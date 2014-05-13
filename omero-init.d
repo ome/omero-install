@@ -56,18 +56,6 @@ diagnostics() {
 	echo
 }
 
-clearlogs() {
-  LOGDIR=${LOGDIR:-${OMERO_HOME}/var/log}
-  TARFILE=${TARFILE:-omero-logs-$(date '+%F').tar.bz2}
-  echo -n $"Clearing logs $prog:"
-  cd $LOGDIR && tar -caf $TARFILE *.{err,out,log} && \
-	(for x in ${LOGDIR}/*.{err,out,log}; do : > $x ;done) && \
-	chown $OMERO_USER ${LOGDIR}/${TARFILE} && \
-	echo -n $" saved to $LOGFILE/$TARFILE:"
-  RETVAL=$?
-  echo
-}
-
 case "$1" in
 	start)
 		start
@@ -81,18 +69,12 @@ case "$1" in
 		;;
 	status)
 		status
-		RETVAL=$?
 		;;
 	diagnostics)
 		diagnostics
-		RETVAL=$?
 		;;
-  clearlogs)
-    clearlogs
-    RETVAL=$?
-    ;;
 	*)	
-		echo $"Usage: $0 {start|stop|restart|status|diagnostics|clearlogs}"
+		echo $"Usage: $0 {start|stop|restart|status|diagnostics}"
 		RETVAL=1
 esac
 exit $RETVAL
