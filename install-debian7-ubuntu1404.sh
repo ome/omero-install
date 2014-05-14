@@ -11,6 +11,7 @@ bash -eux setup_postgres.sh
 cp settings.env setup_omero_ice35.sh ~omero
 sudo -iu omero bash -eux setup_omero_ice35.sh
 
+cd ~omero
 bash -eux setup_nginx.sh
 
 #sudo -iu omero OMERO.server/bin/omero admin start
