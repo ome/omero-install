@@ -6,7 +6,7 @@ apt-get -y install \
 	wget \
 	python-{imaging,matplotlib,numpy,pip,scipy,tables,virtualenv} \
 	openjdk-7-jre-headless \
-	zeroc-ice \
+	ice-services python-zeroc-ice \
 	postgresql \
 	nginx
 
