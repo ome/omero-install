@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e -u -x
-
 cp omero-init.d /etc/init.d/omero
 chmod a+x /etc/init.d/omero
 

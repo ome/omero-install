@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e -u -x
-
 # See setup_omero.sh for the nginx config file creation
 
 if [ -d /etc/nginx/sites-available/ -a -d /etc/nginx/sites-enabled/ ]; then

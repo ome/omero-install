@@ -1,4 +1,4 @@
-service postgresql start
+#!/bin/bash
 
 useradd -m omero
 cd ~omero
