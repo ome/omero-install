@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e -u -x
+
 bash -eux dependencies-centos6.sh
 source settings.env
 

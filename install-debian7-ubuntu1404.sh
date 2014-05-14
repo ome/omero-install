@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e -u -x
+
 bash -eux dependencies-debian7-ubuntu1404.sh
 source settings.env
 
