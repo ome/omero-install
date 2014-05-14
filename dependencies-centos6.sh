@@ -14,14 +14,15 @@ yum -y install \
 
 yum -y install \
 	python-pip python-devel \
-	numpy scipy matplotlib \
+	numpy scipy python-matplotlib Cython \
 	gcc \
-	zlib-devel \
-	libjpg-devel \
+	libjpeg-devel \
 	libpng-devel \
+	libtiff-devel \
+	zlib-devel \
 	hdf5-devel
 
-# Requires gcc {libjpg,libpng,libtiff,zlib}-devel
+# Requires gcc {libjpeg,libpng,libtiff,zlib}-devel
 pip install pillow
 pip install numexpr==1.4.2
 # Requires gcc, Cython, hdf5-devel
@@ -29,15 +30,11 @@ pip install tables==2.4.0
 
 # Postgres, reconfigure to allow TCP connections
 yum -y install http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
-yum install postgresql93-server postgresql93
-
-
-# For docker testing:
-#touch /etc/sysconfig/network
+yum -y install postgresql93-server postgresql93
 
 service postgresql-9.3 initdb
 sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/9.3/data/pg_hba.conf
-service postgresql start
+service postgresql-9.3 start
 
 # Nginx
 cat << EOF > /etc/yum.repos.d/nginx.repo
@@ -48,5 +45,5 @@ gpgcheck=0
 enabled=1
 EOF
 
-yum install -y nginx
+yum -y install nginx
 
