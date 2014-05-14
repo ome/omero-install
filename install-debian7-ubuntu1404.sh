@@ -6,7 +6,7 @@ source settings.env
 bash -eux system_setup.sh
 bash -eux setup_postgres.sh
 
-cd ~omero
+cp settings.env setup_omero_ice35.sh ~omero
 sudo -iu omero bash -eux setup_omero_ice35.sh
 
 bash -eux setup_nginx.sh
