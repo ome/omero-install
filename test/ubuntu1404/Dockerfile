@@ -3,10 +3,10 @@
 FROM ubuntu:14.04
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
-ADD https://github.com/manics/omero-install/archive/master.zip /
-RUN apt-get install unzip && unzip master.zip
+ADD omero-install-test.zip /
+RUN apt-get -y install unzip && unzip omero-install-test.zip
 
-RUN cd omero-install-master && bash install-ubuntu1404.sh
+RUN cd omero-install-test && bash install-ubuntu1404.sh
 ADD run.sh /home/omero/run.sh
 
 EXPOSE 80 4063 4064
