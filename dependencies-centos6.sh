@@ -6,7 +6,6 @@ curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
 	http://download.zeroc.com/Ice/3.5/el6/zeroc-ice-el6.repo
 
 yum -y install \
-	sudo \
 	unzip \
 	wget \
 	java-1.7.0-openjdk \

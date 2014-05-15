@@ -12,14 +12,14 @@ bash -eux system_setup.sh
 bash -eux setup_postgres.sh
 
 cp settings.env setup_omero_ice35.sh ~omero
-sudo -iu omero bash -eux setup_omero_ice35.sh
+su - omero -c "bash -eux setup_omero_ice35.sh"
 
 pushd ~omero
 bash -eux $INSTALL_SCRIPTS/setup_nginx.sh
 popd
 
-#sudo -iu omero OMERO.server/bin/omero admin start
-#sudo -iu omero OMERO.server/bin/omero web start
+#su - omero -c "OMERO.server/bin/omero admin start"
+#su - omero -c "OMERO.server/bin/omero web start"
 
 bash -eux setup_omero_daemon.sh
 
