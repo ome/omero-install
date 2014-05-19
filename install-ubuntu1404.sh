@@ -16,13 +16,13 @@ cp settings.env setup_omero_ice35.sh ~omero
 su - omero -c "bash -eux setup_omero_ice35.sh"
 
 pushd ~omero
-bash -eux $INSTALL_SCRIPTS/setup_nginx.sh
+bash -eux $INSTALL_SCRIPTS/setup_nginx_ubuntu1404.sh
 popd
 
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"
 
-bash -eux setup_omero_daemon.sh
+bash -eux setup_omero_daemon_ubuntu1404.sh
 
 #service omero start
 #service omero-web start
