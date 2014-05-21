@@ -22,4 +22,3 @@ else
     echo "ERROR: Failed to find init.d management script"
     exit 2
 fi
-

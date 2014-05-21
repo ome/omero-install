@@ -26,4 +26,3 @@ bash -eux setup_omero_daemon_centos6.sh
 
 #service omero start
 #service omero-web start
-

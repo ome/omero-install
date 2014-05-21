@@ -45,4 +45,3 @@ enabled=1
 EOF
 
 yum -y install nginx
-

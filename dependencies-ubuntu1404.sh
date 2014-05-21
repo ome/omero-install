@@ -11,4 +11,3 @@ apt-get -y install \
 	nginx
 
 service postgresql start
-
