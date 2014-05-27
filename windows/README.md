@@ -15,9 +15,26 @@ Install Python, Java, PostgreSQL and Ice. Set/update the system PATH and PYTHONP
 
     setup_windows.bat
 
+- jre-7u55-windows-x64.exe
+- postgresql-9.3.2-3-windows-x64.exe
+- Ice-3.5.1-win-x64-Release.zip
+- python-2.7.6/python-2.7.6.amd64.msi
+
 Install Python module dependencies (all the exes in the `python-2.7.6` directory). Note that these python modules are built as exes which, unlike msi files, cannot be scripted. As a workaround `installpymod.vbs` simulates hitting `<ENTER>` on the keyboard to move through the installer prompts, however it uses simple timeouts so if the installer is slow it may not work:
 
     setup_python_deps.bat
+
+- python-2.7.6/matplotlib-1.3.1.win-amd64-py2.7.exe
+- python-2.7.6/numexpr-2.4.win-amd64-py2.7.exe
+- python-2.7.6/numpy-MKL-1.8.1.win-amd64-py2.7.exe
+- python-2.7.6/Pillow-2.4.0.win-amd64-py2.7.exe
+- python-2.7.6/pyparsing-2.0.2.win-amd64-py2.7.exe
+- python-2.7.6/python-dateutil-2.2.win-amd64-py2.7.exe
+- python-2.7.6/pytz-2014.2.win-amd64-py2.7.exe
+- python-2.7.6/pywin32-218.win-amd64-py2.7.exe
+- python-2.7.6/six-1.6.1.win-amd64-py2.7.exe
+- python-2.7.6/tables-3.1.1.win-amd64-py2.7.exe
+- python-2.7.6/virtualenv-1.11.4.win-amd64-py2.7.exe
 
 Create a database and user for OMERO:
 
@@ -34,6 +51,8 @@ Do a basic check of dependencies, you should not see any error messages when thi
 Finally install and configure OMERO in the usual way:
 
     setup_omero.bat
+
+- omero/OMERO.server-5.0.2-rc1-73-71bbbc7-ice35-b309.zip
 
 
 Required files
@@ -63,6 +82,6 @@ Required files
 Additional files
 ----------------
 
-installpymod.vbs: A helper script for simulating an interactive install of a Python module. 
-j_unzip.vbs: A helper script for unzipping file using the native Windows capabilities.
+- installpymod.vbs: A helper script for simulating an interactive install of a Python module. 
+- j_unzip.vbs: A helper script for unzipping file using the native Windows capabilities.
 
