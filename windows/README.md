@@ -16,7 +16,7 @@ Install Python, Java, PostgreSQL and Ice. Set/update the system PATH and PYTHONP
     setup_windows.bat
 
 - jre-7u55-windows-x64.exe
-- postgresql-9.3.2-3-windows-x64.exe
+- postgresql-9.3.4-3-windows-x64.exe
 - Ice-3.5.1-win-x64-Release.zip
 - python-2.7.6/python-2.7.6.amd64.msi
 
@@ -52,14 +52,14 @@ Finally install and configure OMERO in the usual way:
 
     setup_omero.bat
 
-- omero/OMERO.server-5.0.2-rc1-73-71bbbc7-ice35-b309.zip
+- omero/OMERO.server-5.0.2-ice35-b26.zip
 
 
 Required files
 --------------
 
 - jre-7u55-windows-x64.exe
-- postgresql-9.3.2-3-windows-x64.exe
+- postgresql-9.3.4-3-windows-x64.exe
 - Ice-3.5.1-win-x64-Release.zip
 
 - python-2.7.6/python-2.7.6.amd64.msi
@@ -76,7 +76,7 @@ Required files
 - python-2.7.6/tables-3.1.1.win-amd64-py2.7.exe
 - python-2.7.6/virtualenv-1.11.4.win-amd64-py2.7.exe
 
-- omero/OMERO.server-5.0.2-rc1-73-71bbbc7-ice35-b309.zip
+- omero/OMERO.server-5.0.2-ice35-b26.zip
 
 
 Additional files
