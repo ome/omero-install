@@ -5,7 +5,7 @@ start /w msiexec /passive /i python-2.7.6\python-2.7.6.amd64.msi
 
 start /w jre-7u55-windows-x64.exe /s
 
-start /w postgresql-9.3.2-3-windows-x64.exe --mode unattended
+start /w postgresql-9.3.4-3-windows-x64.exe --mode unattended
 
 
 rmdir /s /q Ice-3.5.1-win-x64-Release
