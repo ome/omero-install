@@ -1,8 +1,8 @@
 
-start /w cscript j_unzip.vbs omero\OMERO.server-5.0.2-rc1-73-71bbbc7-ice35-b309.zip
-xcopy /e /i OMERO.server-5.0.2-rc1-73-71bbbc7-ice35-b309 c:\OMERO.server-5.0.2-rc1-73-71bbbc7-ice35-b309
+start /w cscript j_unzip.vbs omero\OMERO.server-5.0.2-ice35-b26.zip
+xcopy /e /i OMERO.server-5.0.2-ice35-b26 c:\OMERO.server-5.0.2-ice35-b26
 
-pushd c:\OMERO.server-5.0.2-rc1-73-71bbbc7-ice35-b309
+pushd c:\OMERO.server-5.0.2-ice35-b26
 
 python bin\omero db script -f db.sql "" "" omero
 
