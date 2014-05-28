@@ -36,13 +36,13 @@ Install Python module dependencies (all the exes in the `python-2.7.6` directory
 - python-2.7.6/tables-3.1.1.win-amd64-py2.7.exe
 - python-2.7.6/virtualenv-1.11.4.win-amd64-py2.7.exe
 
+Reboot, this is because OMERO.server runs under a local system account and modified environment variables will only be picked up after a reboot:
+
+    shutdown /r
+
 Create a database and user for OMERO:
 
     setup_postgres.bat
-
-Reboot, this is because OMERO.server runs under a local system account and modified envrionment variables will only be picked up after a reboot:
-
-    shutdown /r
 
 Do a basic check of dependencies, you should not see any error messages when this is run:
 
