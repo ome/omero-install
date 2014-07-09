@@ -1,9 +1,11 @@
 #!/bin/bash
 
-yum -y install http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+yum -y install http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
 
 curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
 	http://download.zeroc.com/Ice/3.5/el6/zeroc-ice-el6.repo
+# TODO: Official Zeroc Ice repository for EL7
+sed -i.bak 's/$releasever/6/' /etc/yum.repos.d/zeroc-ice-el6.repo
 
 yum -y install \
 	unzip \
@@ -13,23 +15,17 @@ yum -y install \
 
 yum -y install \
 	python-pip python-devel \
-	numpy scipy python-matplotlib Cython \
-	gcc \
-	libjpeg-devel \
-	libpng-devel \
-	libtiff-devel \
-	zlib-devel \
+	numpy scipy python-matplotlib python-pillow Cython \
+	gcc gcc-c++ \
 	hdf5-devel
 
-# Requires gcc {libjpeg,libpng,libtiff,zlib}-devel
-pip install pillow
-pip install numexpr==1.4.2
+# Requires gcc-c++
+pip install numexpr
 # Requires gcc, Cython, hdf5-devel
-pip install tables==2.4.0
+pip install tables
 
 # Postgres, reconfigure to allow TCP connections
-yum -y install http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
-yum -y install postgresql93-server postgresql93
+yum -y install postgresql-server postgresql
 
 service postgresql-9.3 initdb
 sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/9.3/data/pg_hba.conf

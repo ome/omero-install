@@ -4,7 +4,7 @@ set -e -u -x
 
 source settings.env
 
-bash -eux dependencies-centos6.sh
+bash -eux dependencies-centos7.sh
 
 bash -eux system_setup.sh
 bash -eux setup_postgres.sh
