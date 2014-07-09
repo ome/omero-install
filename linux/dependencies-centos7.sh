@@ -27,7 +27,16 @@ pip install tables
 # Postgres, reconfigure to allow TCP connections
 yum -y install postgresql-server postgresql
 
-service postgresql-9.3 initdb
-sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/9.3/data/pg_hba.conf
-chkconfig postgresql-9.3 on
-service postgresql-9.3 start
+# Note systemd doesn't work stright off on docker
+DOCKER=1
+if [ $DOCKER -eq 1 ]; then
+	#export PGDATA=/var/lib/pgsql/data
+	su postgres -c 'initdb /var/lib/pgsql/data'
+	sed -i.bak -re 's/^(host.*)trust/\1md5/' /var/lib/pgsql/data/pg_hba.conf
+	su postgres -c 'pg_ctl -D /var/lib/pgsql/data -l /var/lib/pgsql/logfile start'
+else
+	TODO: service postgresql-9.3 initdb
+	sed -i.bak -re 's/^(host.*)trust/\1md5/' /var/lib/pgsql/data/pg_hba.conf
+	TODO: chkconfig postgresql-9.3 on
+	systemctl start postgresql
+fi
