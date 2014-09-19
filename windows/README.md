@@ -62,7 +62,6 @@ Finally install and configure OMERO in the usual way:
 
 - omero/OMERO.server-5.0.4-ice35-b43.zip
 
-Setup IIS
 
 Required files
 --------------

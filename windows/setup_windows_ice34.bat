@@ -17,5 +17,3 @@ start /w msiexec /passive /i Ice-3.4.2.msi
 IF DEFINED PYTHONPATH (setx /m PYTHONPATH "c:\Program Files (x86)\ZeroC\Ice-3.4.2\python\x64;%PYTHONPATH%") ELSE (setx /m PYTHONPATH "c:\Program Files (x86)\ZeroC\Ice-3.4.2\python\x64")
 
 setx /m PATH "c:\Program Files (x86)\ZeroC\Ice-3.4.2\bin\x64;c:\Python26;c:\Program Files\PostgreSQL\9.3\bin;%PATH%"
-
-
