@@ -12,13 +12,10 @@ set PGPASSWORD=
 
 mkdir \OMERO
 python bin\omero config set omero.data.dir \OMERO
-
-python bin\omero config set omero.web.application_server development
-python bin\omero config set omero.web.debug True
+rem python bin\omero config set omero.web.debug True
 
 popd
 
 rem To start OMERO reboot and run
 rem bin\omero admin start
-rem bin\omero web start
-
+rem bin\omero web iis
