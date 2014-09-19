@@ -54,7 +54,7 @@ Finally install and configure OMERO in the usual way:
 
     setup_omero.bat
 
-- omero/OMERO.server-5.0.2-ice35-b26.zip
+- omero/OMERO.server-5.0.4-ice35-b43.zip
 
 
 Required files
@@ -78,7 +78,7 @@ Required files
 - python-2.7.6/tables-3.1.1.win-amd64-py2.7.exe
 - python-2.7.6/virtualenv-1.11.4.win-amd64-py2.7.exe
 
-- omero/OMERO.server-5.0.2-ice35-b26.zip
+- omero/OMERO.server-5.0.4-ice35-b43.zip
 
 
 Additional files
