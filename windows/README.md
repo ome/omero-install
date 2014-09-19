@@ -13,6 +13,8 @@ Prerequisites
 
 Install Python, Java, PostgreSQL and Ice. Set/update the system PATH and PYTHONPATH environment variables. For the custom Ice 3.5 binaries you will need to add the `bin` and `lib` directories to PATH, and the `python` directory to PYTHONPATH. It is also helpful to add the Python and PostgreSQL directories to PATH.
 
+Note that due to a bug(?) in the Python installer it is not possible to do an unattended install at present. Accept all the defaults in the installation dialog.
+
     setup_windows.bat
 
 - jre-7u55-windows-x64.exe
