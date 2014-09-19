@@ -19,7 +19,7 @@ Note that due to a bug(?) in the Python installer it is not possible to do an un
 
 - jre-7u55-windows-x64.exe
 - postgresql-9.3.4-3-windows-x64.exe
-- Ice-3.5.1-win-x64-Release.zip
+- Ice-3.5.1-2-win-x64-Release.zip
 - python-2.7.6/python-2.7.6.amd64.msi
 
 Install Python module dependencies (all the exes in the `python-2.7.6` directory). Note that these python modules are built as exes which, unlike msi files, cannot be scripted. As a workaround `installpymod.vbs` simulates hitting `<ENTER>` on the keyboard to move through the installer prompts, however it uses simple timeouts so if the installer is slow it may not work:
@@ -62,7 +62,7 @@ Required files
 
 - jre-7u55-windows-x64.exe
 - postgresql-9.3.4-3-windows-x64.exe
-- Ice-3.5.1-win-x64-Release.zip
+- Ice-3.5.1-2-win-x64-Release.zip
 
 - python-2.7.6/python-2.7.6.amd64.msi
 
