@@ -17,7 +17,7 @@ Note that due to a bug(?) in the Python installer it is not possible to do an un
 
     setup_windows.bat
 
-- jre-7u55-windows-x64.exe
+- jre-7u67-windows-x64.exe
 - postgresql-9.3.4-3-windows-x64.exe
 - Ice-3.5.1-2-win-x64-Release.zip
 - python-2.7.6/python-2.7.6.amd64.msi
@@ -60,7 +60,7 @@ Finally install and configure OMERO in the usual way:
 Required files
 --------------
 
-- jre-7u55-windows-x64.exe
+- jre-7u67-windows-x64.exe
 - postgresql-9.3.4-3-windows-x64.exe
 - Ice-3.5.1-2-win-x64-Release.zip
 

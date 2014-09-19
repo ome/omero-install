@@ -7,7 +7,7 @@ rem default installation settings :-(
 rem start /w msiexec /passive /i python-2.7.6\python-2.7.6.amd64.msi
 start /w msiexec /i python-2.7.6\python-2.7.6.amd64.msi
 
-start /w jre-7u55-windows-x64.exe /s
+start /w jre-7u67-windows-x64.exe /s
 
 start /w postgresql-9.3.4-3-windows-x64.exe --mode unattended
 
