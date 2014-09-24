@@ -63,32 +63,6 @@ Finally install and configure OMERO in the usual way:
 - omero/OMERO.server-5.0.5-ice35-b47.zip
 
 
-Required files
---------------
-
-- jre-7u67-windows-x64.exe
-- postgresql-9.3.4-3-windows-x64.exe
-- Ice-3.5.1-2-win-x64-Release.zip
-
-- python-2.7.6/python-2.7.6.amd64.msi
-
-- python-2.7.6/matplotlib-1.3.1.win-amd64-py2.7.exe
-- python-2.7.6/numexpr-2.4.win-amd64-py2.7.exe
-- python-2.7.6/numpy-MKL-1.8.1.win-amd64-py2.7.exe
-- python-2.7.6/Pillow-2.4.0.win-amd64-py2.7.exe
-- python-2.7.6/pyparsing-2.0.2.win-amd64-py2.7.exe
-- python-2.7.6/python-dateutil-2.2.win-amd64-py2.7.exe
-- python-2.7.6/pytz-2014.2.win-amd64-py2.7.exe
-- python-2.7.6/pywin32-218.win-amd64-py2.7.exe
-- python-2.7.6/six-1.6.1.win-amd64-py2.7.exe
-- python-2.7.6/tables-3.1.1.win-amd64-py2.7.exe
-- python-2.7.6/virtualenv-1.11.4.win-amd64-py2.7.exe
-
-- python-source/isapi_wsgi-0.4.2.zip
-
-- omero/OMERO.server-5.0.5-ice35-b47.zip
-
-
 Additional files
 ----------------
 
