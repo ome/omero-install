@@ -60,7 +60,7 @@ Finally install and configure OMERO in the usual way:
 
     setup_omero.bat
 
-- omero/OMERO.server-5.0.4-ice35-b43.zip
+- omero/OMERO.server-5.0.5-ice35-b47.zip
 
 
 Required files
@@ -86,7 +86,7 @@ Required files
 
 - python-source/isapi_wsgi-0.4.2.zip
 
-- omero/OMERO.server-5.0.4-ice35-b43.zip
+- omero/OMERO.server-5.0.5-ice35-b47.zip
 
 
 Additional files
