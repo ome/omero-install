@@ -1,6 +1,6 @@
 # Dockerfile for testing the OMERO Linux installation instructions
 # Not intended for production use
-FROM centos:6.4
+FROM centos:centos6
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 # Needed for postgres init.d
