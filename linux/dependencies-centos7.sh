@@ -1,11 +1,9 @@
 #!/bin/bash
 
-yum -y install http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
+yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
 
-curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
-	http://download.zeroc.com/Ice/3.5/el6/zeroc-ice-el6.repo
-# TODO: Official Zeroc Ice repository for EL7
-sed -i.bak 's/$releasever/6/' /etc/yum.repos.d/zeroc-ice-el6.repo
+curl -o /etc/yum.repos.d/zeroc-ice-el7.repo \
+	http://download.zeroc.com/Ice/3.5/el7/zeroc-ice-el7.repo
 
 yum -y install \
 	unzip \
