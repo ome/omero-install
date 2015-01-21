@@ -17,26 +17,28 @@ Note that due to a bug(?) in the Python installer it is not possible to do an un
 
     setup_windows.bat
 
-- jre-7u67-windows-x64.exe
-- postgresql-9.3.4-3-windows-x64.exe
+- jre-8u31-windows-x64.exe
+- postgresql-9.4.0-1-windows-x64.exe
 - Ice-3.5.1-2-win-x64-Release.zip
-- python-2.7.6/python-2.7.6.amd64.msi
+- python-2.7.9/python-2.7.9.amd64.msi
+- msvcp100.dll
+- msvcr100.dll
 
-Install Python module dependencies (all the exes in the `python-2.7.6` directory). Note that these python modules are built as exes which, unlike msi files, cannot be scripted. As a workaround `installpymod.vbs` simulates hitting `<ENTER>` on the keyboard to move through the installer prompts, however it uses simple timeouts so if the installer is slow it may not work:
+Install Python module dependencies (all the exes in the `python-2.7.9` directory). Note that some of these python modules are built as exes which, unlike msi files, cannot be scripted. As a workaround `installpymod.vbs` simulates hitting `<ENTER>` on the keyboard to move through the installer prompts, however it uses simple timeouts so if the installer is slow it may not work. The remainder are wheel files which must be installed using pip:
 
     setup_python_deps.bat
 
-- python-2.7.6/matplotlib-1.3.1.win-amd64-py2.7.exe
-- python-2.7.6/numexpr-2.4.win-amd64-py2.7.exe
-- python-2.7.6/numpy-MKL-1.8.1.win-amd64-py2.7.exe
-- python-2.7.6/Pillow-2.4.0.win-amd64-py2.7.exe
-- python-2.7.6/pyparsing-2.0.2.win-amd64-py2.7.exe
-- python-2.7.6/python-dateutil-2.2.win-amd64-py2.7.exe
-- python-2.7.6/pytz-2014.2.win-amd64-py2.7.exe
-- python-2.7.6/pywin32-218.win-amd64-py2.7.exe
-- python-2.7.6/six-1.6.1.win-amd64-py2.7.exe
-- python-2.7.6/tables-3.1.1.win-amd64-py2.7.exe
-- python-2.7.6/virtualenv-1.11.4.win-amd64-py2.7.exe
+- python-2.7.9\matplotlib-1.4.2-cp27-none-win_amd64.whl
+- python-2.7.9\numpy-MKL-1.9.1.win-amd64-py2.7.exe
+- python-2.7.9\numexpr-2.4.win-amd64-py2.7.exe
+- python-2.7.9\Pillow-2.7.0-cp27-none-win_amd64.whl
+- python-2.7.9\pyparsing-2.0.3.win-amd64-py2.7.exe
+- python-2.7.9\python_dateutil-2.4.0-py2.py3-none-any.whl
+- python-2.7.9\pytz-2014.10-py2.py3-none-any.whl
+- python-2.7.9\six-1.9.0-py2.py3-none-any.whl
+- python-2.7.9\tables-3.1.1-cp27-none-win_amd64.whl
+- python-2.7.9\virtualenv-12.0.5-py2.py3-none-any.whl
+- python-2.7.9\pywin32-219-cp27-none-win_amd64.whl
 
 Reboot, this is because OMERO.server runs under a local system account and modified environment variables will only be picked up after a reboot:
 
@@ -66,6 +68,5 @@ Finally install and configure OMERO in the usual way:
 Additional files
 ----------------
 
-- installpymod.vbs: A helper script for simulating an interactive install of a Python module. 
+- installpymod.vbs: A helper script for simulating an interactive install of a Python module.
 - j_unzip.vbs: A helper script for unzipping file using the native Windows capabilities.
-
