@@ -20,7 +20,7 @@ Note that due to a bug(?) in the Python installer it is not possible to do an un
 - jre-8u31-windows-x64.exe
 - postgresql-9.4.0-1-windows-x64.exe
 - Ice-3.5.1-2-win-x64-Release.zip
-- python-2.7.9/python-2.7.9.amd64.msi
+- python-2.7.9\python-2.7.9.amd64.msi
 - msvcp100.dll
 - msvcr100.dll
 
@@ -56,13 +56,13 @@ Setup IIS with Python:
 
     setup_iis.bat
 
-- python-source/isapi_wsgi-0.4.2.zip
+- python-source\isapi_wsgi-0.4.2.zip
 
 Finally install and configure OMERO in the usual way:
 
     setup_omero.bat
 
-- omero/OMERO.server-5.0.6-ice35-b53.zip
+- omero\OMERO.server-5.0.6-ice35-b53.zip
 
 
 Additional files
