@@ -65,6 +65,21 @@ Finally install and configure OMERO in the usual way:
 - omero\OMERO.server-5.0.6-ice35-b53.zip
 
 
+Optional Prerequisites
+----------------------
+
+Install MPlayer (the installation process requires 7zip) and reboot:
+
+    setup_mplayer.bat
+
+- extras/7z938-x64.msi
+- extras/mplayer-svn-37353-x86_64.7z
+
+And reboot (due to PATH modification):
+
+    shutdown /r
+
+
 Additional files
 ----------------
 
