@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # Cleanup script for CI testing
 
+set -e
+set -u
+set -x
+
 # Stop existing instance of OMERO
 pkill icegridnode || echo No OMERO.server running
 pkill python || echo No OMERO.Web running
