@@ -2,12 +2,10 @@
 # Cleanup script for CI testing
 
 # Stop existing instance of OMERO
-/usr/local/bin/omero web stop || echo Web stop failed.
-/usr/local/bin/omero admin stop || echo Server stop failed.
-
-# Remove dangling processes
-pgrep nginx && /usr/local/bin/nginx -c /usr/local/nginx/etc/omero.conf -s stop
-pgrep postgres && killall postgres
+pkill icegridnode || echo No OMERO.server running
+pkill python || echo No OMERO.Web running
+pgrep nginx && /usr/local/bin/nginx -c /usr/local/nginx/etc/omero.conf -s stop || echo No nginx running
+pkill postgres || echo No PostgreSQL running
 
 # Clean existing Homebrew
 rm -rf /usr/local/* && rm -rf /usr/local/.git || echo No Homebrew found
