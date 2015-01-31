@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Cleanup script for CI testing
+
+# Remove dangling processes
+pgrep nginx && killall nginx
+pgrep postgres && killall postgres
+
+# Clean existing Homebrew
+rm -rf /usr/local/* && rm -rf /usr/local/.git || echo No Homebrew found
+rm -rf /Library/Caches/Homebrew/* || echo No Homebrew cache found

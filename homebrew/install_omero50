@@ -87,6 +87,9 @@ bin/omero config set omero.data.dir $OMERO_DATA_DIR
 # Start the server
 bin/omero admin start
 
+# Check OMERO version
+bin/omero version | grep -v UNKNOWN
+
 # Test simple fake import
 bin/omero login -s localhost -u root -w $ROOT_PASSWORD
 touch test.fake
@@ -114,3 +117,6 @@ nginx -c $(bin/brew --prefix omero50)/etc/nginx.conf -s stop
 
 # Stop the server
 bin/omero admin stop
+
+# Stop PostgreSQL
+bin/pg_ctl -D $PSQL_DIR  -m fast stop
