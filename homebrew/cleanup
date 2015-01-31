@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 # Cleanup script for CI testing
 
+# Stop existing instance of OMERO
+/usr/local/bin/omero web stop || echo Web stop failed.
+/usr/local/bin/omero admin stop || echo Server stop failed.
+
 # Remove dangling processes
-pgrep nginx && killall nginx
+pgrep nginx && /usr/local/bin/nginx -c /usr/local/nginx/etc/omero.conf -s stop
 pgrep postgres && killall postgres
 
 # Clean existing Homebrew
