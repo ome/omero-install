@@ -1,7 +1,7 @@
 OMERO installation via Homebrew
 ===============================
 
-This directory contains scripts for installing OMERO on clean Mac OS X:
+This directory contains scripts for installing OMERO on clean Mac OS X system:
 
 - [cleanup](cleanup) completely removes all content under `/usr/local` and
 is meant to be used by Continuous Integration jobs.
