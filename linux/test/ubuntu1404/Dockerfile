@@ -3,6 +3,8 @@
 FROM ubuntu:14.04
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
+RUN update-locale LANG=C.UTF-8
+
 ADD omero-install-test.zip /
 RUN apt-get update && apt-get -y install unzip && unzip omero-install-test.zip
 
