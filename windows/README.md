@@ -62,7 +62,7 @@ Finally install and configure OMERO in the usual way:
 
     setup_omero.bat
 
-- omero\OMERO.server-5.0.6-ice35-b53.zip
+- omero\OMERO.server-5.0.7-ice35-b58.zip
 
 
 Additional files
