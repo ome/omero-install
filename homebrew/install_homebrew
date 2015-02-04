@@ -57,4 +57,4 @@ if [ $TESTING_MODE ]; then
 fi
 
 # Tap homebrew-science library (HDF5)
-bin/brew tap homebrew/science || echo "Already tapped"
+/usr/local/bin/brew tap homebrew/science || echo "Already tapped"
