@@ -24,15 +24,15 @@ Note that due to a bug(?) in the Python installer it is not possible to do an un
 - msvcp100.dll
 - msvcr100.dll
 
-Install Python module dependencies (all the exes in the `python-2.7.9` directory). Note that some of these python modules are built as exes which, unlike msi files, cannot be scripted. As a workaround `installpymod.vbs` simulates hitting `<ENTER>` on the keyboard to move through the installer prompts, however it uses simple timeouts so if the installer is slow it may not work. The remainder are wheel files which must be installed using pip:
+Install Python module dependencies (all the whl files in the `python-2.7.9` directory). These are wheel files which must be installed using pip:
 
     setup_python_deps.bat
 
 - python-2.7.9\matplotlib-1.4.2-cp27-none-win_amd64.whl
-- python-2.7.9\numpy-MKL-1.9.1.win-amd64-py2.7.exe
-- python-2.7.9\numexpr-2.4.win-amd64-py2.7.exe
+- python-2.7.9\numpy-1.9.2rc1+mkl-cp27-none-win_amd64.whl
+- python-2.7.9\numexpr-2.4-cp27-none-win_amd64.whl
 - python-2.7.9\Pillow-2.7.0-cp27-none-win_amd64.whl
-- python-2.7.9\pyparsing-2.0.3.win-amd64-py2.7.exe
+- python-2.7.9\pyparsing-2.0.3-py2-none-any.whl
 - python-2.7.9\python_dateutil-2.4.0-py2.py3-none-any.whl
 - python-2.7.9\pytz-2014.10-py2.py3-none-any.whl
 - python-2.7.9\six-1.9.0-py2.py3-none-any.whl
