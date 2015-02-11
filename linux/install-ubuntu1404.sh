@@ -9,8 +9,8 @@ bash -eux dependencies-ubuntu1404.sh
 bash -eux system_setup.sh
 bash -eux setup_postgres.sh
 
-cp settings.env setup_omero_ice35.sh ~omero
-su - omero -c "bash -eux setup_omero_ice35.sh"
+cp settings.env setup_omero.sh ~omero
+su - omero -c "bash -eux setup_omero.sh"
 
 bash -eux setup_nginx_ubuntu1404.sh
 

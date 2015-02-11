@@ -9,8 +9,8 @@ bash -eux dependencies-centos6.sh
 bash -eux system_setup.sh
 bash -eux setup_postgres.sh
 
-cp settings.env setup_omero_ice35.sh setup_omero_apache.sh ~omero
-su - omero -c "bash -eux setup_omero_ice35.sh"
+cp settings.env setup_omero.sh setup_omero_apache.sh ~omero
+su - omero -c "bash -eux setup_omero.sh"
 su - omero -c "bash -eux setup_omero_apache.sh"
 
 bash -eux setup_apache_centos6.sh
