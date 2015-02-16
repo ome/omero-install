@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-DISTRO=ubuntu1404
+DISTRO=
 WEBSERVER=nginx
 OMEROVER=omero50
 
@@ -22,6 +22,11 @@ for arg in "$@"; do
 		exit 1
 	esac
 done
+
+if [ -z "$DISTRO" ]; then
+	echo "No distro specified"
+	exit 1
+fi
 
 source settings.env
 
