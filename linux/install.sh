@@ -51,6 +51,7 @@ if [ $DISTRO = centos6 ]; then
 		bash -eux setup_nginx_centos6.sh
 		bash -eux setup_nginx_centos6_selinux.sh
 	else
+		su - omero -c "bash -eux setup_omero_apache.sh"
 		bash -eux setup_apache_centos6.sh
 	fi
 else
