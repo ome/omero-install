@@ -18,4 +18,4 @@ OMERO.server/bin/omero db script -f OMERO.server/db.sql "" "" "$OMERO_ROOT_PASS"
 
 psql -h localhost -U "$OMERO_DB_USER" "$OMERO_DB_NAME" < OMERO.server/db.sql
 
-OMERO.server/bin/omero web config nginx --system --http "$OMERO_WEB_PORT" > OMERO.server/nginx.conf.tmp
+OMERO.server/bin/omero web config nginx --http "$OMERO_WEB_PORT" > OMERO.server/nginx.conf.tmp
