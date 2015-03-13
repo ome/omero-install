@@ -25,12 +25,12 @@ prog="omero-web"
 # also read the omero config
 [ -r /etc/default/omero ] && . /etc/default/omero
 
-OMERO_HOME=${OMERO_HOME:-"/home/omero/OMERO.server"}
+OMERO_SERVER=${OMERO_SERVER:-"/home/omero/OMERO.server"}
 OMERO_USER=${OMERO_USER:-"omero"}
 
 start() {	
 	echo -n $"Starting $prog:"
-	su - ${OMERO_USER} -c "${OMERO_HOME}/bin/omero web start" &> /dev/null && echo -n ' OMERO.web'
+	su - ${OMERO_USER} -c "${OMERO_SERVER}/bin/omero web start" &> /dev/null && echo -n ' OMERO.web'
 	RETVAL=$?
 	[ "$RETVAL" = 0 ]
         echo
@@ -38,7 +38,7 @@ start() {
 
 stop() {
 	echo -n $"Stopping $prog:"
-	su - ${OMERO_USER} -c "${OMERO_HOME}/bin/omero web stop" &> /dev/null && echo -n ' OMERO.web'
+	su - ${OMERO_USER} -c "${OMERO_SERVER}/bin/omero web stop" &> /dev/null && echo -n ' OMERO.web'
 	RETVAL=$?
 	[ "$RETVAL" = 0 ]
         echo
@@ -46,7 +46,7 @@ stop() {
 
 status() {
 	echo -n $"Status $prog:"
-	su - ${OMERO_USER} -c "${OMERO_HOME}/bin/omero web status"
+	su - ${OMERO_USER} -c "${OMERO_SERVER}/bin/omero web status"
 	RETVAL=$?
 }
 
