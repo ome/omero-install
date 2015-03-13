@@ -6,6 +6,11 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 # Needed for postgres init.d
 RUN touch /etc/sysconfig/network
 
+# Get cron working http://stackoverflow.com/a/21928878
+RUN yum -y install cronie && \
+	sed -i -re s'/(session\s+required\s+pam_loginuid.so)/#\1/' \
+	/etc/pam.d/crond
+
 ADD omero-install-test.zip /
 RUN yum -y install unzip && unzip omero-install-test.zip
 
