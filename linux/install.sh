@@ -70,7 +70,7 @@ else
 	bash -eux setup_omero_daemon_ubuntu1404.sh
 fi
 
-bash -eux setup_crontab.sh
+bash -eux setup_cron.sh
 
 #service omero start
 #service omero-web start

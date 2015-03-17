@@ -9,7 +9,7 @@ set -e
 
 rm -rf omero-install-test
 mkdir omero-install-test
-cp ../*.sh ../*.env ../*init.d ../*crontab omero-install-test
+cp ../*.sh ../*.env ../*init.d ../*cron omero-install-test
 zip -r $1/omero-install-test.zip omero-install-test
 rm -rf omero-install-test
 
