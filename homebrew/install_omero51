@@ -14,9 +14,6 @@ export HTTPPORT=${HTTPPORT:-8080}
 
 cd /usr/local
 
-# Install Genshi (OMERO and Bio-Formats requirement)
-bin/pip install -U genshi
-
 ###################################################################
 # Bio-Formats installation
 ###################################################################
