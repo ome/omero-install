@@ -17,25 +17,25 @@ Note that due to a bug(?) in the Python installer it is not possible to do an un
 
     setup_windows.bat
 
-- jre-8u31-windows-x64.exe
-- postgresql-9.4.0-1-windows-x64.exe
-- Ice-3.5.1-3-win-x64-Release.zip
+- jre-8u45-windows-x64.exe
+- postgresql-9.4.1-3-windows-x64.exe
+- Ice-3.5.1-b3-win-x64-Release.zip
 - python-2.7.9\python-2.7.9.amd64.msi
 
 Install Python module dependencies (all the whl files in the `python-2.7.9` directory). These are wheel files which must be installed using pip:
 
     setup_python_deps.bat
 
-- python-2.7.9\matplotlib-1.4.2-cp27-none-win_amd64.whl
-- python-2.7.9\numpy-1.9.2rc1+mkl-cp27-none-win_amd64.whl
-- python-2.7.9\numexpr-2.4-cp27-none-win_amd64.whl
-- python-2.7.9\Pillow-2.7.0-cp27-none-win_amd64.whl
+- python-2.7.9\matplotlib-1.4.3-cp27-none-win_amd64.whl
+- python-2.7.9\numpy-1.9.2+mkl-cp27-none-win_amd64.whl
+- python-2.7.9\numexpr-2.4.3-cp27-none-win_amd64.whl
+- python-2.7.9\Pillow-2.8.1-cp27-none-win_amd64.whl
 - python-2.7.9\pyparsing-2.0.3-py2-none-any.whl
-- python-2.7.9\python_dateutil-2.4.0-py2.py3-none-any.whl
-- python-2.7.9\pytz-2014.10-py2.py3-none-any.whl
+- python-2.7.9\python_dateutil-2.4.2-py2.py3-none-any.whl
+- python-2.7.9\pytz-2015.2-py2.py3-none-any.whl
 - python-2.7.9\six-1.9.0-py2.py3-none-any.whl
 - python-2.7.9\tables-3.1.1-cp27-none-win_amd64.whl
-- python-2.7.9\virtualenv-12.0.5-py2.py3-none-any.whl
+- python-2.7.9\virtualenv-12.1.1-py2.py3-none-any.whl
 - python-2.7.9\pywin32-219-cp27-none-win_amd64.whl
 
 Reboot, this is because OMERO.server runs under a local system account and modified environment variables will only be picked up after a reboot:
@@ -70,8 +70,8 @@ Install MPlayer (the installation process requires 7zip) and reboot:
 
     setup_mplayer.bat
 
-- extras/7z938-x64.msi
-- extras/mplayer-svn-37353-x86_64.7z
+- extras\7z938-x64.msi
+- extras\mplayer-svn-37386-x86_64.7z
 
 And reboot (due to PATH modification):
 
@@ -81,5 +81,4 @@ And reboot (due to PATH modification):
 Additional files
 ----------------
 
-- installpymod.vbs: A helper script for simulating an interactive install of a Python module.
 - j_unzip.vbs: A helper script for unzipping file using the native Windows capabilities.
