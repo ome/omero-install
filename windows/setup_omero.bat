@@ -1,6 +1,6 @@
 
-start /w cscript j_unzip.vbs omero\OMERO.server-5.0.8-ice35-b60.zip
-xcopy /e /i OMERO.server-5.0.8-ice35-b60 c:\OMERO.server
+start /w cscript j_unzip.vbs omero\OMERO.server-5.1.1-ice35-b43.zip
+xcopy /e /i OMERO.server-5.1.1-ice35-b43 c:\OMERO.server
 
 pushd c:\OMERO.server
 
