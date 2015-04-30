@@ -63,7 +63,7 @@ Finally install and configure OMERO in the usual way:
 - omero\OMERO.server-5.1.1-ice35-b43.zip
 
 
-Optional Prerequisites
+Optional prerequisites
 ----------------------
 
 Install MPlayer (the installation process requires 7zip):
