@@ -6,6 +6,7 @@ pushd c:\OMERO.server
 
 python bin\omero db script -f db.sql "" "" omero
 
+set PGCLIENTENCODING=UTF8
 set PGPASSWORD=omero
 psql -hlocalhost -Uomero -fdb.sql omero
 set PGPASSWORD=
