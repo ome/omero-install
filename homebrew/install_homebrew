@@ -42,7 +42,7 @@ bin/brew doctor
 bin/brew install python
 
 # Tap ome-alt library
-if [ $TESTING_MODE ]; then
+if [ "$TESTING_MODE" = true ]; then
     bin/brew tap --full ome/alt || echo "Already tapped"
 
     # Install scc tools
