@@ -4,4 +4,4 @@ service crond start
 service omero start
 service httpd start
 service omero-web start
-bash
+exec bash
