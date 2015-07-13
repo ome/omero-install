@@ -29,7 +29,7 @@ VERBOSE=1 bin/brew test bioformats51
 # Install PostgreSQL and OMERO
 OMERO_PYTHONPATH=$(bin/brew --prefix omero51)/lib/python
 if [ "$ICE" == "3.4" ]; then
-    bin/brew install omero51 --with-ice34 --with-nginx --with-cpp
+    bin/brew install omero51 --with-ice34 --with-nginx
     ICE_HOME=$(bin/brew --prefix zeroc-ice34)
     export PYTHONPATH=$OMERO_PYTHONPATH:$ICE_HOME/python
     export DYLD_LIBRARY_PATH=$ICE_HOME/lib
