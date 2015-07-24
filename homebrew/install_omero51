@@ -34,7 +34,7 @@ if [ "$ICE" == "3.4" ]; then
     export PYTHONPATH=$OMERO_PYTHONPATH:$ICE_HOME/python
     export DYLD_LIBRARY_PATH=$ICE_HOME/lib
 else
-    bin/brew install omero51 --with-nginx
+    bin/brew install omero51 --with-nginx --with-cpp
     export PYTHONPATH=$OMERO_PYTHONPATH
 fi
 VERBOSE=1 bin/brew test omero51
