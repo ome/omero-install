@@ -11,6 +11,6 @@ cd /usr/local
 # Bio-Formats-C++ installation
 ###################################################################
 
-# Install Bio-Formats
-bin/brew install bioformats-cpp51
-VERBOSE=1 bin/brew test bioformats-cpp51
+# Install Bio-Formats C++ from the Homebrew science repository
+bin/brew install bioformats-cpp
+VERBOSE=1 bin/brew test bioformats-cpp
