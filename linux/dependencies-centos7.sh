@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+yum -y install epel-release
 
 curl -o /etc/yum.repos.d/zeroc-ice-el7.repo \
 	http://download.zeroc.com/Ice/3.5/el7/zeroc-ice-el7.repo
@@ -24,17 +24,12 @@ pip install tables
 
 # Postgres, reconfigure to allow TCP connections
 yum -y install postgresql-server postgresql
+PGSETUP_INITDB_OPTIONS=--encoding=UTF8 postgresql-setup initdb
+sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/data/pg_hba.conf
 
-# Note systemd doesn't work stright off on docker
-DOCKER=1
-if [ $DOCKER -eq 1 ]; then
-	#export PGDATA=/var/lib/pgsql/data
-	su postgres -c 'initdb /var/lib/pgsql/data'
-	sed -i.bak -re 's/^(host.*)trust/\1md5/' /var/lib/pgsql/data/pg_hba.conf
-	su postgres -c 'pg_ctl -D /var/lib/pgsql/data -l /var/lib/pgsql/logfile start'
-else
-	TODO: service postgresql-9.3 initdb
-	sed -i.bak -re 's/^(host.*)trust/\1md5/' /var/lib/pgsql/data/pg_hba.conf
-	TODO: chkconfig postgresql-9.3 on
-	systemctl start postgresql
+# Note postgres and systemd need some fiddling to work inside docker
+if [ "$container" = "docker" ]; then
+	sed -i.bak -re 's/^(OOMScoreAdjust.*)/#\1/' /usr/lib/systemd/system/postgresql.service
 fi
+systemctl start postgresql
+systemctl enable postgresql

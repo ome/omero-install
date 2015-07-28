@@ -9,8 +9,8 @@ bash -eux dependencies-centos7.sh
 bash -eux system_setup.sh
 bash -eux setup_postgres.sh
 
-cp settings.env setup_omero_ice35.sh ~omero
-su - omero -c "bash -eux setup_omero_ice35.sh"
+cp settings.env setup_omero51.sh ~omero
+su - omero -c "bash -eux setup_omero51.sh"
 
 bash -eux setup_nginx_centos7.sh
 
@@ -18,7 +18,7 @@ bash -eux setup_nginx_centos7.sh
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"
 
-bash -eux setup_omero_daemon_centos6.sh
+#bash -eux setup_omero_daemon_centos6.sh
 
 #service omero start
 #service omero-web start
