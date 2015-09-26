@@ -19,7 +19,7 @@ Note that due to a bug(?) in the Python installer it is not possible to do an un
 
 - jre-8u45-windows-x64.exe
 - postgresql-9.4.1-3-windows-x64.exe
-- Ice-3.5.1-b3-win-x64-Release.zip
+- Ice-3.5.1-b4-win-x64-Release.zip
 - python-2.7.9\python-2.7.9.amd64.msi
 
 Install Python module dependencies (all the whl files in the `python-2.7.9` directory). These are wheel files which must be installed using pip:
