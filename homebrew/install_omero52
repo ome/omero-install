@@ -78,7 +78,7 @@ bin/omero import test.fake
 bin/omero logout
 
 # Start OMERO.web
-bin/omero web config nginx-development --http $HTTPPORT > $(bin/brew --prefix omero52)/etc/nginx/omero.conf
+bin/omero web config nginx-development --http $HTTPPORT > $(bin/brew --prefix omero52)/etc/nginx.conf
 bin/omero web start
 nginx -c $(bin/brew --prefix omero52)/etc/nginx.conf
 
