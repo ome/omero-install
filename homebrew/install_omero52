@@ -62,6 +62,9 @@ if [ -d "$OMERO_DATA_DIR" ]; then
     rm -rf $OMERO_DATA_DIR
 fi
 mkdir -p $OMERO_DATA_DIR
+
+# Temp workaround
+mkdir -p $(bin/brew --prefix omero52)/etc/grid
 bin/omero config set omero.data.dir $OMERO_DATA_DIR
 
 # Start the server
