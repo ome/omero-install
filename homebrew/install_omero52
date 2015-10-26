@@ -78,9 +78,9 @@ bin/omero import test.fake
 bin/omero logout
 
 # Start OMERO.web
-bin/omero web config nginx-development --http $HTTPPORT > /usr/local/etc/nginx/omero.conf
-nginx -c /usr/local/etc/nginx/omero.conf
+bin/omero web config nginx-development --http $HTTPPORT > $(bin/brew --prefix omero52)/etc/nginx/omero.conf
 bin/omero web start
+nginx -c $(bin/brew --prefix omero52)/etc/nginx.conf
 
 # Test simple Web connection
 brew install wget
@@ -92,8 +92,8 @@ resp=$(wget --keep-session-cookies --load-cookies cookies.txt --post-data $post_
 echo "$resp"
 
 # Stop OMERO.web
+nginx -c $(bin/brew --prefix omero52)/etc/nginx.conf -s stop
 bin/omero web stop
-nginx -c /usr/local/etc/nginx/omero.conf -s stop
 
 # Stop the server
 bin/omero admin stop
