@@ -8,7 +8,7 @@ set -x
 # Stop existing instance of OMERO
 pkill icegridnode || echo No OMERO.server running
 pkill python || echo No OMERO.Web running
-pgrep nginx && /usr/local/bin/nginx -c /usr/local/nginx/etc/omero.conf -s stop || echo No nginx running
+pkill nginx || echo No nginx running
 pkill postgres || echo No PostgreSQL running
 
 # Clean existing Homebrew
