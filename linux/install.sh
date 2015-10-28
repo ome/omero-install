@@ -4,7 +4,7 @@ set -e -u -x
 
 DISTRO=
 WEBSERVER=nginx
-OMEROVER=omero51
+OMEROVER=omero
 
 for arg in "$@"; do
 	case "$arg" in
@@ -14,7 +14,7 @@ for arg in "$@"; do
 	nginx|apache)
 		WEBSERVER="$arg"
 		;;
-	omero51|omero51-merge)
+	omero|omerodev)
 		OMEROVER="$arg"
 		;;
 	*)
