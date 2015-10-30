@@ -27,7 +27,7 @@ yum -y install \
 	hdf5-devel \
 	freetype-devel \
 	expat-devel \
-	libbz2-devel \
+	bzip2-devel \
 	openssl-devel
 
 # TODO: this installs a lot of unecessary packages:
