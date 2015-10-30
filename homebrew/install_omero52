@@ -7,7 +7,7 @@ set -x
 
 export PSQL_DIR=${PSQL_DIR:-/usr/local/var/postgres}
 export OMERO_DATA_DIR=${OMERO_DATA_DIR:-/tmp/var/OMERO.data}
-export SCRIPT_NAME=${SCRIPT_NAME:-OMERO.sql}
+export PSQL_SCRIPT_NAME=PSQL_SCRIPT_NAME:-OMERO.sql}
 export ROOT_PASSWORD=${ROOT_PASSWORD:-omero}
 export ICE=${ICE:-3.5}
 export HTTPPORT=${HTTPPORT:-8080}
@@ -54,9 +54,9 @@ bin/omero config set omero.db.user db_user
 bin/omero config set omero.db.pass db_password
 
 # Run DB script
-bin/omero db script --password $ROOT_PASSWORD -f $SCRIPT_NAME
-bin/psql -h localhost -U db_user omero_database < $SCRIPT_NAME
-rm $SCRIPT_NAME
+bin/omero db script --password $ROOT_PASSWORD -f $PSQL_SCRIPT_NAME
+bin/psql -h localhost -U db_user omero_database < $PSQL_SCRIPT_NAME
+rm $PSQL_SCRIPT_NAME
 
 # Set up the data directory
 if [ -d "$OMERO_DATA_DIR" ]; then
