@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set +u
+source /opt/rh/python27/enable
+set -u
+
 cat << EOF > /etc/yum.repos.d/nginx.repo
 [nginx]
 name=nginx repo

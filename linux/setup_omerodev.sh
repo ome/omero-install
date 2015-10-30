@@ -4,6 +4,10 @@ set -e -u -x
 
 source settings.env
 
+set +u
+source /opt/rh/python27/enable
+set -u
+
 virtualenv omego
 omego/bin/pip install omego
 

@@ -32,6 +32,7 @@ source settings.env
 
 if [ $DISTRO = centos6 ]; then
 	bash -eux dependencies-centos6.sh
+	bash -eux dependencies-centos6-ice.sh
 else
 	bash -eux dependencies-ubuntu1404.sh
 fi
