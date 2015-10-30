@@ -40,7 +40,7 @@ fi
 bash -eux system_setup.sh
 bash -eux setup_postgres.sh
 
-cp settings.env setup_$OMEROVER.sh ~omero
+cp settings.env omero-c6-py27.env setup_$OMEROVER.sh ~omero
 if [ $WEBSERVER = apache ]; then
 	cp setup_omero_apache.sh ~omero
 fi
