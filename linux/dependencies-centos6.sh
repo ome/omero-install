@@ -11,12 +11,7 @@ yum -y install \
 	wget \
 	java-1.8.0-openjdk \
 	db53 db53-devel db53-utils mcpp-devel
-	#ice ice-python ice-servers
 
-#yum -y install \
-	#python-pip python-devel python-virtualenv \
-	#numpy scipy python-matplotlib Cython \
-	#gcc \
 yum -y install \
 	python27 \
 	python27-numpy \
@@ -32,15 +27,6 @@ yum -y install \
 
 # TODO: this installs a lot of unecessary packages:
 yum -y groupinstall "Development Tools"
-
-# Requires gcc {libjpeg,libpng,libtiff,zlib}-devel
-#pip install pillow
-#pip install numexpr==1.4.2
-# Requires gcc, Cython, hdf5-devel
-#pip install tables==2.4.0
-
-# Django
-#pip install Django==1.6.11
 
 set +u
 source /opt/rh/python27/enable
