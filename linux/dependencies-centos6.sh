@@ -46,8 +46,12 @@ set +u
 source /opt/rh/python27/enable
 set -u
 easy_install pip
+
 export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 pip install tables pillow matplotlib
+
+# Django
+pip install "Django<1.9"
 
 # Postgres, reconfigure to allow TCP connections
 yum -y install http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
