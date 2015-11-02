@@ -4,10 +4,12 @@ set -e -u -x
 
 source settings.env
 
-SERVER=http://downloads.openmicroscopy.org/latest/omero5.1/server-ice35.zip
+virtualenv omego
+omego/bin/pip install omego
 
-wget $SERVER
-unzip -q server-ice35.zip
+BRANCH=OMERO-DEV-latest
+
+omego/bin/omego download --branch $BRANCH server
 ln -s OMERO.server-*/ OMERO.server
 
 OMERO.server/bin/omero config set omero.data.dir "$OMERO_DATA_DIR"

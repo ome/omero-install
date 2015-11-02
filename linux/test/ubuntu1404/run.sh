@@ -5,4 +5,4 @@ cron
 service omero start
 service nginx start
 service omero-web start
-bash
+exec bash
