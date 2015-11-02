@@ -28,7 +28,7 @@ VERBOSE=1 bin/brew test omero52
 bin/brew install postgres
 
 # Install OMERO Python dependencies
-bin/pip install -r $(bin/brew --prefix omero52)/requirements.txt
+bin/pip install -r $(bin/brew --prefix omero52)/requirements-py27-nginx.txt
 bash bin/omero_python_deps
 
 # Set additional environment variables
