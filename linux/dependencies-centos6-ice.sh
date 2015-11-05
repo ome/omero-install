@@ -18,3 +18,6 @@ source /opt/rh/python27/enable
 set -u
 make && make test && make install
 
+echo /opt/Ice-3.5.1/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
+ldconfig
+
