@@ -26,7 +26,7 @@ PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-9.4/bin/postgresql94-setup ini
 sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/9.4/data/pg_hba.conf
 
 # Workaround to get postgresql running inside Docker
-if [ "$container" = docker ]; then
+if [ "${container:-}" = docker ]; then
 	sed -i 's/OOMScoreAdjust/#OOMScoreAdjust/' \
         	/usr/lib/systemd/system/postgresql-9.4.service
 	systemctl daemon-reload
