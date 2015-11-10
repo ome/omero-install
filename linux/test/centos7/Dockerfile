@@ -2,8 +2,7 @@
 # Not intended for production use
 # Note to enable systemd this must be run with on a host with systemd
 # and additional flaks, see the omero-ssh-systemd README
-#FROM openmicroscopy/omero-ssh-systemd
-FROM manics/omero-ssh-systemd
+FROM openmicroscopy/omero-ssh-systemd
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 # Remove the existing omero user
