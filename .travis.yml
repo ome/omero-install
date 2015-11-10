@@ -5,5 +5,5 @@ env:
   - ENV=centos6
   - ENV=ubuntu1404
 script:
-    - cd linux/test && ./docker-build.sh $ENV && docker run -ti omero_install_test_$ENV
+    - cd linux/test && ./docker-build.sh $ENV && docker run -d omero_install_test_$ENV
     # Sadly, no test for Windows or OS X here.
