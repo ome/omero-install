@@ -32,6 +32,7 @@ source settings.env
 
 if [ $DISTRO = centos6 ]; then
 	bash -eux dependencies-centos6.sh
+	bash -eux dependencies-centos6-ice.sh
 else
 	bash -eux dependencies-ubuntu1404.sh
 fi
@@ -39,7 +40,7 @@ fi
 bash -eux system_setup.sh
 bash -eux setup_postgres.sh
 
-cp settings.env setup_$OMEROVER.sh ~omero
+cp settings.env omero-c6-py27.env setup_$OMEROVER.sh ~omero
 if [ $WEBSERVER = apache ]; then
 	cp setup_omero_apache.sh ~omero
 fi
