@@ -9,8 +9,8 @@ bash -eux dependencies-centos7.sh
 bash -eux system_setup.sh
 bash -eux setup_postgres.sh
 
-cp settings.env setup_omero51.sh ~omero
-su - omero -c "bash -eux setup_omero51.sh"
+cp settings.env setup_omero.sh ~omero
+su - omero -c "bash -eux setup_omero.sh"
 
 bash -eux setup_nginx_centos7.sh
 
