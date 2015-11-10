@@ -1,0 +1,13 @@
+language: objective-c
+matrix:
+  fast_finish: true
+services:
+  - docker
+env:
+  - ENV=centos6
+  - ENV=ubuntu1404
+  - ENV=install_omero52
+script:
+    - if [[ $ENV == 'install*' ]]; then cd homebrew && sh $ENV; fi
+    - if [[ $ENV != 'install*' ]]; then cd linux/test && ./docker-build.sh $ENV && docker run -ti omero-install-test-$ENV; fi
+    # Sadly, no test for Windows here.
