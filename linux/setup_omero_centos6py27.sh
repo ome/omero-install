@@ -8,9 +8,9 @@ set +u
 source /opt/rh/python27/enable
 set -u
 
-SERVER=http://downloads.openmicroscopy.org/latest/omero5/server-ice35.zip
+SERVER=https://ci.openmicroscopy.org/view/DEV/job/OMERO-DEV-merge-build/156/ICE=3.5,jdk=8_LATEST,label=octopus/artifact/src/target/OMERO.server-5.2.0-74-5bd5e75-ice35-b156.zip
 
-wget $SERVER
+wget -o server-ice35.zip $SERVER
 unzip -q server-ice35.zip
 ln -s OMERO.server-*/ OMERO.server
 
