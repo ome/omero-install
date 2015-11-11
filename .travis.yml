@@ -4,6 +4,8 @@ services:
 env:
   - ENV=centos6
   - ENV=centos6-apache
+  - ENV=centos6py27
+  - ENV=centos6py27-apache
   - ENV=ubuntu1404
 script:
     - cd linux/test && ./docker-build.sh $ENV && docker run -d omero_install_test_$ENV
