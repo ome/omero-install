@@ -5,11 +5,10 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 RUN update-locale LANG=C.UTF-8
 
-ADD omero-install-test.zip /
-RUN apt-get update && apt-get -y install unzip && unzip omero-install-test.zip
+COPY omero-install-test /omero-install-test
 
-RUN cd omero-install-test && bash install-ubuntu1404.sh
-ADD run.sh /home/omero/run.sh
+RUN cd /omero-install-test && bash install-ubuntu1404.sh
+COPY run.sh /home/omero/run.sh
 
 EXPOSE 80 4063 4064
 CMD ["/bin/bash", "-e", "/home/omero/run.sh"]
