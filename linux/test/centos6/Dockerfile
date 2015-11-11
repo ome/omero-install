@@ -11,11 +11,10 @@ RUN yum -y install cronie && \
 	sed -i -re s'/(session\s+required\s+pam_loginuid.so)/#\1/' \
 	/etc/pam.d/crond
 
-ADD omero-install-test.zip /
-RUN yum -y install unzip && unzip omero-install-test.zip
+COPY omero-install-test /omero-install-test
 
-RUN cd omero-install-test && bash install-centos6.sh
-ADD run.sh /home/omero/run.sh
+RUN cd /omero-install-test && bash install-centos6.sh
+COPY run.sh /home/omero/run.sh
 
 EXPOSE 80 4063 4064
 CMD ["/bin/bash", "-e", "/home/omero/run.sh"]
