@@ -14,11 +14,11 @@ su - omero -c "bash -eux setup_omero.sh"
 
 bash -eux setup_nginx_centos7.sh
 
-#If you don't want to use the init.d scripts you can start OMERO manually:
+#If you don't want to use the systemd scripts you can start OMERO manually:
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"
 
-#bash -eux setup_omero_daemon_centos6.sh
+bash -eux setup_omero_daemon_centos7.sh
 
-#service omero start
-#service omero-web start
+#systemctl start omero.service
+#systemctl start omero-web.service
