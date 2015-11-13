@@ -1,11 +1,11 @@
 #!/bin/bash
 
-apt-get -y install nginx gunicorn
+apt-get -y install apache2 libapache2-mod-wsgi
 
-# See setup_omero*.sh for the nginx config file creation
+# See setup_omero*.sh for the apache config file creation
 
-cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/sites-available/omero-web
-rm /etc/nginx/sites-enabled/default
-ln -s /etc/nginx/sites-available/omero-web /etc/nginx/sites-enabled/
+cp ~omero/OMERO.server/apache.conf.tmp /etc/apache2/sites-available/omero-web.conf
+a2dissite 000-default.conf
+a2ensite omero-web.conf
 
-service nginx start
+service apache2 start
