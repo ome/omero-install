@@ -23,7 +23,7 @@ bash -eux system_setup.sh
 bash -eux setup_postgres.sh
 
 cp settings.env setup_$OMEROVER.sh ~omero
-cp setup_omero_apache.sh ~omero
+cp setup_omero_apache24.sh ~omero
 
 if [ $OMEROVER = omerodev ]; then
 	yum -y install python-virtualenv
