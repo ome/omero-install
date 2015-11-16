@@ -28,8 +28,8 @@ cp setup_omero_apache.sh ~omero
 if [ $OMEROVER = omerodev ]; then
 	yum -y install python-virtualenv
 	yum clean all
-	su - omero -c "bash -eux setup_$OMEROVER.sh"
 fi 
+su - omero -c "bash -eux setup_$OMEROVER.sh"
 
 su - omero -c "bash -eux setup_omero_apache24.sh"
 bash -eux setup_apache_centos7.sh
