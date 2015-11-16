@@ -31,7 +31,7 @@ if [ $OMEROVER = omerodev ]; then
 	su - omero -c "bash -eux setup_$OMEROVER.sh"
 fi 
 
-su - omero -c "bash -eux setup_omero_apache.sh"
+su - omero -c "bash -eux setup_omero_apache24.sh"
 bash -eux setup_apache_centos7.sh
 
 #If you don't want to use the systemd scripts you can start OMERO manually:
