@@ -7,16 +7,16 @@ OMEROVER=omero
 
 source settings.env
 
-bash -eux dependencies-centos6.sh
+bash -eux step01_centos6_deps.sh
 
-bash -eux system_setup.sh
-bash -eux setup_postgres.sh
+bash -eux step02_all_setup.sh
+bash -eux step03_all_postgres.sh
 
-cp settings.env setup_$OMEROVER.sh ~omero
+cp settings.env step04_all_$OMEROVER.sh ~omero
 
-su - omero -c "bash -eux setup_$OMEROVER.sh"
+su - omero -c "bash -eux step04_all_$OMEROVER.sh"
 
-bash -eux setup_nginx_centos6.sh
+bash -eux step05_centos6_nginx.sh
 
 bash -eux setup_centos6_selinux.sh
 
@@ -24,11 +24,11 @@ bash -eux setup_centos6_selinux.sh
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"
 
-bash -eux setup_omero_daemon_centos6.sh
+bash -eux step06_centos6_daemon.sh
 
-bash -eux setup_permissions.sh
+bash -eux step07_all_perms.sh
 
-bash -eux setup_cron.sh
+bash -eux step08_all_cron.sh
 
 #service omero start
 #service omero-web start

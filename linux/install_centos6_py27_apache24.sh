@@ -7,20 +7,20 @@ OMEROVER=omero
 
 source settings.env
 
-bash -eux dependencies-centos6py27.sh
+bash -eux step01_centos6_py27_deps.sh
 bash -eux dependencies-ice-centos6py27.sh
 
-bash -eux system_setup.sh
+bash -eux step02_all_setup.sh
 bash -eux user_setup_centos6py27.sh
-bash -eux setup_postgres.sh
+bash -eux step03_all_postgres.sh
 
-cp settings.env omero-centos6py27.env setup_${OMEROVER}_centos6py27.sh ~omero
+cp settings.env omero-centos6py27.env step04_centos6_py27_${OMEROVER}.sh ~omero
 cp setup_omero_apache24.sh ~omero
 
-su - omero -c "bash -eux setup_${OMEROVER}_centos6py27.sh"
+su - omero -c "bash -eux step04_centos6_py27_${OMEROVER}.sh"
 
 su - omero -c "bash -eux setup_omero_apache24.sh"
-bash -eux setup_apache_centos6py27.sh
+bash -eux step05_centos6_py27_apache24.sh
 
 bash -eux setup_centos6_selinux.sh
 
@@ -28,11 +28,11 @@ bash -eux setup_centos6_selinux.sh
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"
 
-bash -eux setup_omero_daemon_noweb_centos6.sh
+bash -eux step06_centos6_daemon_no_web.sh
 
-bash -eux setup_permissions.sh
+bash -eux step07_all_perms.sh
 
-bash -eux setup_cron.sh
+bash -eux step08_all_cron.sh
 
 #service omero start
 #service omero-web start
