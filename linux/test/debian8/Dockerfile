@@ -9,7 +9,7 @@ RUN update-locale LANG=C.UTF-8
 ADD omero-install-test.zip /
 RUN apt-get -y install unzip && unzip omero-install-test.zip
 
-RUN cd omero-install-test && bash install-ubuntu1404.sh
+RUN cd omero-install-test && bash install_ubuntu1404_nginx.sh
 ADD run.sh /home/omero/run.sh
 
 EXPOSE 80 4063 4064
