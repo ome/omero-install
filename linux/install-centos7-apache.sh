@@ -4,17 +4,6 @@ set -e -u -x
 
 OMEROVER=omero
 
-for arg in "$@"; do
-	case "$arg" in
-	omero|omerodev)
-		OMEROVER="$arg"
-		;;
-	*)
-		echo "Unknown option: $arg";
-		exit 1
-	esac
-done
-
 source settings.env
 
 bash -eux dependencies-centos7.sh
