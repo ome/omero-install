@@ -9,8 +9,7 @@ source settings.env
 
 bash -eux step01_centos6_py27_deps.sh
 
-bash -eux step02_all_setup.sh
-bash -eux user_setup_centos6py27.sh
+bash -eux step02_centos6_py27_setup.sh
 bash -eux step03_all_postgres.sh
 
 cp settings.env omero-centos6py27.env step04_centos6_py27_${OMEROVER}.sh ~omero
