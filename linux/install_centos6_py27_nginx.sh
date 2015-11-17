@@ -8,7 +8,6 @@ OMEROVER=omero
 source settings.env
 
 bash -eux step01_centos6_py27_deps.sh
-bash -eux dependencies-ice-centos6py27.sh
 
 bash -eux step02_all_setup.sh
 bash -eux user_setup_centos6py27.sh
