@@ -18,8 +18,6 @@ su - omero -c "bash -eux step04_all_$OMEROVER.sh"
 
 bash -eux step05_centos6_nginx.sh
 
-bash -eux setup_centos6_selinux.sh
-
 #If you don't want to use the init.d scripts you can start OMERO manually:
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"

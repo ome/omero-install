@@ -20,8 +20,6 @@ su - omero -c "bash -eux step04_centos6_py27_${OMEROVER}.sh"
 su - omero -c "bash -eux setup_omero_apache24.sh"
 bash -eux step05_centos6_py27_apache24.sh
 
-bash -eux setup_centos6_selinux.sh
-
 #If you don't want to use the init.d scripts you can start OMERO manually:
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"
