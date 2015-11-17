@@ -6,7 +6,7 @@ OMEROVER=omero
 
 for arg in "$@"; do
 	case "$arg" in
-	omero|omerodev|omerodevmerge)
+	omero|omerodev)
 		OMEROVER="$arg"
 		;;
 	*)
