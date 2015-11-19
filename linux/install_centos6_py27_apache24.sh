@@ -13,11 +13,8 @@ bash -eux step02_centos6_py27_setup.sh
 bash -eux step03_all_postgres.sh
 
 cp settings.env omero-centos6py27.env step04_centos6_py27_${OMEROVER}.sh ~omero
-cp setup_omero_apache24.sh ~omero
-
 su - omero -c "bash -eux step04_centos6_py27_${OMEROVER}.sh"
 
-su - omero -c "bash -eux setup_omero_apache24.sh"
 bash -eux step05_centos6_py27_apache24.sh
 
 #If you don't want to use the init.d scripts you can start OMERO manually:

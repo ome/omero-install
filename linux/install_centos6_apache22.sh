@@ -13,11 +13,8 @@ bash -eux step02_all_setup.sh
 bash -eux step03_all_postgres.sh
 
 cp settings.env step04_all_$OMEROVER.sh ~omero
-cp setup_omero_apache.sh ~omero
-
 su - omero -c "bash -eux step04_all_$OMEROVER.sh"
 
-su - omero -c "bash -eux setup_omero_apache.sh"
 bash -eux step05_centos6_apache22.sh
 
 #If you don't want to use the init.d scripts you can start OMERO manually:

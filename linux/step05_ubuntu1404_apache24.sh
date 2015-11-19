@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cp setup_omero_apache24.sh ~omero
+su - omero -c "bash -eux setup_omero_apache24.sh"
+
 apt-get -y install apache2 libapache2-mod-wsgi
 
 # See setup_omero*.sh for the apache config file creation

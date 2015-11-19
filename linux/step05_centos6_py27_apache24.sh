@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cp setup_omero_apache24.sh ~omero
+su - omero -c "bash -eux setup_omero_apache24.sh"
+
 yum -y install httpd24-httpd python27-mod_wsgi
 
 # See setup_omero_apache.sh for the apache config file creation

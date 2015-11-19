@@ -13,11 +13,7 @@ bash -eux step02_all_setup.sh
 bash -eux step03_all_postgres.sh
 
 cp settings.env step04_all_$OMEROVER.sh ~omero
-cp setup_omero_apache24.sh ~omero
-
 su - omero -c "bash -eux step04_all_$OMEROVER.sh"
-
-su - omero -c "bash -eux setup_omero_apache24.sh"
 
 bash -eux step05_ubuntu1404_apache24.sh
 
