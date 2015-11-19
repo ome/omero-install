@@ -7,6 +7,8 @@ env:
   - ENV=centos6py27
   - ENV=centos6py27-apache
   - ENV=ubuntu1404
+before_script:
+  - if [ "${ENV}" == "centos6py27-apache" ]; then sed -i -e 's|^OMEROVER=omero|&dev|g' linux/install-centos6py27-apache.sh; fi
 script:
     - cd linux/test && ./docker-build.sh $ENV && docker run -d omero_install_test_$ENV
     # Sadly, no test for Windows or OS X here.

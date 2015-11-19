@@ -15,11 +15,11 @@ bash -eux user_setup_centos6py27.sh
 bash -eux setup_postgres.sh
 
 cp settings.env omero-centos6py27.env setup_${OMEROVER}_centos6py27.sh ~omero
-cp setup_omero_apache.sh ~omero
+cp setup_omero_apache24.sh ~omero
 
 su - omero -c "bash -eux setup_${OMEROVER}_centos6py27.sh"
 
-su - omero -c "bash -eux setup_omero_apache.sh"
+su - omero -c "bash -eux setup_omero_apache24.sh"
 bash -eux setup_apache_centos6py27.sh
 
 bash -eux setup_centos6_selinux.sh
