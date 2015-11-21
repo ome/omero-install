@@ -10,7 +10,6 @@ is meant to be used by Continuous Integration jobs.
 including Homebrew Python and adds the taps required for OME formula
 installation.
 
-- [install_omero44](install_omero44), [install_omero50](install_omero50)
-and [install_omero51](install_omero51) install the latest {major}.{minor}
+- [install_omero51](install_omero51) install the latest {major}.{minor}
 version of Bio-Formats and OMERO. Additionally, it starts and test the
 installed OMERO.server and OMERO.web client.
