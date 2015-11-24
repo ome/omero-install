@@ -6,7 +6,7 @@ set -u
 set -x
 
 export OMERO_DATA_DIR=${OMERO_DATA_DIR:-/tmp/var/OMERO.data}
-export PSQL_SCRIPT_NAME=PSQL_SCRIPT_NAME:-OMERO.sql}
+export PSQL_SCRIPT_NAME=${PSQL_SCRIPT_NAME:-OMERO.sql}
 export ROOT_PASSWORD=${ROOT_PASSWORD:-omero}
 export ICE=${ICE:-3.5}
 export HTTPPORT=${HTTPPORT:-8080}
