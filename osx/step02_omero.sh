@@ -5,7 +5,6 @@ set -e
 set -u
 set -x
 
-export PSQL_DIR=${PSQL_DIR:-/usr/local/var/postgres}
 export OMERO_DATA_DIR=${OMERO_DATA_DIR:-/tmp/var/OMERO.data}
 export PSQL_SCRIPT_NAME=PSQL_SCRIPT_NAME:-OMERO.sql}
 export ROOT_PASSWORD=${ROOT_PASSWORD:-omero}
@@ -24,9 +23,6 @@ bin/brew install omero52 --with-nginx --with-cpp
 export PYTHONPATH=$OMERO_PYTHONPATH
 VERBOSE=1 bin/brew test omero52
 
-# Install PostgreSQL
-bin/brew install postgres
-
 # Install OMERO Python dependencies
 bin/pip install -r $(bin/brew --prefix omero52)/share/web/requirements-py27-nginx.txt
 bash bin/omero_python_deps
@@ -34,13 +30,10 @@ bash bin/omero_python_deps
 # Set additional environment variables
 export ICE_CONFIG=$(bin/brew --prefix omero52)/etc/ice.config
 
-# Note: If postgres startup fails it's probably because there was an old
-# process still running.
-# Create PostgreSQL database
-if [ -d "$PSQL_DIR" ]; then
-    rm -rf $PSQL_DIR
-fi
-bin/initdb -E UTF8 $PSQL_DIR
+# Install PostgreSQL
+bin/brew install postgres
+
+# Start PostgreSQL
 bin/pg_ctl -D $PSQL_DIR -l $PSQL_DIR/server.log -w start
 
 # Create user and database
