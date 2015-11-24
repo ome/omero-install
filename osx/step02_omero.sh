@@ -34,7 +34,7 @@ export ICE_CONFIG=$(bin/brew --prefix omero52)/etc/ice.config
 bin/brew install postgres
 
 # Start PostgreSQL
-bin/pg_ctl -D $PSQL_DIR -l $PSQL_DIR/server.log -w start
+bin/pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log -w start
 
 # Create user and database
 bin/createuser -w -D -R -S db_user
@@ -92,4 +92,4 @@ bin/omero web stop
 bin/omero admin stop
 
 # Stop PostgreSQL
-bin/pg_ctl -D $PSQL_DIR  -m fast stop
+bin/pg_ctl -D /usr/local/var/postgres -m fast stop
