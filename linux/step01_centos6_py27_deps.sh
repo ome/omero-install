@@ -14,6 +14,7 @@ yum -y install \
 
 yum -y install \
 	python27 \
+	python27-virtualenv \
 	python27-numpy \
 	libjpeg-devel \
 	libpng-devel \
@@ -47,3 +48,25 @@ service postgresql-9.4 initdb
 sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/9.4/data/pg_hba.conf
 chkconfig postgresql-9.4 on
 service postgresql-9.4 start
+
+# Now get and build ice
+yum -y install tar
+
+mkdir /tmp/ice
+cd /tmp/ice
+
+curl -Lo Ice-3.5.1.tar.gz https://zeroc.com/download/Ice/3.5/Ice-3.5.1.tar.gz
+
+tar xvf Ice-3.5.1.tar.gz
+cd Ice-3.5.1
+
+cd cpp
+make && make test && make install
+cd ../py
+set +u
+source /opt/rh/python27/enable
+set -u
+make && make test && make install
+
+echo /opt/Ice-3.5.1/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
+ldconfig

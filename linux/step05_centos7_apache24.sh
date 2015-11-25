@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cp setup_omero_apache24.sh ~omero
+su - omero -c "bash -eux setup_omero_apache24.sh"
+
 yum -y install httpd mod_wsgi
 yum clean all
 
