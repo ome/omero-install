@@ -10,6 +10,8 @@ export PSQL_SCRIPT_NAME=${PSQL_SCRIPT_NAME:-OMERO.sql}
 export ROOT_PASSWORD=${ROOT_PASSWORD:-omero}
 export ICE=${ICE:-3.5}
 export HTTPPORT=${HTTPPORT:-8080}
+export LANG=${LANG:-en_US.UTF-8}
+export LANGUAGE=${LANGUAGE:-en_US:en}
 
 cd /usr/local
 
