@@ -73,7 +73,7 @@ cd cpp
 make && make test && make install
 cd ../py
 
-virtualenv omero --system-site-packages
+virtualenv omero
 set +u
 source omero/bin/activate
 set -u
