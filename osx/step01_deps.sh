@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Main Homebrew installation script
+# Installs OMERO requirements
 
 set -e
 set -u
@@ -59,4 +59,7 @@ else
 fi
 
 # Tap homebrew-science library (HDF5)
-/usr/local/bin/brew tap homebrew/science || echo "Already tapped"
+bin/brew tap homebrew/science || echo "Already tapped"
+
+# Install PostgreSQL
+bin/brew install postgres
