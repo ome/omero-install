@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
-# Main Homebrew installation script
+# Installs OMERO requirements
 
 set -e
 set -u
 set -x
+
+export PATH=/usr/local/bin:$PATH
+export LANG=${LANG:-en_US.UTF-8}
+export LANGUAGE=${LANGUAGE:-en_US:en}
 
 # Test whether this script is run in a job environment
 JOB_NAME=${JOB_NAME:-}
@@ -20,17 +24,18 @@ TESTING_MODE=${TESTING_MODE:-$DEFAULT_TESTING_MODE}
 
 # Install Homebrew in /usr/local
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-cd /usr/local
-
-# Install git if not already installed
-bin/brew list | grep "\bgit\b" || bin/brew install git
 
 # Update Homebrew
-bin/brew update
+brew update
 
 # Run brew doctor
-export PATH=$(bin/brew --prefix)/bin:$PATH
-bin/brew doctor
+brew doctor
+
+# Install git if not already installed
+brew list | grep "\bgit\b" || brew install git
+
+# Install PostgreSQL
+brew install postgres
 
 ###################################################################
 # Python pip installation
@@ -39,24 +44,24 @@ bin/brew doctor
 # Install Homebrew python
 # Alternately, the system Python can be used but installing Python
 # dependencies may require sudo
-bin/brew install python
+brew install python
 
 # Tap ome-alt library
 if [ "$TESTING_MODE" = true ]; then
-    bin/brew tap --full ome/alt || echo "Already tapped"
+    brew tap --full ome/alt || echo "Already tapped"
 
     # Install scc tools
-    bin/pip install -U scc || echo "scc installed"
+    pip install -U scc || echo "scc installed"
 
     # Merge homebrew-alt PRs
-    cd Library/Taps/ome/homebrew-alt
-    /usr/local/bin/scc merge master
+    cd /usr/local/Library/Taps/ome/homebrew-alt
+    scc merge master
 
     # Repair formula symlinks after merge
-    /usr/local/bin/brew tap --repair
+    brew tap --repair
 else
-    bin/brew tap ome/alt || echo "Already tapped"
+    brew tap ome/alt || echo "Already tapped"
 fi
 
 # Tap homebrew-science library (HDF5)
-/usr/local/bin/brew tap homebrew/science || echo "Already tapped"
+brew tap homebrew/science || echo "Already tapped"
