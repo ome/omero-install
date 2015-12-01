@@ -39,7 +39,7 @@ resp=$(wget --keep-session-cookies --load-cookies cookies.txt --post-data $post_
 echo "$resp"
 
 # Stop OMERO.web
-nginx -c $(bin/brew --prefix omero52)/etc/nginx.conf -s stop
+nginx -c $(brew --prefix omero52)/etc/nginx.conf -s stop
 omero web stop
 
 # Stop the server
