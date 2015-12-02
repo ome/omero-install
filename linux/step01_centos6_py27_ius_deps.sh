@@ -7,7 +7,8 @@ curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
 
 yum -y install \
 	unzip \
-	wget
+	wget \
+	tar
 
 wget https://centos6.iuscommunity.org/ius-release.rpm
 rpm -Uvh ius-release*.rpm
@@ -29,6 +30,7 @@ yum -y install \
 	bzip2-devel \
 	openssl-devel
 
+
 # TODO: this installs a lot of unecessary packages:
 yum -y groupinstall "Development Tools"
 
@@ -45,6 +47,7 @@ pip install virtualenv
 # dependencies
 pip install tables pillow numpy matplotlib
 
+
 # Django
 pip install "Django<1.9"
 
@@ -58,8 +61,6 @@ chkconfig postgresql-9.4 on
 service postgresql-9.4 start
 
 # Now get and build ice
-yum -y install tar
-
 mkdir /tmp/ice
 cd /tmp/ice
 
