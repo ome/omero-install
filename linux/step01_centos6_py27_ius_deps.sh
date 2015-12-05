@@ -20,6 +20,7 @@ yum -y install \
 yum -y install \
 	python27 \
 	python27-devel \
+	python27-pip \
 	libjpeg-devel \
 	libpng-devel \
 	libtiff-devel \
@@ -34,22 +35,9 @@ yum -y install \
 # TODO: this installs a lot of unecessary packages:
 yum -y groupinstall "Development Tools"
 
-# TODO: review
-# First get the setup script for Setuptools:
-wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
- 
-# Then install it for Python 2.7:
-python2.7 ez_setup.py
-easy_install pip
 export PYTHONWARNINGS="ignore:Unverified HTTPS request"
-pip install virtualenv
+pip2.7 install virtualenv
 
-# dependencies
-pip install tables pillow numpy matplotlib
-
-
-# Django
-pip install "Django<1.9"
 
 # Postgres, reconfigure to allow TCP connections
 yum -y install http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
@@ -60,7 +48,13 @@ sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/9.4/data/pg_hba.conf
 chkconfig postgresql-9.4 on
 service postgresql-9.4 start
 
+# start virtualenv
+virtualenv /tmp/omero-ice
+set +u
+source /tmp/omero-ice/bin/activate
+set -u
 # Now get and build ice
+
 mkdir /tmp/ice
 cd /tmp/ice
 
@@ -74,13 +68,8 @@ cd cpp
 make && make test && make install
 cd ../py
 
-virtualenv omero
-set +u
-source omero/bin/activate
-set -u
-
 make && make test && make install
-deactivate
 
 echo /opt/Ice-3.5.1/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
 ldconfig
+deactivate
