@@ -67,3 +67,23 @@ Centos 7 testing
         bash install-centos7.sh
         #echo omero:omero | chpasswd
 
+Centos 6 ius testing
+====================
+1. Create a test image containing the installation scripts
+2. Start the container
+3. Change into the `/omero-install-test` directory
+4. Run the scripts
+5. Example
+        ./docker-build.sh centos6_py27_ius
+        cd /omero-install-test
+        bash docker_virtualenv_ius_apache24.sh
+        To enable the OMERO web server, once the Docker image is running modify
+        the web configuration `/etc/httpd/conf.d/omero-web.conf` to
+        set `WSGIPythonHome` and `WSGIPythonPath`,
+
+        WSGIPythonHome /tmp/omeroenv
+        WSGIPythonPath /tmp/omeroenv/lib64/python2.7/site-packages
+
+        Then restart the apache service,
+
+        service httpd restart
