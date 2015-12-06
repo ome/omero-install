@@ -65,12 +65,11 @@ cd Ice-3.5.1
 
 cd cpp
 
-#make && make test && make install
-make && make install
+make && make test && make install
 cd ../py
 
-#make && make test && make install
-make && make install
+make && make test && make install
+
 echo /opt/Ice-3.5.1/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
 ldconfig
 deactivate
