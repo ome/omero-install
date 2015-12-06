@@ -22,6 +22,11 @@ set -u
 # Django
 /tmp/omeroenv/bin/pip2.7 install "Django<1.9"
 
+# cannot use python27-mod_wsgi from ius since httpd2.2 is a dependency
+# install via pip.
+/tmp/omeroenv/bin/pip2.7 install mod_wsgi-httpd
+/tmp/omeroenv/bin/pip2.7 install mod_wsgi
+
 echo source \~omero/omero-centos6py27ius.env >> ~omero/.bashrc
 cp settings.env omero-centos6py27ius.env step04_centos6_py27_ius_${OMEROVER}.sh ~omero
 
@@ -36,10 +41,7 @@ cp settings.env ~omero
 cp setup_omero_apache24.sh ~omero
 su - omero -c "bash -eux setup_omero_apache24.sh"
 
-# cannot use python27-mod_wsgi from ius since httpd2.2 is a dependency
-# install via pip.
-/tmp/omeroenv/bin/pip2.7 install mod_wsgi-httpd
-/tmp/omeroenv/bin/pip2.7 install mod_wsgi
+
 
 # See setup_omero_apache.sh for the apache config file creation
 cp ~omero/OMERO.server/apache.conf.tmp /etc/httpd/conf.d/omero-web.conf
