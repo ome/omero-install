@@ -49,9 +49,9 @@ chkconfig postgresql-9.4 on
 service postgresql-9.4 start
 
 # start virtualenv
-virtualenv /tmp/omero-ice
+virtualenv /tmp/omeroenv
 set +u
-source /tmp/omero-ice/bin/activate
+source /tmp/omeroenv/bin/activate
 set -u
 # Now get and build ice
 
@@ -65,11 +65,12 @@ cd Ice-3.5.1
 
 cd cpp
 
-make && make test && make install
+#make && make test && make install
+make && make install
 cd ../py
 
-make && make test && make install
-
+#make && make test && make install
+make && make install
 echo /opt/Ice-3.5.1/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
 ldconfig
 deactivate
