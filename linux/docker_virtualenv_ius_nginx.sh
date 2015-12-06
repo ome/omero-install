@@ -35,6 +35,9 @@ set -u
 echo source \~omero/omero-centos6py27ius.env >> ~omero/.bashrc
 cp settings.env omero-centos6py27ius.env step04_centos6_py27_ius_${OMEROVER}.sh ~omero
 
+if [ $OMEROVER = omerodev ]; then
+	/tmp/omeroenv/bin/pip2.7 install omego
+fi
 su - omero -c "bash -eux step04_centos6_py27_ius_${OMEROVER}.sh"
 
 # See setup_omero*.sh for the nginx config file creation
