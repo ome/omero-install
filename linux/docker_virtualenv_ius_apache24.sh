@@ -20,7 +20,7 @@ set -u
 /home/omero/omeroenv/bin/pip2.7 install pillow numpy matplotlib
 
 # Django
-/home/omero/omeroenv/bin/pip2.7 install "Django<1.9"
+/home/omero/omeroenv/bin/pip2.7 install "Django>=1.8,<1.9"
 
 # cannot use python27-mod_wsgi from ius since httpd2.2 is a dependency
 # install via pip.
