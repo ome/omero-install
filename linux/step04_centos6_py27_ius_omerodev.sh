@@ -6,7 +6,7 @@ source settings.env
 
 BRANCH=OMERO-DEV-latest
 
-/tmp/omeroenv/bin/omego download --branch $BRANCH server
+/home/omero/omeroenv/bin/omego download --branch $BRANCH server
 ln -s OMERO.server-*/ OMERO.server
 
 OMERO.server/bin/omero config set omero.data.dir "$OMERO_DATA_DIR"

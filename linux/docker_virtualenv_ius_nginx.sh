@@ -19,24 +19,24 @@ source settings.env
 yum -y install nginx
 
 #Create virtual env.
-virtualenv /tmp/omeroenv
+virtualenv /home/omero/omeroenv
 set +u
-source /tmp/omeroenv/bin/activate
+source /home/omero/omeroenv/bin/activate
 set -u
 
 # install omero dependencies
-/tmp/omeroenv/bin/pip2.7 install pillow numpy matplotlib
+/home/omero/omeroenv/bin/pip2.7 install pillow numpy matplotlib
 
 # Django
-/tmp/omeroenv/bin/pip2.7 install "Django<1.9"
+/home/omero/omeroenv/bin/pip2.7 install "Django<1.9"
 
-/tmp/omeroenv/bin/pip2.7 install gunicorn
+/home/omero/omeroenv/bin/pip2.7 install gunicorn
 
 echo source \~omero/omero-centos6py27ius.env >> ~omero/.bashrc
 cp settings.env omero-centos6py27ius.env step04_centos6_py27_ius_${OMEROVER}.sh ~omero
 
 if [ $OMEROVER = omerodev ]; then
-	/tmp/omeroenv/bin/pip2.7 install omego
+	/home/omero/omeroenv/bin/pip2.7 install omego
 fi
 su - omero -c "bash -eux step04_centos6_py27_ius_${OMEROVER}.sh"
 
