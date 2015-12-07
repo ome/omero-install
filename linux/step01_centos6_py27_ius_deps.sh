@@ -48,29 +48,23 @@ sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/9.4/data/pg_hba.conf
 chkconfig postgresql-9.4 on
 service postgresql-9.4 start
 
-# start virtualenv
+#start virtualenv
 virtualenv /tmp/omero-ice
 set +u
 source /tmp/omero-ice/bin/activate
 set -u
-# Now get and build ice
+# Now install ice
 
-mkdir /tmp/ice
-cd /tmp/ice
+mkdir /home/download-ice
+cd /home/download-ice
 
-curl -Lo Ice-3.5.1.tar.gz https://zeroc.com/download/Ice/3.5/Ice-3.5.1.tar.gz
+wget http://downloads.openmicroscopy.org/ice/experimental/Ice-3.5.1-b1-centos6-iuspy27-x86_64.tar.gz
 
-tar xvf Ice-3.5.1.tar.gz
-cd Ice-3.5.1
+cd ..
+tar -zxvf /home/download-ice/Ice-3.5.1-b1-centos6-iuspy27-x86_64.tar.gz
 
-cd cpp
-
-#make && make test && make install
-make && make install
-cd ../py
-
-#make && make test && make install
-make && make install
+# so we don't have to update ice home
+mv /home/Ice-3.5.1-b1-centos6-iuspy27-x86_64 /opt/Ice-3.5.1
 
 echo /opt/Ice-3.5.1/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
 ldconfig
