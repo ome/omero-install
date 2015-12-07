@@ -79,10 +79,9 @@ Centos 6 ius testing
         bash docker_virtualenv_ius_apache24.sh
         To enable the OMERO web server, once the Docker image is running modify
         the web configuration `/etc/httpd/conf.d/omero-web.conf` to
-        set `WSGIPythonHome` and `WSGIPythonPath`,
+        add at the end of the 'python-path' parameter of  `WSGIDaemonProcess``,
 
-        WSGIPythonHome /tmp/omeroenv
-        WSGIPythonPath /tmp/omeroenv/lib64/python2.7/site-packages
+        /home/omero/omeroenv/lib64/python2.7/site-packages
 
         Then restart the apache service,
 
