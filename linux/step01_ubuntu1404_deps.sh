@@ -10,6 +10,6 @@ apt-get -y install \
 	postgresql
 
 # Django
-pip install "Django<1.9"
+pip install "Django>=1.8,<1.9"
 
 service postgresql start
