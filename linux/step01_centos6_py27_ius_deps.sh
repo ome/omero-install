@@ -48,11 +48,6 @@ sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/9.4/data/pg_hba.conf
 chkconfig postgresql-9.4 on
 service postgresql-9.4 start
 
-#start virtualenv
-virtualenv /tmp/omero-ice
-set +u
-source /tmp/omero-ice/bin/activate
-set -u
 # Now install ice
 
 mkdir /home/download-ice
@@ -68,4 +63,3 @@ mv /home/Ice-3.5.1-b1-centos6-iuspy27-x86_64 /opt/Ice-3.5.1
 
 echo /opt/Ice-3.5.1/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
 ldconfig
-deactivate
