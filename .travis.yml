@@ -8,9 +8,12 @@ env:
   - ENV=centos6_py27_apache24
   - ENV=ubuntu1404_nginx
   - ENV=ubuntu1404_apache24
+  - ENV=debian8_nginx
+  - ENV=debian8_apache24
 before_script:
   - if [ "${ENV}" == "centos6_py27_apache24" ]; then sed -i -e 's|^OMEROVER=omero|&dev|g' linux/install_centos6_py27_apache24.sh; fi
   - if [ "${ENV}" == "ubuntu1404_apache24" ]; then sed -i -e 's|^OMEROVER=omero|&dev|g' linux/install_ubuntu1404_apache24.sh; fi
+  - if [ "${ENV}" == "debian8_apache24"]; then sed -i -e 's|^OMEROVER=omero|&dev|g' linux/install_ubuntu1404_apache24.sh; fi
 script:
     - cd linux/test && ./docker-build.sh $ENV && docker run -d omero_install_test_$ENV
     # Sadly, no test for Windows or OS X here.
