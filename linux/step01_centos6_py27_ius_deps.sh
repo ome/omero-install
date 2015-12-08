@@ -1,6 +1,7 @@
 #!/bin/bash
 
-yum -y install epel-release
+# epel-release will be pulled as a dependency
+yum -y install https://centos6.iuscommunity.org/ius-release.rpm
 
 curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
 	http://download.zeroc.com/Ice/3.5/el6/zeroc-ice-el6.repo
@@ -10,8 +11,8 @@ yum -y install \
 	wget \
 	tar
 
-wget https://centos6.iuscommunity.org/ius-release.rpm
-rpm -Uvh ius-release*.rpm
+#wget https://centos6.iuscommunity.org/ius-release.rpm
+#rpm -Uvh ius-release*.rpm
 
 yum -y install \
 	java-1.8.0-openjdk \
@@ -50,16 +51,15 @@ service postgresql-9.4 start
 
 # Now install ice
 
-mkdir /home/download-ice
-cd /home/download-ice
+mkdir /tmp/ice-download
+cd /tmp/ice-download
 
 wget http://downloads.openmicroscopy.org/ice/experimental/Ice-3.5.1-b1-centos6-iuspy27-x86_64.tar.gz
 
-cd ..
-tar -zxvf /home/download-ice/Ice-3.5.1-b1-centos6-iuspy27-x86_64.tar.gz
+tar -zxvf /tmp/ice-download/Ice-3.5.1-b1-centos6-iuspy27-x86_64.tar.gz
 
-# so we don't have to update ice home
-mv /home/Ice-3.5.1-b1-centos6-iuspy27-x86_64 /opt/Ice-3.5.1
+# so we don't have to update ICE_HOME
+mv Ice-3.5.1-b1-centos6-iuspy27-x86_64 /opt/Ice-3.5.1
 
 echo /opt/Ice-3.5.1/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
 ldconfig
