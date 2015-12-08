@@ -22,12 +22,8 @@ yum -y install \
 	libjpeg-devel \
 	libpng-devel \
 	libtiff-devel \
-	zlib-devel \
 	hdf5-devel \
-	freetype-devel \
-	expat-devel \
-	bzip2-devel \
-	openssl-devel
+	freetype-devel
 
 
 # TODO: this installs a lot of unecessary packages:
