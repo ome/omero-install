@@ -11,9 +11,6 @@ yum -y install \
 	wget \
 	tar
 
-#wget https://centos6.iuscommunity.org/ius-release.rpm
-#rpm -Uvh ius-release*.rpm
-
 yum -y install \
 	java-1.8.0-openjdk \
 	db53 db53-devel db53-utils mcpp-devel
