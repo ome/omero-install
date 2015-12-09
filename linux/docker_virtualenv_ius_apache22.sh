@@ -10,7 +10,7 @@ source settings.env
 #install Apache 2.2
 yum -y install httpd
 
-# install mod_wsgi compiled with 2.7
+# install mod_wsgi compiled against 2.7
 yum -y install python27-mod_wsgi
 
 #Create virtual env.
@@ -27,7 +27,6 @@ set -u
 # install omero dependencies
 /home/omero/omeroenv/bin/pip2.7 install numpy matplotlib
 
-
 # Django
 /home/omero/omeroenv/bin/pip2.7 install "Django>=1.8,<1.9"
 
@@ -42,9 +41,8 @@ su - omero -c "bash -eux step04_centos6_py27_ius_${OMEROVER}.sh"
 
 cp settings.env ~omero
 
-cp setup_omero_apache24.sh ~omero
-su - omero -c "bash -eux setup_omero_apache24.sh"
-
+cp setup_omero_apache22.sh ~omero
+su - omero -c "bash -eux setup_omero_apache22.sh"
 
 # See setup_omero_apache.sh for the apache config file creation
 cp ~omero/OMERO.server/apache.conf.tmp /etc/httpd/conf.d/omero-web.conf

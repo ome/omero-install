@@ -48,7 +48,6 @@ cp setup_omero_apache24.sh ~omero
 su - omero -c "bash -eux setup_omero_apache24.sh"
 
 
-
 # See setup_omero_apache.sh for the apache config file creation
 cp ~omero/OMERO.server/apache.conf.tmp /etc/httpd/conf.d/omero-web.conf
 
