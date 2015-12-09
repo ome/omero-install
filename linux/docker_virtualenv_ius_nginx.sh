@@ -26,8 +26,11 @@ source /home/omero/omeroenv/bin/activate
 set -u
 /home/omero/omeroenv/bin/pip install --upgrade pip
 
+# Cap Pillow version due to a limitation in OMERO.figure with v3.0.0
+/home/omero/omeroenv/bin/pip2.7 install "Pillow<3.0"
+
 # install omero dependencies
-/home/omero/omeroenv/bin/pip2.7 install pillow numpy matplotlib
+/home/omero/omeroenv/bin/pip2.7 install numpy matplotlib
 
 # Django
 /home/omero/omeroenv/bin/pip2.7 install "Django>=1.8,<1.9"
