@@ -24,7 +24,7 @@ virtualenv -p /usr/bin/python2.7 /home/omero/omeroenv
 set +u
 source /home/omero/omeroenv/bin/activate
 set -u
-pip install --upgrade pip
+/home/omero/omeroenv/bin/pip install --upgrade pip
 
 # install omero dependencies
 /home/omero/omeroenv/bin/pip2.7 install pillow numpy matplotlib
