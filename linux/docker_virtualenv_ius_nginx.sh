@@ -49,24 +49,25 @@ su - omero -c "bash -eux step04_centos6_py27_ius_${OMEROVER}.sh"
 su - omero -c "OMERO.server/bin/omero config set omero.web.application_server wsgi-tcp"
 su - omero -c "OMERO.server/bin/omero web config nginx --http "$OMERO_WEB_PORT" > OMERO.server/nginx.conf.tmp"
 
-# Add OMERO web
+#remove comment
+mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
+cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
+
+service nginx start
+
+# Add OMERO.figure
 cd /home/omero
 wget http://downloads.openmicroscopy.org/figure/1.2.0/figure-1.2.0.zip
 unzip -q figure-1.2.0.zip
 mv figure-1.2.0 OMERO.server/lib/python/omeroweb/figure
 
-# Install required package for web
+# Install required packages
 /home/omero/omeroenv/bin/pip2.7 install reportlab markdown
 # add app
 su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"figure\"'"
 su - omero -c "OMERO.server/bin/omero config append omero.web.ui.top_links '[\"Figure\", \"figure_index\", {\"title\": \"Open Figure in new tab\", \"target\": \"figure\"}]'"
 
 
-#remove comment
-mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
-cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
-
-service nginx start
 
 bash -eux setup_centos6_selinux.sh
 bash -eux step07_all_perms.sh
