@@ -55,19 +55,8 @@ cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 service nginx start
 
-# Add OMERO.figure
-cd /home/omero
-wget http://downloads.openmicroscopy.org/figure/1.2.0/figure-1.2.0.zip
-unzip -q figure-1.2.0.zip
-mv figure-1.2.0 OMERO.server/lib/python/omeroweb/figure
-
-# Install required packages
-/home/omero/omeroenv/bin/pip2.7 install reportlab markdown
-# add app
-su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"figure\"'"
-su - omero -c "OMERO.server/bin/omero config append omero.web.ui.top_links '[\"Figure\", \"figure_index\", {\"title\": \"Open Figure in new tab\", \"target\": \"figure\"}]'"
-
-
+#install figure
+bash -eux step05_1_all_figure.sh ve
 
 bash -eux setup_centos6_selinux.sh
 bash -eux step07_all_perms.sh
