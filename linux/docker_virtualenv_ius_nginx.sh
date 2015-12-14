@@ -11,7 +11,6 @@ enabled=1
 EOF
 
 OMEROVER=omero
-#OMEROVER=omerodev
 
 source settings.env
 

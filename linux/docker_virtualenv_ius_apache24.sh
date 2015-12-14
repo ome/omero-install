@@ -2,8 +2,7 @@
 
 set -e -u -x
 
-#OMEROVER=omero
-OMEROVER=omerodev
+OMEROVER=omero
 
 source settings.env
 
