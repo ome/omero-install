@@ -5,6 +5,9 @@ yum -y install epel-release
 curl -o /etc/yum.repos.d/zeroc-ice-el7.repo \
 	http://download.zeroc.com/Ice/3.5/el7/zeroc-ice-el7.repo
 
+#work around to avoid error with systemd
+yum -y swap -- remove systemd-container systemd-container-libs -- install systemd systemd-libs
+
 yum -y install \
 	unzip \
 	wget \
