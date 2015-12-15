@@ -10,7 +10,7 @@ ADD omero-install-test.zip /
 RUN apt-get -y install unzip && unzip omero-install-test.zip
 
 RUN cd omero-install-test && \
-	bash install_ubuntu1404_nginx.sh && \
+	bash install_debian8_nginx.sh && \
 	bash docker_shutdown_ubuntu1404.sh
 ADD run.sh /home/omero/run.sh
 
