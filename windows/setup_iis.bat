@@ -8,3 +8,6 @@ pushd isapi_wsgi-0.4.2
 python setup.py install
 popd
 
+rem To start OMERO run
+rem bin\omero admin start
+rem bin\omero web iis

@@ -50,18 +50,17 @@ Do a basic check of dependencies, you should not see any error messages when thi
 
     check.bat
 
-Setup IIS with Python:
-
-    setup_iis.bat
-
-- python-source\isapi_wsgi-0.4.2.zip
-
-Finally install and configure OMERO in the usual way:
+Install and configure OMERO in the usual way:
 
     setup_omero.bat
 
 - omero\OMERO.server-5.1.1-ice35-b43.zip
 
+Finally setup IIS with Python:
+
+    setup_iis.bat
+
+- python-source\isapi_wsgi-0.4.2.zip
 
 Optional prerequisites
 ----------------------
