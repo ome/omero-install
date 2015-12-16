@@ -46,7 +46,10 @@ su - omero -c "bash -eux setup_omero_apache22.sh"
 # See setup_omero_apache.sh for the apache config file creation
 cp ~omero/OMERO.server/apache.conf.tmp /etc/httpd/conf.d/omero-web.conf
 
-
 chkconfig httpd on
 service httpd start
+
+#install figure
+bash -eux step05_1_all_figure.sh ve
+
 bash -eux step07_all_perms.sh

@@ -54,5 +54,8 @@ cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 service nginx start
 
+#install figure
+bash -eux step05_1_all_figure.sh ve
+
 bash -eux setup_centos6_selinux.sh
 bash -eux step07_all_perms.sh

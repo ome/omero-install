@@ -57,4 +57,8 @@ EOF
 
 chkconfig httpd on
 service httpd start
+
+#install figure
+bash -eux step05_1_all_figure.sh ve
+
 bash -eux step07_all_perms.sh

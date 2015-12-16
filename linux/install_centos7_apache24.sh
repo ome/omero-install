@@ -16,6 +16,8 @@ su - omero -c "bash -eux step04_all_$OMEROVER.sh"
 
 bash -eux step05_centos7_apache24.sh
 
+bash -eux step05_1_all_figure.sh
+
 #If you don't want to use the systemd scripts you can start OMERO manually:
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"
