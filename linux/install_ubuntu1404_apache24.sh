@@ -3,6 +3,7 @@
 set -e -u -x
 
 OMEROVER=omero
+WEBAPPS=false
 
 source settings.env
 
@@ -15,6 +16,12 @@ cp settings.env step04_all_$OMEROVER.sh ~omero
 su - omero -c "bash -eux step04_all_$OMEROVER.sh"
 
 bash -eux step05_ubuntu1404_apache24.sh
+
+if [ $WEBAPPS = true ]; then
+	#install git to install gallery
+	apt-get -y install git
+	bash -eux step05_1_all_webapps.sh
+fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:
 #su - omero -c "OMERO.server/bin/omero admin start"
