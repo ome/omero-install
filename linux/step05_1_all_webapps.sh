@@ -9,6 +9,11 @@ NAME_FIGURE=figure-1.2.0
 URL_WEBTAGGING=http://downloads.openmicroscopy.org/webtagging/1.3.0/webtagging-1.3.0.zip
 NAME_WEBTAGGING=webtagging-1.3.0
 
+# Gallery 
+URL_GALLERY=https://github.com/ome/gallery/archive/v1.0.0.zip
+NAME_GALLERY_ZIP=v1.0.0.zip
+NAME_GALLERY=gallery-1.0.0
+
 # Read parameter
 VIRTUALENV=false
 for arg in "$@"; do
@@ -48,6 +53,8 @@ su - omero -c "OMERO.server/bin/omero config append omero.web.ui.top_links '[\"T
 
 # Web gallery
 #clone the repository
-git clone https://github.com/ome/gallery.git
-mv gallery OMERO.server/lib/python/omeroweb/gallery
+wget $URL_GALLERY
+unzip -q $NAME_GALLERY_ZIP
+
+mv $NAME_GALLERY OMERO.server/lib/python/omeroweb/gallery
 su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"gallery\"'"
