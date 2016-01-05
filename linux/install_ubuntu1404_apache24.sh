@@ -18,8 +18,6 @@ su - omero -c "bash -eux step04_all_$OMEROVER.sh"
 bash -eux step05_ubuntu1404_apache24.sh
 
 if [ $WEBAPPS = true ]; then
-	#install git to install gallery
-	apt-get -y install git
 	bash -eux step05_1_all_webapps.sh
 fi
 
