@@ -25,9 +25,7 @@ yum -y install \
 	zlib-devel \
 	hdf5-devel \
 	freetype-devel \
-	expat-devel \
-	bzip2-devel \
-	openssl-devel
+	expat-devel
 
 # TODO: this installs a lot of unecessary packages:
 yum -y groupinstall "Development Tools"
