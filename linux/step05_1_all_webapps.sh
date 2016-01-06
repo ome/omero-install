@@ -14,6 +14,11 @@ URL_GALLERY=https://github.com/ome/gallery/archive/v1.0.0.zip
 NAME_GALLERY_ZIP=v1.0.0.zip
 NAME_GALLERY=gallery-1.0.0
 
+# web test
+URL_WEBTEST=https://github.com/openmicroscopy/webtest/archive/master.zip
+NAME_WEBTEST_ZIP=master.zip
+NAME_WEBTEST=webtest-master
+
 # Read parameter
 VIRTUALENV=false
 for arg in "$@"; do
@@ -52,9 +57,23 @@ su - omero -c "OMERO.server/bin/omero config append omero.web.ui.center_plugins 
 su - omero -c "OMERO.server/bin/omero config append omero.web.ui.top_links '[\"Tag Search\", \"tagsearch\"]'"
 
 # Web gallery
-#clone the repository
 wget $URL_GALLERY
 unzip -q $NAME_GALLERY_ZIP
 
 mv $NAME_GALLERY OMERO.server/lib/python/omeroweb/gallery
 su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"gallery\"'"
+
+# Web test
+wget $URL_WEBTEST
+unzip -q $NAME_WEBTEST_ZIP
+
+mv $NAME_WEBTEST OMERO.server/lib/python/omeroweb/webtest
+su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"webtest\"'"
+
+su - omero -c "OMERO.server/bin/omero config append omero.web.ui.right_plugins '[\"ROIs\", \"webtest/webclient_plugins/right_plugin.rois.js.html\", \"image_roi_tab\"]'"
+su - omero -c "OMERO.server/bin/omero config append omero.web.ui.center_plugins '[\"Split View\", \"webtest/webclient_plugins/center_plugin.splitview.js.html\", \"split_view_panel\"]'"
+
+
+
+
+
