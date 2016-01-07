@@ -3,7 +3,7 @@
 set -e -u -x
 
 OMEROVER=omero
-WEBAPPS=false
+WEBAPPS=${WEBAPPS:-false}
 
 source settings.env
 
