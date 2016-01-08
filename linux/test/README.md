@@ -36,19 +36,6 @@ but could, for instance, be set to track the merge branch,
 
     BRANCH=OMERO-DEV-merge
 
-Ubuntu 14.04/apache testing
-===========================
-
-To enable the OMERO web server, once the Docker image is running modify
-the web configuration `/etc/apache2/sites-available/omero-web.conf` to
-switch `WSGISocketPrefix` from its current value to,
-
-    WSGISocketPrefix /var/run/wsgi
-
-Then restart the apache service,
-
-    service apache2 restart
-
 Centos 7 testing
 ================
 
