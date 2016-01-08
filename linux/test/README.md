@@ -64,7 +64,7 @@ Centos 7 testing
         #CID=$(docker run -d ... --privileged omero_install_test_centos7)
         ssh -o UserKnownHostsFile=/dev/null root@<address of container> # Password: omero
         cd /omero-install-test
-        bash install-centos7.sh
+        bash install_centos7_nginx.sh
         #echo omero:omero | chpasswd
 
 Centos 6 ius testing
