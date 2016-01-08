@@ -18,7 +18,7 @@ su - omero -c "bash -eux step04_centos6_py27_${OMEROVER}.sh"
 bash -eux step05_centos6_py27_apache24.sh
 
 if [ $WEBAPPS = true ]; then
-	bash -eux step05_1_all_webapps.sh
+	PY_ENV=scl bash -eux step05_1_all_webapps.sh
 fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:

@@ -1,6 +1,8 @@
 
 #!/bin/bash
 
+PY_ENV=${PY_ENV:-all}
+
 # Figure details
 URL_FIGURE=http://downloads.openmicroscopy.org/figure/1.2.0/figure-1.2.0.zip
 NAME_FIGURE=figure-1.2.0
@@ -19,23 +21,21 @@ URL_WEBTEST=https://github.com/openmicroscopy/webtest/archive/master.zip
 NAME_WEBTEST_ZIP=master.zip
 NAME_WEBTEST=webtest-master
 
-# Read parameter
-VIRTUALENV=false
-for arg in "$@"; do
-	case "$arg" in ve)
-	VIRTUALENV=true;;
-	esac
-done
-
 # Add OMERO.figure
 cd ~omero
 wget $URL_FIGURE
 unzip -q $NAME_FIGURE.zip
 mv $NAME_FIGURE OMERO.server/lib/python/omeroweb/figure
 
+echo "value=$PY_ENV"
 # Install required packages
-if [ $VIRTUALENV = true ]; then
+if [ "$PY_ENV" = "ius" ]; then
 	/home/omero/omeroenv/bin/pip2.7 install reportlab markdown
+elif [ "$PY_ENV" = "scl" ]; then
+	set +u
+	source /opt/rh/python27/enable
+	set -u
+	pip install reportlab markdown
 else
 	pip install reportlab markdown
 fi
