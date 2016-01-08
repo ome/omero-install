@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-OMEROVER=omerodev
+OMEROVER=omero
 
 source settings.env
 
