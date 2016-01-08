@@ -17,7 +17,7 @@ for running docker images.
 Ubuntu 14.04 using apache needs the web configuration to be modified to
 enable the OMERO web server to run, see below.
 
-Centos 7 cannot be tested in this way as systemd doesn't fully work, see below.
+CentOS 7 cannot be tested in this way as systemd doesn't fully work, see below.
 
 Installing development branches
 -------------------------------
@@ -36,7 +36,7 @@ but could, for instance, be set to track the merge branch,
 
     BRANCH=OMERO-DEV-merge
 
-Centos 7 testing
+CentOS 7 testing
 ================
 
 1. Create a test image containing the installation scripts
@@ -54,7 +54,7 @@ Centos 7 testing
         bash install_centos7_nginx.sh
         #echo omero:omero | chpasswd
 
-Centos 6 ius testing
+CentOS 6 ius testing
 ====================
 1. Create a test image containing the installation scripts
 2. Start the container
