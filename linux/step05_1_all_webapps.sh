@@ -72,8 +72,3 @@ su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"webtest\"'
 
 su - omero -c "OMERO.server/bin/omero config append omero.web.ui.right_plugins '[\"ROIs\", \"webtest/webclient_plugins/right_plugin.rois.js.html\", \"image_roi_tab\"]'"
 su - omero -c "OMERO.server/bin/omero config append omero.web.ui.center_plugins '[\"Split View\", \"webtest/webclient_plugins/center_plugin.splitview.js.html\", \"split_view_panel\"]'"
-
-
-
-
-
