@@ -3,6 +3,9 @@
 FROM centos:centos6
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
+
+ARG WEBAPPS=false
+
 # Needed for postgres init.d
 RUN touch /etc/sysconfig/network
 
@@ -15,7 +18,7 @@ ADD omero-install-test.zip /
 RUN yum -y install unzip && unzip omero-install-test.zip
 
 RUN cd omero-install-test && \
-	bash install_centos6_py27_nginx.sh && \
+	WEBAPPS=${WEBAPPS} bash install_centos6_py27_nginx.sh && \
 	bash docker_shutdown_centos6.sh
 ADD run.sh /home/omero/run.sh
 
