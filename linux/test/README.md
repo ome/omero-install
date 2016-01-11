@@ -5,17 +5,14 @@ This directory contains Dockerfiles for testing the installation walkthroughs.
 
 For example:
 
-    ./docker-build.sh ubuntu1404
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404
+    ./docker-build.sh ubuntu1404_nginx
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
 
-    ./docker-build.sh centos6
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6
+    ./docker-build.sh centos6_apache22
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_apache22
 
 See `docker run --help` for more information on these and other options
 for running docker images.
-
-Ubuntu 14.04 using apache needs the web configuration to be modified to
-enable the OMERO web server to run, see below.
 
 CentOS 7 cannot be tested in this way as systemd doesn't fully work, see below.
 
