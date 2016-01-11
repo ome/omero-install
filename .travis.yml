@@ -10,9 +10,12 @@ env:
   - ENV=ubuntu1404_apache24
   - ENV=debian8_nginx
   - ENV=debian8_apache24
+<<<<<<< HEAD
   - ENV=centos6_py27_ius_apache22
   - ENV=centos6_py27_ius_apache24
   - ENV=centos6_py27_ius_nginx
+=======
+>>>>>>> clean up
 
 before_install:  
   - sudo apt-get update
