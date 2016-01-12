@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OMEROVER=omero
+OMEROVER=${OMEROVER:-omero}
 
 # Install the OMERO dependencies in a virtual environment
 # Create virtual env.
