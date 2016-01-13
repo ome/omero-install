@@ -16,7 +16,7 @@ cp settings.env omero-centos6py27.env step04_centos6_py27_${OMEROVER}.sh ~omero
 su - omero -c "bash -eux step04_centos6_py27_${OMEROVER}.sh"
 
 if [ $WEBAPPS = true ]; then
-	PY_ENV=scl bash -eux step05_1_all_webapps.sh
+	PY_ENV=py27_scl bash -eux step05_1_all_webapps.sh
 fi
 
 bash -eux step05_centos6_py27_apache24.sh
