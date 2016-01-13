@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-PY_ENV=${PY_ENV:-all}
+PY_ENV=${PY_ENV:-py27}
 
 # Figure details
 URL_FIGURE=http://downloads.openmicroscopy.org/figure/1.2.0/figure-1.2.0.zip
