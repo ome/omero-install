@@ -19,6 +19,22 @@ for running docker images.
 
 CentOS 7 cannot be tested in this way as systemd doesn't fully work, see below.
 
+
+Installing web applications
+---------------------------
+
+By default the installation walkthroughs do not install any of the web applications.
+To create a test image with: figure (https://github.com/ome/figure), 
+gallery (https://github.com/ome/gallery), webtest (https://github.com/openmicroscopy/webtest) and
+webtagging (https://github.com/MicronOxford/webtagging), you can pass `WEBAPPS=true` to the build
+script.
+
+For example:
+
+    WEBAPPS=true ./docker-build.sh ubuntu1404_nginx
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
+
+
 Installing development branches
 -------------------------------
 
@@ -35,6 +51,7 @@ to the required branch. By default this tracks latest,
 but could, for instance, be set to track the merge branch,
 
     BRANCH=OMERO-DEV-merge
+
 
 CentOS 7 testing
 ================
