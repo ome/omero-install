@@ -11,6 +11,9 @@ For example:
     ./docker-build.sh centos6_apache22
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_apache22
 
+    ./docker-build.sh centos6_py27_ius_nginx
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx
+
 See `docker run --help` for more information on these and other options
 for running docker images.
 
@@ -50,23 +53,3 @@ CentOS 7 testing
         cd /omero-install-test
         bash install_centos7_nginx.sh
         #echo omero:omero | chpasswd
-
-CentOS 6 ius testing
-====================
-1. Create a test image containing the installation scripts
-2. Start the container
-3. Change into the `/omero-install-test` directory
-4. Run the scripts
-5. Example
-        ./docker-build.sh centos6_py27_ius
-        cd /omero-install-test
-        bash docker_virtualenv_ius_apache24.sh
-        To enable the OMERO web server, once the Docker image is running modify
-        the web configuration `/etc/httpd/conf.d/omero-web.conf` to
-        add at the end of the 'python-path' parameter of  `WSGIDaemonProcess`,
-
-        /home/omero/omeroenv/lib64/python2.7/site-packages
-
-        Then restart the apache service,
-
-        service httpd restart
