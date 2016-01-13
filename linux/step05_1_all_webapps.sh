@@ -29,9 +29,10 @@ mv $NAME_FIGURE OMERO.server/lib/python/omeroweb/figure
 
 echo "value=$PY_ENV"
 # Install required packages
-if [ "$PY_ENV" = "ius" ]; then
-	/home/omero/omeroenv/bin/pip2.7 install reportlab markdown
-elif [ "$PY_ENV" = "scl" ]; then
+if [ "$PY_ENV" = "py26" ]; then
+	pip install reportlab==2.7
+	pip install reportlab markdown
+elif [ "$PY_ENV" = "py27_scl" ]; then
 	set +u
 	source /opt/rh/python27/enable
 	set -u
