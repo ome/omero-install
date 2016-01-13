@@ -44,6 +44,10 @@ fi
 su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"figure\"'"
 su - omero -c "OMERO.server/bin/omero config append omero.web.ui.top_links '[\"Figure\", \"figure_index\", {\"title\": \"Open Figure in new tab\", \"target\": \"figure\"}]'"
 
+# Copy the script 
+FOLDER=OMERO.server/lib/python/omeroweb/figure/scripts
+cp $FOLDER/omero/figure_scripts/Figure_To_Pdf.py OMERO.server/lib/scripts/omero/figure_scripts
+
 # Webtagging
 wget $URL_WEBTAGGING
 unzip -q $NAME_WEBTAGGING.zip
