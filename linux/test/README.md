@@ -17,7 +17,7 @@ For example:
 See `docker run --help` for more information on these and other options
 for running docker images.
 
-CentOS 7 cannot be tested in this way as systemd doesn't fully work, see below.
+CentOS 7 cannot be tested in this way as `systemd` doesn't fully work, see below.
 
 
 Installing web applications
