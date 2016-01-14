@@ -15,7 +15,7 @@ ADD omero-install-test.zip /
 RUN yum -y install unzip && unzip omero-install-test.zip
 
 RUN cd omero-install-test && \
-	bash install_centos6_py27_ius.sh && \
+	bash install_centos6_py27_ius_nginx.sh && \
 	bash docker_shutdown_centos6.sh
 ADD run.sh /home/omero/run.sh
 
