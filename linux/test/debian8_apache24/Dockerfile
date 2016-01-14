@@ -12,7 +12,7 @@ ADD omero-install-test.zip /
 RUN apt-get -y install unzip && unzip omero-install-test.zip
 
 RUN cd omero-install-test && \
-	WEBAPPS=${WEBAPPS} bash install_debian8_apache24.sh && \
+	bash install_debian8_apache24.sh && \
 	bash docker_shutdown_ubuntu1404.sh
 ADD run.sh /home/omero/run.sh
 

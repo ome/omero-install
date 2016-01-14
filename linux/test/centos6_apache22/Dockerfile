@@ -17,7 +17,7 @@ ADD omero-install-test.zip /
 RUN yum -y install unzip && unzip omero-install-test.zip
 
 RUN cd omero-install-test && \
-	WEBAPPS=${WEBAPPS} bash install_centos6_apache22.sh && \
+	bash install_centos6_apache22.sh && \
 	bash docker_shutdown_centos6.sh
 ADD run.sh /home/omero/run.sh
 
