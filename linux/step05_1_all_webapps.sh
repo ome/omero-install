@@ -37,6 +37,13 @@ elif [ "$PY_ENV" = "py27_scl" ]; then
 	source /opt/rh/python27/enable
 	set -u
 	pip install reportlab markdown
+elif [ "$PY_ENV" = "py27_ius" ]; then
+	virtualenv -p /usr/bin/python2.7 /home/omero/omeroenv
+	set +u
+	source /home/omero/omeroenv/bin/activate
+	set -u
+	/home/omero/omeroenv/bin/pip2.7 install reportlab markdown
+	deactivate
 else
 	pip install reportlab markdown
 fi
