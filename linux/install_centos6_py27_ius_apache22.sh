@@ -3,6 +3,7 @@
 set -e -u -x
 
 OMEROVER=omero
+WEBAPPS=${WEBAPPS:-false}
 
 source settings.env
 
@@ -16,6 +17,10 @@ OMEROVER=${OMEROVER} bash -eux step03_centos6_py27_ius_virtualenv_deps.sh
 cp settings.env omero-centos6py27ius.env step04_centos6_py27_ius_${OMEROVER}.sh ~omero
 
 su - omero -c "bash -eux step04_centos6_py27_ius_${OMEROVER}.sh"
+
+if [ $WEBAPPS = true ]; then
+	PY_ENV=py27_ius bash -eux step05_1_all_webapps.sh
+fi
 
 bash -eux step05_centos6_py27_ius_apache22.sh
 
