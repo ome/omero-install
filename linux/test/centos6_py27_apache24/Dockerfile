@@ -3,8 +3,8 @@
 FROM centos:centos6
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
-
 ARG WEBAPPS=false
+ARG OMEROVER=omero
 
 # Needed for postgres init.d
 RUN touch /etc/sysconfig/network
