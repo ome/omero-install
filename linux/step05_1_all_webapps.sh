@@ -3,29 +3,27 @@
 
 PY_ENV=${PY_ENV:-py27}
 
-# Figure details
-URL_FIGURE=http://downloads.openmicroscopy.org/figure/1.2.0/figure-1.2.0.zip
-NAME_FIGURE=figure-1.2.0
+# Figure URL
+URL_FIGURE=http://downloads.openmicroscopy.org/latest/figure.zip
 
-# Web tagging details
-URL_WEBTAGGING=http://downloads.openmicroscopy.org/webtagging/1.3.0/webtagging-1.3.0.zip
-NAME_WEBTAGGING=webtagging-1.3.0
+# Web tagging URL
+URL_WEBTAGGING=http://downloads.openmicroscopy.org/latest/webtagging.zip
 
-# Gallery 
+# Gallery URL
 URL_GALLERY=https://github.com/ome/gallery/archive/v1.0.0.zip
-NAME_GALLERY_ZIP=v1.0.0.zip
-NAME_GALLERY=gallery-1.0.0
 
-# web test
+# web test URL
 URL_WEBTEST=https://github.com/openmicroscopy/webtest/archive/master.zip
-NAME_WEBTEST_ZIP=master.zip
-NAME_WEBTEST=webtest-master
+
+cd ~omero
 
 # Add OMERO.figure
-cd ~omero
+NAME_FIGURE_ZIP=${URL_FIGURE##*/}
+
 wget $URL_FIGURE
-unzip -q $NAME_FIGURE.zip
-mv $NAME_FIGURE OMERO.server/lib/python/omeroweb/figure
+unzip -q $NAME_FIGURE_ZIP
+rm $NAME_FIGURE_ZIP
+mv figure* OMERO.server/lib/python/omeroweb/figure
 
 echo "value=$PY_ENV"
 # Install required packages
@@ -57,10 +55,14 @@ FOLDER=OMERO.server/lib/python/omeroweb/figure/scripts
 cp $FOLDER/omero/figure_scripts/Figure_To_Pdf.py OMERO.server/lib/scripts/omero/figure_scripts
 
 # Webtagging
+NAME_WEBTAGGING_ZIP=${URL_WEBTAGGING##*/}
+
 wget $URL_WEBTAGGING
-unzip -q $NAME_WEBTAGGING.zip
-mv $NAME_WEBTAGGING/autotag OMERO.server/lib/python/omeroweb/autotag
-mv $NAME_WEBTAGGING/tagsearch OMERO.server/lib/python/omeroweb/tagsearch
+unzip -q $NAME_WEBTAGGING_ZIP
+rm $NAME_WEBTAGGING_ZIP
+
+mv webtagging*/autotag OMERO.server/lib/python/omeroweb/autotag
+mv webtagging*/tagsearch OMERO.server/lib/python/omeroweb/tagsearch
 
 # Register the app
 su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"autotag\"'"
@@ -69,17 +71,23 @@ su - omero -c "OMERO.server/bin/omero config append omero.web.ui.center_plugins 
 su - omero -c "OMERO.server/bin/omero config append omero.web.ui.top_links '[\"Tag Search\", \"tagsearch\"]'"
 
 # Web gallery
+NAME_GALLERY_ZIP=${URL_GALLERY##*/}
+
 wget $URL_GALLERY
 unzip -q $NAME_GALLERY_ZIP
 
-mv $NAME_GALLERY OMERO.server/lib/python/omeroweb/gallery
+rm $NAME_GALLERY_ZIP
+mv gallery* OMERO.server/lib/python/omeroweb/gallery
 su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"gallery\"'"
 
 # Web test
+NAME_WEBTEST_ZIP=${URL_WEBTEST##*/}
+
 wget $URL_WEBTEST
 unzip -q $NAME_WEBTEST_ZIP
+rm $NAME_WEBTEST_ZIP
 
-mv $NAME_WEBTEST OMERO.server/lib/python/omeroweb/webtest
+mv webtest* OMERO.server/lib/python/omeroweb/webtest
 su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"webtest\"'"
 
 su - omero -c "OMERO.server/bin/omero config append omero.web.ui.right_plugins '[\"ROIs\", \"webtest/webclient_plugins/right_plugin.rois.js.html\", \"image_roi_tab\"]'"
