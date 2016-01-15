@@ -4,6 +4,7 @@ FROM ubuntu:14.04
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ARG WEBAPPS=false
+ARG OMEROVER=omero
 
 RUN update-locale LANG=C.UTF-8
 

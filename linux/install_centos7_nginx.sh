@@ -2,6 +2,7 @@
 
 set -e -u -x
 
+OMEROVER=${OMEROVER:-omero}
 WEBAPPS=${WEBAPPS:-false}
 
 source settings.env
@@ -12,7 +13,7 @@ bash -eux step02_all_setup.sh
 bash -eux step03_all_postgres.sh
 
 cp settings.env step04_all_omero.sh ~omero
-su - omero -c "bash -eux step04_all_omero.sh"
+su - omero -c "bash -eux step04_all_$OMEROVER.sh"
 
 bash -eux step05_centos7_nginx.sh
 
