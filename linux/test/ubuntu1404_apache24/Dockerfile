@@ -3,6 +3,8 @@
 FROM ubuntu:14.04
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
+ARG WEBAPPS=false
+
 RUN update-locale LANG=C.UTF-8
 
 ADD omero-install-test.zip /

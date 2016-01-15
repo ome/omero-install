@@ -3,6 +3,7 @@
 set -e -u -x
 
 OMEROVER=omero
+WEBAPPS=${WEBAPPS:-false}
 
 source settings.env
 
@@ -18,6 +19,10 @@ cp settings.env omero-centos6py27ius.env step04_centos6_py27_ius_${OMEROVER}.sh 
 su - omero -c "bash -eux step04_centos6_py27_ius_${OMEROVER}.sh"
 
 bash -eux step05_centos6_py27_ius_nginx.sh
+
+if [ $WEBAPPS = true ]; then
+	PY_ENV=py27_ius bash -eux step05_1_all_webapps.sh
+fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:
 #su - omero -c "OMERO.server/bin/omero admin start"

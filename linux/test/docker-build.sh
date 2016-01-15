@@ -5,6 +5,8 @@ if [ $# -ne 1 ]; then
 	exit 2
 fi
 
+WEBAPPS=${WEBAPPS:-false}
+
 set -e
 
 rm -rf omero-install-test
@@ -15,6 +17,10 @@ rm -rf omero-install-test
 
 IMAGE=omero_install_test_${1%*/}
 echo "Building image $IMAGE"
-docker build -t $IMAGE --no-cache $1
-echo "Test this image by running docker run -it [...] $IMAGE"
 
+if [[ $1 =~ "centos7" ]]; then
+	docker build -t $IMAGE --no-cache $1
+else
+	docker build -t $IMAGE --no-cache --build-arg WEBAPPS=${WEBAPPS} $1
+fi
+echo "Test this image by running docker run -it [...] $IMAGE"

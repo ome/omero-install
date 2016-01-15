@@ -3,6 +3,8 @@
 FROM debian:jessie
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
+ARG WEBAPPS=false
+
 RUN apt-get update && apt-get -y install locales
 RUN update-locale LANG=C.UTF-8
 
