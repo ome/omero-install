@@ -5,6 +5,7 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ARG WEBAPPS=false
 ARG OMEROVER=omero
+ARG JAVAVER=open17
 
 RUN apt-get update && apt-get -y install locales
 RUN update-locale LANG=C.UTF-8

@@ -5,6 +5,7 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ARG WEBAPPS=false
 ARG OMEROVER=omero
+ARG JAVAVER=open17
 
 # Needed for postgres init.d
 RUN touch /etc/sysconfig/network

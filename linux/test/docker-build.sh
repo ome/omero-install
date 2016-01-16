@@ -7,6 +7,7 @@ fi
 
 WEBAPPS=${WEBAPPS:-false}
 OMEROVER=${OMEROVER:-omero}
+JAVAVER=${JAVAVER:-open17}
 
 set -e
 
@@ -22,6 +23,7 @@ echo "Building image $IMAGE"
 if [[ $1 =~ "centos7" ]]; then
 	docker build -t $IMAGE --no-cache $1
 else
-	docker build -t $IMAGE --no-cache --build-arg OMEROVER=${OMEROVER} --build-arg WEBAPPS=${WEBAPPS} $1
+	docker build -t $IMAGE --no-cache --build-arg OMEROVER=${OMEROVER} \
+	--build-arg JAVAVER=${JAVAVER} --build-arg WEBAPPS=${WEBAPPS} $1
 fi
 echo "Test this image by running docker run -it [...] $IMAGE"
