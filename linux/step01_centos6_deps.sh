@@ -5,11 +5,15 @@ yum -y install epel-release
 curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
 	http://download.zeroc.com/Ice/3.5/el6/zeroc-ice-el6.repo
 
+
 yum -y install \
 	unzip \
-	wget \
-	java-1.7.0-openjdk \
-	ice ice-python ice-servers
+	wget
+
+#install java
+bash -eux step01_centos_java_deps.sh
+
+yum -y install ice ice-python ice-servers
 
 yum -y install \
 	python-pip python-devel python-virtualenv \

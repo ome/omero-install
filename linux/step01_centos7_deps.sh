@@ -7,8 +7,12 @@ curl -o /etc/yum.repos.d/zeroc-ice-el7.repo \
 
 yum -y install \
 	unzip \
-	wget \
-	java-1.8.0-openjdk \
+	wget
+
+#install java
+bash -eux step01_centos_java_deps.sh
+
+yum -y install \
 	ice ice-python ice-servers
 
 yum -y install \
