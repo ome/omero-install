@@ -8,7 +8,8 @@ apt-get -y install \
 #install java
 if [ "$JAVAVER" = "open18" ]; then
 	echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
-	apt-get -y install openjdk-8-jre-headless
+	apt-get update
+	apt-get -y install openjdk-8-jre-headless=8u66-b17-1~bpo8+1 ca-certificates-java=20140324
 elif [ "$JAVAVER" = "oracle17" ]; then
 	echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" > /etc/apt/sources.list.d/webupd8team-java.list
 	echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list.d/webupd8team-java.list
