@@ -38,8 +38,7 @@ easy_install pip
 export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 pip install tables matplotlib
 
-# Cap Pillow version due to a limitation in OMERO.figure with v3.0.0
-pip install "Pillow<3.0"
+pip install Pillow
 
 # Django
 pip install "Django>=1.8,<1.9"
