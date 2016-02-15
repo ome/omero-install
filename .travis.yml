@@ -16,7 +16,7 @@ env:
 
 before_install:  
   - sudo apt-get update
-  - sudo apt-get install docker-engine
+  - sudo DEBIAN_FRONTEND=noninteractive apt-get -q -o Dpkg::Options::="--force-confnew" install -y docker-engine
 
 script:
     - cd linux/test && ./docker-build.sh $ENV && docker run -d omero_install_test_$ENV
