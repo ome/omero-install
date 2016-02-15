@@ -32,6 +32,9 @@ bash bin/omero_python_deps
 # Set additional environment variables
 export ICE_CONFIG=$(brew --prefix omero52)/etc/ice.config
 
+# Initialize the PostgreSQL cluster
+initdb -E UTF8 /usr/local/var/postgres
+
 # Start PostgreSQL
 pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log -w start
 
