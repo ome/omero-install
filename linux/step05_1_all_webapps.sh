@@ -15,6 +15,9 @@ URL_GALLERY=https://github.com/ome/gallery/archive/v1.0.0.zip
 # web test URL
 URL_WEBTEST=https://github.com/openmicroscopy/webtest/archive/master.zip
 
+# web error URL
+URL_WEBERROR=https://github.com/openmicroscopy/weberror/archive/master.zip
+
 cd ~omero
 
 # Add OMERO.figure
@@ -79,6 +82,17 @@ unzip -q $NAME_GALLERY_ZIP
 rm $NAME_GALLERY_ZIP
 mv gallery* OMERO.server/lib/python/omeroweb/gallery
 su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"gallery\"'"
+
+# Web error
+NAME_WEBERROR_ZIP=${URL_WEBERROR##*/}
+
+wget $URL_WEBERROR
+unzip -q $NAME_WEBERROR_ZIP
+
+rm $NAME_WEBERROR_ZIP
+mv weberror*/weberror OMERO.server/lib/python/omeroweb/weberror
+su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"weberror\"'"
+
 
 # Web test
 NAME_WEBTEST_ZIP=${URL_WEBTEST##*/}
