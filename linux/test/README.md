@@ -39,18 +39,12 @@ Installing development branches
 -------------------------------
 
 By default the installation uses the latest OMERO server release. To use
-a specific development build set,
+a specific development, you can specify as a parameter one of the development version
+i.e. omerodev or omeromerge, when building the image.
 
-    OMEROVER=omerodev
+For example:
 
-in the relevant `install-` script and in `setup_omerodev.sh` set `BRANCH`
-to the required branch. By default this tracks latest,
-
-    BRANCH=OMERO-DEV-latest
-
-but could, for instance, be set to track the merge branch,
-
-    BRANCH=OMERO-DEV-merge
+    OMEROVER=omerodev ./docker-build.sh ubuntu1404_nginx
 
 
 CentOS 7 testing
