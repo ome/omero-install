@@ -18,7 +18,7 @@ set +u
 source /home/omero/omeroenv/bin/activate
 set -u
 # install in virtualenv created in step01
-/home/omero/omeroenv/bin/pip2.7 install --upgrade gunicorn
+/home/omero/omeroenv/bin/pip2.7 install --upgrade "gunicorn>=19.3"
 
 deactivate
 # See setup_omero*.sh for the nginx config file creation
