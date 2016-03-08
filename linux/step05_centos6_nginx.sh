@@ -18,4 +18,3 @@ cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 service nginx start
 
-bash -eux setup_centos_selinux.sh

@@ -17,5 +17,3 @@ cp ~omero/OMERO.server/apache.conf.tmp /etc/httpd/conf.d/omero-web.conf
 
 chkconfig httpd on
 service httpd start
-
-bash -eux setup_centos_selinux.sh

@@ -25,6 +25,8 @@ bash -eux step05_centos6_apache22.sh
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"
 
+bash -eux setup_centos_selinux.sh
+
 bash -eux step06_centos6_daemon_no_web.sh
 
 bash -eux step07_all_perms.sh

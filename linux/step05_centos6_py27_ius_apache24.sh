@@ -32,5 +32,3 @@ EOF
 
 chkconfig httpd on
 service httpd start
-
-bash -eux setup_centos_selinux.sh
