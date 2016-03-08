@@ -25,6 +25,8 @@ fi
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"
 
+bash -eux setup_centos_selinux.sh
+
 bash -eux step06_centos7_daemon.sh
 
 #systemctl start omero.service

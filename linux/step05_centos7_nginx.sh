@@ -12,4 +12,3 @@ cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 systemctl enable nginx
 systemctl start nginx
 
-bash -eux setup_centos_selinux.sh
