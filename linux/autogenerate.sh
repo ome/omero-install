@@ -145,6 +145,13 @@ echo "#end-step07" >> $file
 
 echo -en '\n' >> $file
 echo "#start-step08: As root, perform regular tasks" >> $file
+echo "#start-omeroweb-cron" >> $file
+line=$(sed -n '2,$p' omero-web-cron)
+echo "$line" >> $file
+echo "#end-omeroweb-cron" >> $file
+echo "#Copy omero-web-cron into the appropriate location" >> $file
+echo "#start-copy-omeroweb-cron" >> $file
 line=$(sed -n '2,$p' step08_all_cron.sh)
 echo "$line" >> $file
+echo "#end-copy-omeroweb-cron" >> $file
 echo "#end-step08" >> $file
