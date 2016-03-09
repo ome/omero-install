@@ -1,6 +1,5 @@
 set PYTHONPIP=C:\Python27\Scripts\pip.exe
 
-%PYTHONPIP% install python-2.7.9\Django-1.6.11-py2.py3-none-any.whl
 %PYTHONPIP% install python-2.7.9\matplotlib-1.4.3-cp27-none-win_amd64.whl
 %PYTHONPIP% install python-2.7.9\numpy-1.9.2+mkl-cp27-none-win_amd64.whl
 %PYTHONPIP% install python-2.7.9\numexpr-2.4.3-cp27-none-win_amd64.whl

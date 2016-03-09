@@ -16,7 +16,3 @@ python bin\omero config set omero.data.dir \OMERO
 rem python bin\omero config set omero.web.debug True
 
 popd
-
-rem To start OMERO run
-rem bin\omero admin start
-rem bin\omero web iis
