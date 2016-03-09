@@ -43,7 +43,7 @@ if [ $OS = "centos6_py27_ius" ] ; then
 	number=$((number+1))
 	line=$(sed -n ''$number',$p' step03_"$OS"_virtualenv_deps.sh)
 	echo "$line" >> $file
-	echo "#end-step01.1:" >> $file
+	echo "#end-step01.1" >> $file
 fi
 
 echo -en '\n' >> $file
@@ -54,7 +54,7 @@ else
 	line=$(sed -n '2,$p' step02_all_setup.sh)
 fi
 echo "$line" >> $file
-echo "#end-step02:" >> $file
+echo "#end-step02" >> $file
 
 # postgres remove section
 echo -en '\n' >> $file
