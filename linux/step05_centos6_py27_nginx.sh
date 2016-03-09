@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#start-install
 set +u
 source /opt/rh/python27/enable
 set -u

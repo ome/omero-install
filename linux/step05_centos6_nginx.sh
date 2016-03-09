@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#start-install
 cat << EOF > /etc/yum.repos.d/nginx.repo
 [nginx]
 name=nginx repo

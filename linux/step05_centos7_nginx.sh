@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#start-install
 yum -y --enablerepo=cr install nginx
 
 pip install "gunicorn>=19.3"

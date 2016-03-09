@@ -2,6 +2,8 @@
 
 OMEROVER=${OMEROVER:-omero}
 
+#start-install
+
 # Install the OMERO dependencies in a virtual environment
 # Create virtual env.
 # -p only require if it has been installed with python 2.6

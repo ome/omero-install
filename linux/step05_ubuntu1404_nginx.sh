@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#start-install
 apt-get -y install nginx
 
 pip install "gunicorn>=19.3"
