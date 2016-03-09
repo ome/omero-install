@@ -89,12 +89,36 @@ if [ $OS = "debian8" ] ; then
 fi
 
 echo -en '\n' >> $file
-echo "#start-step05: Install Web server, Nginx, as root" >> $file
+echo "#start-step05: Install Web server as root" >> $file
+echo "#start-nginx" >> $file
 start=$(sed -n '/#start-install/=' step05_"$v"_nginx.sh)
 start=$((start+1))
 line=$(sed -n ''$start',$p' step05_"$v"_nginx.sh)
-
 echo "$line" >> $file
+echo "#end-nginx" >> $file
+echo -en '\n' >> $file
+echo "#start-apache" >> $file
+
+apachever="apache24" #webserver might become a parameter
+if [ $OS = "centos6" ] || [ $OS = "centos6_py27_ius" ] ; then
+	apachever="apache22"
+fi
+line=$(sed -n ''/#start-copy/','/#end-copy/'p' step05_"$v"_"$apachever".sh)
+echo "$line" >> $file
+echo "#start-configure: Configure OMERO.web as the omero system user" >> $file
+start=$(sed -n '/#start-config/=' setup_omero_"$apachever".sh)
+start=$((start+1))
+line=$(sed -n ''$start',$p' setup_omero_"$apachever".sh)
+echo "$line" >> $file
+echo "#end-configure" >> $file
+#start install
+echo "#start-apache-install" >> $file
+start=$(sed -n '/#start-install/=' step05_"$v"_"$apachever".sh)
+start=$((start+1))
+line=$(sed -n ''$start',$p' step05_"$v"_"$apachever".sh)
+echo "$line" >> $file
+echo "#end-apache-install" >> $file
+echo "#end-apache" >> $file
 echo "#end-step05" >> $file
 
 if [ $OS = "centos6_py27" ] || [ $OS = "centos6_py27_ius" ] ; then
