@@ -155,3 +155,10 @@ line=$(sed -n '2,$p' step08_all_cron.sh)
 echo "$line" >> $file
 echo "#end-copy-omeroweb-cron" >> $file
 echo "#end-step08" >> $file
+
+if [[ $OS =~ "centos" ]]; then
+echo "#start-selinux" >> $file
+line=$(sed -n '2,$p' setup_centos_selinux.sh)
+echo "$line" >> $file
+echo "#end-selinux" >> $file
+fi
