@@ -1,7 +1,7 @@
 #!/bin/bash
 # installation of the recommended dependencies
 # i.e. Java 1.8, nginx
-OS=${OS:-centos6}
+OS=${OS:-centos7}
 file=walkthrough_$OS.sh
 if [ -e $file ]; then
 	rm $file
