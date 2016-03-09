@@ -68,7 +68,7 @@ echo "#end-step03" >> $file
 
 echo -en '\n' >> $file
 echo "#start-step04: As the omero system user, install the OMERO.server" >> $file
-if [ $OS = "centos6_py27" ] || [ $OS = "centos6_py27_ius" ] ; then
+if [[ $OS =~ "centos6_py27" ]] ; then
 	var="${OS//_/}"
 	echo "#start-copy-omeroscript" >> $file
 	echo "cp settings.env omero-$var.env step04_$OS_omero.sh ~omero " >> $file
@@ -125,7 +125,7 @@ echo "#end-apache-install" >> $file
 echo "#end-apache" >> $file
 echo "#end-step05" >> $file
 
-if [ $OS = "centos6_py27" ] || [ $OS = "centos6_py27_ius" ] ; then
+if [[ $OS =~ "centos6" ]] ; then
 	v="centos6"
 fi
 
