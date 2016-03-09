@@ -13,7 +13,7 @@ source settings.env
 EOF
 
 echo -en '\n' >> $file
-echo "#start-step01: Install dependencies as root" >> $file
+echo "#start-step01: As root, install dependencies" >> $file
 if [ $OS = "centos7" ] ; then
 	number=$(sed -n '/#start-workaround/=' step01_"$OS"_deps.sh)
 	number=$((number-1))
@@ -47,7 +47,7 @@ if [ $OS = "centos6_py27_ius" ] ; then
 fi
 
 echo -en '\n' >> $file
-echo "#start-step02: Set-up as root" >> $file
+echo "#start-step02: As root, create an omero system user and directory for the OMERO repository" >> $file
 if [ $OS = "centos6_py27" ] || [ $OS = "centos6_py27_ius" ] ; then
 	line=$(sed -n '2,$p' step02_"$OS"_setup.sh)
 else 
@@ -58,7 +58,7 @@ echo "#end-step02" >> $file
 
 # postgres remove section
 echo -en '\n' >> $file
-echo "#start-step03: Database user and database creation as root" >> $file
+echo "#start-step03: As root, create a database user and a database" >> $file
 #find from where to start copying
 start=$(sed -n '/#start-setup/=' step03_all_postgres.sh)
 start=$((start+1))
@@ -67,7 +67,7 @@ echo "$line" >> $file
 echo "#end-step03" >> $file
 
 echo -en '\n' >> $file
-echo "#start-step04: OMERO.server install as the omero system user" >> $file
+echo "#start-step04: As the omero system user, install the OMERO.server" >> $file
 if [ $OS = "centos6_py27" ] || [ $OS = "centos6_py27_ius" ] ; then
 	var="${OS//_/}"
 	echo "#start-copy-omeroscript" >> $file
@@ -93,7 +93,7 @@ if [ $OS = "debian8" ] ; then
 fi
 
 echo -en '\n' >> $file
-echo "#start-step05: Install Web server as root" >> $file
+echo "#start-step05: As root, install a Web server: Nginx or Apache" >> $file
 echo "#start-nginx" >> $file
 start=$(sed -n '/#start-install/=' step05_"$v"_nginx.sh)
 start=$((start+1))
@@ -109,7 +109,7 @@ if [ $OS = "centos6" ] || [ $OS = "centos6_py27_ius" ] ; then
 fi
 line=$(sed -n ''/#start-copy/','/#end-copy/'p' step05_"$v"_"$apachever".sh)
 echo "$line" >> $file
-echo "#start-configure: Configure OMERO.web as the omero system user" >> $file
+echo "#start-configure: As the omero system user, configure OMERO.web" >> $file
 start=$(sed -n '/#start-config/=' setup_omero_"$apachever".sh)
 start=$((start+1))
 line=$(sed -n ''$start',$p' setup_omero_"$apachever".sh)
@@ -130,13 +130,13 @@ if [ $OS = "centos6_py27" ] || [ $OS = "centos6_py27_ius" ] ; then
 fi
 
 echo -en '\n' >> $file
-echo "#start-step06: Scripts to start OMERO and OMERO.web automatically as root" >> $file
+echo "#start-step06: As root, run the scripts to start OMERO and OMERO.web automatically" >> $file
 line=$(sed -n '2,$p' step06_"$v"_daemon.sh)
 echo "$line" >> $file
 echo "#end-step06" >> $file
 
 echo -en '\n' >> $file
-echo "#start-step07: Securing OMERO as root" >> $file
+echo "#start-step07: As root, secure OMERO" >> $file
 start=$(sed -n '/#start/=' step07_all_perms.sh)
 start=$((start+1))
 line=$(sed -n ''$start',$p' step07_all_perms.sh)
@@ -144,7 +144,7 @@ echo "$line" >> $file
 echo "#end-step07" >> $file
 
 echo -en '\n' >> $file
-echo "#start-step08: Regular tasks" >> $file
+echo "#start-step08: As root, perform regular tasks" >> $file
 line=$(sed -n '2,$p' step08_all_cron.sh)
 echo "$line" >> $file
 echo "#end-step08" >> $file
