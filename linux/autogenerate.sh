@@ -70,12 +70,16 @@ echo -en '\n' >> $file
 echo "#start-step04: OMERO.server install as the omero system user" >> $file
 if [ $OS = "centos6_py27" ] || [ $OS = "centos6_py27_ius" ] ; then
 	var="${OS//_/}"
+	echo "#start-copy-omeroscript" >> $file
 	echo "cp settings.env omero-$var.env step04_$OS_omero.sh ~omero " >> $file
+	echo "#end-copy-omeroscript" >> $file
 	start=$(sed -n '/#start-install/=' step04_"$OS"_omero.sh)
 	start=$((start+1))
 	line=$(sed -n ''$start',$p' step04_"$OS"_omero.sh)
 else 
+	echo "#start-copy-omeroscript" >> $file
 	echo "cp settings.env step04_all_omero.sh ~omero " >> $file
+	echo "#end-copy-omeroscript" >> $file
 	start=$(sed -n '/#start-install/=' step04_all_omero.sh)
 	start=$((start+1))
 	line=$(sed -n ''$start',$p' step04_all_omero.sh)
