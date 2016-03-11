@@ -4,6 +4,7 @@ set -e -u -x
 
 source settings.env
 
+#start-install
 set +u
 source /opt/rh/python27/enable
 set -u

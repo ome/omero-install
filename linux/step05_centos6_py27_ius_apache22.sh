@@ -1,9 +1,11 @@
 #!/bin/bash
 
+#start-copy
 cp setup_omero_apache22.sh ~omero
-
+#end-copy
 su - omero -c "bash -eux setup_omero_apache22.sh"
 
+#start-install
 #install Apache 2.2
 yum -y install httpd
 
@@ -17,5 +19,3 @@ cp ~omero/OMERO.server/apache.conf.tmp /etc/httpd/conf.d/omero-web.conf
 
 chkconfig httpd on
 service httpd start
-
-bash -eux setup_centos_selinux.sh

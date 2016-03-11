@@ -2,6 +2,8 @@
 
 OMEROVER=${OMEROVER:-omero}
 
+#start-install
+
 # Install the OMERO dependencies in a virtual environment
 # Create virtual env.
 # -p only require if it has been installed with python 2.6
@@ -21,8 +23,10 @@ set -u
 # Django
 /home/omero/omeroenv/bin/pip2.7 install "Django>=1.8,<1.9"
 
+#start-dev
 if [ $OMEROVER = omerodev ] || [ $OMEROVER = omeromerge ] ; then
 	/home/omero/omeroenv/bin/pip2.7 install omego
 fi
+#end-dev
 
 deactivate

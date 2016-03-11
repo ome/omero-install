@@ -1,9 +1,11 @@
 #!/bin/bash
 
+#start-copy
 cp setup_omero_apache24.sh ~omero
-
+#end-copy
 su - omero -c "bash -eux setup_omero_apache24.sh"
 
+#start-install
 #install httpd 2.4
 yum -y install httpd24u
 
@@ -32,5 +34,3 @@ EOF
 
 chkconfig httpd on
 service httpd start
-
-bash -eux setup_centos_selinux.sh

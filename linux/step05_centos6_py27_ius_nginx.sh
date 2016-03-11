@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e -u -x
+#start-install
 
 cat << EOF > /etc/yum.repos.d/nginx.repo
 [nginx]
@@ -28,5 +29,3 @@ mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
 cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 service nginx start
-
-bash -eux setup_centos_selinux.sh

@@ -24,3 +24,15 @@ there are separate scripts for Python 2.7, the default is Python 2.6.
 
 Usernames and passwords can be customized in `settings.env`.
 
+Documentation generation
+========================
+To generate a walkthrough file corresponding to a given OS, run the
+`autogenerate.sh` script, the OS is specified as a paramater e.g.
+	
+	OS=ubuntu1404 bash autogenerate.sh
+
+The walkthrough file is used for the omero documention e.g.
+http://www.openmicroscopy.org/site/support/omero5.2/sysadmins/unix/server-linux-walkthrough.html
+but it should not be executed.
+
+
