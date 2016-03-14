@@ -1,18 +1,7 @@
 #!/bin/bash
 
-# epel-release will be pulled as a dependency
-yum -y install https://centos6.iuscommunity.org/ius-release.rpm
-
 curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
 	http://download.zeroc.com/Ice/3.5/el6/zeroc-ice-el6.repo
-
-yum -y install \
-	unzip \
-	wget \
-	tar
-
-#install java
-bash -eux step01_centos_java_deps.sh
 
 yum -y install \
 	db53 db53-utils mcpp

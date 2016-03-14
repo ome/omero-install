@@ -7,6 +7,11 @@ WEBAPPS=${WEBAPPS:-false}
 
 source settings.env
 
+bash -eux step01_centos6_py27_ius_init.sh
+
+# install java
+bash -eux step01_centos_java_deps.sh
+
 bash -eux step01_centos6_py27_ius_deps.sh
 bash -eux step02_centos6_py27_ius_setup.sh
 
