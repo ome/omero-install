@@ -12,8 +12,30 @@ set -e -u -x
 source settings.env
 EOF
 
+N=$OS
+if [ $OS = "debian8" ] ; then
+	N="ubuntu1404"
+fi
 echo -en '\n' >> $file
 echo "#start-step01: As root, install dependencies" >> $file
+line=$(sed -n '2,$p' step01_"$N"_init.sh)
+echo "$line" >> $file
+
+# install java
+N=$OS
+if [[ $OS =~ "centos" ]] ; then
+	N="centos"
+fi 
+echo -en '\n' >> $file
+echo "#install Java" >> $file
+number=$(sed -n '/#start-recommended/=' step01_"$N"_java_deps.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-recommended/=' step01_"$N"_java_deps.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' step01_"$N"_java_deps.sh)
+echo "$line"  >> $file
+echo -en '\n' >> $file
+
 if [ $OS = "centos7" ] ; then
 	number=$(sed -n '/#start-workaround/=' step01_"$OS"_deps.sh)
 	number=$((number-1))
