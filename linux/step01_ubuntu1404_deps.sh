@@ -7,12 +7,14 @@ apt-get -y install \
 	wget \
 	python-{matplotlib,numpy,pip,scipy,tables,virtualenv}
 
-#install java
+# install java
 if [ "$JAVAVER" = "open18" ]; then
+	#start-recommended
 	apt-get -y install software-properties-common
 	add-apt-repository -y ppa:openjdk-r/ppa
 	apt-get update
 	apt-get -y install openjdk-8-jre
+	#end-recommended
 elif [ "$JAVAVER" = "oracle17" ]; then
 	apt-get -y install software-properties-common
 	add-apt-repository -y ppa:webupd8team/java
