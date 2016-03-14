@@ -7,6 +7,11 @@ WEBAPPS=${WEBAPPS:-false}
 
 source settings.env
 
+bash -eux step01_ubuntu_init.sh
+
+# install java
+bash -eux step01_debian8_java_deps.sh
+
 bash -eux step01_debian8_deps.sh
 
 bash -eux step02_all_setup.sh
