@@ -1,5 +1,5 @@
 #!/bin/bash
-JAVAVER=${JAVAVER:-open17}
+JAVAVER=${JAVAVER:-open18}
 
 apt-get update
 apt-get -y install \
@@ -27,7 +27,7 @@ elif [ "$JAVAVER" = "oracle18" ]; then
 	echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
 	echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
 	apt-get -y install oracle-java8-installer
-else
+elif [ "$JAVAVER" = "open17" ]; then
 	apt-get -y install openjdk-7-jre-headless
 fi
 

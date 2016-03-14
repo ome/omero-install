@@ -1,9 +1,9 @@
 #!/bin/bash
-JAVAVER=${JAVAVER:-open17}
+JAVAVER=${JAVAVER:-open18}
 
 # Java installation default Java openjdk 1.7
-if [ "$JAVAVER" = "open18" ]; then
-	yum -y install java-1.8.0-openjdk
+if [ "$JAVAVER" = "open17" ]; then
+	yum -y install java-1.7.0-openjdk
 elif [ "$JAVAVER" = "oracle17" ]; then
 	wget --no-cookies \
 	--no-check-certificate \
@@ -19,5 +19,5 @@ elif [ "$JAVAVER" = "oracle18" ]; then
 	-O jdk-8-linux-x64.rpm
 	yum -y localinstall jdk-8-linux-x64.rpm
 else
-	yum -y install java-1.7.0-openjdk
+	yum -y install java-1.8.0-openjdk
 fi
