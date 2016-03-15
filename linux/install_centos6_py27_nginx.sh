@@ -12,6 +12,9 @@ bash -eux step01_centos6_py27_init.sh
 # install java
 bash -eux step01_centos_java_deps.sh
 
+# install ice
+bash -eux step01_centos6_py27_ice_deps.sh
+
 bash -eux step01_centos6_py27_deps.sh
 
 bash -eux step02_centos6_py27_setup.sh

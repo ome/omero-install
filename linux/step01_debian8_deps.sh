@@ -3,9 +3,7 @@
 apt-get -y install \
 	python-{matplotlib,numpy,pip,scipy,tables,virtualenv}
 
-apt-get -y install \
-	ice-services python-zeroc-ice \
-	postgresql
+apt-get -y install postgresql
 
 # require to install Pillow
 apt-get -y install \

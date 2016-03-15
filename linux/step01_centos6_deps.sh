@@ -1,11 +1,5 @@
 #!/bin/bash
 
-curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
-	http://download.zeroc.com/Ice/3.5/el6/zeroc-ice-el6.repo
-
-
-yum -y install ice ice-python ice-servers
-
 yum -y install \
 	python-pip python-devel python-virtualenv \
 	numpy scipy python-matplotlib Cython \

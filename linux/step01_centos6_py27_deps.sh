@@ -1,11 +1,5 @@
 #!/bin/bash
 
-curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
-	http://download.zeroc.com/Ice/3.5/el6/zeroc-ice-el6.repo
-
-yum -y install \
-	db53 db53-utils mcpp
-
 yum -y install \
 	python27 \
 	python27-virtualenv \
@@ -43,19 +37,3 @@ service postgresql-9.4 initdb
 sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/9.4/data/pg_hba.conf
 chkconfig postgresql-9.4 on
 service postgresql-9.4 start
-
-# Now install ice
-mkdir /tmp/ice-download
-cd /tmp/ice-download
-
-wget http://downloads.openmicroscopy.org/ice/experimental/Ice-3.5.1-b1-centos6-sclpy27-x86_64.tar.gz
-
-tar -zxvf /tmp/ice-download/Ice-3.5.1-b1-centos6-sclpy27-x86_64.tar.gz
-
-# so we don't have to update ICE_HOME
-mv Ice-3.5.1-b1-centos6-sclpy27-x86_64 /opt/Ice-3.5.1
-
-# make path to Ice globally accessible
-# if globally set, there is no need to export LD_LIBRARY_PATH
-echo /opt/Ice-3.5.1/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
-ldconfig

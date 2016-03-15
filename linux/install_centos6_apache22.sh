@@ -12,6 +12,9 @@ bash -eux step01_centos6_init.sh
 # install java
 bash -eux step01_centos_java_deps.sh
 
+# install ice
+bash -eux step01_centos6_ice_deps.sh
+
 bash -eux step01_centos6_deps.sh
 
 bash -eux step02_all_setup.sh
