@@ -22,4 +22,8 @@ elif [ "$JAVAVER" = "openjdk18" ]; then
 	#start-recommended
 	yum -y install java-1.8.0-openjdk
 	#end-recommended
+elif [ "$JAVAVER" = "openjdk18-devel" ]; then
+	yum -y install java-1.8.0-openjdk-devel
+elif [ "$JAVAVER" = "openjdk17-devel" ]; then
+	yum -y install java-1.7.0-openjdk-devel
 fi

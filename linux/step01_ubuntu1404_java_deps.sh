@@ -25,4 +25,11 @@ elif [ "$JAVAVER" = "oracle18" ]; then
 	apt-get -y install oracle-java8-installer
 elif [ "$JAVAVER" = "openjdk17" ]; then
 	apt-get -y install openjdk-7-jre-headless
+elif [ "$JAVAVER" = "openjdk17-devel" ]; then
+	apt-get -y install openjdk-7-jdk
+elif [ "$JAVAVER" = "openjdk18-devel" ]; then
+	apt-get -y install software-properties-common
+	add-apt-repository -y ppa:openjdk-r/ppa
+	apt-get update
+	apt-get -y install openjdk-8-jdk
 fi
