@@ -7,7 +7,7 @@ fi
 
 WEBAPPS=${WEBAPPS:-false}
 OMEROVER=${OMEROVER:-omero}
-JAVAVER=${JAVAVER:-open17}
+JAVAVER=${JAVAVER:-openjdk18}
 
 set -e
 
