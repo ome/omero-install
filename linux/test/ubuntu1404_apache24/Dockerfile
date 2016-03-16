@@ -7,6 +7,7 @@ ARG WEBAPPS=false
 ARG OMEROVER=omero
 ARG JAVAVER=openjdk18
 ARG ICEVER=ice35
+ARG PGVER=pg94
 
 RUN update-locale LANG=C.UTF-8
 

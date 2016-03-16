@@ -17,6 +17,10 @@ bash -eux step01_centos7_ice_deps.sh
 
 bash -eux step01_centos7_deps.sh
 
+# install Postgres
+bash -eux step01_centos7_pg_deps.sh
+
+
 bash -eux step02_all_setup.sh
 bash -eux step03_all_postgres.sh
 

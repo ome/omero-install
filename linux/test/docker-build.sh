@@ -9,6 +9,7 @@ WEBAPPS=${WEBAPPS:-false}
 OMEROVER=${OMEROVER:-omero}
 JAVAVER=${JAVAVER:-openjdk18}
 ICEVER=${ICEVER:-ice35}
+PGVER=${PGVER:-pg94}
 
 set -e
 
@@ -26,6 +27,6 @@ if [[ $1 =~ "centos7" ]]; then
 else
 	docker build -t $IMAGE --no-cache --build-arg OMEROVER=${OMEROVER} \
 	--build-arg JAVAVER=${JAVAVER} --build-arg WEBAPPS=${WEBAPPS} \
-	--build-arg ICEVER=${ICEVER} $1
+	--build-arg ICEVER=${ICEVER} --build-arg PGVER=${PGVER} $1
 fi
 echo "Test this image by running docker run -it [...] $IMAGE"
