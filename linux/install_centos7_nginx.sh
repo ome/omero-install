@@ -5,7 +5,7 @@ set -e -u -x
 OMEROVER=${OMEROVER:-omero}
 WEBAPPS=${WEBAPPS:-false}
 
-source settings.env
+source `dirname $0`/settings.env
 
 bash -eux step01_centos7_init.sh
 
