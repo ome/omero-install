@@ -32,6 +32,8 @@ JAVAVER=oracle18 ./docker-build.sh ubuntu1404_nginx
 The supported values are: 
 openjdk17, openjdk18, openjdk17-devel, openjdk18-devel, oracle17, oracle18
 
+If you do not want to install Java set JAVAVER=nojava
+
 Configuring Postgres
 --------------------
 
@@ -44,6 +46,8 @@ For example:
 
 The supported values are: 
 pg94, pg95
+
+If you do not want to install Postgres set PGVER=nopg
 
 Configuring Ice
 --------------------
