@@ -19,6 +19,44 @@ for running docker images.
 
 CentOS 7 cannot be tested in this way as `systemd` doesn't fully work, see below.
 
+Configuring Java
+----------------
+
+By default, openjdk1.8 is installed.
+It is possible to install other versions using the JAVAVER parameter
+
+For example, to install oracle-java:
+
+JAVAVER=oracle18 ./docker-build.sh ubuntu1404_nginx
+
+The supported values are: 
+openjdk17, openjdk18, openjdk17-devel, openjdk18-devel, oracle17, oracle18
+
+Configuring Postgres
+--------------------
+
+By default, Postgres 9.4 is installed.
+It is possible to install other versions using the PGVER parameter
+
+For example:
+
+    PGVER=pg95 ./docker-build.sh ubuntu1404_nginx
+
+The supported values are: 
+pg94, pg95
+
+Configuring Ice
+--------------------
+
+By default, Ice 3.5 is installed.
+It is possible to install other versions using the ICEVER parameter
+
+For example:
+
+    ICEVER=ice35-devel ./docker-build.sh ubuntu1404_nginx
+
+The supported values are: 
+ice35, ice35-devel
 
 Installing web applications
 ---------------------------
