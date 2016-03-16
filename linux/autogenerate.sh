@@ -27,12 +27,25 @@ if [[ $OS =~ "centos" ]] ; then
 	N="centos"
 fi 
 echo -en '\n' >> $file
-echo "#install Java" >> $file
+echo "# install Java" >> $file
 number=$(sed -n '/#start-recommended/=' step01_"$N"_java_deps.sh)
 ns=$((number+1))
 number=$(sed -n '/#end-recommended/=' step01_"$N"_java_deps.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' step01_"$N"_java_deps.sh)
+echo "$line"  >> $file
+echo -en '\n' >> $file
+
+echo "# install Ice" >> $file
+N=$OS
+if [ $OS = "debian8" ] ; then
+	N="ubuntu1404"
+fi 
+number=$(sed -n '/#start-recommended/=' step01_"$N"_ice_deps.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-recommended/=' step01_"$N"_ice_deps.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' step01_"$N"_ice_deps.sh)
 echo "$line"  >> $file
 echo -en '\n' >> $file
 
