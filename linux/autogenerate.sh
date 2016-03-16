@@ -99,20 +99,19 @@ echo -en '\n' >> $file
 
 echo "#end-step01" >> $file
 
-# review the name of the original file.
 if [ $OS = "centos6_py27_ius" ] ; then
 	echo -en '\n' >> $file
 	echo "#start-step01.1: virtual env" >> $file
 	#find from where to start copying
-	start=$(sed -n '/#start-install/=' step03_"$OS"_virtualenv_deps.sh)
+	start=$(sed -n '/#start-install/=' step01_"$OS"_virtualenv_deps.sh)
 	start=$((start+1))
-	number=$(sed -n '/#start-dev/=' step03_"$OS"_virtualenv_deps.sh)
+	number=$(sed -n '/#start-dev/=' step01_"$OS"_virtualenv_deps.sh)
 	number=$((number-1))
-	line=$(sed -n ''$start','$number'p' step03_"$OS"_virtualenv_deps.sh)
+	line=$(sed -n ''$start','$number'p' step01_"$OS"_virtualenv_deps.sh)
 	echo "$line" >> $file
-	number=$(sed -n '/#end-dev/=' step03_"$OS"_virtualenv_deps.sh)
+	number=$(sed -n '/#end-dev/=' step01_"$OS"_virtualenv_deps.sh)
 	number=$((number+1))
-	line=$(sed -n ''$number',$p' step03_"$OS"_virtualenv_deps.sh)
+	line=$(sed -n ''$number',$p' step01_"$OS"_virtualenv_deps.sh)
 	echo "$line" >> $file
 	echo "#end-step01.1" >> $file
 fi

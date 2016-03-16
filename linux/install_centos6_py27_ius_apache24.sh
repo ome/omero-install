@@ -20,11 +20,11 @@ bash -eux step01_centos6_py27_ius_deps.sh
 # install Postgres
 bash -eux step01_centos6_pg_deps.sh
 
+OMEROVER=${OMEROVER} bash -eux step01_centos6_py27_ius_virtualenv_deps.sh
+
 bash -eux step02_centos6_py27_ius_setup.sh
 
 bash -eux step03_all_postgres.sh
-
-OMEROVER=${OMEROVER} bash -eux step03_centos6_py27_ius_virtualenv_deps.sh
 
 cp settings.env omero-centos6py27ius.env step04_centos6_py27_ius_${OMEROVER}.sh ~omero
 
