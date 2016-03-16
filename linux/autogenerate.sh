@@ -33,6 +33,10 @@ ns=$((number+1))
 number=$(sed -n '/#end-recommended/=' step01_"$N"_java_deps.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' step01_"$N"_java_deps.sh)
+
+# remove leading whitespace
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+
 echo "$line"  >> $file
 echo -en '\n' >> $file
 
@@ -47,6 +51,10 @@ ns=$((number+1))
 number=$(sed -n '/#end-recommended/=' step01_"$N"_ice_deps.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' step01_"$N"_ice_deps.sh)
+
+# remove leading whitespace
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+
 echo "$line"  >> $file
 echo -en '\n' >> $file
 
@@ -67,6 +75,9 @@ if [ $OS = "centos7" ] ; then
 	number=$(sed -n '/#start-workaround/=' step01_"$N"_pg_deps.sh)
 	ne=$((number-1))
 	line=$(sed -n ''$ns','$ne'p' step01_"$N"_pg_deps.sh)
+	# remove leading whitespace
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+
 	echo "$line" >> $file
 	number=$(sed -n '/#end-workaround/=' step01_"$OS"_pg_deps.sh)
 	ns=$((number+1))
@@ -80,6 +91,9 @@ else
 	ne=$((number-1))
 	line=$(sed -n ''$ns','$ne'p' step01_"$N"_pg_deps.sh)
 fi
+# remove leading whitespace
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+
 echo "$line"  >> $file
 echo -en '\n' >> $file
 
