@@ -36,6 +36,7 @@ line=$(sed -n ''$ns','$ne'p' step01_"$N"_java_deps.sh)
 echo "$line"  >> $file
 echo -en '\n' >> $file
 
+# install ice
 echo "# install Ice" >> $file
 N=$OS
 if [ $OS = "debian8" ] ; then
@@ -49,18 +50,39 @@ line=$(sed -n ''$ns','$ne'p' step01_"$N"_ice_deps.sh)
 echo "$line"  >> $file
 echo -en '\n' >> $file
 
-if [ $OS = "centos7" ] ; then
-	number=$(sed -n '/#start-workaround/=' step01_"$OS"_deps.sh)
-	number=$((number-1))
-	line=$(sed -n '2,'$number'p' step01_"$OS"_deps.sh)
-	echo "$line" >> $file
-	number=$(sed -n '/#end-workaround/=' step01_"$OS"_deps.sh)
-	number=$((number+1))
-	line=$(sed -n ''$number',$p' step01_"$OS"_deps.sh)
-else
-	line=$(sed -n '2,$p' step01_"$OS"_deps.sh)
-fi
+# install dependencies
+line=$(sed -n '2,$p' step01_"$OS"_deps.sh)
 echo "$line" >> $file
+
+# install postgres
+N=$OS
+if [ $OS = "debian8" ] ; then
+	N="ubuntu1404"
+fi
+echo -en '\n' >> $file
+echo "# install Postgres" >> $file
+if [ $OS = "centos7" ] ; then
+	number=$(sed -n '/#start-recommended/=' step01_"$N"_pg_deps.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#start-workaround/=' step01_"$N"_pg_deps.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' step01_"$N"_pg_deps.sh)
+	echo "$line" >> $file
+	number=$(sed -n '/#end-workaround/=' step01_"$OS"_pg_deps.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#end-recommended/=' step01_"$N"_pg_deps.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' step01_"$OS"_pg_deps.sh)
+else
+	number=$(sed -n '/#start-recommended/=' step01_"$N"_pg_deps.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#end-recommended/=' step01_"$N"_pg_deps.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' step01_"$N"_pg_deps.sh)
+fi
+echo "$line"  >> $file
+echo -en '\n' >> $file
+
 echo "#end-step01" >> $file
 
 # review the name of the original file.
