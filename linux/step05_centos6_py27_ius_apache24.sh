@@ -3,7 +3,6 @@
 #start-copy
 cp setup_omero_apache24.sh ~omero
 #end-copy
-su - omero -c "bash -eux setup_omero_apache24.sh"
 
 #start-install
 #install httpd 2.4
@@ -16,8 +15,13 @@ set -u
 
 # cannot use python27-mod_wsgi from ius since httpd2.2 is a dependency
 # install via pip.
-/home/omero/omeroenv/bin/pip2.7 install mod_wsgi-httpd
-/home/omero/omeroenv/bin/pip2.7 install mod_wsgi
+/home/omero/omeroenv/bin/pip2.7 install -r requirements_centos6_py27_ius_apache24.txt
+
+# Install OMERO.web requirements
+/home/omero/omeroenv/bin/pip2.7 install -r ~omero/OMERO.server/share/web/requirements-py27-apache.txt
+
+# See setup_omero_apache.sh for the apache config file creation
+su - omero -c "bash -eux setup_omero_apache22.sh"
 
 deactivate
 
