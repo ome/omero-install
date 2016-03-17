@@ -1,8 +1,12 @@
 #!/bin/bash
 
 set -e -u -x
-#start-install
 
+#start-copy
+cp setup_omero_nginx.sh ~omero
+#end-copy
+
+#start-install
 cat << EOF > /etc/yum.repos.d/nginx.repo
 [nginx]
 name=nginx repo
@@ -18,13 +22,15 @@ virtualenv -p /usr/bin/python2.7 /home/omero/omeroenv
 set +u
 source /home/omero/omeroenv/bin/activate
 set -u
-# install in virtualenv created in step01
-/home/omero/omeroenv/bin/pip2.7 install --upgrade "gunicorn>=19.3"
+
+# Install OMERO.web requirements
+/home/omero/omeroenv/bin/pip2.7 install -r ~omero/OMERO.server/share/web/requirements-py27-nginx.txt
 
 deactivate
-# See setup_omero*.sh for the nginx config file creation
 
-#remove comment
+# set up as the omero user.
+su - omero -c "bash -eux setup_omero_nginx.sh"
+
 mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
 cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
