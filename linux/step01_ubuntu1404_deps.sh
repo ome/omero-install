@@ -17,7 +17,5 @@ apt-get -y install \
 	tcl8.6-dev \
 	tk8.6-dev
 
-pip install --upgrade "Pillow<3.0"
-
-# Django
-pip install "Django>=1.8,<1.9"
+# upgrade required since pillow is already installed
+pip install --upgrade -r requirements.txt

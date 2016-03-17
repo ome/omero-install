@@ -10,11 +10,11 @@ yum -y install \
 	zlib-devel \
 	hdf5-devel
 
-# Requires gcc {libjpeg,libpng,libtiff,zlib}-devel
-pip install 'Pillow<3.0'
-pip install numexpr==1.4.2
-# Requires gcc, Cython, hdf5-devel
-pip install tables==2.4.0
-
-# Django
-pip install Django==1.6.11
+# install dependencies using pip
+# due to the fact that numexp must be installed before tables
+# and due to limitation of pip.
+while read line; do
+  if [[ ! "$line" = \#* ]]; then
+  	pip install $line
+  fi
+done < requirements_centos6.txt
