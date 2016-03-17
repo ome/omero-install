@@ -5,6 +5,10 @@ cp setup_omero_apache24.sh ~omero
 #end-copy
 
 #start-install
+set +u
+source /opt/rh/python27/enable
+set -u
+
 yum -y install httpd24-httpd python27-mod_wsgi
 
 # Install OMERO.web requirements
