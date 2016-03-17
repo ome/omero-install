@@ -11,8 +11,15 @@ yum -y install httpd
 # install mod_wsgi compiled against 2.7
 yum -y install python27-mod_wsgi
 
+virtualenv -p /usr/bin/python2.7 /home/omero/omeroenv
+set +u
+source /home/omero/omeroenv/bin/activate
+set -u
+
 # Install OMERO.web requirements
-pip install -r ~omero/OMERO.server/share/web/requirements-py27-apache.txt
+/home/omero/omeroenv/bin/pip2.7 install -r ~omero/OMERO.server/share/web/requirements-py27-apache.txt
+
+deactivate
 
 # See setup_omero_apache.sh for the apache config file creation
 su - omero -c "bash -eux setup_omero_apache22.sh"

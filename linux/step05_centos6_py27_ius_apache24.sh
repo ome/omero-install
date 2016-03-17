@@ -15,16 +15,16 @@ set -u
 
 # cannot use python27-mod_wsgi from ius since httpd2.2 is a dependency
 # install via pip.
-/home/omero/omeroenv/bin/pip2.7 install -r requirements_centos6_py27_ius_apache24.txt
+/home/omero/omeroenv/bin/pip2.7 install -r mod_wsgi-httpd
+/home/omero/omeroenv/bin/pip2.7 install -r mod_wsgi
 
 # Install OMERO.web requirements
 /home/omero/omeroenv/bin/pip2.7 install -r ~omero/OMERO.server/share/web/requirements-py27-apache.txt
 
-# See setup_omero_apache.sh for the apache config file creation
-su - omero -c "bash -eux setup_omero_apache22.sh"
-
 deactivate
 
+# See setup_omero_apache.sh for the apache config file creation
+su - omero -c "bash -eux setup_omero_apache22.sh"
 
 # Add virtual env python to the python-path parameter of the WSGIDaemonProcess directive
 sed -i 's/\(python-path\=\)/\1\/home\/omero\/omeroenv\/lib64\/python2.7\/site-packages:/' ~omero/OMERO.server/apache.conf.tmp
