@@ -4,6 +4,7 @@ set -e -u -x
 
 OMEROVER=${OMEROVER:-omero}
 WEBAPPS=${WEBAPPS:-false}
+PGVER=${PGVER:-pg94}
 
 source settings.env
 
@@ -24,7 +25,9 @@ bash -eux step02_centos6_py27_ius_setup.sh
 
 OMEROVER=${OMEROVER} bash -eux step01_centos6_py27_ius_virtualenv_deps.sh
 
-bash -eux step03_all_postgres.sh
+if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
+	bash -eux step03_all_postgres.sh
+fi
 
 cp settings.env omero-centos6py27ius.env step04_centos6_py27_ius_${OMEROVER}.sh ~omero
 

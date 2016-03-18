@@ -4,6 +4,7 @@ set -e -u -x
 
 OMEROVER=${OMEROVER:-omero}
 WEBAPPS=${WEBAPPS:-false}
+PGVER=${PGVER:-pg94}
 
 source settings.env
 
@@ -21,7 +22,10 @@ bash -eux step01_centos6_deps.sh
 bash -eux step01_centos6_pg_deps.sh
 
 bash -eux step02_all_setup.sh
-bash -eux step03_all_postgres.sh
+
+if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
+	bash -eux step03_all_postgres.sh
+fi
 
 cp settings.env step04_all_$OMEROVER.sh ~omero
 
