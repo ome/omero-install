@@ -13,8 +13,8 @@ yum -y install \
 # install dependencies using pip
 # due to the fact that numexp must be installed before tables
 # and due to limitation of pip.
-while read line; do
+while IFS='' read -r line || [[ -n "$line" ]]; do
   if [[ ! "$line" = \#* ]]; then
-  	pip install $line
+  	echo $line
   fi
 done < requirements_centos6.txt
