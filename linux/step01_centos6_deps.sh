@@ -15,6 +15,6 @@ yum -y install \
 # and due to limitation of pip.
 while IFS='' read -r line || [[ -n "$line" ]]; do
   if [[ ! "$line" = \#* ]]; then
-  	echo $line
+  	pip install $line
   fi
 done < requirements_centos6.txt
