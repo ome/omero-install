@@ -32,7 +32,7 @@ JAVAVER=oracle18 ./docker-build.sh ubuntu1404_nginx
 The supported values are: 
 openjdk17, openjdk18, openjdk17-devel, openjdk18-devel, oracle17, oracle18
 
-If you do not want to install Java set JAVAVER=nojava
+If you do not want to install Java set JAVAVER to nojava
 
 Configuring Postgres
 --------------------
@@ -42,12 +42,13 @@ It is possible to install other versions using the PGVER parameter
 
 For example:
 
-    PGVER=pg95 ./docker-build.sh ubuntu1404_nginx
+    PGVER=pg95 ./docker-build.sh centos6_py27_ius_nginx
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx pg95
 
 The supported values are: 
 pg94, pg95
 
-If you do not want to install Postgres set PGVER=nopg
+If you do not want to install Postgres set PGVER to nopg
 
 Configuring Ice
 --------------------

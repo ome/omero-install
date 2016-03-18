@@ -22,8 +22,8 @@ RUN yum -y install unzip && unzip omero-install-test.zip
 
 RUN cd omero-install-test && \
 	bash install_centos6_apache22.sh && \
-	bash docker_shutdown_centos6.sh
+	PGVER=${PGVER} bash docker_shutdown_centos6.sh
 ADD run.sh /home/omero/run.sh
 
 EXPOSE 80 4063 4064
-CMD ["/bin/bash", "-e", "/home/omero/run.sh"]
+ENTRYPOINT ["/bin/bash", "-e", "/home/omero/run.sh"]
