@@ -45,6 +45,10 @@ For example:
     PGVER=pg95 ./docker-build.sh centos6_py27_ius_nginx
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx pg95
 
+    PGVER=pg95 ./docker-build.sh ubuntu1404_nginx
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
+
+Note that you do not need to specify the version when running the Ubuntu/Debian image.
 The supported values are: 
 pg94, pg95
 
