@@ -14,4 +14,6 @@ apt-get -y install \
 	tcl8.6-dev \
 	tk8.6-dev
 
+pip install --upgrade pip
+
 pip install -r requirements.txt
