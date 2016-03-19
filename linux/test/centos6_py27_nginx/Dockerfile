@@ -26,4 +26,4 @@ RUN cd omero-install-test && \
 ADD run.sh /home/omero/run.sh
 
 EXPOSE 80 4063 4064
-CMD ["/bin/bash", "-e", "/home/omero/run.sh"]
+ENTRYPOINT ["/bin/bash", "-e", "/home/omero/run.sh"]
