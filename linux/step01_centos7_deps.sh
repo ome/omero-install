@@ -9,4 +9,10 @@ yum -y install \
 	libjpeg-devel \
 	gcc
 
+if [[ ! "${container:-}" = docker ]]; then
+	#start-docker-pip
+	pip install --upgrade pip
+	#end-docker-pip
+fi
+
 pip install -r requirements.txt
