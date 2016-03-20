@@ -6,7 +6,7 @@ OMEROVER=${OMEROVER:-omero}
 WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg94}
 
-source settings.env
+source `dirname $0`/settings.env
 
 bash -eux step01_centos7_init.sh
 
