@@ -59,9 +59,26 @@ echo "$line"  >> $file
 echo -en '\n' >> $file
 
 # install dependencies
-line=$(sed -n '2,$p' step01_"$OS"_deps.sh)
-echo "$line" >> $file
+if [ $OS = "centos7" ] ; then
+	number=$(sed -n '/#start-docker-pip/=' step01_"$OS"_deps.sh)
+	ne=$((number-2))
+	line=$(sed -n '2,'$ne'p' step01_"$OS"_deps.sh)
+	echo "$line" >> $file
+	# remove leading whitespace
+	number=$(sed -n '/#start-docker-pip/=' step01_"$OS"_deps.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#end-docker-pip/=' step01_"$OS"_deps.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' step01_"$OS"_deps.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 
+	echo "$line" >> $file
+	ne=$(($ne+3))
+	line=$(sed -n ''$ne',$p' step01_"$OS"_deps.sh)
+else
+	line=$(sed -n '2,$p' step01_"$OS"_deps.sh)
+fi
+echo "$line" >> $file
 # install postgres
 N=$OS
 if [ $OS = "debian8" ] ; then
@@ -71,19 +88,21 @@ echo -en '\n' >> $file
 echo "# install Postgres" >> $file
 if [ $OS = "centos7" ] ; then
 	number=$(sed -n '/#start-recommended/=' step01_"$N"_pg_deps.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#start-workaround/=' step01_"$N"_pg_deps.sh)
+	nrs=$((number+1))
+	number=$(sed -n '/#end-recommended/=' step01_"$N"_pg_deps.sh)
+	nre=$((number-1))
+	number=$(sed -n ''$nrs','$nre'!d;/#start-workaround/!d;=' step01_"$N"_pg_deps.sh)
 	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' step01_"$N"_pg_deps.sh)
+	line=$(sed -n ''$nrs','$ne'p' step01_"$N"_pg_deps.sh)
 	# remove leading whitespace
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 
 	echo "$line" >> $file
-	number=$(sed -n '/#end-workaround/=' step01_"$OS"_pg_deps.sh)
+	number=$(sed -n ''$nrs','$nre'!d;/#end-workaround/!d;=' step01_"$N"_pg_deps.sh)
 	ns=$((number+1))
 	number=$(sed -n '/#end-recommended/=' step01_"$N"_pg_deps.sh)
 	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' step01_"$OS"_pg_deps.sh)
+	line=$(sed -n ''$ns','$ne'p' step01_"$N"_pg_deps.sh)
 else
 	number=$(sed -n '/#start-recommended/=' step01_"$N"_pg_deps.sh)
 	ns=$((number+1))
