@@ -14,9 +14,9 @@ if [ "$PGVER" = "pg94" ]; then
 
 	#start-workaround to get postgresql running inside Docker
 	if [ "${container:-}" = docker ]; then
-	sed -i 's/OOMScoreAdjust/#OOMScoreAdjust/' \
+		sed -i 's/OOMScoreAdjust/#OOMScoreAdjust/' \
         	/usr/lib/systemd/system/postgresql-9.4.service
-	systemctl daemon-reload
+		systemctl daemon-reload
 	fi
 	#end-workaround
 	systemctl start postgresql-9.4.service
@@ -32,9 +32,9 @@ elif [ "$PGVER" = "pg95" ]; then
 
 	#start-workaround to get postgresql running inside Docker
 	if [ "${container:-}" = docker ]; then
-	sed -i 's/OOMScoreAdjust/#OOMScoreAdjust/' \
+		sed -i 's/OOMScoreAdjust/#OOMScoreAdjust/' \
         	/usr/lib/systemd/system/postgresql-9.5.service
-	systemctl daemon-reload
+		systemctl daemon-reload
 	fi
 	#end-workaround
 	systemctl start postgresql-9.5.service
