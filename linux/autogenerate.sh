@@ -83,6 +83,8 @@ echo "$line" >> $file
 N=$OS
 if [ $OS = "debian8" ] ; then
 	N="ubuntu1404"
+elif [[ $OS =~ "centos6" ]]; then
+	N="centos6"
 fi
 echo -en '\n' >> $file
 echo "# install Postgres" >> $file
