@@ -3,12 +3,24 @@
 set -e -u -x
 
 OMEROVER=${OMEROVER:-omero}
+PY_ENV=${PY_ENV:-py27}
 
 source settings.env
+#start-install
+if [ "$PY_ENV" = "py27_scl" ]; then
+	#start-py27-scl
+	set +u
+	source /opt/rh/python27/enable
+	set -u
+	#end-py27-scl
+fi
+
+#start-venv
+virtualenv /home/omero/omeroenv
+/home/omero/omeroenv/bin/pip install omego
+#end-venv
 
 #start-install
-virtualenv omego
-omego/bin/pip install omego
 if [ $OMEROVER = omerodev ]; then
 	omego/bin/omego download --branch OMERO-DEV-latest server
 elif [ $OMEROVER = omeromerge ]; then
