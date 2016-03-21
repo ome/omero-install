@@ -22,13 +22,13 @@ virtualenv /home/omero/omeroenv
 
 #start-install
 if [ $OMEROVER = omerodev ]; then
-	omego/bin/omego download --branch OMERO-DEV-latest server
+	/home/omero/omeroenv/bin/omego download --branch OMERO-DEV-latest server
 elif [ $OMEROVER = omeromerge ]; then
 	BRANCH=OMERO-DEV-merge-build
-	omego/bin/omego download --branch OMERO-DEV-merge-build server
+	/home/omero/omeroenv/bin/omego download --branch OMERO-DEV-merge-build server
 else
 	#start-release
-	omego/bin/omego download --release latest server
+	/home/omero/omeroenv/bin/omego download --release latest server
 	#end-release
 fi
 
