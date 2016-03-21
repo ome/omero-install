@@ -27,8 +27,8 @@ if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 
-cp settings.env step04_all_$OMEROVER.sh ~omero
-su - omero -c "bash -eux step04_all_$OMEROVER.sh"
+cp settings.env step04_all_omero.sh ~omero
+su - omero -c "OMEROVER=$OMEROVER bash -eux step04_all_omero.sh"
 
 bash -eux step05_centos7_nginx.sh
 
