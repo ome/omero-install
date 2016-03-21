@@ -139,10 +139,26 @@ fi
 
 echo -en '\n' >> $file
 echo "#start-step02: As root, create an omero system user and directory for the OMERO repository" >> $file
-if [ $OS = "centos6_py27" ] || [ $OS = "centos6_py27_ius" ] ; then
-	line=$(sed -n '2,$p' step02_"$OS"_setup.sh)
-else 
-	line=$(sed -n '2,$p' step02_all_setup.sh)
+if [[ $OS =~ "centos6_py27" ]] ; then
+	number=$(sed -n '/#start-create-user/=' step02_"$OS"_setup.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#end-create-user/=' step02_"$OS"_setup.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' step02_"$OS"_setup.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "$line" >> $file
+	ne=$((number+3))
+	line=$(sed -n ''$ne',$p' step02_"$OS"_setup.sh)
+else
+	number=$(sed -n '/#start-create-user/=' step02_all_setup.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#end-create-user/=' step02_all_setup.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' step02_all_setup.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "$line" >> $file
+	ne=$((number+3))
+	line=$(sed -n ''$ne',$p' step02_all_setup.sh)
 fi
 echo "$line" >> $file
 echo "#end-step02" >> $file
