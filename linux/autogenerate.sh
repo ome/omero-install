@@ -160,19 +160,37 @@ echo "#start-step04: As the omero system user, install the OMERO.server" >> $fil
 if [[ $OS =~ "centos6_py27" ]] ; then
 	var="${OS//_/}"
 	echo "#start-copy-omeroscript" >> $file
-	echo "cp settings.env omero-$var.env step04_$OS_omero.sh ~omero " >> $file
+	echo "cp settings.env omero-$var.env step04_all_omero.sh ~omero " >> $file
 	echo "#end-copy-omeroscript" >> $file
-	start=$(sed -n '/#start-install/=' step04_"$OS"_omero.sh)
-	start=$((start+1))
-	line=$(sed -n ''$start',$p' step04_"$OS"_omero.sh)
+	number=$(sed -n '/#start-py27-scl/=' step04_all_omero.sh)
+	ns=$((start+1))
+	number=$(sed -n '/#end-py27-scl/=' step04_all_omero.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' step04_all_omero.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "$line" >> $file
+	line=$(sed -n ''$start',$p' step04_all_omero.sh)
 else 
 	echo "#start-copy-omeroscript" >> $file
 	echo "cp settings.env step04_all_omero.sh ~omero " >> $file
 	echo "#end-copy-omeroscript" >> $file
-	start=$(sed -n '/#start-install/=' step04_all_omero.sh)
-	start=$((start+1))
-	line=$(sed -n ''$start',$p' step04_all_omero.sh)
 fi
+number=$(sed -n '/#start-venv/=' step04_all_omero.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-venv/=' step04_all_omero.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' step04_all_omero.sh)
+echo "$line" >> $file
+number=$(sed -n '/#start-release/=' step04_all_omero.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-release/=' step04_all_omero.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' step04_all_omero.sh)
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line" >> $file
+number=$(sed -n '/#configure/=' step04_all_omero.sh)
+ns=$((number+1))
+line=$(sed -n ''$ns',$p' step04_all_omero.sh)
 echo "$line" >> $file
 echo "#end-step04" >> $file
 

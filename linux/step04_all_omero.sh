@@ -31,9 +31,10 @@ else
 	omego/bin/omego download --release latest server
 	#end-release
 fi
+
+#configure
 ln -s OMERO.server-*/ OMERO.server
 
-# configure
 OMERO.server/bin/omero config set omero.data.dir "$OMERO_DATA_DIR"
 OMERO.server/bin/omero config set omero.db.name "$OMERO_DB_NAME"
 OMERO.server/bin/omero config set omero.db.user "$OMERO_DB_USER"
