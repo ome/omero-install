@@ -190,7 +190,7 @@ if [[ $OS =~ "centos6_py27" ]] ; then
 	line=$(sed -n ''$start',$p' step04_all_omero.sh)
 else 
 	echo "#start-copy-omeroscript" >> $file
-	echo "cp settings.env step04_all_omero.sh ~omero " >> $file
+	echo "cp settings.env step04_all_omero.sh ~omero setup_omero_db.sh" >> $file
 	echo "#end-copy-omeroscript" >> $file
 fi
 number=$(sed -n '/#start-venv/=' step04_all_omero.sh)
@@ -209,6 +209,10 @@ echo "$line" >> $file
 number=$(sed -n '/#configure/=' step04_all_omero.sh)
 ns=$((number+1))
 line=$(sed -n ''$ns',$p' step04_all_omero.sh)
+echo "$line" >> $file
+number=$(sed -n '/#start-config/=' setup_omero_db.sh)
+ns=$((number+1))
+line=$(sed -n ''$ns',$p' setup_omero_db.sh)
 echo "$line" >> $file
 echo "#end-step04" >> $file
 
