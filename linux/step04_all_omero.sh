@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-OMEROVER=${OMEROVER:-omero}
+OMEROVER=${OMEROVER:-latest}
 PY_ENV=${PY_ENV:-py27}
 
 source settings.env
@@ -23,16 +23,9 @@ if [[ ! $PY_ENV = "py27_ius" ]]; then
 fi
 
 #start-install
-if [ $OMEROVER = omerodev ]; then
-	/home/omero/omeroenv/bin/omego download --branch OMERO-DEV-latest server
-elif [ $OMEROVER = omeromerge ]; then
-	BRANCH=OMERO-DEV-merge-build
-	/home/omero/omeroenv/bin/omego download --branch OMERO-DEV-merge-build server
-else
-	#start-release
-	/home/omero/omeroenv/bin/omego download --release latest server
-	#end-release
-fi
+#start-release
+/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
+#end-release
 
 #configure
 ln -s OMERO.server-*/ OMERO.server

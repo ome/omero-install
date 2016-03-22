@@ -6,7 +6,7 @@ if [ $# -ne 1 ]; then
 fi
 
 WEBAPPS=${WEBAPPS:-false}
-OMEROVER=${OMEROVER:-omero}
+OMEROVER=${OMEROVER:-latest}
 JAVAVER=${JAVAVER:-openjdk18}
 ICEVER=${ICEVER:-ice35}
 PGVER=${PGVER:-pg94}

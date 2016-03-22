@@ -55,7 +55,7 @@ pg94, pg95
 If you do not want to install Postgres set PGVER to nopg
 
 Configuring Ice
---------------------
+---------------
 
 By default, Ice 3.5 is installed.
 It is possible to install other versions using the ICEVER parameter
@@ -86,13 +86,15 @@ Installing development branches
 -------------------------------
 
 By default the installation uses the latest OMERO server release. To use
-a specific development, you can specify as a parameter one of the development version
-i.e. omerodev or omeromerge, when building the image.
+a specific development, you can specify as a parameter one of the development versions
+when building the image.
 
 For example:
 
-    OMEROVER=omerodev ./docker-build.sh ubuntu1404_nginx
+    OMEROVER=OMERO-DEV-latest ./docker-build.sh ubuntu1404_nginx
 
+The supported values are: 
+OMERO-DEV-latest, OMERO-DEV-merge-build, latest
 
 CentOS 7 testing
 ================

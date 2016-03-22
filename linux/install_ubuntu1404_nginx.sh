@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-OMEROVER=${OMEROVER:-omero}
+OMEROVER=${OMEROVER:-latest}
 WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg94}
 
