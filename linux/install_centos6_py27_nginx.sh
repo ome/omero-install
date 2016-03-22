@@ -27,9 +27,11 @@ if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 
-cp settings.env omero-centos6py27.env step04_all_omero.sh ~omero
+cp settings.env omero-centos6py27.env step04_all_omero.sh setup_omero_db.sh ~omero
 
 su - omero -c "OMEROVER=$OMEROVER PY_ENV=py27_scl bash -eux step04_all_omero.sh"
+
+su - omero -c "bash setup_omero_db.sh"
 
 bash -eux step05_centos6_py27_nginx.sh
 
