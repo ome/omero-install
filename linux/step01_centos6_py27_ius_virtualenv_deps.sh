@@ -1,7 +1,5 @@
 #!/bin/bash
 
-OMEROVER=${OMEROVER:-omero}
-
 #start-install
 
 # Install the OMERO dependencies in a virtual environment
