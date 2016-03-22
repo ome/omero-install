@@ -1,8 +1,6 @@
 #!/bin/bash
 JAVAVER=${JAVAVER:-openjdk18}
 
-apt-cache search java | grep openjdk
-
 # install java
 if [ "$JAVAVER" = "openjdk17" ]; then
 	apt-get -y install openjdk-7-jre-headless
