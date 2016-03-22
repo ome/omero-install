@@ -15,10 +15,12 @@ if [ "$PY_ENV" = "py27_scl" ]; then
 	#end-py27-scl
 fi
 
-#start-venv
-virtualenv /home/omero/omeroenv
-/home/omero/omeroenv/bin/pip install omego
-#end-venv
+if [[ ! $PY_ENV = "py27_ius" ]]; then
+	#start-venv
+	virtualenv /home/omero/omeroenv
+	/home/omero/omeroenv/bin/pip install omego
+	#end-venv
+fi
 
 #start-install
 if [ $OMEROVER = omerodev ]; then
