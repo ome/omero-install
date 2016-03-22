@@ -16,6 +16,4 @@ set -u
 
 /home/omero/omeroenv/bin/pip2.7 install -r requirements_centos6_py27_ius.txt
 
-/home/omero/omeroenv/bin/pip2.7 install omego
-
 deactivate
