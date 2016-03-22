@@ -18,7 +18,7 @@ fi
 if [[ ! $PY_ENV = "py27_ius" ]]; then
 	#start-venv
 	virtualenv /home/omero/omeroenv
-	/home/omero/omeroenv/bin/pip install omego
+	/home/omero/omeroenv/bin/pip install omego==0.3.0
 	#end-venv
 fi
 
