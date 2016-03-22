@@ -19,6 +19,37 @@ for running docker images.
 
 CentOS 7 cannot be tested in this way as `systemd` doesn't fully work, see below.
 
+Adding a new step
+-----------------
+
+When adding a new step e.g. ice support:
+1. first create either a file per OS or for a group of OS.
+2. update the install_* scripts.
+3. if a new parameter has to be introduce, the various Dockerfile and docker-build.sh in the 
+test directory have to be updated.
+4. add a new configuration section to this README.md.
+
+Generating the walkthrough for documentation
+--------------------------------------------
+
+The walkthrough files should be used for documentation purpose.
+To generate the walkthrough file corresponding to a given OS i.e. `walkthough_OS.sh`,
+run for example:
+
+    OS=centos6 bash autogenerate.sh
+
+Only the "recommended" requirements will be copied to the walkthrough file.
+When a requirement is modified e.g. Postgres 9.5 instead of Postgres 9.4
+the following markers `#start-recommended`, `#end-recommended` should be updated
+in the corresponding steps files.
+The default value for given parameter should be the recommended version
+e.g. openjdk18 for Java.
+
+Both nginx and apache installation steps are added to the walkthrough file
+
+The possible values are:
+centos7 (default), centos6, centos6_py27, centos6_py27_ius, debian8, ubuntu1404
+
 Configuring Java
 ----------------
 
@@ -30,9 +61,13 @@ For example, to install oracle-java:
 JAVAVER=oracle18 ./docker-build.sh ubuntu1404_nginx
 
 The supported values are: 
-openjdk17, openjdk18, openjdk17-devel, openjdk18-devel, oracle17, oracle18
+openjdk17, openjdk18 (default), openjdk17-devel, openjdk18-devel, oracle17, oracle18
 
-If you do not want to install Java set JAVAVER to nojava
+If you do not want to install Java set JAVAVER to nojava.
+
+To add a new Java version, update the following files 
+`step01_centos_java_deps.sh`, `step01_debian8_java_deps.sh`,
+`step01_ubuntu1404_java_deps.sh` and update this README.md.
 
 Configuring Postgres
 --------------------
@@ -48,11 +83,16 @@ For example:
     PGVER=pg95 ./docker-build.sh ubuntu1404_nginx
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
 
-Note that you do not need to specify the version when running the Ubuntu/Debian image.
-The supported values are: 
-pg94, pg95
+Note that you do not need to specify the version when running the ubuntu/Debian image.
 
-If you do not want to install Postgres set PGVER to nopg
+The supported values are: 
+pg94 (default), pg95
+
+If you do not want to install Postgres set PGVER to nopg.
+
+To add a new Postgres version, update the following files 
+`step01_centos6_pg_deps.sh`, `step01_centos7_pg_deps.sh`, `step01_debian8_pg_deps.sh`,
+`step01_ubuntu1404_pg_deps.sh` and update this README.md.
 
 Configuring Ice
 ---------------
@@ -66,6 +106,10 @@ For example:
 
 The supported values are: 
 ice35, ice35-devel
+
+To add a new Ice version, update the following files 
+`step01_centos6_ice_deps.sh`, `step01_centos6_py27_ice_deps.sh`, `step01_centos6_py27_ius_ice_deps.sh`
+`step01_centos7_ice_deps.sh`, `step01_ubuntu1404_ice_deps.sh` and update this README.md.
 
 Installing web applications
 ---------------------------
@@ -94,9 +138,9 @@ For example:
     OMEROVER=OMERO-DEV-latest ./docker-build.sh ubuntu1404_nginx
 
 The supported values are: 
-OMERO-DEV-latest, OMERO-DEV-merge-build, latest
+OMERO-DEV-latest, OMERO-DEV-merge-build, latest (default)
 
-CentOS 7 testing
+Testing CentOS 7
 ================
 
 1. Create a test image containing the installation scripts
@@ -113,3 +157,5 @@ CentOS 7 testing
         cd /omero-install-test
         bash install_centos7_nginx.sh
         #echo omero:omero | chpasswd
+7. It is possible to use the various parameters when running the installation script e.g.
+        ICEVER=ice35-devel bash install_centos7_nginx.sh
