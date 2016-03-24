@@ -78,12 +78,18 @@ It is possible to install other versions using the PGVER parameter
 For example:
 
     PGVER=pg95 ./docker-build.sh centos6_py27_ius_nginx
+    
+    PGVER=pg95 ./docker-build.sh ubuntu1404_nginx
+    
+To run the image for centOS 6  image, you need to pass the version used e.g. pg95 if the version 
+is not the default one. It is not necessary to specify the version when running ubuntu/Debian image.
+
+For example:
+
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx pg95
 
-    PGVER=pg95 ./docker-build.sh ubuntu1404_nginx
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
 
-Note that you do not need to specify the version when running the ubuntu/Debian image.
 
 The supported values are: 
 pg94 (default), pg95
