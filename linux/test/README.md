@@ -153,15 +153,19 @@ Testing CentOS 7
 2. Start the container (this requires special options for systemd which may depend on your host system, see the [parent README](https://github.com/ome/ome-docker/blob/master/omero-ssh-systemd/README.md))
 3. ssh in
 4. Change into the `/omero-install-test` directory
-5. Run the scripts
+5. Run either `install_centos7_apache24.sh` or `install_centos7_nginx.sh`
 6. Optionally set a system password for the `omero` user if you want to allow ssh access
 
         ./docker-build.sh centos7
-        CID=$(docker run -d ... -v /sys/fs/cgroup:/sys/fs/cgroup:ro omero_install_test_centos7)
-        #CID=$(docker run -d ... --privileged omero_install_test_centos7)
-        ssh -o UserKnownHostsFile=/dev/null root@<address of container> # Password: omero
+        CID=$(docker run -d -p 2222:22 -p 8080:80 -p 4063:4063 -p 4064:4064 -v /sys/fs/cgroup:/sys/fs/cgroup:ro omero_install_test_centos7)
+        #CID=$(docker run -d -p 2222:22 -p 8080:80 -p 4063:4063 -p 4064:4064 --privileged omero_install_test_centos7)
+        ssh -o UserKnownHostsFile=/dev/null -p 2222 root@<address of container> # Password: omero
         cd /omero-install-test
         bash install_centos7_nginx.sh
         #echo omero:omero | chpasswd
-7. It is possible to use the various parameters when running the installation script e.g.
+8. Manually start as the omero system user, the OMERO.server and OMERO.web:
+
+        su - omero -c "OMERO.server/bin/omero admin start"
+        su - omero -c "OMERO.server/bin/omero web start"
+7. Notet that it is possible to use the various parameters when running the installation script e.g.
         ICEVER=ice35-devel bash install_centos7_nginx.sh
