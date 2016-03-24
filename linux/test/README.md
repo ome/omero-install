@@ -157,8 +157,8 @@ Testing CentOS 7
 6. Optionally set a system password for the `omero` user if you want to allow ssh access
 
         ./docker-build.sh centos7
-        CID=$(docker run -d -p 2222:22 -p 8080:80 -p 4063:4063 -p 4064:4064 -v /sys/fs/cgroup:/sys/fs/cgroup:ro omero_install_test_centos7)
-        #CID=$(docker run -d -p 2222:22 -p 8080:80 -p 4063:4063 -p 4064:4064 --privileged omero_install_test_centos7)
+        #CID=$(docker run -d -p 2222:22 -p 8080:80 -p 4063:4063 -p 4064:4064 -v /sys/fs/cgroup:/sys/fs/cgroup:ro omero_install_test_centos7)
+        CID=$(docker run -d -p 2222:22 -p 8080:80 -p 4063:4063 -p 4064:4064 --privileged omero_install_test_centos7)
         ssh -o UserKnownHostsFile=/dev/null -p 2222 root@<address of container> # Password: omero
         cd /omero-install-test
         bash install_centos7_nginx.sh
