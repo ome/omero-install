@@ -3,6 +3,7 @@
 FROM debian:jessie
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
+ARG EXPERIMENTAL=false
 ARG WEBAPPS=false
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk18
