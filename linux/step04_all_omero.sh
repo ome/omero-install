@@ -5,7 +5,7 @@ set -e -u -x
 OMEROVER=${OMEROVER:-latest}
 PY_ENV=${PY_ENV:-py27}
 
-source settings.env
+source `dirname $0`/settings.env
 #start-install
 if [ "$PY_ENV" = "py27_scl" ]; then
 	#start-py27-scl

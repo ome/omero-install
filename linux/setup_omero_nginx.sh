@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-source settings.env
+source `dirname $0`/settings.env
 
 #start-config
 OMERO.server/bin/omero config set omero.web.application_server wsgi-tcp

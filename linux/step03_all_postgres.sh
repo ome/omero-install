@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source settings.env
+source `dirname $0`/settings.env
 
 #start-setup
 
