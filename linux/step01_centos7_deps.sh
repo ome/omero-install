@@ -15,4 +15,4 @@ if [[ ! "${container:-}" = docker ]]; then
 	#end-docker-pip
 fi
 
-pip install -r requirements.txt
+pip install -r `dirname $0`/requirements.txt
