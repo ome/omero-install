@@ -2,6 +2,7 @@
 
 set -e -u -x
 
+EXPERIMENTAL=${EXPERIMENTAL:-false}
 OMEROVER=${OMEROVER:-latest}
 WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg94}
@@ -18,6 +19,10 @@ bash -eux step01_centos6_py27_deps.sh
 # install ice
 bash -eux step01_centos6_py27_ice_deps.sh
 
+
+if $EXPERIMENTAL ; then
+    bash -eux step01_centos6_py27_deps_experimental.sh
+fi
 
 # install Postgres
 bash -eux step01_centos6_pg_deps.sh

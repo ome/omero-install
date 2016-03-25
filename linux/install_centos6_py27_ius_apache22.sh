@@ -2,6 +2,7 @@
 
 set -e -u -x
 
+EXPERIMENTAL=${EXPERIMENTAL:-false}
 OMEROVER=${OMEROVER:-latest}
 WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg94}
@@ -24,6 +25,10 @@ bash -eux step01_centos6_pg_deps.sh
 bash -eux step02_centos6_py27_ius_setup.sh
 
 bash -eux step01_centos6_py27_ius_virtualenv_deps.sh
+
+if $EXPERIMENTAL ; then
+    bash -eux step01_centos6_py27_ius_deps_experimental.sh
+fi
 
 if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
 	bash -eux step03_all_postgres.sh
