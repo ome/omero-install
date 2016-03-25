@@ -13,10 +13,10 @@ bash -eux step01_centos7_init.sh
 # install java
 bash -eux step01_centos_java_deps.sh
 
+bash -eux step01_centos7_deps.sh
+
 # install ice
 bash -eux step01_centos7_ice_deps.sh
-
-bash -eux step01_centos7_deps.sh
 
 # install Postgres
 bash -eux step01_centos7_pg_deps.sh

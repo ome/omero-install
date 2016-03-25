@@ -13,10 +13,10 @@ bash -eux step01_ubuntu1404_init.sh
 # install java
 bash -eux step01_ubuntu1404_java_deps.sh
 
+bash -eux step01_ubuntu1404_deps.sh
+
 # install ice
 bash -eux step01_ubuntu1404_ice_deps.sh
-
-bash -eux step01_ubuntu1404_deps.sh
 
 # install Postgres
 bash -eux step01_ubuntu1404_pg_deps.sh
