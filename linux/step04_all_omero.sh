@@ -15,7 +15,7 @@ if [ "$PY_ENV" = "py27_scl" ]; then
 	#end-py27-scl
 fi
 
-if [[ ! $PY_ENV = "py27_ius" ]]; then
+if [[ ! $PY_ENV = "py27_ius" ] && [ ! $OMEROVER=~"ice36" ]]; then
 	#start-venv
 	virtualenv /home/omero/omeroenv
 	/home/omero/omeroenv/bin/pip install omego==0.3.0
@@ -23,13 +23,31 @@ if [[ ! $PY_ENV = "py27_ius" ]]; then
 fi
 
 #start-install
-#start-release
-/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
-#end-release
+if [ $OMEROVER="latest-ice36" ]; then
+	#tmp build from branch
+	cd ~omero
+	git clone --depth=1 https://github.com/jburel/openmicroscopy.git
+
+	cd openmicroscopy
+	git submodule init
+	git submodule update
+	cd ..
+
+	#unzip -q ice36.zip
+	sed -i 's/omero.version=UNKNOWN/omero.version=5.2.2/g' openmicroscopy/etc/build.properties
+	openmicroscopy/build.py
+
+	mv openmicroscopy/dist OMERO.server
+elif [ $OMEROVER="OMERO-DEV-merge-build-ice36" ]; then
+
+else
+	#start-release
+	/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
+	#end-release
+	ln -s OMERO.server-*/ OMERO.server
+fi
 
 #configure
-ln -s OMERO.server-*/ OMERO.server
-
 OMERO.server/bin/omero config set omero.data.dir "$OMERO_DATA_DIR"
 OMERO.server/bin/omero config set omero.db.name "$OMERO_DB_NAME"
 OMERO.server/bin/omero config set omero.db.user "$OMERO_DB_USER"
