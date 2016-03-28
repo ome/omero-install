@@ -16,6 +16,8 @@ elif [ "$ICEVER" = "ice35-devel" ]; then
 
 	yum -y install ice ice-python-devel ice-java-devel ice-servers
 elif [ "$ICEVER" = "ice36" ]; then
+	#for omero, to remove when we do not install from git
+	yum -y install git
 	curl -o /etc/yum.repos.d/zeroc-ice-el7.repo \
 	http://download.zeroc.com/Ice/3.6/el7/zeroc-ice-el7.repo
 	yum -y groupinstall "Development tools"
