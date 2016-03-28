@@ -4,6 +4,7 @@ set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
 PY_ENV=${PY_ENV:-py27}
+ICEVER=${ICEVER:-ice35}
 
 source `dirname $0`/settings.env
 #start-install
@@ -15,7 +16,7 @@ if [ "$PY_ENV" = "py27_scl" ]; then
 	#end-py27-scl
 fi
 
-if [[ ! $PY_ENV = "py27_ius" ] && [ ! $OMEROVER=~"ice36" ]]; then
+if [[ ! $PY_ENV = "py27_ius" ]]; then
 	#start-venv
 	virtualenv /home/omero/omeroenv
 	/home/omero/omeroenv/bin/pip install omego==0.3.0
@@ -23,7 +24,7 @@ if [[ ! $PY_ENV = "py27_ius" ] && [ ! $OMEROVER=~"ice36" ]]; then
 fi
 
 #start-install
-if [ $OMEROVER="latest-ice36" ]; then
+if [ $ICEVER="ice36" ]; then
 	#tmp build from branch
 	cd ~omero
 	git clone --depth=1 https://github.com/jburel/openmicroscopy.git
@@ -38,8 +39,6 @@ if [ $OMEROVER="latest-ice36" ]; then
 	openmicroscopy/build.py
 
 	mv openmicroscopy/dist OMERO.server
-elif [ $OMEROVER="OMERO-DEV-merge-build-ice36" ]; then
-
 else
 	#start-release
 	/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
