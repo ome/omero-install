@@ -19,6 +19,7 @@ elif [ "$ICEVER" = "ice36" ]; then
 	curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
 	http://download.zeroc.com/Ice/3.6/el6/zeroc-ice-el6.repo
 
+	yum -y install git
 	yum -y groupinstall "Development tools"
 	yum -y install openssl-devel bzip2-devel expat-devel
 	yum -y install db53-devel db53-utils mcpp-devel
