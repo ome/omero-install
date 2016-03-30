@@ -28,6 +28,10 @@ if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 
+# for convenience
+if [ "$ICEVER" = "ice36" ]; then
+	sed -i 's/Ice-3.5.1/Ice-3.6.2/g' omero-centos6py27.env
+fi
 cp settings.env omero-centos6py27.env step04_all_omero.sh setup_omero_db.sh ~omero
 
 su - omero -c "OMEROVER=$OMEROVER PY_ENV=py27_scl ICEVER=$ICEVER bash -eux step04_all_omero.sh"
