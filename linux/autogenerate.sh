@@ -202,6 +202,7 @@ ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' step04_all_omero.sh)
 
 line="$(echo -e "${line}" | sed -e 's/$OMEROVER/latest/g')"
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 echo "$line" >> $file
 number=$(sed -n '/#configure/=' step04_all_omero.sh)
 ns=$((number+1))

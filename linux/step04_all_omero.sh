@@ -42,8 +42,9 @@ if [ $ICEVER="ice36" ]; then
 else
 	#start-release
 	/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
-	#end-release
+
 	ln -s OMERO.server-*/ OMERO.server
+	#end-release
 fi
 
 #configure
