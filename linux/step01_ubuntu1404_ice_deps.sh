@@ -11,6 +11,7 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 elif [ "$ICEVER" = "ice36" ]; then
 	# install git to build omero
 	apt-get -y install git
+	apt-get -y install libssl-dev libbz2-dev libmcpp-dev libdb++-dev libdb-dev libdb-java
 	mkdir /tmp/ice-download
 	cd /tmp/ice-download
 	#to be modified and rename
