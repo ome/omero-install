@@ -5,7 +5,14 @@ cp setup_omero_nginx.sh ~omero
 #end-copy
 
 #start-install
-yum -y --enablerepo=cr install nginx
+cat << EOF > /etc/yum.repos.d/nginx.repo
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/
+gpgcheck=0
+enabled=1
+EOF
+yum -y install nginx
 
 pip install -r ~omero/OMERO.server/share/web/requirements-py27-nginx.txt
 
