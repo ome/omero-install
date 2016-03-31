@@ -5,7 +5,7 @@
 yum -y install redis python-redis
 
 set +u
-source /opt/rh/python27/enable
+source /home/omero/omeroenv/bin/activate
 set -u
 
 pip install django-redis-cache=>1.6.5
