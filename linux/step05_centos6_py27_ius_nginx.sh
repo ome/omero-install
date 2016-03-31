@@ -24,12 +24,20 @@ source /home/omero/omeroenv/bin/activate
 set -u
 
 # Install OMERO.web requirements
-/home/omero/omeroenv/bin/pip2.7 install -r ~omero/OMERO.server/share/web/requirements-py27-nginx.txt
-
+file=~omero/OMERO.server/share/web/requirements-py27-nginx.txt
+p=nginx
+if [ -f $file ]; then
+	/home/omero/omeroenv/bin/pip2.7 install -r ~omero/OMERO.server/share/web/requirements-py27-nginx.txt
+else
+	#for version 5.1.x
+	/home/omero/omeroenv/bin/pip2.7 install "Django>=1.8,<1.9"
+	/home/omero/omeroenv/bin/pip2.7 install gunicorn
+	p=nginx-wsgi
+fi
 deactivate
 
 # set up as the omero user.
-su - omero -c "bash -eux setup_omero_nginx.sh"
+su - omero -c "bash -eux setup_omero_nginx.sh $p"
 
 mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
 cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
