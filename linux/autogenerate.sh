@@ -126,13 +126,7 @@ if [ $OS = "centos6_py27_ius" ] ; then
 	#find from where to start copying
 	start=$(sed -n '/#start-install/=' step01_"$OS"_virtualenv_deps.sh)
 	start=$((start+1))
-	number=$(sed -n '/#start-dev/=' step01_"$OS"_virtualenv_deps.sh)
-	number=$((number-1))
-	line=$(sed -n ''$start','$number'p' step01_"$OS"_virtualenv_deps.sh)
-	echo "$line" >> $file
-	number=$(sed -n '/#end-dev/=' step01_"$OS"_virtualenv_deps.sh)
-	number=$((number+1))
-	line=$(sed -n ''$number',$p' step01_"$OS"_virtualenv_deps.sh)
+	line=$(sed -n ''$start',$p' step01_"$OS"_virtualenv_deps.sh)
 	echo "$line" >> $file
 	echo "#end-step01.1" >> $file
 fi
@@ -218,21 +212,21 @@ line=$(sed -n ''$ns',$p' setup_omero_db.sh)
 echo "$line" >> $file
 echo "#end-step04" >> $file
 
-v=$OS
-if [ $OS = "debian8" ] ; then
-	v="ubuntu1404"
-fi
-
 echo -en '\n' >> $file
 echo "#start-step05: As root, install a Web server: Nginx or Apache" >> $file
 echo "#start-nginx" >> $file
-start=$(sed -n '/#start-install/=' step05_"$v"_nginx.sh)
+start=$(sed -n '/#start-install/=' step05_"$OS"_nginx.sh)
 start=$((start+1))
-line=$(sed -n ''$start',$p' step05_"$v"_nginx.sh)
+line=$(sed -n ''$start',$p' step05_"$OS"_nginx.sh)
 echo "$line" >> $file
 echo "#end-nginx" >> $file
 echo -en '\n' >> $file
 echo "#start-apache" >> $file
+
+v=$OS
+if [ $OS = "debian8" ] ; then
+	v="ubuntu1404"
+fi
 
 apachever="apache24" #webserver might become a parameter
 if [ $OS = "centos6" ] || [ $OS = "centos6_py27_ius" ] ; then
