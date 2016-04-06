@@ -4,10 +4,7 @@ apt-get update
 apt-get -y install \
 	unzip \
 	wget \
-	python-{matplotlib,numpy,pip,scipy,tables,virtualenv} \
-	openjdk-7-jre-headless \
-	ice-services python-zeroc-ice \
-	postgresql
+	python-{matplotlib,numpy,pip,scipy,tables,virtualenv}
 
 # require to install Pillow
 apt-get -y install \
@@ -20,9 +17,7 @@ apt-get -y install \
 	tcl8.6-dev \
 	tk8.6-dev
 
-pip install --upgrade "Pillow<3.0"
+pip install --upgrade pip
 
-# Django
-pip install "Django>=1.8,<1.9"
-
-service postgresql start
+# upgrade required since pillow is already installed
+pip install --upgrade -r requirements.txt

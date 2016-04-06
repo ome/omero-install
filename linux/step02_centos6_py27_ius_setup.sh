@@ -1,6 +1,10 @@
 #!/bin/bash
 
-useradd -m omero
+if [ -z "$(getent passwd omero)" ]; then
+	#start-create-user
+    useradd -m omero
+    #end-create-user
+fi
 chmod a+X ~omero
 
 mkdir -p "$OMERO_DATA_DIR"

@@ -6,13 +6,16 @@ if [ $# -ne 1 ]; then
 fi
 
 WEBAPPS=${WEBAPPS:-false}
-OMEROVER=${OMEROVER:-omero}
+OMEROVER=${OMEROVER:-latest}
+JAVAVER=${JAVAVER:-openjdk18}
+ICEVER=${ICEVER:-ice35}
+PGVER=${PGVER:-pg94}
 
 set -e
 
 rm -rf omero-install-test
 mkdir omero-install-test
-cp ../*.sh ../*.env ../*init.d ../*.service ../*cron omero-install-test
+cp ../*.sh ../*.env ../*init.d ../*.service ../*cron ../*.txt omero-install-test
 zip -r $1/omero-install-test.zip omero-install-test
 rm -rf omero-install-test
 
@@ -22,6 +25,8 @@ echo "Building image $IMAGE"
 if [[ $1 =~ "centos7" ]]; then
 	docker build -t $IMAGE --no-cache $1
 else
-	docker build -t $IMAGE --no-cache --build-arg OMEROVER=${OMEROVER} --build-arg WEBAPPS=${WEBAPPS} $1
+	docker build -t $IMAGE --no-cache --build-arg OMEROVER=${OMEROVER} \
+	--build-arg JAVAVER=${JAVAVER} --build-arg WEBAPPS=${WEBAPPS} \
+	--build-arg ICEVER=${ICEVER} --build-arg PGVER=${PGVER} $1
 fi
 echo "Test this image by running docker run -it [...] $IMAGE"

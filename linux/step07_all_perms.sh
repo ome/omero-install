@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-source settings.env
+source `dirname $0`/settings.env
 
 #start
 chmod go-rwx ~omero/OMERO.server/etc ~omero/OMERO.server/var

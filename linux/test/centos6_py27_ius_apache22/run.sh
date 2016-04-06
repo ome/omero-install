@@ -1,5 +1,11 @@
 #!/bin/bash
-service postgresql-9.4 start
+PGVER=${1:-pg94}
+
+if [ "$PGVER" = "pg94" ]; then
+	service postgresql-9.4 start
+elif [ "$PGVER" = "pg95" ]; then
+	service postgresql-9.5 start
+fi
 service crond start
 service omero start
 service httpd start
