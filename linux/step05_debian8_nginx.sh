@@ -5,6 +5,11 @@ cp setup_omero_nginx.sh ~omero
 #end-copy
 
 #start-install
+echo "deb http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list
+wget http://nginx.org/keys/nginx_signing.key
+apt-key add nginx_signing.key
+rm nginx_signing.key
+apt-get update
 apt-get -y install nginx
 
 pip install -r ~omero/OMERO.server/share/web/requirements-py27-nginx.txt
@@ -12,8 +17,7 @@ pip install -r ~omero/OMERO.server/share/web/requirements-py27-nginx.txt
 # set up as the omero user.
 su - omero -c "bash -eux setup_omero_nginx.sh"
 
-cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/sites-available/omero-web
-rm /etc/nginx/sites-enabled/default
-ln -s /etc/nginx/sites-available/omero-web /etc/nginx/sites-enabled/
+cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
+rm /etc/nginx/conf.d/default.conf
 
 service nginx start
