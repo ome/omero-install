@@ -2,6 +2,7 @@ language: python
 services:
   - docker
 env:
+  - ENV=centos7
   - ENV=centos6_nginx
   - ENV=centos6_apache22
   - ENV=centos6_py27_nginx

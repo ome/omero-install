@@ -29,4 +29,7 @@ mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
 cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 systemctl enable nginx
-systemctl start nginx
+
+if [ ! "${container:-}" = docker ]; then
+    systemctl start nginx
+fi
