@@ -44,7 +44,7 @@ bash -eux step05_centos7_apache24.sh
 
 bash -eux setup_centos_selinux.sh
 
-bash -eux step06_centos7_daemon.sh
+PGVER=$PGVER bash -eux step06_centos7_daemon.sh
 
 #systemctl start omero.service
 #systemctl start omero-web.service
