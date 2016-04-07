@@ -25,6 +25,7 @@ pip install -r ~omero/OMERO.server/share/web/requirements-py27-nginx.txt
 su - omero -c "bash -eux setup_omero_nginx.sh"
 
 sed -i.bak -re 's/( default_server.*)/; #\1/' /etc/nginx/nginx.conf
+mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
 cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 systemctl enable nginx
