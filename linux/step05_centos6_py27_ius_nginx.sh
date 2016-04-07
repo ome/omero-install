@@ -26,12 +26,12 @@ set -u
 # Install OMERO.web requirements
 file=~omero/OMERO.server/share/web/requirements-py27-nginx.txt
 p=nginx
+# introduce in 5.2.0
 if [ -f $file ]; then
-	/home/omero/omeroenv/bin/pip2.7 install -r ~omero/OMERO.server/share/web/requirements-py27-nginx.txt
+	/home/omero/omeroenv/bin/pip2.7 install -r $file
 else
 	#for version 5.1.x
-	/home/omero/omeroenv/bin/pip2.7 install "Django>=1.8,<1.9"
-	/home/omero/omeroenv/bin/pip2.7 install gunicorn
+	/home/omero/omeroenv/bin/pip2.7 install "gunicorn>=19.3"
 	p=nginx-wsgi
 fi
 deactivate
