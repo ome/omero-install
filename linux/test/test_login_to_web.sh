@@ -1,9 +1,7 @@
 #!/bin/bash
 #
 
-set -u
-set -e
-set -x
+set -e -u -x
 
 WEB_HOST=${WEB_HOST:-127.0.0.1:80}
 
