@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 set -u -x
 
 #source `pwd`/../settings.env
 
-if [[ "darwin" == ${OSTYPE//[0-9.]/} ]]; then
+if [[ "darwin" == "${OSTYPE//[0-9.]/}" ]]; then
     docker run -d --privileged -p 8888:80 --name omeroinstall omero_install_test_centos7
 else
     docker run -d --name omeroinstall -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run omero_install_test_$ENV
@@ -20,7 +20,7 @@ docker exec -it omeroinstall /bin/bash -c "service omero status -l"
 docker exec -it omeroinstall /bin/bash -c "service omero-web status -l"
 docker exec -it omeroinstall /bin/bash -c 'su - omero -c "/home/omero/OMERO.server/bin/omero login -s localhost -p 4064 -u root -w omero_root_password"'
 
-if [[ "darwin" == ${OSTYPE//[0-9.]/} ]]; then
+if [[ "darwin" == "${OSTYPE//[0-9.]/}" ]]; then
   curl -I http://$(docker-machine ip omerodev):8888/webclient
   WEB_HOST=$(docker-machine ip omerodev):8888 ./test_login_to_web.sh
 else
