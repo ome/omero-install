@@ -14,20 +14,18 @@ docker inspect -f {{.State.Running}} omeroinstall
 
 docker exec -it omeroinstall /bin/bash -c 'until [ -f /home/omero/OMERO.server/var/log/Blitz-0.log ]; do sleep 5; done; echo "File found"; exit'
 
-docker exec -it omeroinstall /bin/bash -c 'tail -f /home/omero/OMERO.server/var/log/Blitz-0.log | while read LOGLINE; do [[ "${LOGLINE}" == *"OMERO.blitz now accepting connections"* ]] && pkill -P $$ tail > /dev/null 2>&1; done'
+docker exec -it omeroinstall /bin/bash -c 'while ! grep "OMERO.blitz now accepting connections" /home/omero/OMERO.server/var/log/Blitz-0.log; do sleep 10; done'
 
 docker exec -it omeroinstall /bin/bash -c "service omero status -l"
 docker exec -it omeroinstall /bin/bash -c "service omero-web status -l"
 docker exec -it omeroinstall /bin/bash -c "su - omero -c \"/home/omero/OMERO.server/bin/omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
 
-if [[ "$ENV" == "centos7" ]]; then
-  if [[ "darwin" == "${OSTYPE//[0-9.]/}" ]]; then
-    curl -I http://$(docker-machine ip omerodev):8888/webclient
-    WEB_HOST=$(docker-machine ip omerodev):8888 ./test_login_to_web.sh
-  else
-    curl -I http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' omeroinstall`/webclient
-    WEB_HOST=`docker inspect --format '{{ .NetworkSettings.IPAddress }}' omeroinstall` ./test_login_to_web.sh
-  fi
+if [[ "darwin" == "${OSTYPE//[0-9.]/}" ]]; then
+  curl -I http://$(docker-machine ip omerodev):8888/webclient
+  WEB_HOST=$(docker-machine ip omerodev):8888 ./test_login_to_web.sh
+else
+  curl -I http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' omeroinstall`/webclient
+  WEB_HOST=`docker inspect --format '{{ .NetworkSettings.IPAddress }}' omeroinstall` ./test_login_to_web.sh
 fi
 
 docker stop omeroinstall
