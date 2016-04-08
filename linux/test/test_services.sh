@@ -1,8 +1,8 @@
 #!/bin/sh
 
-set -e -u -x
+set -u -x
 
-source `pwd`/../settings.env
+#source `pwd`/../settings.env
 
 if [[ "darwin" == ${OSTYPE//[0-9.]/} ]]; then
     docker run -d --privileged -p 8888:80 --name omeroinstall omero_install_test_centos7
