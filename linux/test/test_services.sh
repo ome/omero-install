@@ -17,7 +17,14 @@ docker exec -it omeroinstall /bin/bash -c 'until [ -f /home/omero/OMERO.server/v
 docker exec -it omeroinstall /bin/bash -c 'while ! grep "OMERO.blitz now accepting connections" /home/omero/OMERO.server/var/log/Blitz-0.log; do sleep 10; done'
 
 docker exec -it omeroinstall /bin/bash -c "service omero status -l"
-docker exec -it omeroinstall /bin/bash -c "service omero-web status -l"
+
+if [[ $ENV =~ "nginx" ]]; then
+    docker exec -it omeroinstall /bin/bash -c "service omero-web status -l"
+fi
+if [[ $ENV =~ "apache" ]]; then
+    docker exec -it omeroinstall /bin/bash -c "service httpd status -l"
+fi
+
 docker exec -it omeroinstall /bin/bash -c "su - omero -c \"/home/omero/OMERO.server/bin/omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
 
 if [[ "darwin" == "${OSTYPE//[0-9.]/}" ]]; then
