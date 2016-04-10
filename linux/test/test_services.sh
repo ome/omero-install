@@ -17,8 +17,26 @@ fi
 docker inspect -f {{.State.Running}} $CNAME
 
 # wait for omero to start up and accept connections
-docker exec -it $CNAME /bin/bash -c 'd=10; until [ -f /home/omero/OMERO.server/var/log/Blitz-0.log ]; do sleep 10; d=$[$d -1]; if [ $d -lt 0 ]; then exit 1; fi; done; echo "File found"; exit'
-docker exec -it $CNAME /bin/bash -c 'd=10; while ! grep "OMERO.blitz now accepting connections" /home/omero/OMERO.server/var/log/Blitz-0.log ; do sleep 10; d=$[$d -1]; if [ $d -lt 0 ]; then exit 1; fi; done'
+docker exec -it $CNAME /bin/bash -c 'd=10; \
+    until [ -f /home/omero/OMERO.server/var/log/Blitz-0.log ]; \
+        do \
+            sleep 10; \
+            d=$[$d -1]; \
+            if [ $d -lt 0 ]; then \
+                exit 1; \
+            fi; \
+        done; \
+    echo "File found"; exit'
+
+docker exec -it $CNAME /bin/bash -c 'd=10; \
+    while ! grep "OMERO.blitz now accepting connections" /home/omero/OMERO.server/var/log/Blitz-0.log ; \
+        do \
+            sleep 10; \
+            d=$[$d -1]; \
+            if [ $d -lt 0 ]; then \
+                exit 1; \
+            fi; \
+        done'
 
 #check OMERO.server service status
 docker exec -it $CNAME /bin/bash -c "service omero status -l"
@@ -36,11 +54,13 @@ docker exec -it $CNAME /bin/bash -c "su - omero -c \"/home/omero/OMERO.server/bi
 
 # Log in to OMERO.web
 if [[ "darwin" == "${OSTYPE//[0-9.]/}" ]]; then
-  curl -I http://$(docker-machine ip omerodev):8888/webclient
-  WEB_HOST=$(docker-machine ip omerodev):8888 ./test_login_to_web.sh
+  DOCKER_IP=$(docker-machine ip omerodev)
+  curl -I http://${DOCKER_IP}:8888/webclient
+  WEB_HOST="${DOCKER_IP}:8888" ./test_login_to_web.sh
 else
-  curl -I http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' $CNAME`/webclient
-  WEB_HOST=`docker inspect --format '{{ .NetworkSettings.IPAddress }}' $CNAME` ./test_login_to_web.sh
+  DOCKER_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $CNAME)
+  curl -I http://${DOCKER_IP}/webclient
+  WEB_HOST=$DOCKER_IP ./test_login_to_web.sh
 fi
 
 # stop and cleanup
