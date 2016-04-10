@@ -4,6 +4,7 @@ set -e -u -x
 
 ENV=${ENV:-centos7_nginx}
 DMNAME=${DMNAME:-dev}
+EXPERIMENTAL=${EXPERIMENTAL:-false}
 
 source `pwd`/../settings.env
 
@@ -50,6 +51,10 @@ if [[ $ENV =~ "nginx" ]]; then
 fi
 if [[ $ENV =~ "apache" ]]; then
     docker exec -it $CNAME /bin/bash -c "service httpd status -l"
+fi
+
+if [[ "$EXPERIMENTAL" = true ]]; then
+    docker exec -it $CNAME /bin/bash -c "service redis status -l"
 fi
 
 # Log in to OMERO.server
