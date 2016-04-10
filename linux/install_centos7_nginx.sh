@@ -43,6 +43,10 @@ if [ $WEBAPPS = true ]; then
 	bash -eux step05_1_all_webapps.sh
 fi
 
+if [ "$EXPERIMENTAL" = true ]; then
+	bash -eux step05_2_experimentalconfig.sh
+fi
+
 #If you don't want to use the systemd scripts you can start OMERO manually:
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"

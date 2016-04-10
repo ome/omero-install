@@ -45,6 +45,10 @@ if [ $WEBAPPS = true ]; then
 	PY_ENV=py27_ius bash -eux step05_1_all_webapps.sh
 fi
 
+if [ "$EXPERIMENTAL" = true ]; then
+	PY_ENV=py27_ius bash -eux step05_2_experimentalconfig.sh
+fi
+
 bash -eux step05_centos6_py27_ius_apache22.sh
 
 #If you don't want to use the init.d scripts you can start OMERO manually:

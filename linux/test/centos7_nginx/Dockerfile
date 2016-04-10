@@ -19,6 +19,7 @@ RUN yum -y install unzip && unzip omero-install-test.zip
 # This is so that scripts can detect whether they're in docker
 RUN echo 'export container=docker' > /etc/profile.d/docker.sh
 
+ARG EXPERIMENTAL=false
 ARG WEBAPPS=false
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk18

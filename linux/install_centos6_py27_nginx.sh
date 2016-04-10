@@ -45,6 +45,10 @@ if [ $WEBAPPS = true ]; then
 	PY_ENV=py27_scl bash -eux step05_1_all_webapps.sh
 fi
 
+if [ "$EXPERIMENTAL" = true ]; then
+	PY_ENV=py27_scl bash -eux step05_2_experimentalconfig.sh
+fi
+
 #If you don't want to use the init.d scripts you can start OMERO manually:
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"
