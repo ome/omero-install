@@ -103,10 +103,8 @@ if [ $OS = "centos7" ] ; then
 	number=$(sed -n '/#end-recommended/=' step01_"$N"_pg_deps.sh)
 	nre=$((number-1))
 	line=$(sed -n ''$nrs','$nre'p' step01_"$N"_pg_deps.sh)
-
 	# remove docker conditional
 	line=`remove_docker_workaround "${line}"`
-
 else
 	number=$(sed -n '/#start-recommended/=' step01_"$N"_pg_deps.sh)
 	ns=$((number+1))
@@ -220,10 +218,8 @@ echo "#start-nginx" >> $file
 start=$(sed -n '/#start-install/=' step05_"$OS"_nginx.sh)
 start=$((start+1))
 line=$(sed -n ''$start',$p' step05_"$OS"_nginx.sh)
-
 # remove docker conditional
 line=`remove_docker_workaround "${line}"`
-
 echo "$line" >> $file
 echo "#end-nginx" >> $file
 echo -en '\n' >> $file
@@ -253,7 +249,6 @@ start=$((start+1))
 line=$(sed -n ''$start',$p' step05_"$v"_"$apachever".sh)
 # remove docker conditional
 line=`remove_docker_workaround "${line}"`
-
 echo "$line" >> $file
 echo "#end-apache-install" >> $file
 echo "#end-apache" >> $file
@@ -273,7 +268,6 @@ nre=$((number-1))
 line=$(sed -n ''$nrs','$nre'p' step06_"$v"_daemon.sh)
 # remove docker conditional
 line=`remove_docker_workaround "${line}"`
-
 echo "$line" >> $file
 echo "#end-step06" >> $file
 

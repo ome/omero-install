@@ -39,12 +39,10 @@ elif [ "$PGVER" = "pg95" ]; then
 		PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-9.5/bin/postgresql95-setup initdb
 	fi
 	sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/9.5/data/pg_hba.conf
-
 	if [ "${container:-}" = docker ]; then
 		sed -i 's/OOMScoreAdjust/#OOMScoreAdjust/' \
 		/usr/lib/systemd/system/postgresql-9.5.service
 	fi
-
 	if [ "${container:-}" = docker ]; then
 		su - postgres -c "/usr/pgsql-9.5/bin/pg_ctl start -D /var/lib/pgsql/9.5/data -w"
 	else
