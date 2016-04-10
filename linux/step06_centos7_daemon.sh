@@ -7,7 +7,6 @@ if [ "$PGVER" = "pg95" ]; then
 elif [ "$PGVER" = "pg94" ]; then
 	#start-recommended
 	cp omero-systemd.service /etc/systemd/system/omero.service
-	#end-recommended
 fi
 
 cp omero-web-systemd.service /etc/systemd/system/omero-web.service
@@ -18,3 +17,4 @@ fi
 
 systemctl enable omero.service
 systemctl enable omero-web.service
+#end-recommended
