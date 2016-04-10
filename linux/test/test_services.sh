@@ -2,6 +2,8 @@
 
 set -e -u -x
 
+ENV=${ENV:-centos7_nginx}
+
 source `pwd`/../settings.env
 
 CNAME=omeroinstall_$ENV
