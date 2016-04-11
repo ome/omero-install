@@ -3,7 +3,6 @@ services:
   - docker
 env:
   - ENV=centos7_nginx
-  - ENV=centos7_nginx PGVER=pg95
   - ENV=centos7_apache24
   - ENV=centos6_nginx
   - ENV=centos6_apache22
