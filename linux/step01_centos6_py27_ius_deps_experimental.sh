@@ -10,6 +10,6 @@ set +u
 source /home/omero/omeroenv/bin/activate
 set -u
 
-pip install django-redis-cache=>1.6.5
+pip install django-redis-cache>=1.6.5
 
 deactivate
