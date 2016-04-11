@@ -30,13 +30,34 @@ omero import test.fake
 omero logout
 
 # Test simple Web connection
-brew install wget
-sleep 30
-wget --keep-session-cookies --save-cookies cookies.txt http://localhost:$HTTPPORT/webclient/login/ -O csrf_index.html
-csrf=$(cat csrf_index.html | grep "name=\'csrfmiddlewaretoken\'"  | sed "s/.* value=\'\(.*\)\'.*/\1/")
-post_data="username=root&password=$ROOT_PASSWORD&csrfmiddlewaretoken=$csrf&server=1&noredirect=1"
-resp=$(wget --keep-session-cookies --load-cookies cookies.txt --post-data $post_data http://localhost:$HTTPPORT/webclient/login/)
-echo "$resp"
+COOKIES=cookies.txt
+LOGIN_URL=http://localhost:$HTTPPORT/webclient/login/
+LOGOUT_URL=http://localhost:$HTTPPORT/webclient/logout/
+SERVER='1'
+CURL_CMD="curl -i -k -s -c $COOKIES -b $COOKIES "
+$CURL_CMD $LOGIN_URL > /dev/null
+csrf_token=$(grep csrftoken $COOKIES | sed 's/^.*csrftoken\s*//' |  sed -e 's/^[[:space:]]*//' )
+DJANGO_TOKEN="csrfmiddlewaretoken=$csrf_token"
+
+echo "Perform login ..."
+RSP=$($CURL_CMD \
+        -e $LOGIN_URL \
+        -d "$DJANGO_TOKEN&username=root&password=$ROOT_PASSWORD&server=$SERVER" \
+        -X POST $LOGIN_URL)
+if grep -q id_server <<<$RSP; then
+  exit 1
+else
+  echo "You are logged in!"
+fi
+
+echo "Perform logout ..."
+$CURL_CMD \
+    -e $LOGIN_URL \
+    -d "$DJANGO_TOKEN" \
+    -X POST $LOGOUT_URL
+
+echo "You are logged out!"
+
 
 # Stop OMERO.web
 nginx -c $(brew --prefix omero52)/etc/nginx.conf -s stop
