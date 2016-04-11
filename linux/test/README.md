@@ -17,7 +17,37 @@ For example:
 See `docker run --help` for more information on these and other options
 for running docker images.
 
-CentOS 7 cannot be tested in this way as `systemd` doesn't fully work, see below.
+CentOS 7 testing workflow is fully automated
+
+    $ cd linux/test
+    $ export ENV=centos7_nginx
+
+    $ ./docker-build.sh $ENV
+    OSX: $ DMNAME=dev ./test_services.sh # docker machine can be obtained from docker-machine ls
+    UNIX: $ ./test_services.sh
+
+or can be tested manually
+
+    OSX: $ docker run -d --privileged -p 8888:80 --name omeroinstall omero_install_test_$ENV
+    UNIX: $ docker run -d --name omeroinstall -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run omero_install_test_$ENV
+    wait 10 sec
+    $ docker exec -it omeroinstall /bin/bash -c "service omero status"
+    Redirecting to /bin/systemctl status  -l omero.service
+    ● omero.service - OMERO.server
+       Loaded: loaded (/etc/systemd/system/omero.service; enabled; vendor preset: disabled)
+       Active: active (running) since Mon 2016-04-11 13:43:23 UTC; 30s ago
+     Main PID: 91 (python)
+    ...
+    $ docker exec -it omeroinstall /bin/bash -c "service omero-web status"
+    Redirecting to /bin/systemctl status  -l omero-web.service
+    ● omero-web.service - OMERO.web
+       Loaded: loaded (/etc/systemd/system/omero-web.service; enabled; vendor preset: disabled)
+       Active: active (running) since Mon 2016-04-11 13:43:27 UTC; 26s ago
+      Process: 69 ExecStart=/home/omero/OMERO.server/bin/omero web start (code=exited, status=0/SUCCESS)
+     Main PID: 493 (gunicorn)
+    ...
+
+
 
 Adding a new step
 -----------------
