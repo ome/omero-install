@@ -3,6 +3,7 @@
 set -e -u -x
 
 ENV=${ENV:-centos7_nginx}
+DMNAME=${DMNAME:-dev}
 
 source `pwd`/../settings.env
 
@@ -56,7 +57,7 @@ docker exec -it $CNAME /bin/bash -c "su - omero -c \"/home/omero/OMERO.server/bi
 
 # Log in to OMERO.web
 if [[ "darwin" == "${OSTYPE//[0-9.]/}" ]]; then
-  DOCKER_IP=$(docker-machine ip omerodev)
+  DOCKER_IP=$(docker-machine ip "${DMNAME}")
   curl -I http://${DOCKER_IP}:8888/webclient
   WEB_HOST="${DOCKER_IP}:8888" ./test_login_to_web.sh
 else
