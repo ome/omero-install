@@ -30,34 +30,7 @@ omero import test.fake
 omero logout
 
 # Test simple Web connection
-COOKIES=cookies.txt
-LOGIN_URL=http://localhost:$HTTPPORT/webclient/login/
-LOGOUT_URL=http://localhost:$HTTPPORT/webclient/logout/
-SERVER='1'
-CURL_CMD="curl -i -k -s -c $COOKIES -b $COOKIES "
-$CURL_CMD $LOGIN_URL > /dev/null
-csrf_token=$(grep csrftoken $COOKIES | sed 's/^.*csrftoken\s*//' |  sed -e 's/^[[:space:]]*//' )
-DJANGO_TOKEN="csrfmiddlewaretoken=$csrf_token"
-
-echo "Perform login ..."
-RSP=$($CURL_CMD \
-        -e $LOGIN_URL \
-        -d "$DJANGO_TOKEN&username=root&password=$ROOT_PASSWORD&server=$SERVER" \
-        -X POST $LOGIN_URL)
-if grep -q id_server <<<$RSP; then
-  exit 1
-else
-  echo "You are logged in!"
-fi
-
-echo "Perform logout ..."
-$CURL_CMD \
-    -e $LOGIN_URL \
-    -d "$DJANGO_TOKEN" \
-    -X POST $LOGOUT_URL
-
-echo "You are logged out!"
-
+bash WEB_HOST="locahost:${HTTPPORT}" OMERO_ROOT_PASS=$ROOT_PASSWORD ../linux/test/test_login_to_web.sh
 
 # Stop OMERO.web
 nginx -c $(brew --prefix omero52)/etc/nginx.conf -s stop
