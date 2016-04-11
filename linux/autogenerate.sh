@@ -193,6 +193,7 @@ number=$(sed -n '/#end-venv/=' step04_all_omero.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' step04_all_omero.sh)
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+
 echo "$line" >> $file
 number=$(sed -n '/#start-release/=' step04_all_omero.sh)
 ns=$((number+1))
@@ -260,15 +261,19 @@ fi
 
 echo -en '\n' >> $file
 echo "#start-step06: As root, run the scripts to start OMERO and OMERO.web automatically" >> $file
-#line=$(sed -n '2,$p' step06_"$v"_daemon.sh)
-number=$(sed -n '/#start-recommended/=' step06_"$v"_daemon.sh)
-nrs=$((number+1))
-number=$(sed -n '/#end-recommended/=' step06_"$v"_daemon.sh)
-nre=$((number-1))
-line=$(sed -n ''$nrs','$nre'p' step06_"$v"_daemon.sh)
-# remove docker conditional
-line=`remove_docker_workaround "${line}"`
-echo "$line" >> $file
+if [[ $v =~ "centos7" ]] ; then
+	number=$(sed -n '/#start-recommended/=' step06_"$v"_daemon.sh)
+	nrs=$((number+1))
+	number=$(sed -n '/#end-recommended/=' step06_"$v"_daemon.sh)
+	nre=$((number-1))
+	line=$(sed -n ''$nrs','$nre'p' step06_"$v"_daemon.sh)
+	# remove docker conditional
+	line=`remove_docker_workaround "${line}"`
+	echo "$line" >> $file
+else
+	line=$(sed -n '2,$p' step06_"$v"_daemon.sh)
+	echo "$line" >> $file
+fi
 echo "#end-step06" >> $file
 
 echo -en '\n' >> $file
