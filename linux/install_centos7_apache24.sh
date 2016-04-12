@@ -28,11 +28,6 @@ if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 
-# for convenience
-if [ "$ICEVER" = "ice36" ]; then
-	cat omero-ice36.env >> /etc/profile
-fi
-
 cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero
 su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero.sh"
 
