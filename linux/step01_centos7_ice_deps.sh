@@ -23,6 +23,7 @@ elif [ "$ICEVER" = "ice36" ]; then
 	yum -y install git
 	#yum -y groupinstall "Development tools"
 	yum -y install gcc-c++
+	yum -y install libdb-utils
 	yum -y install openssl-devel bzip2-devel expat-devel
 
 	yum -y install ice-all-runtime ice-all-devel
