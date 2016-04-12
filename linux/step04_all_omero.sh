@@ -24,7 +24,7 @@ if [[ ! $PY_ENV = "py27_ius" ]]; then
 fi
 
 #start-install
-if [ $ICEVER="ice36" ]; then
+if [ "$ICEVER" = "ice36" ]; then
 	#tmp build from branch
 	cd ~omero
 	git clone --depth=1 https://github.com/jburel/openmicroscopy.git
