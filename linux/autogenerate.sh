@@ -1,6 +1,15 @@
 #!/bin/bash
 # installation of the recommended dependencies
 # i.e. Java 1.8, nginx
+
+remove_docker_workaround () {
+l="$(echo -e "${@}" | sed -e 's/^[[:space:]]*//')"
+l="$(echo -e "${l}" | sed -e 's/^if.*!.*then//' )"
+l="$(echo -e "${l}" | sed -e '/^if.*container.*then/,/else/d' )"
+l="$(echo -e "${l}" | sed -e 's/^fi//')"
+echo "${l}"
+}
+
 OS=${OS:-centos7}
 file=walkthrough_$OS.sh
 if [ -e $file ]; then
@@ -93,18 +102,9 @@ if [ $OS = "centos7" ] ; then
 	nrs=$((number+1))
 	number=$(sed -n '/#end-recommended/=' step01_"$N"_pg_deps.sh)
 	nre=$((number-1))
-	number=$(sed -n ''$nrs','$nre'!d;/#start-workaround/!d;=' step01_"$N"_pg_deps.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$nrs','$ne'p' step01_"$N"_pg_deps.sh)
-	# remove leading whitespace
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-
-	echo "$line" >> $file
-	number=$(sed -n ''$nrs','$nre'!d;/#end-workaround/!d;=' step01_"$N"_pg_deps.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#end-recommended/=' step01_"$N"_pg_deps.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' step01_"$N"_pg_deps.sh)
+	line=$(sed -n ''$nrs','$nre'p' step01_"$N"_pg_deps.sh)
+	# remove docker conditional
+	line=`remove_docker_workaround "${line}"`
 else
 	number=$(sed -n '/#start-recommended/=' step01_"$N"_pg_deps.sh)
 	ns=$((number+1))
@@ -193,6 +193,7 @@ number=$(sed -n '/#end-venv/=' step04_all_omero.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' step04_all_omero.sh)
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+
 echo "$line" >> $file
 number=$(sed -n '/#start-release/=' step04_all_omero.sh)
 ns=$((number+1))
@@ -218,6 +219,8 @@ echo "#start-nginx" >> $file
 start=$(sed -n '/#start-install/=' step05_"$OS"_nginx.sh)
 start=$((start+1))
 line=$(sed -n ''$start',$p' step05_"$OS"_nginx.sh)
+# remove docker conditional
+line=`remove_docker_workaround "${line}"`
 echo "$line" >> $file
 echo "#end-nginx" >> $file
 echo -en '\n' >> $file
@@ -245,6 +248,8 @@ echo "#start-apache-install" >> $file
 start=$(sed -n '/#start-install/=' step05_"$v"_"$apachever".sh)
 start=$((start+1))
 line=$(sed -n ''$start',$p' step05_"$v"_"$apachever".sh)
+# remove docker conditional
+line=`remove_docker_workaround "${line}"`
 echo "$line" >> $file
 echo "#end-apache-install" >> $file
 echo "#end-apache" >> $file
@@ -256,8 +261,19 @@ fi
 
 echo -en '\n' >> $file
 echo "#start-step06: As root, run the scripts to start OMERO and OMERO.web automatically" >> $file
-line=$(sed -n '2,$p' step06_"$v"_daemon.sh)
-echo "$line" >> $file
+if [[ $v =~ "centos7" ]] ; then
+	number=$(sed -n '/#start-recommended/=' step06_"$v"_daemon.sh)
+	nrs=$((number+1))
+	number=$(sed -n '/#end-recommended/=' step06_"$v"_daemon.sh)
+	nre=$((number-1))
+	line=$(sed -n ''$nrs','$nre'p' step06_"$v"_daemon.sh)
+	# remove docker conditional
+	line=`remove_docker_workaround "${line}"`
+	echo "$line" >> $file
+else
+	line=$(sed -n '2,$p' step06_"$v"_daemon.sh)
+	echo "$line" >> $file
+fi
 echo "#end-step06" >> $file
 
 echo -en '\n' >> $file

@@ -18,4 +18,6 @@ cp ~omero/OMERO.server/apache.conf.tmp /etc/httpd/conf.d/omero-web.conf
 rm -rf /run/httpd/* /tmp/httpd*
 
 systemctl enable httpd.service
-systemctl start httpd
+if [ ! "${container:-}" = docker ]; then
+    systemctl start httpd
+fi

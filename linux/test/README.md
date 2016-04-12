@@ -17,7 +17,8 @@ For example:
 See `docker run --help` for more information on these and other options
 for running docker images.
 
-CentOS 7 cannot be tested in this way as `systemd` doesn't fully work, see below.
+CentOS 7 testing workflow is fully automated, for more details see below
+
 
 Adding a new step
 -----------------
@@ -150,22 +151,38 @@ Testing CentOS 7
 ================
 
 1. Create a test image containing the installation scripts
-2. Start the container (this requires special options for systemd which may depend on your host system, see the [parent README](https://github.com/ome/ome-docker/blob/master/omero-ssh-systemd/README.md))
-3. ssh in
-4. Change into the `/omero-install-test` directory
-5. Run either `install_centos7_apache24.sh` or `install_centos7_nginx.sh`
-6. Optionally set a system password for the `omero` user if you want to allow ssh access
 
-        ./docker-build.sh centos7
-        #CID=$(docker run -d -p 2222:22 -p 8080:80 -p 4063:4063 -p 4064:4064 -v /sys/fs/cgroup:/sys/fs/cgroup:ro omero_install_test_centos7)
-        CID=$(docker run -d -p 2222:22 -p 8080:80 -p 4063:4063 -p 4064:4064 --privileged omero_install_test_centos7)
-        ssh -o UserKnownHostsFile=/dev/null -p 2222 root@<address of container> # Password: omero
-        cd /omero-install-test
-        bash install_centos7_nginx.sh
-        #echo omero:omero | chpasswd
-8. Manually start as the omero system user, the OMERO.server and OMERO.web:
+        $ cd linux/test
+        NGINX $ export ENV=centos7_nginx
+        APACHE $ export ENV=centos7_apache24
+        $ ./docker-build.sh $ENV
 
-        su - omero -c "OMERO.server/bin/omero admin start"
-        su - omero -c "OMERO.server/bin/omero web start"
-7. Notet that it is possible to use the various parameters when running the installation script e.g.
-        ICEVER=ice35-devel bash install_centos7_nginx.sh
+     Notet that it is possible to use the various parameters when running the installation script e.g.
+
+        $PGVER=pg95 ./docker-build.sh $ENV
+
+2. Run tests
+
+        OSX: $ DMNAME=dev ./test_services.sh # docker machine can be obtained from docker-machine ls
+        UNIX: $ ./test_services.sh
+
+    or can be tested manually
+
+        OSX: $ docker run -d --privileged -p 8888:80 --name omeroinstall omero_install_test_$ENV
+        UNIX: $ docker run -d --name omeroinstall -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run omero_install_test_$ENV
+        wait 10 sec
+        $ docker exec -it omeroinstall /bin/bash -c "service omero status"
+        Redirecting to /bin/systemctl status  -l omero.service
+        ● omero.service - OMERO.server
+           Loaded: loaded (/etc/systemd/system/omero.service; enabled; vendor preset: disabled)
+           Active: active (running) since Mon 2016-04-11 13:43:23 UTC; 30s ago
+         Main PID: 91 (python)
+        ...
+        $ docker exec -it omeroinstall /bin/bash -c "service omero-web status"
+        Redirecting to /bin/systemctl status  -l omero-web.service
+        ● omero-web.service - OMERO.web
+           Loaded: loaded (/etc/systemd/system/omero-web.service; enabled; vendor preset: disabled)
+           Active: active (running) since Mon 2016-04-11 13:43:27 UTC; 26s ago
+          Process: 69 ExecStart=/home/omero/OMERO.server/bin/omero web start (code=exited, status=0/SUCCESS)
+         Main PID: 493 (gunicorn)
+        ...
