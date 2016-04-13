@@ -34,8 +34,7 @@ if [ "$ICEVER" = "ice36" ]; then
 	git submodule update
 	cd ..
 
-	#unzip -q ice36.zip
-	sed -i 's/omero.version=UNKNOWN/omero.version=5.2.2/g' openmicroscopy/etc/build.properties
+	sed -i 's/omero.version=UNKNOWN/omero.version=5.2.3/g' openmicroscopy/etc/build.properties
 	openmicroscopy/build.py
 
 	mv openmicroscopy/dist OMERO.server
