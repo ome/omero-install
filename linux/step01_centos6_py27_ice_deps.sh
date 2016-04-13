@@ -37,21 +37,22 @@ elif [ "$ICEVER" = "ice36" ]; then
 	# Now install ice
 	mkdir /tmp/ice-download
 	cd /tmp/ice-download
-	URL=https://github.com/zeroc-ice/ice/archive/3.6.zip
+	URL=https://github.com/zeroc-ice/ice/archive/v3.6.2.zip
 	NAME_ZIP=${URL##*/}
 	wget $URL
 	unzip -q $NAME_ZIP
 	rm $NAME_ZIP
-	cd ice-3.6
+	cd ice-3.6.2
 	cd cpp
-	make && make install
-	cd ../python
 	make && make install
 	#zeroc-ice
 	cd ../..
-	wget https://pypi.python.org/packages/source/z/zeroc-ice/zeroc-ice-3.6.1.zip#md5=a8c5a7782826c7b342e13c870ac59c7b
-	unzip -q zeroc-ice-3.6.1.zip
-	cd zeroc-ice-3.6.1
+	wget https://pypi.python.org/packages/source/z/zeroc-ice/zeroc-ice-3.6.2.tar.gz#md5=88249513eb977e94b0c8232187795955
+	tar -zxvf zeroc-ice-3.6.2.tar.gz
+	cd zeroc-ice-3.6.2
+	set +u
+	source /opt/rh/python27/enable
+	set -u
 	python setup.py install
 
 	echo /opt/Ice-3.6.2/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
