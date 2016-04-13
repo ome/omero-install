@@ -28,7 +28,4 @@ elif [ "$ICEVER" = "ice36" ]; then
 
 	yum -y install openssl-devel bzip2-devel expat-devel
 	pip install zeroc-ice
-
-	echo /opt/Ice-3.6.2/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
-	ldconfig
 fi
