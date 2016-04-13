@@ -21,7 +21,7 @@ elif [ "$ICEVER" = "ice36" ]; then
 
 	#for omero, to remove when we do not install from git
 	yum -y install git
-	#yum -y groupinstall "Development tools"
+
 	yum -y install gcc-c++
 	yum -y install libdb-utils
 	yum -y install openssl-devel bzip2-devel expat-devel
