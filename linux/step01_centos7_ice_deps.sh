@@ -29,7 +29,4 @@ elif [ "$ICEVER" = "ice36" ]; then
 	yum -y install ice-all-runtime ice-all-devel
 
 	pip install zeroc-ice
-
-	echo /opt/Ice-3.6.2/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
-	ldconfig
 fi
