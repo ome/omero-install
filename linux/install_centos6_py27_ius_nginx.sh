@@ -17,12 +17,7 @@ bash -eux step01_centos_java_deps.sh
 bash -eux step01_centos6_py27_ius_deps.sh
 
 # create user
-bash -eux step02_centos6_py27_ius_setup.sh
-
-# for convenience
-if [ "$ICEVER" = "ice36" ]; then
-	sed -i 's/Ice-3.5.1/Ice-3.6.2/g' omero-centos6py27ius.env
-fi
+ICEVER=$ICEVER bash -eux step02_centos6_py27_ius_setup.sh
 
 # install ice
 bash -eux step01_centos6_py27_ius_ice_deps.sh

@@ -25,26 +25,17 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 	ldconfig
 	#end-recommended
 elif [ "$ICEVER" = "ice36" ]; then
-	curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
-	http://download.zeroc.com/Ice/3.6/el6/zeroc-ice-el6.repo
+	cd /etc/yum.repos.d
+	wget https://zeroc.com/download/rpm/zeroc-ice-el6.repo
 
+	# git installed since we do not use omego but build omero from source
 	yum -y install git
-	yum -y groupinstall "Development tools"
-	yum -y install openssl-devel bzip2-devel expat-devel
-	yum -y install db53-devel db53-utils mcpp-devel
-	yum -y install python-devel
 
-	# Now install ice
-	mkdir /tmp/ice-download
-	cd /tmp/ice-download
-	URL=https://github.com/zeroc-ice/ice/archive/v3.6.2.zip
-	NAME_ZIP=${URL##*/}
-	wget $URL
-	unzip -q $NAME_ZIP
-	rm $NAME_ZIP
-	cd ice-3.6.2
-	cd cpp
-	make && make install
+	yum -y install gcc-c++
+	yum -y install db53 db53-utils
+	yum -y install ice-all-runtime ice-all-devel
+
+	yum -y install openssl-devel bzip2-devel expat-devel
 
 	virtualenv -p /usr/bin/python2.7 /home/omero/omeroenv
 	set +u
@@ -55,7 +46,4 @@ elif [ "$ICEVER" = "ice36" ]; then
 	/home/omero/omeroenv/bin/pip2.7 install zeroc-ice
 
 	deactivate
-	
-	echo /opt/Ice-3.6.2/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
-	ldconfig
 fi
