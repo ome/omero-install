@@ -16,23 +16,24 @@ bash -eux step01_centos_java_deps.sh
 
 bash -eux step01_centos6_py27_ius_deps.sh
 
+# create user
+bash -eux step02_centos6_py27_ius_setup.sh
+
+# for convenience
+if [ "$ICEVER" = "ice36" ]; then
+	sed -i 's/Ice-3.5.1/Ice-3.6.2/g' omero-centos6py27ius.env
+fi
+
 # install ice
 bash -eux step01_centos6_py27_ius_ice_deps.sh
 
 # install Postgres
 bash -eux step01_centos6_pg_deps.sh
 
-bash -eux step02_centos6_py27_ius_setup.sh
-
 bash -eux step01_centos6_py27_ius_virtualenv_deps.sh
 
 if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
 	bash -eux step03_all_postgres.sh
-fi
-
-# for convenience
-if [ "$ICEVER" = "ice36" ]; then
-	sed -i 's/Ice-3.5.1/Ice-3.6.2/g' omero-centos6py27ius.env
 fi
 
 cp settings.env omero-centos6py27ius.env step04_all_omero.sh setup_omero_db.sh ~omero
