@@ -10,7 +10,7 @@ COOKIES=cookies.txt
 LOGIN_URL=http://$WEB_HOST/webclient/login/
 LOGOUT_URL=http://$WEB_HOST/webclient/logout/
 
-source ../settings.env
+source `dirname $0`/../settings.env
 
 OMERO_ROOT='root'
 SERVER='1'
