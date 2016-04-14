@@ -141,8 +141,17 @@ if [[ $OS =~ "centos6_py27" ]] ; then
 	line=$(sed -n ''$ns','$ne'p' step02_"$OS"_setup.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 	echo "$line" >> $file
-	ne=$((number+3))
-	line=$(sed -n ''$ne',$p' step02_"$OS"_setup.sh)
+	ns=$((number+3))
+	number=$(sed -n '/#start-ice/=' step02_"$OS"_setup.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' step02_"$OS"_setup.sh)
+	echo "$line" >> $file
+	number=$(sed -n '/#start-recommended/=' step02_"$OS"_setup.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#end-recommended/=' step02_"$OS"_setup.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' step02_"$OS"_setup.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 else
 	number=$(sed -n '/#start-create-user/=' step02_all_setup.sh)
 	ns=$((number+1))
