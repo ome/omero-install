@@ -8,7 +8,7 @@ set -x
 
 export PATH=/usr/local/bin:$PATH
 export HTTPPORT=${HTTPPORT:-8080}
-export ROOT_PASSWORD=${ROOT_PASSWORD:-omero}
+export ROOT_PASSWORD=${ROOT_PASSWORD:-omero_root_password}
 
 # Start PostgreSQL
 pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log -w start
