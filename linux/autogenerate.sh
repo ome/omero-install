@@ -270,6 +270,12 @@ echo "#end-configure-apache" >> $file
 echo "#start-apache-install" >> $file
 start=$(sed -n '/#start-install/=' step05_"$v"_"$apachever".sh)
 start=$((start+1))
+end=$(sed -n '/#start-setup-as-omero/=' step05_"$v"_"$apachever".sh)
+end=$((end-1))
+line=$(sed -n ''$start','$end'p' step05_"$v"_"$apachever".sh)
+echo "$line" >> $file
+start=$(sed -n '/#end-setup-as-omero/=' step05_"$v"_"$apachever".sh)
+start=$((start+1))
 line=$(sed -n ''$start',$p' step05_"$v"_"$apachever".sh)
 # remove docker conditional
 line=`remove_docker_workaround "${line}"`
