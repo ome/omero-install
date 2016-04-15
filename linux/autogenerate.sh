@@ -189,8 +189,7 @@ echo "#end-step03" >> $file
 
 echo -en '\n' >> $file
 echo "#start-step04: As the omero system user, install the OMERO.server" >> $file
-if [[ $OS =~ "centos6_py27" ]] ; then
-	var="${OS//_/}"
+if [ $OS = "centos6_py27" ] ; then
 	echo "#start-copy-omeroscript" >> $file
 	echo "cp settings.env omero-$var.env step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
 	echo "#end-copy-omeroscript" >> $file
@@ -201,20 +200,23 @@ if [[ $OS =~ "centos6_py27" ]] ; then
 	line=$(sed -n ''$ns','$ne'p' step04_all_omero.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 	echo "$line" >> $file
-	line=$(sed -n ''$start',$p' step04_all_omero.sh)
-else 
+elif [ $OS = "centos6_py27_ius" ] ; then
 	echo "#start-copy-omeroscript" >> $file
 	echo "cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero" >> $file
 	echo "#end-copy-omeroscript" >> $file
-fi
-number=$(sed -n '/#start-venv/=' step04_all_omero.sh)
-ns=$((number+1))
-number=$(sed -n '/#end-venv/=' step04_all_omero.sh)
-ne=$((number-1))
-line=$(sed -n ''$ns','$ne'p' step04_all_omero.sh)
-line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+else
+	echo "#start-copy-omeroscript" >> $file
+	echo "cp settings.env omero-$var.env step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
+	echo "#end-copy-omeroscript" >> $file
+	number=$(sed -n '/#start-venv/=' step04_all_omero.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#end-venv/=' step04_all_omero.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' step04_all_omero.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "$line" >> $file
 
-echo "$line" >> $file
+fi
 number=$(sed -n '/#start-release/=' step04_all_omero.sh)
 ns=$((number+1))
 number=$(sed -n '/#end-release/=' step04_all_omero.sh)
@@ -258,12 +260,12 @@ if [ $OS = "centos6" ] || [ $OS = "centos6_py27_ius" ] ; then
 fi
 line=$(sed -n ''/#start-copy/','/#end-copy/'p' step05_"$v"_"$apachever".sh)
 echo "$line" >> $file
-echo "#start-configure: As the omero system user, configure OMERO.web" >> $file
+echo "#start-configure-apache: As the omero system user, configure OMERO.web" >> $file
 start=$(sed -n '/#start-config/=' setup_omero_"$apachever".sh)
 start=$((start+1))
 line=$(sed -n ''$start',$p' setup_omero_"$apachever".sh)
 echo "$line" >> $file
-echo "#end-configure" >> $file
+echo "#end-configure-apache" >> $file
 #start install
 echo "#start-apache-install" >> $file
 start=$(sed -n '/#start-install/=' step05_"$v"_"$apachever".sh)
