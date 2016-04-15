@@ -17,7 +17,11 @@ bash -eux step01_debian8_java_deps.sh
 bash -eux step01_debian8_deps.sh
 
 # install ice
-bash -eux step01_ubuntu1404_ice_deps.sh
+bash -eux step01_debian8_ice_deps.sh
+
+if [ "$ICEVER" = "ice36" ]; then		
+	cat omero-ice36.env >> /etc/profile		
+fi
 
 # install Postgres
 bash -eux step01_debian8_pg_deps.sh
