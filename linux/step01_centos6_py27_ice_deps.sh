@@ -17,7 +17,7 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 
 	tar -zxvf /tmp/ice-download/Ice-3.5.1-b1-centos6-sclpy27-x86_64.tar.gz
 
-	# so we don't have to update ICE_HOME
+	# Install under /opt
 	mv Ice-3.5.1-b1-centos6-sclpy27-x86_64 /opt/Ice-3.5.1
 
 	# make path to Ice globally accessible
