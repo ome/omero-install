@@ -48,6 +48,10 @@ e.g. openjdk18 for Java.
 
 Both nginx and apache installation steps are added to the walkthrough file
 
+To generate all the walkthroughs, run the following command
+    
+    ALL=true bash autogenerate.sh
+
 The possible values are:
 centos7 (default), centos6, centos6_py27, centos6_py27_ius, debian8, ubuntu1404
 

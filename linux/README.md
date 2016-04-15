@@ -36,3 +36,7 @@ To generate a walkthrough file corresponding to a given OS, run the
 The walkthrough file is used for the omero documention e.g.
 http://www.openmicroscopy.org/site/support/omero5.2/sysadmins/unix/server-linux-walkthrough.html
 but it should not be executed.
+
+To generate all the walkthroughs, run the following command
+	
+	ALL=true bash autogenerate.sh

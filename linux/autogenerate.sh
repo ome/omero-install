@@ -10,7 +10,18 @@ l="$(echo -e "${l}" | sed -e 's/^fi//')"
 echo "${l}"
 }
 
-OS=${OS:-centos7}
+#generate the walkthrough for all supported os
+function generate_all() {
+	values=(centos7 centos6 centos6_py27 centos6_py27_ius ubuntu1404 debian8)
+	for os in "${values[@]}"; do
+  		echo "${os}"
+  		 generate ${os}
+	done
+}
+
+# generate the specified walkthrough
+function generate() {
+OS=$1
 file=walkthrough_$OS.sh
 if [ -e $file ]; then
 	rm $file
@@ -313,3 +324,16 @@ line=$(sed -n '2,$p' setup_centos_selinux.sh)
 echo "$line" >> $file
 echo "#end-selinux" >> $file
 fi
+}
+
+#generate scripts for all os by default.
+ALL=${ALL:-false}
+OS=${OS:-centos7}
+
+if [ $ALL = true ]; then
+	generate_all
+else
+	generate $OS
+fi
+
+
