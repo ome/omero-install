@@ -14,7 +14,7 @@ RUN userdel -r omero && \
 	echo 'root:omero' | chpasswd
 
 ADD omero-install-test.zip /
-RUN yum -y install unzip && unzip omero-install-test.zip
+RUN yum -y install initscripts unzip && unzip omero-install-test.zip
 
 # This is so that scripts can detect whether they're in docker
 RUN echo 'export container=docker' > /etc/profile.d/docker.sh
