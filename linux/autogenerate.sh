@@ -163,6 +163,9 @@ if [[ $OS =~ "centos6_py27" ]] ; then
 	ne=$((number-1))
 	line=$(sed -n ''$ns','$ne'p' step02_"$OS"_setup.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "#start-configuration-env" >> $file
+	echo "$line" >> $file
+	echo "#end-configuration-env" >> $file
 else
 	number=$(sed -n '/#start-create-user/=' step02_all_setup.sh)
 	ns=$((number+1))
@@ -173,8 +176,8 @@ else
 	echo "$line" >> $file
 	ne=$((number+3))
 	line=$(sed -n ''$ne',$p' step02_all_setup.sh)
+	echo "$line" >> $file
 fi
-echo "$line" >> $file
 echo "#end-step02" >> $file
 
 # postgres remove section
