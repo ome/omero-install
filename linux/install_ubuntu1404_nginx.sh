@@ -40,7 +40,7 @@ if [ $WEBAPPS = true ]; then
 fi
 
 if [ "$WEBSESSION" = true ]; then
-	bash -eux step05_2_experimentalconfig.sh
+	bash -eux step05_2_websessionconfig.sh
 fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:

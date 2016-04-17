@@ -27,7 +27,7 @@ bash -eux step02_centos6_py27_ius_setup.sh
 bash -eux step01_centos6_py27_ius_virtualenv_deps.sh
 
 if $WEBSESSION ; then
-    bash -eux step01_centos6_py27_ius_deps_experimental.sh
+    bash -eux step01_centos6_py27_ius_deps_websession.sh
 fi
 
 if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
@@ -47,7 +47,7 @@ if [ $WEBAPPS = true ]; then
 fi
 
 if [ "$WEBSESSION" = true ]; then
-	PY_ENV=py27_ius bash -eux step05_2_experimentalconfig.sh
+	PY_ENV=py27_ius bash -eux step05_2_websessionconfig.sh
 fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:

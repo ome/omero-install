@@ -37,7 +37,7 @@ if [ $WEBAPPS = true ]; then
 fi
 
 if [ "$WEBSESSION" = true ]; then
-	bash -eux step05_2_experimentalconfig.sh
+	bash -eux step05_2_websessionconfig.sh
 fi
 
 bash -eux step05_ubuntu1404_apache24.sh

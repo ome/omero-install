@@ -20,7 +20,7 @@ bash -eux step01_centos7_deps.sh
 bash -eux step01_centos7_ice_deps.sh
 
 if $WEBSESSION ; then
-    bash -eux step01_centos7_deps_experimental.sh
+    bash -eux step01_centos7_deps_websession.sh
 fi
 
 # install Postgres
@@ -44,7 +44,7 @@ if [ $WEBAPPS = true ]; then
 fi
 
 if [ "$WEBSESSION" = true ]; then
-	bash -eux step05_2_experimentalconfig.sh
+	bash -eux step05_2_websessionconfig.sh
 fi
 
 #If you don't want to use the systemd scripts you can start OMERO manually:

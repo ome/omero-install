@@ -20,7 +20,7 @@ bash -eux step01_centos6_py27_deps.sh
 bash -eux step01_centos6_py27_ice_deps.sh
 
 if $WEBSESSION ; then
-    bash -eux step01_centos6_py27_deps_experimental.sh
+    bash -eux step01_centos6_py27_deps_websession.sh
 fi
 
 # install Postgres
@@ -44,7 +44,7 @@ if [ $WEBAPPS = true ]; then
 fi
 
 if [ "$WEBSESSION" = true ]; then
-	PY_ENV=py27_scl bash -eux step05_2_experimentalconfig.sh
+	PY_ENV=py27_scl bash -eux step05_2_websessionconfig.sh
 fi
 
 bash -eux step05_centos6_py27_apache24.sh
