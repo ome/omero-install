@@ -4,7 +4,7 @@ set -e -u -x
 
 ENV=${ENV:-centos7_nginx}
 DMNAME=${DMNAME:-dev}
-EXPERIMENTAL=${EXPERIMENTAL:-false}
+WEBSESSION=${WEBSESSION:-false}
 
 source `pwd`/../settings.env
 
@@ -53,7 +53,7 @@ if [[ $ENV =~ "apache" ]]; then
     docker exec -it $CNAME /bin/bash -c "service httpd status -l"
 fi
 
-if [[ "$EXPERIMENTAL" = true ]]; then
+if [[ "$WEBSESSION" = true ]]; then
     docker exec -it $CNAME /bin/bash -c "service redis status -l"
 fi
 

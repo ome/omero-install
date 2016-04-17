@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-EXPERIMENTAL=${EXPERIMENTAL:-false}
+WEBSESSION=${WEBSESSION:-false}
 OMEROVER=${OMEROVER:-latest}
 WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg94}
@@ -26,7 +26,7 @@ bash -eux step02_centos6_py27_ius_setup.sh
 
 bash -eux step01_centos6_py27_ius_virtualenv_deps.sh
 
-if $EXPERIMENTAL ; then
+if $WEBSESSION ; then
     bash -eux step01_centos6_py27_ius_deps_experimental.sh
 fi
 
@@ -46,7 +46,7 @@ if [ $WEBAPPS = true ]; then
 	PY_ENV=py27_ius bash -eux step05_1_all_webapps.sh
 fi
 
-if [ "$EXPERIMENTAL" = true ]; then
+if [ "$WEBSESSION" = true ]; then
 	PY_ENV=py27_ius bash -eux step05_2_experimentalconfig.sh
 fi
 

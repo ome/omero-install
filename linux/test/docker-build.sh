@@ -11,7 +11,7 @@ JAVAVER=${JAVAVER:-openjdk18}
 ICEVER=${ICEVER:-ice35}
 PGVER=${PGVER:-pg94}
 
-EXPERIMENTAL=${EXPERIMENTAL:-false}
+WEBSESSION=${WEBSESSION:-false}
 
 set -e
 
@@ -27,7 +27,7 @@ echo "Building image $IMAGE"
 docker build -t $IMAGE --no-cache --build-arg OMEROVER=${OMEROVER} \
 	--build-arg JAVAVER=${JAVAVER} --build-arg WEBAPPS=${WEBAPPS} \
     --build-arg ICEVER=${ICEVER} --build-arg PGVER=${PGVER} \
-    --build-arg EXPERIMENTAL=${EXPERIMENTAL} $1
+    --build-arg WEBSESSION=${WEBSESSION} $1
 
 if [[ "$1" =~ "centos7" ]]; then
 	echo "Test this image by running ./test_services.sh"

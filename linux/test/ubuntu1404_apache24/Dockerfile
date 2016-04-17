@@ -3,7 +3,7 @@
 FROM ubuntu:14.04
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
-ARG EXPERIMENTAL=false
+ARG WEBSESSION=false
 ARG WEBAPPS=false
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk18

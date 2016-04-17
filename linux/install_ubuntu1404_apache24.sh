@@ -37,7 +37,7 @@ if [ $WEBAPPS = true ]; then
 	bash -eux step05_1_all_webapps.sh
 fi
 
-if [ "$EXPERIMENTAL" = true ]; then
+if [ "$WEBSESSION" = true ]; then
 	bash -eux step05_2_experimentalconfig.sh
 fi
 
