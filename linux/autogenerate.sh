@@ -12,7 +12,7 @@ echo "${l}"
 
 #generate the walkthrough for all supported os
 function generate_all() {
-	values=(centos7 centos6 centos6_py27 centos6_py27_ius ubuntu1404 debian8)
+	values=(centos7 centos6_py27 centos6_py27_ius ubuntu1404 debian8)
 	for os in "${values[@]}"; do
   		echo "${os}"
   		 generate ${os}
