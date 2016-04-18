@@ -6,6 +6,7 @@ if [ "$PGVER" = "pg94" ]; then
 elif [ "$PGVER" = "pg95" ]; then
 	service postgresql-9.5 start
 fi
+service redis start
 service crond start
 service omero start
 service nginx start
