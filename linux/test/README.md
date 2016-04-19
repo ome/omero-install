@@ -139,7 +139,7 @@ For example:
 
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx --websession true
 
-It is not necessary to specify the version when running CentOS7 image.
+It is not necessary to specify the version when running CentOS 7 image.
 
 Installing web applications
 ---------------------------
