@@ -25,19 +25,11 @@ fi
 
 #start-install
 if [ "$ICEVER" = "ice36" ]; then
-	#tmp build from branch
 	cd ~omero
-	git clone --depth=1 https://github.com/jburel/openmicroscopy.git
-
-	cd openmicroscopy
-	git submodule init
-	git submodule update
-	cd ..
-
-	sed -i 's/omero.version=UNKNOWN/omero.version=5.2.3/g' openmicroscopy/etc/build.properties
-	openmicroscopy/build.py
-
-	mv openmicroscopy/dist OMERO.server
+	SERVER=http://10.0.51.107:8080/job/OMERO-build/label=testice36/lastSuccessfulBuild/artifact/src/target/OMERO.server-5.2.2-296-a636af6-ice36-b2.zip
+	wget $SERVER
+	unzip -q OMERO.server*
+	ln -s OMERO.server-*/ OMERO.server
 else
 	#start-release
 	/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
