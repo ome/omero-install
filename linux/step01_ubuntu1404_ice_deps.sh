@@ -9,8 +9,6 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 	apt-get -y install ice-services python-zeroc-ice
 	#end-recommended
 elif [ "$ICEVER" = "ice36" ]; then
-	# install git to build omero
-	apt-get -y install git
 
 	apt-get -y install db5.3-util
 	apt-get -y install libssl-dev libbz2-dev libmcpp-dev libdb++-dev libdb-dev

@@ -29,9 +29,6 @@ elif [ "$ICEVER" = "ice36" ]; then
 	cd /etc/yum.repos.d
 	wget https://zeroc.com/download/rpm/zeroc-ice-el6.repo
 
-	# git installed since we do not use omego but build omero from source
-	yum -y install git
-
 	yum -y install gcc-c++
 	yum -y install db53 db53-utils
 	yum -y install ice-all-runtime ice-all-devel
