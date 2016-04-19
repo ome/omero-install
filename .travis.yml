@@ -2,19 +2,19 @@ language: python
 services:
   - docker
 env:
-  - ENV=centos7_nginx
-  - ENV=centos7_apache24
+  - ENV=centos7_nginx  WEBSESSION=true
+  - ENV=centos7_apache24 WEBSESSION=true
   - ENV=centos6_nginx
   - ENV=centos6_apache22
-  - ENV=centos6_py27_nginx
-  - ENV=centos6_py27_apache24
-  - ENV=ubuntu1404_nginx
-  - ENV=ubuntu1404_apache24
-  - ENV=debian8_nginx
-  - ENV=debian8_apache24
-  - ENV=centos6_py27_ius_apache22
-  - ENV=centos6_py27_ius_apache24
-  - ENV=centos6_py27_ius_nginx
+  - ENV=centos6_py27_nginx WEBSESSION=true
+  - ENV=centos6_py27_apache24 WEBSESSION=true
+  - ENV=ubuntu1404_nginx WEBSESSION=true
+  - ENV=ubuntu1404_apache24 WEBSESSION=true
+  - ENV=debian8_nginx WEBSESSION=true
+  - ENV=debian8_apache24 WEBSESSION=true
+  - ENV=centos6_py27_ius_apache22 WEBSESSION=true
+  - ENV=centos6_py27_ius_apache24 WEBSESSION=true
+  - ENV=centos6_py27_ius_nginx WEBSESSION=true
 
 before_install:  
   - sudo apt-get update

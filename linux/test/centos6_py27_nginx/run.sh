@@ -1,14 +1,38 @@
 #!/bin/bash
-PGVER=${1:-pg94}
+PGVER=94
+WEBSESSION=false
 
-if [ "$PGVER" = "pg94" ]; then
+while [[ $# > 1 ]]
+do
+key="$1"
+
+case $key in
+    -p|--pg)
+    PGVER="$2"
+    shift # past argument
+    ;;
+    -w|--websession)
+    WEBSESSION="$2"
+    shift # past argument
+    ;;
+    *)
+            # unknown option
+    ;;
+esac
+shift # past argument or value
+done
+
+if [ "$PGVER" = "94" ]; then
 	service postgresql-9.4 start
-elif [ "$PGVER" = "pg95" ]; then
+elif [ "$PGVER" = "95" ]; then
 	service postgresql-9.5 start
 fi
-service redis start
+if [ "$WEBSESSION" = "true" ]; then
+	service redis start
+fi
 service crond start
 service omero start
 service nginx start
+
 service omero-web start
 exec bash

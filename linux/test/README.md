@@ -87,13 +87,13 @@ is not the default one. It is not necessary to specify the version when running 
 
 For example:
 
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx pg95
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx --pg 95
 
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
 
 
 The supported values are: 
-pg94 (default), pg95
+94 (default), 95
 
 If you do not want to install Postgres set PGVER to nopg.
 
