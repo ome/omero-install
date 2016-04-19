@@ -226,9 +226,18 @@ number=$(sed -n '/#end-release/=' step04_all_omero.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' step04_all_omero.sh)
 
-line="$(echo -e "${line}" | sed -e 's/$OMEROVER/latest/g')"
+#line="$(echo -e "${line}" | sed -e 's/$OMEROVER/latest/g')"
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 echo "$line" >> $file
+number=$(sed -n '/#start-link/=' step04_all_omero.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-link/=' step04_all_omero.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' step04_all_omero.sh)
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line" >> $file
+#line="$(echo -e "${line}" | sed -e 's/$OMEROVER/latest/g')"
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 number=$(sed -n '/#configure/=' step04_all_omero.sh)
 ns=$((number+1))
 line=$(sed -n ''$ns',$p' step04_all_omero.sh)

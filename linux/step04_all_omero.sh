@@ -31,11 +31,20 @@ if [ "$ICEVER" = "ice36" ]; then
 	unzip -q OMERO.server*
 	ln -s OMERO.server-*/ OMERO.server
 else
-	#start-release
-	/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
-
+	
+	# do not use omego for the release version
+	if [ "$OMEROVER" = "latest"]; then
+		#start-release
+		SERVER=http://downloads.openmicroscopy.org/latest/omero5.2/server-ice35.zip
+		wget $SERVER
+		unzip -q OMERO.server*
+		#end-release
+	else
+		/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
+	fi
+	#start-link
 	ln -s OMERO.server-*/ OMERO.server
-	#end-release
+	#end-link
 fi
 
 #configure
