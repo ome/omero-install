@@ -1,5 +1,6 @@
 #!/bin/bash
 service postgresql start
+service redis start
 #service crond start # Doesn't work in Docker
 cron
 service omero start
