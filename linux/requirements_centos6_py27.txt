@@ -5,4 +5,4 @@
 #
 tables
 matplotlib
-Pillow<3.0
+Pillow
