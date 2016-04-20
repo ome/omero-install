@@ -2,13 +2,13 @@
 
 set -e -u -x
 
-EXPERIMENTAL=${EXPERIMENTAL:-false}
+WEBSESSION=${WEBSESSION:-false}
 
 bash -eux step01_deps.sh
 bash -eux step02_omero.sh
 
-if $EXPERIMENTAL ; then
-    bash -eux step01_deps_experimental.sh
+if $WEBSESSION ; then
+    bash -eux step01_deps_websession.sh
 fi
 
 bash -eux step03_nginx.sh
