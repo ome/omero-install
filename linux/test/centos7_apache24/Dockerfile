@@ -1,12 +1,10 @@
 # Dockerfile for testing the OMERO Linux installation instructions
 # Not intended for production use
 # Note to enable systemd this must be run with on a host with systemd
-# and additional flaks, see the omero-ssh-systemd README
-FROM openmicroscopy/omero-ssh-systemd
-MAINTAINER ome-devel@lists.openmicroscopy.org.uk
+# and additional flaks, see the omero-ssh-c7 README
+FROM openmicroscopy/omero-ssh-c7:0.1.0
 
-# To avoid error: sudo: sorry, you must have a tty to run sudo
-RUN sed -i -e "s/Defaults    requiretty.*/ #Defaults    requiretty/g" /etc/sudoers
+MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 # Remove the existing omero user
 RUN userdel -r omero && \
