@@ -26,7 +26,7 @@ fi
 #start-install
 if [ "$ICEVER" = "ice36" ]; then
 	cd ~omero
-	SERVER=http://10.0.51.107:8080/job/OMERO-build/label=testice36/lastSuccessfulBuild/artifact/src/target/OMERO.server-5.2.2-296-a636af6-ice36-b2.zip
+	SERVER=https://ci.openmicroscopy.org/view/Breaking/job/OMERO-DEV-breaking-build/637/ICE=3.6,jdk=8_LATEST,label=trout/artifact/src/target/OMERO.server-5.2.2-235-deda6c5-ice36-b637.zip
 	wget $SERVER
 	unzip -q OMERO.server*
 	ln -s OMERO.server-*/ OMERO.server
