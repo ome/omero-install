@@ -25,20 +25,21 @@ fi
 
 #start-install
 if [ "$ICEVER" = "ice36" ]; then
+	#start-release-ice36
 	cd ~omero
 	SERVER=https://ci.openmicroscopy.org/view/Breaking/job/OMERO-DEV-breaking-build/637/ICE=3.6,jdk=8_LATEST,label=trout/artifact/src/target/OMERO.server-5.2.2-235-deda6c5-ice36-b637.zip
 	wget $SERVER
 	unzip -q OMERO.server*
-	ln -s OMERO.server-*/ OMERO.server
+	#end-release-ice36
 else
-	
 	# do not use omego for the release version
 	if [ "$OMEROVER" = "latest"]; then
-		#start-release
+		#start-release-ice35
+		cd ~omero
 		SERVER=http://downloads.openmicroscopy.org/latest/omero5.2/server-ice35.zip
 		wget $SERVER
 		unzip -q OMERO.server*
-		#end-release
+		#end-release-ice35
 	else
 		/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
 	fi

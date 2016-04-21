@@ -26,6 +26,7 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 	ldconfig
 	#end-recommended
 elif [ "$ICEVER" = "ice36" ]; then
+	#start-supported
 	cd /etc/yum.repos.d
 	wget https://zeroc.com/download/rpm/zeroc-ice-el6.repo
 
@@ -39,4 +40,5 @@ elif [ "$ICEVER" = "ice36" ]; then
 	source /opt/rh/python27/enable
 	set -u
 	pip install zeroc-ice
+	#end-supported
 fi

@@ -16,6 +16,7 @@ elif [ "$ICEVER" = "ice35-devel" ]; then
 
 	yum -y install ice ice-python-devel ice-java-devel ice-servers
 elif [ "$ICEVER" = "ice36" ]; then
+	#start-supported
 	cd /etc/yum.repos.d
 	wget https://zeroc.com/download/rpm/zeroc-ice-el7.repo
 
@@ -26,4 +27,5 @@ elif [ "$ICEVER" = "ice36" ]; then
 	yum -y install ice-all-runtime ice-all-devel
 
 	pip install zeroc-ice
+	#end-supported
 fi

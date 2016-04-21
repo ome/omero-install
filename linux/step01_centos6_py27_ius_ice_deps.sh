@@ -25,6 +25,7 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 	ldconfig
 	#end-recommended
 elif [ "$ICEVER" = "ice36" ]; then
+	#start-supported
 	cd /etc/yum.repos.d
 	wget https://zeroc.com/download/rpm/zeroc-ice-el6.repo
 
@@ -39,8 +40,8 @@ elif [ "$ICEVER" = "ice36" ]; then
 	source /home/omero/omeroenv/bin/activate
 	set -u
 
-	# Install IcePy
 	/home/omero/omeroenv/bin/pip2.7 install zeroc-ice
 
 	deactivate
+	#end-supported
 fi

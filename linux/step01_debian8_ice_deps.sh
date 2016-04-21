@@ -9,7 +9,7 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 	apt-get -y install ice-services python-zeroc-ice
 	#end-recommended
 elif [ "$ICEVER" = "ice36" ]; then
-
+	#start-supported
 	mkdir /tmp/ice-download
 	apt-get -y install db5.3-util
  		 
@@ -23,10 +23,10 @@ elif [ "$ICEVER" = "ice36" ]; then
  	rm $NAME_ZIP		
  	cd ice-3.6.2/cpp		
  	make && make install
-	# build zeroc-ice
-	pip install zeroc-ice
 
+	pip install zeroc-ice
 
 	echo /opt/Ice-3.6.2/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf		
  	ldconfig
+ 	#end-supported
 fi

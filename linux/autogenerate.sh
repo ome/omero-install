@@ -66,17 +66,28 @@ echo "# install Ice" >> $file
 N=$OS
 if [ $OS = "debian8" ] ; then
 	N="ubuntu1404"
-fi 
+fi
+echo "#start-recommended-ice" >> $file
 number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_ice_deps.sh)
 ns=$((number+1))
 number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_ice_deps.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_ice_deps.sh)
-
 # remove leading whitespace
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-
 echo "$line"  >> $file
+echo "#end-recommended-ice" >> $file
+
+echo "#start-supported-ice" >> $file
+number=$(sed -n '/#start-supported/=' $dir/step01_"$N"_ice_deps.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-supported/=' $dir/step01_"$N"_ice_deps.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_ice_deps.sh)
+# remove leading whitespace
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line"  >> $file
+echo "#end-supported-ice" >> $file
 echo -en '\n' >> $file
 
 # install dependencies
@@ -221,15 +232,25 @@ else
 	echo "$line" >> $file
 
 fi
-number=$(sed -n '/#start-release/=' $dir/step04_all_omero.sh)
+echo "#start-release-ice35" >> $file
+number=$(sed -n '/#start-release-ice35/=' $dir/step04_all_omero.sh)
 ns=$((number+1))
-number=$(sed -n '/#end-release/=' $dir/step04_all_omero.sh)
+number=$(sed -n '/#end-release-ice35/=' $dir/step04_all_omero.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
-
-#line="$(echo -e "${line}" | sed -e 's/$OMEROVER/latest/g')"
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 echo "$line" >> $file
+echo "#end-release-ice35" >> $file
+echo "#start-release-ice36" >> $file
+number=$(sed -n '/#start-release-ice36/=' $dir/step04_all_omero.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-release-ice36/=' $dir/step04_all_omero.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line" >> $file
+echo "#end-release-ice36" >> $file
+
 number=$(sed -n '/#start-link/=' $dir/step04_all_omero.sh)
 ns=$((number+1))
 number=$(sed -n '/#end-link/=' $dir/step04_all_omero.sh)
