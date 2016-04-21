@@ -175,9 +175,18 @@ if [[ $OS =~ "centos6_py27" ]] ; then
 	ne=$((number-1))
 	line=$(sed -n ''$ns','$ne'p' $dir/step02_"$OS"_setup.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "#start-configuration-env" >> $file
+	echo "#start-configuration-env-ice35" >> $file
 	echo "$line" >> $file
-	echo "#end-configuration-env" >> $file
+	echo "#end-configuration-env-ice35" >> $file
+	number=$(sed -n '/#start-supported/=' $dir/step02_"$OS"_setup.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#end-supported/=' $dir/step02_"$OS"_setup.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' $dir/step02_"$OS"_setup.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "#start-configuration-env-ice36" >> $file
+	echo "$line" >> $file
+	echo "#end-configuration-env-ice36" >> $file
 else
 	number=$(sed -n '/#start-create-user/=' $dir/step02_all_setup.sh)
 	ns=$((number+1))

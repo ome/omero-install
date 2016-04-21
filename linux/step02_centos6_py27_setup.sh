@@ -18,7 +18,9 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 	echo source \~omero/omero-centos6py27.env >> ~omero/.bashrc
 	#end-recommended
 elif [ "$ICEVER" = "ice36" ]; then
+	#start-supported
 	echo "source /opt/rh/python27/enable" >> ~omero/.bashrc
 	echo "export PATH=\"/opt/rh/python27/root/usr/bin:$PATH\"" >> ~omero/.bashrc
+	#end-supported
 fi
 #end-ice

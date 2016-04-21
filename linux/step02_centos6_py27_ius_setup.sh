@@ -18,6 +18,8 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 	echo source \~omero/omero-centos6py27ius.env >> ~omero/.bashrc
 	#end-recommended
 elif [ "$ICEVER" = "ice36" ]; then
+	#start-supported
 	echo "export PATH=\"/home/omero/omeroenv/bin:$PATH\"" >> ~omero/.bashrc
+	#end-supported
 fi
 #end-ice
