@@ -2,6 +2,7 @@
 
 set -e -u -x
 
+WEBSESSION=${WEBSESSION:-false}
 OMEROVER=${OMEROVER:-latest}
 WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg94}
@@ -27,6 +28,10 @@ bash -eux step01_centos6_pg_deps.sh
 
 bash -eux step01_centos6_py27_ius_virtualenv_deps.sh
 
+if $WEBSESSION ; then
+    bash -eux step01_centos6_py27_ius_deps_websession.sh
+fi
+
 if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
@@ -39,6 +44,10 @@ su - omero -c "bash setup_omero_db.sh"
 
 if [ $WEBAPPS = true ]; then
 	PY_ENV=py27_ius bash -eux step05_1_all_webapps.sh
+fi
+
+if [ "$WEBSESSION" = true ]; then
+	PY_ENV=py27_ius bash -eux step05_2_websessionconfig.sh
 fi
 
 bash -eux step05_centos6_py27_ius_apache22.sh

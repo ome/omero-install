@@ -11,6 +11,8 @@ JAVAVER=${JAVAVER:-openjdk18}
 ICEVER=${ICEVER:-ice35}
 PGVER=${PGVER:-pg94}
 
+WEBSESSION=${WEBSESSION:-false}
+
 set -e
 
 rm -rf omero-install-test
@@ -24,7 +26,8 @@ echo "Building image $IMAGE"
 
 docker build -t $IMAGE --no-cache --build-arg OMEROVER=${OMEROVER} \
 	--build-arg JAVAVER=${JAVAVER} --build-arg WEBAPPS=${WEBAPPS} \
-	--build-arg ICEVER=${ICEVER} --build-arg PGVER=${PGVER} $1
+    --build-arg ICEVER=${ICEVER} --build-arg PGVER=${PGVER} \
+    --build-arg WEBSESSION=${WEBSESSION} $1
 
 if [[ "$1" =~ "centos7" ]]; then
 	echo "Test this image by running ./test_services.sh"

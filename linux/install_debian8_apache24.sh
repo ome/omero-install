@@ -41,6 +41,10 @@ if [ $WEBAPPS = true ]; then
 	bash -eux step05_1_all_webapps.sh
 fi
 
+if [ "$WEBSESSION" = true ]; then
+	bash -eux step05_2_websessionconfig.sh
+fi
+
 bash -eux step05_ubuntu1404_apache24.sh
 
 #If you don't want to use the init.d scripts you can start OMERO manually:

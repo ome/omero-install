@@ -91,13 +91,13 @@ is not the default one. It is not necessary to specify the version when running 
 
 For example:
 
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx pg95
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx --pg 95
 
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
 
 
 The supported values are: 
-pg94 (default), pg95
+94 (default), 95
 
 If you do not want to install Postgres set PGVER to nopg.
 
@@ -121,6 +121,29 @@ ice35, ice35-devel, ice36
 To add a new Ice version, update the following files:
 `step01_centos6_ice_deps.sh`, `step01_centos6_py27_ice_deps.sh`, `step01_centos6_py27_ius_ice_deps.sh`
 `step01_centos7_ice_deps.sh`, `step01_ubuntu1404_ice_deps.sh` and update this README.md.
+
+Configuring Redis
+-----------------
+
+By default, OMERO.web is set to use filestore session backend.
+For Python 2.7 based environment it is possible to use Redis as a session
+backend using the WEBSESSION parameter
+
+For example:
+
+    WEBSESSION=true ./docker-build.sh centos6_py27_ius_nginx
+
+    WEBSESSION=true ./docker-build.sh ubuntu1404_nginx
+
+To run the image for centOS 6 or ubuntu/Debian, you need to pass the -w/--websession true.
+
+For example:
+
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx --websession true
+
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx --websession true
+
+It is not necessary to specify the version when running CentOS 7 image.
 
 Installing web applications
 ---------------------------
