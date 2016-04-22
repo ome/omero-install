@@ -17,7 +17,7 @@ For example:
 See `docker run --help` for more information on these and other options
 for running docker images.
 
-CentOS 7 testing workflow is fully automated, for more details see below
+CentOS 7 testing workflow is fully automated, for more details see below.
 
 
 Adding a new step
@@ -48,6 +48,10 @@ e.g. openjdk18 for Java.
 
 Both nginx and apache installation steps are added to the walkthrough file
 
+To generate all the walkthroughs, run the following command
+    
+    ALL=true bash autogenerate.sh
+
 The possible values are:
 centos7 (default), centos6, centos6_py27, centos6_py27_ius, debian8, ubuntu1404
 
@@ -55,9 +59,9 @@ Configuring Java
 ----------------
 
 By default, openjdk1.8 is installed.
-It is possible to install other versions using the JAVAVER parameter
+It is possible to install other versions using the JAVAVER parameter.
 
-For example, to install oracle-java:
+For example, to install oracle-java 1.8:
 
 JAVAVER=oracle18 ./docker-build.sh ubuntu1404_nginx
 
@@ -66,7 +70,7 @@ openjdk17, openjdk18 (default), openjdk17-devel, openjdk18-devel, oracle17, orac
 
 If you do not want to install Java set JAVAVER to nojava.
 
-To add a new Java version, update the following files 
+To add a new Java version, update the following files: 
 `step01_centos_java_deps.sh`, `step01_debian8_java_deps.sh`,
 `step01_ubuntu1404_java_deps.sh` and update this README.md.
 
@@ -74,7 +78,7 @@ Configuring Postgres
 --------------------
 
 By default, Postgres 9.4 is installed.
-It is possible to install other versions using the PGVER parameter
+It is possible to install other versions using the PGVER parameter.
 
 For example:
 
@@ -82,8 +86,8 @@ For example:
     
     PGVER=pg95 ./docker-build.sh ubuntu1404_nginx
     
-To run the image for centOS 6  image, you need to pass the version used e.g. pg95 if the version 
-is not the default one. It is not necessary to specify the version when running ubuntu/Debian image.
+To run the image for centOS 6 image, you need to pass the version used e.g. pg95 if the version 
+is not the default one. It is not necessary to specify the version when running Ubuntu/Debian image.
 
 For example:
 
@@ -97,7 +101,7 @@ pg94 (default), pg95
 
 If you do not want to install Postgres set PGVER to nopg.
 
-To add a new Postgres version, update the following files 
+To add a new Postgres version, update the following files: 
 `step01_centos6_pg_deps.sh`, `step01_centos7_pg_deps.sh`, `step01_debian8_pg_deps.sh`,
 `step01_ubuntu1404_pg_deps.sh` and update this README.md.
 
@@ -105,16 +109,16 @@ Configuring Ice
 ---------------
 
 By default, Ice 3.5 is installed.
-It is possible to install other versions using the ICEVER parameter
+It is possible to install other versions using the ICEVER parameter.
 
 For example:
 
     ICEVER=ice35-devel ./docker-build.sh ubuntu1404_nginx
 
 The supported values are: 
-ice35, ice35-devel
+ice35, ice35-devel, ice36
 
-To add a new Ice version, update the following files 
+To add a new Ice version, update the following files:
 `step01_centos6_ice_deps.sh`, `step01_centos6_py27_ice_deps.sh`, `step01_centos6_py27_ius_ice_deps.sh`
 `step01_centos7_ice_deps.sh`, `step01_ubuntu1404_ice_deps.sh` and update this README.md.
 
@@ -161,7 +165,7 @@ Testing CentOS 7
 
         $PGVER=pg95 ./docker-build.sh $ENV
 
-2. Run tests
+2. Run the tests
 
         OSX: $ DMNAME=dev ./test_services.sh # docker machine can be obtained from docker-machine ls
         UNIX: $ ./test_services.sh

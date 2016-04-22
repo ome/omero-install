@@ -5,6 +5,7 @@ set -e -u -x
 OMEROVER=${OMEROVER:-latest}
 WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg94}
+ICEVER=${ICEVER:-ice35}
 
 source settings.env
 
@@ -22,7 +23,7 @@ bash -eux step01_centos6_py27_ice_deps.sh
 # install Postgres
 bash -eux step01_centos6_pg_deps.sh
 
-bash -eux step02_centos6_py27_setup.sh
+ICEVER=$ICEVER bash -eux step02_centos6_py27_setup.sh
 
 if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
 	bash -eux step03_all_postgres.sh
@@ -30,7 +31,7 @@ fi
 
 cp settings.env omero-centos6py27.env step04_all_omero.sh setup_omero_db.sh ~omero
 
-su - omero -c "OMEROVER=$OMEROVER PY_ENV=py27_scl bash -eux step04_all_omero.sh"
+su - omero -c "OMEROVER=$OMEROVER PY_ENV=py27_scl ICEVER=$ICEVER bash -eux step04_all_omero.sh"
 
 su - omero -c "bash setup_omero_db.sh"
 

@@ -7,6 +7,6 @@ source `dirname $0`/settings.env
 #start
 chmod go-rwx ~omero/OMERO.server/etc ~omero/OMERO.server/var
 
-#Optionally restrict accesss to the OMERO data directory
+# Optionally restrict access to the OMERO data directory
 #chmod go-rwx "$OMERO_DATA_DIR"
 

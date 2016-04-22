@@ -5,6 +5,7 @@ set -e -u -x
 OMEROVER=${OMEROVER:-latest}
 WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg94}
+ICEVER=${ICEVER:-ice35}
 
 source `dirname $0`/settings.env
 
@@ -28,7 +29,7 @@ if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
 fi
 
 cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero
-su - omero -c "OMEROVER=$OMEROVER bash -eux step04_all_omero.sh"
+su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero.sh"
 
 su - omero -c "bash setup_omero_db.sh"
 

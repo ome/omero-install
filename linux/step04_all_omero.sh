@@ -4,6 +4,7 @@ set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
 PY_ENV=${PY_ENV:-py27}
+ICEVER=${ICEVER:-ice35}
 
 source `dirname $0`/settings.env
 #start-install
@@ -23,13 +24,31 @@ if [[ ! $PY_ENV = "py27_ius" ]]; then
 fi
 
 #start-install
-#start-release
-/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
-#end-release
+if [ "$ICEVER" = "ice36" ]; then
+	#start-release-ice36
+	cd ~omero
+	SERVER=https://ci.openmicroscopy.org/view/Breaking/job/OMERO-DEV-breaking-build/637/ICE=3.6,jdk=8_LATEST,label=trout/artifact/src/target/OMERO.server-5.2.2-235-deda6c5-ice36-b637.zip
+	wget $SERVER
+	unzip -q OMERO.server*
+	#end-release-ice36
+else
+	# do not use omego for the release version
+	if [ "$OMEROVER" = "latest"]; then
+		#start-release-ice35
+		cd ~omero
+		SERVER=http://downloads.openmicroscopy.org/latest/omero5.2/server-ice35.zip
+		wget $SERVER
+		unzip -q OMERO.server*
+		#end-release-ice35
+	else
+		/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
+	fi
+	#start-link
+	ln -s OMERO.server-*/ OMERO.server
+	#end-link
+fi
 
 #configure
-ln -s OMERO.server-*/ OMERO.server
-
 OMERO.server/bin/omero config set omero.data.dir "$OMERO_DATA_DIR"
 OMERO.server/bin/omero config set omero.db.name "$OMERO_DB_NAME"
 OMERO.server/bin/omero config set omero.db.user "$OMERO_DB_USER"

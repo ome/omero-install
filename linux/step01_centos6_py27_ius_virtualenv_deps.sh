@@ -4,7 +4,7 @@
 
 # Install the OMERO dependencies in a virtual environment
 # Create virtual env.
-# -p only require if it has been installed with python 2.6
+# -p only required if virtualenv has been installed with python 2.6
 
 virtualenv -p /usr/bin/python2.7 /home/omero/omeroenv
 set +u
