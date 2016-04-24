@@ -25,6 +25,6 @@ elif [ "$ICEVER" = "ice36" ]; then
 	yum -y install ice-all-runtime ice-all-devel
 
 	yum -y install openssl-devel bzip2-devel expat-devel
-	pip install zeroc-ice
+	pip install "zeroc-ice>3.5,<3.7"
 	#end-supported
 fi
