@@ -43,10 +43,10 @@ else
 	else
 		/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
 	fi
-	#start-link
-	ln -s OMERO.server-*/ OMERO.server
-	#end-link
 fi
+#start-link
+ln -s OMERO.server-*/ OMERO.server
+#end-link
 
 #configure
 OMERO.server/bin/omero config set omero.data.dir "$OMERO_DATA_DIR"
