@@ -39,6 +39,6 @@ elif [ "$ICEVER" = "ice36" ]; then
 	set +u
 	source /opt/rh/python27/enable
 	set -u
-	pip install zeroc-ice
+	pip install "zeroc-ice>3.5,<3.7"
 	#end-supported
 fi
