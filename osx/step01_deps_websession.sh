@@ -24,7 +24,7 @@ TESTING_MODE=${TESTING_MODE:-$DEFAULT_TESTING_MODE}
 
 # Install redis
 brew install redis
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+brew services start redis
 
 # Install django-cache-redis
 pip install django-cache-redis>=1.6.5
