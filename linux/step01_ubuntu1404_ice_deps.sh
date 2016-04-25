@@ -18,6 +18,6 @@ elif [ "$ICEVER" = "ice36" ]; then
 	apt-get update
 	apt-get -y install zeroc-ice-all-runtime zeroc-ice-all-dev
 
-	pip install zeroc-ice
+	pip install "zeroc-ice>3.5,<3.7"
 	#end-supported
 fi

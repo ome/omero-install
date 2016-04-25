@@ -26,6 +26,6 @@ elif [ "$ICEVER" = "ice36" ]; then
 
 	yum -y install ice-all-runtime ice-all-devel
 
-	pip install zeroc-ice
+	pip install "zeroc-ice>3.5,<3.7"
 	#end-supported
 fi

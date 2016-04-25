@@ -40,7 +40,7 @@ elif [ "$ICEVER" = "ice36" ]; then
 	source /home/omero/omeroenv/bin/activate
 	set -u
 
-	/home/omero/omeroenv/bin/pip2.7 install zeroc-ice
+	/home/omero/omeroenv/bin/pip2.7 install "zeroc-ice>3.5,<3.7"
 
 	deactivate
 	#end-supported

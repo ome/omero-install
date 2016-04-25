@@ -24,7 +24,7 @@ elif [ "$ICEVER" = "ice36" ]; then
  	cd ice-3.6.2/cpp		
  	make && make install
 
-	pip install zeroc-ice
+	pip install "zeroc-ice>3.5,<3.7"
 
 	echo /opt/Ice-3.6.2/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf		
  	ldconfig
