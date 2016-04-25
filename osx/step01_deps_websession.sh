@@ -27,7 +27,7 @@ brew install redis
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
 
 # Install django-cache-redis
-pip install django-cache-redis=>1.6.5
+pip install django-cache-redis>=1.6.5
 
 # Set up redis session backend
 omero config set omero.web.session_engine 'django.contrib.sessions.backends.cache'
