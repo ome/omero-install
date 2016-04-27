@@ -226,7 +226,8 @@ if [ $OS = "centos6_py27" ] ; then
 	ne=$((number-1))
 	line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "$line" >> $file
+	# To be removed when we use omego
+	#echo "$line" >> $file
 elif [ $OS = "centos6_py27_ius" ] ; then
 	echo "#start-copy-omeroscript" >> $file
 	echo "cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero" >> $file
@@ -241,8 +242,8 @@ else
 	ne=$((number-1))
 	line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "$line" >> $file
-
+	# To be removed when we use omego
+	#echo "$line" >> $file
 fi
 echo "#start-release-ice35" >> $file
 number=$(sed -n '/#start-release-ice35/=' $dir/step04_all_omero.sh)
