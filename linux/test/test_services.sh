@@ -45,6 +45,9 @@ docker exec -it $CNAME /bin/bash -c 'd=10; \
 #check OMERO.server service status
 docker exec -it $CNAME /bin/bash -c "service omero status -l"
 
+docker exec -it $CNAME /bin/bash -c "su - omero -c \"/home/omero/OMERO.server/bin/omero admin diagnostics\""
+
+
 # check OMERO.web status
 if [[ $ENV =~ "nginx" ]]; then
     docker exec -it $CNAME /bin/bash -c "service omero-web status -l"
