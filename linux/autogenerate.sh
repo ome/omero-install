@@ -54,12 +54,35 @@ ns=$((number+1))
 number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_java_deps.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_java_deps.sh)
-
 # remove leading whitespace
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-
 echo "$line"  >> $file
 echo -en '\n' >> $file
+
+echo "# install dependencies" >> $file
+# install dependencies
+if [ $OS = "centos7" ] ; then
+	number=$(sed -n '/#start-docker-pip/=' $dir/step01_"$OS"_deps.sh)
+	ne=$((number-2))
+	line=$(sed -n '2,'$ne'p' $dir/step01_"$OS"_deps.sh)
+	echo "$line" >> $file
+	# remove leading whitespace
+	number=$(sed -n '/#start-docker-pip/=' $dir/step01_"$OS"_deps.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#end-docker-pip/=' $dir/step01_"$OS"_deps.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_deps.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+
+	echo "$line" >> $file
+	ne=$(($ne+3))
+	line=$(sed -n ''$ne',$p' $dir/step01_"$OS"_deps.sh)
+else
+	line=$(sed -n '2,$p' $dir/step01_"$OS"_deps.sh)
+fi
+echo "$line" >> $file
+
+
 
 # install ice
 echo "# install Ice" >> $file
@@ -90,27 +113,7 @@ echo "$line"  >> $file
 echo "#end-supported-ice" >> $file
 echo -en '\n' >> $file
 
-# install dependencies
-if [ $OS = "centos7" ] ; then
-	number=$(sed -n '/#start-docker-pip/=' $dir/step01_"$OS"_deps.sh)
-	ne=$((number-2))
-	line=$(sed -n '2,'$ne'p' $dir/step01_"$OS"_deps.sh)
-	echo "$line" >> $file
-	# remove leading whitespace
-	number=$(sed -n '/#start-docker-pip/=' $dir/step01_"$OS"_deps.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#end-docker-pip/=' $dir/step01_"$OS"_deps.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_deps.sh)
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 
-	echo "$line" >> $file
-	ne=$(($ne+3))
-	line=$(sed -n ''$ne',$p' $dir/step01_"$OS"_deps.sh)
-else
-	line=$(sed -n '2,$p' $dir/step01_"$OS"_deps.sh)
-fi
-echo "$line" >> $file
 # install postgres
 N=$OS
 if [ $OS = "debian8" ] ; then
@@ -223,7 +226,8 @@ if [ $OS = "centos6_py27" ] ; then
 	ne=$((number-1))
 	line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "$line" >> $file
+	# To be removed when we use omego
+	#echo "$line" >> $file
 elif [ $OS = "centos6_py27_ius" ] ; then
 	echo "#start-copy-omeroscript" >> $file
 	echo "cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero" >> $file
@@ -238,9 +242,10 @@ else
 	ne=$((number-1))
 	line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "$line" >> $file
-
+	# To be removed when we use omego
+	#echo "$line" >> $file
 fi
+echo "#start-release-ice35" >> $file
 number=$(sed -n '/#start-release-ice35/=' $dir/step04_all_omero.sh)
 ns=$((number+1))
 number=$(sed -n '/#end-release-ice35/=' $dir/step04_all_omero.sh)
@@ -248,6 +253,17 @@ ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 echo "$line" >> $file
+echo "#end-release-ice35" >> $file
+
+echo "#start-release-ice36" >> $file
+number=$(sed -n '/#start-release-ice36/=' $dir/step04_all_omero.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-release-ice36/=' $dir/step04_all_omero.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line" >> $file
+echo "#end-release-ice36" >> $file
 
 number=$(sed -n '/#start-link/=' $dir/step04_all_omero.sh)
 ns=$((number+1))
@@ -256,7 +272,6 @@ ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 echo "$line" >> $file
-#line="$(echo -e "${line}" | sed -e 's/$OMEROVER/latest/g')"
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 number=$(sed -n '/#configure/=' $dir/step04_all_omero.sh)
 ns=$((number+1))
