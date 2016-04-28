@@ -16,6 +16,22 @@ pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log -w start
 # Start the server
 omero admin start
 
+
+if [ -f $(brew --prefix omero53)/var/log/Blitz-0.log ]; then
+    d=10;
+    while ! grep "OMERO.blitz now accepting connections" $(brew --prefix omero52)/var/log/Blitz-0.log ;
+        do
+            sleep 10;
+            d=$[$d -1];
+            if [ $d -lt 0 ]; then
+                exit 1;
+            fi;
+        done
+else
+    echo "File not found!"
+    exit 1
+fi
+
 # Start OMERO.web
 omero web start
 nginx -c $(brew --prefix omero53)/etc/nginx.conf
