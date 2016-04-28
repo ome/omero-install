@@ -15,6 +15,7 @@ pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log -w start
 
 # Start the server
 omero admin start
+omero admin waitup
 
 # Start OMERO.web
 omero web start
