@@ -27,8 +27,8 @@ fi
 if [ "$ICEVER" = "ice36" ]; then
 	#start-release-ice36
 	cd ~omero
-	SERVER=https://ci.openmicroscopy.org/view/OMERO-DEV/job/OMERO-DEV-merge-build/ICE=3.6,jdk=8_LATEST,label=octopus/lastSuccessfulBuild/artifact/src/target/OMERO.server-5.2.2-393-e464f65-ice36-b292.zip
-	wget $SERVER
+	SERVER=http://downloads.openmicroscopy.org/latest/omero5.2/server-ice36.zip
+	wget $SERVER -O OMERO.server-ice36.zip
 	unzip -q OMERO.server*
 	#end-release-ice36
 else
