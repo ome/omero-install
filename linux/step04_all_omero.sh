@@ -28,7 +28,7 @@ if [ "$ICEVER" = "ice36" ]; then
 	#start-release-ice36
 	cd ~omero
 	SERVER=http://downloads.openmicroscopy.org/latest/omero5.2/server-ice36.zip
-	wget $SERVER
+	wget $SERVER -O OMERO.server-ice36.zip
 	unzip -q OMERO.server*
 	#end-release-ice36
 else
