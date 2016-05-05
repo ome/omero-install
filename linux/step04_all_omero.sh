@@ -33,11 +33,11 @@ if [ "$ICEVER" = "ice36" ]; then
 	#end-release-ice36
 else
 	# do not use omego for the release version
-	if [ "$OMEROVER" = "latest"]; then
+	if [ "$OMEROVER" = "latest" ]; then
 		#start-release-ice35
 		cd ~omero
 		SERVER=http://downloads.openmicroscopy.org/latest/omero5.2/server-ice35.zip
-		wget $SERVER
+		wget $SERVER -O OMERO.server-ice35.zip
 		unzip -q OMERO.server*
 		#end-release-ice35
 	else
