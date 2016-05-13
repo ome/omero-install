@@ -25,7 +25,7 @@ if [ -f $file ]; then
 else
 	#for version 5.1.x
 	pip install "gunicorn>=19.3"
-	p=nginx-wsgi
+	p=nginx
 fi
 
 # set up as the omero user.
