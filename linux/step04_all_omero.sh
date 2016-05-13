@@ -23,6 +23,8 @@ if [[ ! $PY_ENV = "py27_ius" ]]; then
 	#end-venv
 fi
 
+#default version
+version=5.2   	
 #start-install
 if [ "$ICEVER" = "ice36" ]; then
 	#start-release-ice36
@@ -39,8 +41,6 @@ else
 		#determine the version to download
 		splitValue=(${OMEROVER//-/ })
     	length=${#splitValue[@]};
-    	#default version
-    	version=5.2
     	if [ $length -gt 1 ]; then
         	version=${splitValue[$((length-2))]}
     	fi
@@ -63,4 +63,9 @@ OMERO.server/bin/omero config set omero.data.dir "$OMERO_DATA_DIR"
 OMERO.server/bin/omero config set omero.db.name "$OMERO_DB_NAME"
 OMERO.server/bin/omero config set omero.db.user "$OMERO_DB_USER"
 OMERO.server/bin/omero config set omero.db.pass "$OMERO_DB_PASS"
-OMERO.server/bin/omero db script -f OMERO.server/db.sql --password "$OMERO_ROOT_PASS"
+OMERO.server/bin/omero db script -f OMERO.server/db.sql "" "" "$OMERO_ROOT_PASS"
+if (( $(echo "$version < 5.1" |bc -l) )); then
+	OMERO.server/bin/omero db script -f OMERO.server/db.sql "" "" "$OMERO_ROOT_PASS"
+else
+	OMERO.server/bin/omero db script -f OMERO.server/db.sql --password "$OMERO_ROOT_PASS"
+fi
