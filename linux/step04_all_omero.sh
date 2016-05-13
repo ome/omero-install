@@ -40,6 +40,11 @@ else
 		wget $SERVER -O OMERO.server-ice35.zip
 		unzip -q OMERO.server*
 		#end-release-ice35
+	elif [ "$OMEROVER" = "OMERO-5.1-latest" ]; then
+		cd ~omero
+		SERVER=http://downloads.openmicroscopy.org/latest/omero5.1/server-ice35.zip
+		wget $SERVER -O OMERO.server-ice35.zip
+		unzip -q OMERO.server*
 	else
 		/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
 	fi
