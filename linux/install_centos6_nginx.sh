@@ -34,7 +34,7 @@ su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero.sh"
 
 su - omero -c "bash setup_omero_db.sh"
 
-bash -eux step05_centos6_nginx.sh
+OMEROVER=$OMEROVER bash -eux step05_centos6_nginx.sh
 
 if [ $WEBAPPS = true ]; then
 	PY_ENV=py26 bash -eux step05_1_all_webapps.sh

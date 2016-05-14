@@ -1,5 +1,7 @@
 #!/bin/bash
 
+OMEROVER=${OMEROVER:-latest}
+
 #start-copy
 cp setup_omero_nginx.sh ~omero
 #end-copy
@@ -25,11 +27,30 @@ if [ -f $file ]; then
 else
 	#for version 5.1.x
 	pip install "gunicorn>=19.3"
-	p=nginx
+	p=nginx-wsgi
+fi
+
+
+b=true
+if [[ "$OMEROVER" == *latest ]]; then
+	#determine the version to download
+	splitValue=(${OMEROVER//-/ })
+    length=${#splitValue[@]};
+    if [ $length -gt 1 ]; then
+        version=${splitValue[$((length-2))]}
+        if (( $(echo "$version < 5.1" |bc -l) )); then
+        	b=false
+        fi
+    fi
 fi
 
 # set up as the omero user.
-su - omero -c "bash -eux setup_omero_nginx.sh $p"
+if [ "$b" = true ]; then
+	su - omero -c "bash -eux setup_omero_nginx.sh $p"
+else
+	cp setup_omero_nginx50.sh ~omero
+	su - omero -c "bash -eux setup_omero_nginx50.sh"
+fi
 
 mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
 cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
