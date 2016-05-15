@@ -172,7 +172,7 @@ For example:
     OMEROVER=OMERO-DEV-latest ./docker-build.sh ubuntu1404_nginx
 
 The supported values are: 
-OMERO-DEV-latest, OMERO-DEV-merge-build, latest (default)
+OMERO-DEV-latest, OMERO-DEV-merge-build, OMERO-5.1-latest, OMERO-5.0-latest, latest (default)
 
 Testing CentOS 7
 ================
