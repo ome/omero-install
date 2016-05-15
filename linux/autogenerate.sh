@@ -275,8 +275,19 @@ echo "$line" >> $file
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 number=$(sed -n '/#configure/=' $dir/step04_all_omero.sh)
 ns=$((number+1))
-line=$(sed -n ''$ns',$p' $dir/step04_all_omero.sh)
+number=$(sed -n '/#start-db/=' $dir/step04_all_omero.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 echo "$line" >> $file
+number=$(sed -n '/#start-deb-latest/=' $dir/step04_all_omero.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-deb-latest/=' $dir/step04_all_omero.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line" >> $file
+
+
 number=$(sed -n '/#start-config/=' $dir/setup_omero_db.sh)
 ns=$((number+1))
 line=$(sed -n ''$ns',$p' $dir/setup_omero_db.sh)
