@@ -175,6 +175,10 @@ For example:
 The supported values are: 
 OMERO-DEV-latest, OMERO-DEV-merge-build, OMERO-5.1-latest, OMERO-5.0-latest, latest (default)
 
+If you select OMERO-5.0-latest, you will have to apply a Java security patch
+see http://blog.openmicroscopy.org/tech-issues/2015/07/21/java-issue/
+for information and instructions.
+
 Testing CentOS 7
 ================
 
