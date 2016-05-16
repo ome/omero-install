@@ -152,7 +152,8 @@ By default the installation walkthroughs do not install any of the web applicati
 To create a test image with: figure (https://github.com/ome/figure), 
 gallery (https://github.com/ome/gallery), webtest (https://github.com/openmicroscopy/webtest) and
 webtagging (https://github.com/MicronOxford/webtagging), you can pass `WEBAPPS=true` to the build
-script.
+script. If you wish not to install one of the apps above, edit one of the "install_*" flag in
+step05_1_all_webapps.sh.
 
 For example:
 
