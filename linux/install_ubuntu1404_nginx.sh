@@ -37,7 +37,7 @@ su - omero -c "bash setup_omero_db.sh"
 OMEROVER=$OMEROVER bash -eux step05_ubuntu1404_nginx.sh
 
 if [ $WEBAPPS = true ]; then
-	bash -eux step05_1_all_webapps.sh
+	OMEROVER=$OMEROVER bash -eux step05_1_all_webapps.sh
 fi
 
 if [ "$WEBSESSION" = true ]; then

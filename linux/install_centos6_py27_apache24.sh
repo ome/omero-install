@@ -41,11 +41,11 @@ su - omero -c "bash setup_omero_db.sh"
 
 
 if [ $WEBAPPS = true ]; then
-	PY_ENV=py27_scl bash -eux step05_1_all_webapps.sh
+	OMEROVER=$OMEROVER PY_ENV=py27_scl bash -eux step05_1_all_webapps.sh
 fi
 
 if [ "$WEBSESSION" = true ]; then
-	PY_ENV=py27_scl bash -eux step05_2_websessionconfig.sh
+	OMEROVER=$OMEROVER PY_ENV=py27_scl bash -eux step05_2_websessionconfig.sh
 fi
 
 bash -eux step05_centos6_py27_apache24.sh
