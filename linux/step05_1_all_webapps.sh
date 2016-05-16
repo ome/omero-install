@@ -2,6 +2,17 @@
 #!/bin/bash
 
 PY_ENV=${PY_ENV:-py27}
+OMEROVER=${OMEROVER:-latest}
+
+version=5.2
+if [[ "$OMEROVER" == *latest ]]; then
+	#determine the version to download
+	splitValue=(${OMEROVER//-/ })
+    length=${#splitValue[@]};
+    if [ $length -gt 1 ]; then
+        version=${splitValue[$((length-2))]}
+    fi
+fi
 
 # flag indicating whether to install an app.
 install_figure=true
@@ -14,6 +25,10 @@ URL_FIGURE=http://downloads.openmicroscopy.org/latest/figure.zip
 
 # Web tagging URL
 URL_WEBTAGGING=http://downloads.openmicroscopy.org/latest/webtagging.zip
+
+if (( $(echo "$version < 5.2" |bc -l) )); then
+    URL_WEBTAGGING=http://downloads.openmicroscopy.org/webtagging/1.3.0/webtagging-1.3.0.zip
+fi
 
 # Gallery URL
 URL_GALLERY=https://github.com/ome/gallery/archive/v1.0.0.zip
