@@ -18,19 +18,15 @@ set -u
 
 # Install OMERO.web requirements
 file=~omero/OMERO.server/share/web/requirements-py27-apache.txt
-p=apache
 # introduce in 5.2.0
 if [ -f $file ]; then
 	/home/omero/omeroenv/bin/pip2.7 install -r $file
-else
-	#for version 5.1.x
-	p=apache-wsgi
 fi
 deactivate
 
 #start-setup-as-omero
 # See setup_omero_apache.sh for the apache config file creation
-su - omero -c "bash -eux setup_omero_apache22.sh $p"
+su - omero -c "bash -eux setup_omero_apache22.sh"
 #end-setup-as-omero
 
 
