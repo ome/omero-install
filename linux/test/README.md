@@ -179,6 +179,9 @@ If you select OMERO-5.0-latest, you will have to apply a Java security patch
 see http://blog.openmicroscopy.org/tech-issues/2015/07/21/java-issue/
 for information and instructions.
 
+OMERO-5.1-latest and OMERO-5.0-latest only work with nginx.
+
+
 Testing CentOS 7
 ================
 
