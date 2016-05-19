@@ -252,6 +252,7 @@ number=$(sed -n '/#end-release-ice35/=' $dir/step04_all_omero.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+line=$(echo -e "${line}" | sed -e "s/\$OMEROVER/5.2/g")
 echo "$line" >> $file
 echo "#end-release-ice35" >> $file
 
@@ -262,6 +263,7 @@ number=$(sed -n '/#end-release-ice36/=' $dir/step04_all_omero.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+line=$(echo -e "${line}" | sed -e "s/\$OMEROVER/5.2/g")
 echo "$line" >> $file
 echo "#end-release-ice36" >> $file
 
