@@ -44,6 +44,16 @@ get_version() {
 	fi
 }
 
+is_latest_version() {
+	value=$(get_version $1)
+	limit=$(get_latest_version)
+	if (($(echo "$value <= $limit" |bc -l))) && (($(echo "$value >= $limit" |bc -l))); then
+		return 0
+	else
+		return 1
+	fi
+}
+
 get_latest_version() {
 	echo $VERSION
 }

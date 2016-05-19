@@ -55,10 +55,25 @@ testIsLessThanNumber() {
 	is_less_than 5.0 $limit
 	assertEquals "The value should be less than $limit" "$?" "0"
 }
+
 testIsLessThanNumber2() {
 	limit=5.1
 	is_less_than 5.2 $limit
 	assertEquals "The value should be greater than $limit" "$?" "1"
 }
 
+testIsLastestVersionFromLatest() {
+	is_latest_version latest
+	assertEquals "This should return the latest version" "$?" "0"
+}
+
+testIsLastestVersionFromVersion() {
+	is_latest_version $(get_latest_version)
+	assertEquals "This should return the latest version" "$?" "0"
+}
+
+testIsLastestVersionFromValue() {
+	is_latest_version 5.1
+	assertEquals "This should not return the latest version" "$?" "1"
+}
 . shunit2
