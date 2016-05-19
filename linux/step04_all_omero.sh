@@ -22,9 +22,8 @@ if [[ ! $PY_ENV = "py27_ius" ]]; then
 	/home/omero/omeroenv/bin/pip install omego==0.3.0
 	#end-venv
 fi
-
-#default version
-version=5.2   	
+ 
+re='^[0-9]+([.][0-9]+)?$'
 #start-install
 if [ "$ICEVER" = "ice36" ]; then
 	#start-release-ice36
@@ -35,22 +34,16 @@ if [ "$ICEVER" = "ice36" ]; then
 	#end-release-ice36
 else
 	# do not use omego for the release version
-	if [[ "$OMEROVER" == *latest ]]; then
-		#start-release-ice35
-		cd ~omero
-		#determine the version to download
-		splitValue=(${OMEROVER//-/ })
-    	length=${#splitValue[@]};
-    	if [ $length -gt 1 ]; then
-        	version=${splitValue[$((length-2))]}
-    	fi
-		SERVER=http://downloads.openmicroscopy.org/latest/omero
-		SERVER+=$version
+	# Handle release version via download page.
+	if [[ $OMEROVER =~ $re ]] ; then
+  		# one release version
+  		SERVER=http://downloads.openmicroscopy.org/latest/omero
+		SERVER+=$OMEROVER
 		SERVER+=/server-ice35.zip
 		wget $SERVER -O OMERO.server-ice35.zip
 		unzip -q OMERO.server*
-		#end-release-ice35
 	else
+		#dev branches installed via omego
 		/home/omero/omeroenv/bin/omego download --branch $OMEROVER server
 	fi
 fi
@@ -65,7 +58,8 @@ OMERO.server/bin/omero config set omero.db.user "$OMERO_DB_USER"
 OMERO.server/bin/omero config set omero.db.pass "$OMERO_DB_PASS"
 OMERO.server/bin/omero db script -f OMERO.server/db.sql "" "" "$OMERO_ROOT_PASS"
 #start-db
-if (( $(echo "$version < 5.1" |bc -l) )); then
+
+if [[ $OMEROVER =~ $re ]] && (( $(echo "$OMEROVER < 5.1" |bc -l) )); then
 	OMERO.server/bin/omero db script -f OMERO.server/db.sql "" "" "$OMERO_ROOT_PASS"
 else
 	#start-deb-latest
