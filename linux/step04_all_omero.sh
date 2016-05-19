@@ -27,7 +27,7 @@ fi
  
 re='^[0-9]+([.][0-9]+)?$'
 if [ $OMEROVER == "latest" ]; then
-	OMEROVER=5.2
+	OMEROVER=$(get_latest_version)
 fi
 #start-install
 if [ "$ICEVER" = "ice36" ]; then

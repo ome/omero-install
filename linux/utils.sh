@@ -43,3 +43,7 @@ get_version() {
 		echo $VERSION
 	fi
 }
+
+get_latest_version() {
+	echo $VERSION
+}
