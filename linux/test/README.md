@@ -173,13 +173,13 @@ For example:
     OMEROVER=OMERO-DEV-latest ./docker-build.sh ubuntu1404_nginx
 
 The supported values are: 
-OMERO-DEV-latest, OMERO-DEV-merge-build, OMERO-5.1-latest, OMERO-5.0-latest, latest (default)
+OMERO-DEV-latest, OMERO-DEV-merge-build, 5.0 (latest i.e. 5.0.8), 5.1 (latest), 5.2 (latest), latest (default)
 
-If you select OMERO-5.0-latest, you will have to apply a Java security patch
+If you select 5.0, you will have to apply a Java security patch
 see http://blog.openmicroscopy.org/tech-issues/2015/07/21/java-issue/
 for information and instructions.
 
-OMERO-5.1-latest and OMERO-5.0-latest only work with nginx.
+5.1 and 5.0 only work with nginx.
 
 
 Testing CentOS 7
