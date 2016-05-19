@@ -299,13 +299,35 @@ echo "#end-step04" >> $file
 echo -en '\n' >> $file
 echo "#start-step05: As root, install a Web server: Nginx or Apache" >> $file
 echo "#start-nginx" >> $file
-start=$(sed -n '/#start-install/=' $dir/step05_"$OS"_nginx.sh)
-start=$((start+1))
-line=$(sed -n ''$start',$p' $dir/step05_"$OS"_nginx.sh)
+number=$(sed -n '/#start-install/=' $dir/step05_"$OS"_nginx.sh)
+ns=$((number+1))
+number=$(sed -n '/#start-latest/=' $dir/step05_"$OS"_nginx.sh)
+ne=$((number-3))
+line=$(sed -n ''$ns','$ne'p' $dir/step05_"$OS"_nginx.sh)
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line" >> $file
+ns=$((number+1))
+number=$(sed -n '/#end-latest/=' $dir/step05_"$OS"_nginx.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step05_"$OS"_nginx.sh)
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line" >> $file
+echo "#start-configure-nginx: As the omero system user, configure OMERO.web" >> $file
+number=$(sed -n '/#start-config/=' $dir/setup_omero_nginx.sh)
+ns=$((number+1))
+line=$(sed -n ''$ns',$p' $dir/setup_omero_nginx.sh)
+line=$(echo -e "${line}" | sed -e "s/\$NGINXCMD/nginx/g")
+echo "$line" >> $file
+echo "#end-configure-nginx" >> $file
+
+number=$(sed -n '/#end-install/=' $dir/step05_"$OS"_nginx.sh)
+ns=$((number+1))
+line=$(sed -n ''$ns',$p' $dir/step05_"$OS"_nginx.sh)
 # remove docker conditional
 line=`remove_docker_workaround "${line}"`
 echo "$line" >> $file
 echo "#end-nginx" >> $file
+
 echo -en '\n' >> $file
 echo "#start-apache" >> $file
 
@@ -395,7 +417,7 @@ fi
 }
 
 #generate scripts for all os by default.
-ALL=${ALL:-false}
+ALL=${ALL:-true}
 OS=${OS:-centos7}
 
 if [ $ALL = true ]; then

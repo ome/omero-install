@@ -8,6 +8,7 @@ set -e -u -x
 cp setup_omero_nginx.sh ~omero
 #end-copy
 
+p=nginx
 #start-install
 cat << EOF > /etc/yum.repos.d/nginx.repo
 [nginx]
@@ -27,10 +28,12 @@ set -u
 
 # Install OMERO.web requirements
 file=~omero/OMERO.server/share/web/requirements-py27-nginx.txt
-p=nginx
+
 # introduce in 5.2.0
 if [ -f $file ]; then
+	#start-latest
 	/home/omero/omeroenv/bin/pip2.7 install -r $file
+	#end-latest
 else
 	#for version 5.1.x
 	/home/omero/omeroenv/bin/pip2.7 install "gunicorn>=19.3"
@@ -46,6 +49,7 @@ else
 	su - omero -c "bash -eux setup_omero_nginx.sh $p"
 fi
 
+#end-install
 mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
 cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
