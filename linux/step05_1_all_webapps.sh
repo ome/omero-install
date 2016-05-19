@@ -5,7 +5,9 @@ PY_ENV=${PY_ENV:-py27}
 OMEROVER=${OMEROVER:-latest}
 
 re='^[0-9]+([.][0-9]+)?$'
-
+if [ $OMEROVER == "latest" ]; then
+	OMEROVER=5.2
+fi
 # flag indicating whether to install an app.
 install_figure=true
 install_webtagging=true
@@ -18,7 +20,7 @@ URL_FIGURE=http://downloads.openmicroscopy.org/latest/figure.zip
 # Web tagging URL
 URL_WEBTAGGING=http://downloads.openmicroscopy.org/latest/webtagging.zip
 
-if [[ $OMEROVER =~ $re ]] && (( $(echo "$OMEROVER < 5.1" |bc -l) )); then
+if $(is_less_than $OMEROVER 5.1); then
     URL_WEBTAGGING=http://downloads.openmicroscopy.org/webtagging/1.3.0/webtagging-1.3.0.zip
 fi
 
