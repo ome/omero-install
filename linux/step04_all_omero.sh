@@ -24,8 +24,7 @@ if [[ ! $PY_ENV = "py27_ius" ]]; then
 	/home/omero/omeroenv/bin/pip install omego==0.4.0
 	#end-venv
 fi
- 
-re='^[0-9]+([.][0-9]+)?$'
+
 if [ $OMEROVER == "latest" ]; then
 	OMEROVER=$(get_latest_version)
 fi
@@ -58,7 +57,7 @@ fi
 # no server downloaded
 if [ ! -d OMERO.server* ]; then
 	# dev branches installed via omego
-	/home/omero/omeroenv/bin/omego download --ice $icevalue py --branch $OMEROVER server
+	/home/omero/omeroenv/bin/omego download --ice $icevalue --branch $OMEROVER server
 fi
 
 #start-link
