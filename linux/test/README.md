@@ -182,6 +182,17 @@ for information and instructions.
 5.1 and 5.0 only work with nginx.
 
 
+| OMERO version         | Ice version |
+|-----------------------|------------ |
+| OMERO-DEV-latest      | 3.5, 3.6    |
+| OMERO-DEV-merge-build | 3.5, 3.6    |
+| 5.0                   | 3.5         |
+| 5.1                   | 3.5         |
+| 5.2                   | 3.5, 3.6    |
+| latest                | 3.5, 3.6    |
+---------------------------------------
+
+
 Testing CentOS 7
 ================
 
