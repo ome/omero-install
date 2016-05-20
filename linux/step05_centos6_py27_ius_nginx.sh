@@ -4,6 +4,7 @@ OMEROVER=${OMEROVER:-latest}
 
 set -e -u -x
 
+source utils.sh
 #start-copy
 cp setup_omero_nginx.sh ~omero
 #end-copy
