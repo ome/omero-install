@@ -26,4 +26,4 @@ script:
     - if [[ "$ENV" =~ "centos7" ]]; then ./test_services.sh; fi
     # run the unit tests
     - ./test_utils.sh
-    # Sadly, no test for Windows or OS X here.
+    # Sadly, no test for OS X here.
