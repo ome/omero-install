@@ -19,9 +19,11 @@ env:
 before_install:  
   - sudo apt-get update
   - sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" docker-engine
-
+  - sudo apt-get -y install shunit2
 script:
     - cd linux/test
     - ./docker-build.sh $ENV
     - if [[ "$ENV" =~ "centos7" ]]; then ./test_services.sh; fi
+    # run the unit tests
+    - ./test_utils.sh
     # Sadly, no test for Windows or OS X here.

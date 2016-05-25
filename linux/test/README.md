@@ -152,7 +152,8 @@ By default the installation walkthroughs do not install any of the web applicati
 To create a test image with: figure (https://github.com/ome/figure), 
 gallery (https://github.com/ome/gallery), webtest (https://github.com/openmicroscopy/webtest) and
 webtagging (https://github.com/MicronOxford/webtagging), you can pass `WEBAPPS=true` to the build
-script.
+script. If you wish not to install one of the apps above, edit one of the "install_*" flag in
+step05_1_all_webapps.sh.
 
 For example:
 
@@ -172,7 +173,25 @@ For example:
     OMEROVER=OMERO-DEV-latest ./docker-build.sh ubuntu1404_nginx
 
 The supported values are: 
-OMERO-DEV-latest, OMERO-DEV-merge-build, latest (default)
+OMERO-DEV-latest, OMERO-DEV-merge-build, 5.0 (latest i.e. 5.0.8), 5.1 (latest), 5.2 (latest), latest (default)
+
+If you select 5.0, you will have to apply a Java security patch
+see http://blog.openmicroscopy.org/tech-issues/2015/07/21/java-issue/
+for information and instructions.
+
+5.1 and 5.0 only work with nginx.
+
+
+| OMERO version         | Ice version |
+|-----------------------|------------ |
+| OMERO-DEV-latest      | 3.5, 3.6    |
+| OMERO-DEV-merge-build | 3.5, 3.6    |
+| 5.0                   | 3.5         |
+| 5.1                   | 3.5         |
+| 5.2                   | 3.5, 3.6    |
+| latest                | 3.5, 3.6    |
+---------------------------------------
+
 
 Testing CentOS 7
 ================

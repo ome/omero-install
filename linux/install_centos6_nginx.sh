@@ -28,16 +28,16 @@ if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 
-cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero
+cp utils.sh settings.env step04_all_omero.sh setup_omero_db.sh ~omero
 
 su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero.sh"
 
 su - omero -c "bash setup_omero_db.sh"
 
-bash -eux step05_centos6_nginx.sh
+OMEROVER=$OMEROVER bash -eux step05_centos6_nginx.sh
 
 if [ $WEBAPPS = true ]; then
-	PY_ENV=py26 bash -eux step05_1_all_webapps.sh
+	OMEROVER=$OMEROVER PY_ENV=py26 bash -eux step05_1_all_webapps.sh
 fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:

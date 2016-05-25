@@ -8,7 +8,11 @@ cp setup_omero_apache22.sh ~omero
 yum -y install httpd mod_wsgi
 
 # Install OMERO.web requirements
-pip install -r ~omero/OMERO.server/share/web/requirements-py26-apache.txt
+file=~omero/OMERO.server/share/web/requirements-py26-apache.txt
+# introduce in 5.2.0
+if [ -f $file ]; then
+	pip install -r $file
+fi
 
 #start-setup-as-omero
 # See setup_omero_apache.sh for the apache config file creation

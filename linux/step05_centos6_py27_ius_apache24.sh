@@ -20,7 +20,6 @@ set -u
 
 # Install OMERO.web requirements
 /home/omero/omeroenv/bin/pip2.7 install -r ~omero/OMERO.server/share/web/requirements-py27-apache.txt
-
 deactivate
 
 #start-setup-as-omero
