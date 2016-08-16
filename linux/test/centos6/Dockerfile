@@ -3,8 +3,6 @@
 FROM centos:centos6
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
-ARG WEBSESSION=false
-ARG WEBAPPS=false
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk18
 ARG ICEVER=ice35
@@ -22,7 +20,7 @@ ADD omero-install-test.zip /
 RUN yum -y install unzip && unzip omero-install-test.zip
 
 RUN cd omero-install-test && \
-	bash install_centos6_apache22.sh && \
+	bash install_centos6.sh && \
 	PGVER=${PGVER} bash docker_shutdown_centos6.sh
 ADD run.sh /home/omero/run.sh
 

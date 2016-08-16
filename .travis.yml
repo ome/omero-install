@@ -4,8 +4,7 @@ services:
 env:
   - ENV=centos7_nginx
   - ENV=centos7_apache24
-  - ENV=centos6_nginx
-  - ENV=centos6_apache22
+  - ENV=centos6
   - ENV=centos6_py27_nginx
   - ENV=centos6_py27_apache24
   - ENV=ubuntu1404_nginx
