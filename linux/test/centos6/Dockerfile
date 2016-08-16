@@ -8,6 +8,11 @@ ARG JAVAVER=openjdk18
 ARG ICEVER=ice35
 ARG PGVER=pg94
 
+# keep to not break docker-build.sh
+ARG WEBSESSION=false
+ARG WEBAPPS=false
+
+
 # Needed for postgres init.d
 RUN touch /etc/sysconfig/network
 
