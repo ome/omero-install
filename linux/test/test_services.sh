@@ -77,5 +77,3 @@ fi
 # stop and cleanup
 docker stop $CNAME
 docker rm $CNAME
-
-# Sadly, no test for Windows or OS X here.
