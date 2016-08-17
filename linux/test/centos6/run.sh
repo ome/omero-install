@@ -24,5 +24,4 @@ elif [ "$PGVER" = "95" ]; then
 fi
 service crond start
 service omero start
-service httpd start
 exec bash

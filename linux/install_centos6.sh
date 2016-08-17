@@ -41,7 +41,4 @@ bash -eux step06_centos6_daemon_no_web.sh
 
 bash -eux step07_all_perms.sh
 
-bash -eux step08_all_cron.sh
-
 #service omero start
-#service omero-web start
