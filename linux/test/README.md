@@ -8,8 +8,8 @@ For example:
     ./docker-build.sh ubuntu1404_nginx
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
 
-    ./docker-build.sh centos6_apache22
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_apache22
+    ./docker-build.sh centos6
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6
 
     ./docker-build.sh centos6_py27_ius_nginx
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx
@@ -135,7 +135,8 @@ For example:
 
     WEBSESSION=true ./docker-build.sh ubuntu1404_nginx
 
-To run the image for centOS 6 or ubuntu/Debian, you need to pass the -w/--websession true.
+To run the image for centOS 6 with Python 2.7 or Ubuntu/Debian, you need to pass the -w/--websession true.
+The parameter is not taken into account for CentOS 6 with Python 2.6
 
 For example:
 
@@ -160,6 +161,7 @@ For example:
     WEBAPPS=true ./docker-build.sh ubuntu1404_nginx
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
 
+The parameter will not be taken into account when creating a CentOS 6 with Python 2.6 test image. 
 
 Installing development branches
 -------------------------------
