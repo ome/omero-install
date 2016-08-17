@@ -37,7 +37,7 @@ The walkthrough files should be used for documentation purpose.
 To generate the walkthrough file corresponding to a given OS i.e. `walkthough_OS.sh`,
 run for example:
 
-    OS=centos6 bash autogenerate.sh
+    OS=centos6 ALL=false bash autogenerate.sh
 
 Only the "recommended" requirements will be copied to the walkthrough file.
 When a requirement is modified e.g. Postgres 9.5 instead of Postgres 9.4
