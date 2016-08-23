@@ -218,7 +218,7 @@ echo -en '\n' >> $file
 echo "#start-step04: As the omero system user, install the OMERO.server" >> $file
 if [ $OS = "centos6_py27" ] ; then
 	echo "#start-copy-omeroscript" >> $file
-	echo "cp settings.env omero-$var.env $dir/step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
+	echo "cp settings.env omero-centos6_py27.env $dir/step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
 	echo "#end-copy-omeroscript" >> $file
 	number=$(sed -n '/#start-py27-scl/=' $dir/step04_all_omero.sh)
 	ns=$((number+1))
@@ -230,7 +230,7 @@ if [ $OS = "centos6_py27" ] ; then
 	#echo "$line" >> $file
 elif [ $OS = "centos6_py27_ius" ] ; then
 	echo "#start-copy-omeroscript" >> $file
-	echo "cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero" >> $file
+	echo "cp settings.env omero-centos6_py27ius.env step04_all_omero.sh setup_omero_db.sh ~omero" >> $file
 	echo "#end-copy-omeroscript" >> $file
 else
 	echo "#start-copy-omeroscript" >> $file
