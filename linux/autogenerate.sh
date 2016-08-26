@@ -167,7 +167,7 @@ if [[ $OS =~ "centos6_py27" ]] ; then
 	line=$(sed -n ''$ns','$ne'p' $dir/step02_"$OS"_setup.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 	echo "$line" >> $file
-	ns=$((number+3))
+	ns=$((number+2))
 	number=$(sed -n '/#start-ice/=' $dir/step02_"$OS"_setup.sh)
 	ne=$((number-1))
 	line=$(sed -n ''$ns','$ne'p' $dir/step02_"$OS"_setup.sh)
