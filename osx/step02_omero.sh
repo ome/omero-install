@@ -32,6 +32,10 @@ bash bin/omero_python_deps
 # Set additional environment variables
 export ICE_CONFIG=$(brew --prefix omero52)/etc/ice.config
 
+# Reinitialize PSQL cluster to fix missing directories on OSX 10.11
+rm -rf /usr/local/var/postgres
+initdb -E UTF8 /usr/local/var/postgres
+
 # Start PostgreSQL
 pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log -w start
 
