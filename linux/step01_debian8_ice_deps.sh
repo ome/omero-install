@@ -16,17 +16,17 @@ elif [ "$ICEVER" = "ice36" ]; then
  	apt-get -y install libssl-dev libbz2-dev libmcpp-dev libdb++-dev libdb-dev libdb-java	
  	cd /tmp/ice-download		
   		  
- 	URL=https://github.com/zeroc-ice/ice/archive/v3.6.2.zip		 
+ 	URL=https://github.com/zeroc-ice/ice/archive/v3.6.3.zip		 
  	NAME_ZIP=${URL##*/}	
  	wget $URL
  	unzip -q $NAME_ZIP
  	rm $NAME_ZIP		
- 	cd ice-3.6.2/cpp		
+ 	cd ice-3.6.3/cpp		
  	make && make install
 
 	pip install "zeroc-ice>3.5,<3.7"
 
-	echo /opt/Ice-3.6.2/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf		
+	echo /opt/Ice-3.6.3/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf		
  	ldconfig
  	#end-supported
 fi
