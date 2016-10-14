@@ -5,7 +5,7 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk18
-ARG ICEVER=ice35
+ARG ICEVER=ice36
 ARG PGVER=pg94
 
 # Needed for postgres init.d
