@@ -4,6 +4,7 @@ yum -y install \
 	python27 \
 	python27-virtualenv \
 	python27-numpy \
+	python27-yaml \
 	libjpeg-devel \
 	libpng-devel \
 	libtiff-devel \

@@ -3,6 +3,7 @@
 yum -y install \
 	python27 \
 	python27-devel \
+	python27-yaml \
 	libjpeg-devel \
 	libpng-devel \
 	libtiff-devel \
