@@ -4,7 +4,7 @@ apt-get update
 apt-get -y install \
 	unzip \
 	wget \
-	python-{matplotlib,numpy,pip,scipy,tables,virtualenv,yaml}
+	python-{matplotlib,numpy,pip,scipy,tables,virtualenv,yaml,jinja2}
 
 # require to install Pillow
 apt-get -y install \
