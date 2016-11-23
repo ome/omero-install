@@ -2,6 +2,7 @@
 
 yum -y install \
 	python-pip python-devel python-virtualenv \
+	python-yaml python-jinja2 \
 	numpy scipy python-matplotlib Cython \
 	gcc \
 	libjpeg-devel \
