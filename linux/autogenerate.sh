@@ -74,8 +74,7 @@ if [ $OS = "centos7" ] ; then
 	line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_deps.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 
-	# do not upgrade pip. this is not required in the doc
-	# echo "$line" >> $file
+	echo "$line" >> $file
 	ne=$(($ne+3))
 	line=$(sed -n ''$ne',$p' $dir/step01_"$OS"_deps.sh)
 	line="$(echo -e "${line}" | sed -e 's/`dirname \$0`\///')"
