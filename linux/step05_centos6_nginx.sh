@@ -24,7 +24,7 @@ yum -y install nginx
 # Install OMERO.web requirements
 file=~omero/OMERO.server/share/web/requirements-py26-nginx.txt
 
-# introduce in 5.2.0
+# introduced in 5.2.0
 if [ -f $file ]; then
 	#start-latest
 	pip install -r $file

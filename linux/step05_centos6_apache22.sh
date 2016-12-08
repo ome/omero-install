@@ -9,7 +9,7 @@ yum -y install httpd mod_wsgi
 
 # Install OMERO.web requirements
 file=~omero/OMERO.server/share/web/requirements-py26-apache.txt
-# introduce in 5.2.0
+# introduced in 5.2.0
 if [ -f $file ]; then
 	pip install -r $file
 fi
