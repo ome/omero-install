@@ -30,7 +30,7 @@ set -u
 # Install OMERO.web requirements
 file=~omero/OMERO.server/share/web/requirements-py27-nginx.txt
 
-# introduce in 5.2.0
+# introduced in 5.2.0
 if [ -f $file ]; then
 	#start-latest
 	/home/omero/omeroenv/bin/pip2.7 install -r $file
