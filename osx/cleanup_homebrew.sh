@@ -12,7 +12,4 @@ pkill nginx || echo No nginx running
 pkill postgres || echo No PostgreSQL running
 
 # Clean existing Homebrew
-rm -rf /usr/local/* && rm -rf /usr/local/.git || echo No Homebrew found
-
-# Remove Homebre cache
-# rm -rf /Library/Caches/Homebrew/* || echo No Homebrew cache found
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
