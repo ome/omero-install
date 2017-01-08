@@ -3,12 +3,7 @@
 yum -y install \
 	python-pip python-devel python-virtualenv \
 	python-yaml python-jinja2 \
-	numpy scipy python-matplotlib python-tables
-
-yum -y install \
-	zlib-devel \
-	libjpeg-devel \
-	gcc
+	python-pillow numpy scipy python-tables
 
 if [[ ! "${container:-}" = docker ]]; then
 	#start-docker-pip
