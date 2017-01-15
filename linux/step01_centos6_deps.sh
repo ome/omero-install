@@ -3,12 +3,8 @@
 yum -y install \
 	python-pip python-devel python-virtualenv \
 	python-yaml python-jinja2 \
-	numpy scipy python-matplotlib Cython \
+	numpy scipy Cython \
 	gcc \
-	libjpeg-devel \
-	libpng-devel \
-	libtiff-devel \
-	zlib-devel \
 	hdf5-devel
 
 # install dependencies using pip
