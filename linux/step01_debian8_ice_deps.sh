@@ -5,11 +5,11 @@ ICEVER=${ICEVER:-ice35}
 
 # Ice installation
 if [[ "$ICEVER" =~ "ice35" ]]; then
-	#start-recommended
-	apt-get -y install ice-services python-zeroc-ice
-	#end-recommended
-elif [ "$ICEVER" = "ice36" ]; then
 	#start-supported
+	apt-get -y install ice-services python-zeroc-ice
+ 	#end-supported
+elif [ "$ICEVER" = "ice36" ]; then
+	#start-recommended
 	mkdir /tmp/ice-download
 	apt-get -y install db5.3-util
  		 
@@ -28,5 +28,5 @@ elif [ "$ICEVER" = "ice36" ]; then
 
 	echo /opt/Ice-3.6.3/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf		
  	ldconfig
- 	#end-supported
+	#end-recommended
 fi

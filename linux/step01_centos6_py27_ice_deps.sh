@@ -4,7 +4,7 @@ ICEVER=${ICEVER:-ice35}
 
 # Ice installation
 if [[ "$ICEVER" =~ "ice35" ]]; then
-	#start-recommended
+	#start-supported
 	curl -o /etc/yum.repos.d/zeroc-ice-el6.repo \
 	http://download.zeroc.com/Ice/3.5/el6/zeroc-ice-el6.repo
 
@@ -24,9 +24,9 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 	# if globally set, there is no need to export LD_LIBRARY_PATH
 	echo /opt/Ice-3.5.1/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
 	ldconfig
-	#end-recommended
+    #end-supported
 elif [ "$ICEVER" = "ice36" ]; then
-	#start-supported
+	#start-recommended
 	cd /etc/yum.repos.d
 	wget https://zeroc.com/download/rpm/zeroc-ice-el6.repo
 
@@ -40,5 +40,5 @@ elif [ "$ICEVER" = "ice36" ]; then
 	source /opt/rh/python27/enable
 	set -u
 	pip install "zeroc-ice>3.5,<3.7"
-	#end-supported
+	#end-recommended
 fi

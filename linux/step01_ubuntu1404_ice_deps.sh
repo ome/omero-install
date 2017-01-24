@@ -5,11 +5,11 @@ ICEVER=${ICEVER:-ice35}
 
 # Ice installation
 if [[ "$ICEVER" =~ "ice35" ]]; then
-	#start-recommended
-	apt-get -y install ice-services python-zeroc-ice
-	#end-recommended
-elif [ "$ICEVER" = "ice36" ]; then
 	#start-supported
+	apt-get -y install ice-services python-zeroc-ice
+	#end-supported
+elif [ "$ICEVER" = "ice36" ]; then
+	#start-recommended
 	apt-get -y install db5.3-util
 	apt-get -y install libssl-dev libbz2-dev libmcpp-dev libdb++-dev libdb-dev
 
@@ -19,5 +19,5 @@ elif [ "$ICEVER" = "ice36" ]; then
 	apt-get -y install zeroc-ice-all-runtime zeroc-ice-all-dev
 
 	pip install "zeroc-ice>3.5,<3.7"
-	#end-supported
+	#end-recommended
 fi
