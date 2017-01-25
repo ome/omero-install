@@ -22,7 +22,8 @@ before_install:
 script:
     - cd linux/test
     - JAVAVER=oracle19 ./docker-build.sh $ENV
-    - if [[ "$ENV" =~ "centos7" ]]; then ./test_services.sh; fi
+    # do not start since the version of omero installed will not support Java 1.9
+    #- if [[ "$ENV" =~ "centos7" ]]; then ./test_services.sh; fi
     # run the unit tests
     - ./test_utils.sh
     # Sadly, no test for OS X here.
