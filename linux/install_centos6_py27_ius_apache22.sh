@@ -32,7 +32,7 @@ if $WEBSESSION ; then
     bash -eux step01_centos6_py27_ius_deps_websession.sh
 fi
 
-if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
+if [[ "$PGVER" =~ ^(pg94|pg95|pg96)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 
