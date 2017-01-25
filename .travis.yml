@@ -14,6 +14,8 @@ env:
   - ENV=centos6_py27_ius_apache22
   - ENV=centos6_py27_ius_apache24
   - ENV=centos6_py27_ius_nginx
+  - ENV=ubuntu1604_nginx
+  - ENV=ubuntu1604_apache24
 
 before_install:  
   - sudo apt-get update
