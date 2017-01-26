@@ -66,7 +66,7 @@ elif [ "$PGVER" = "pg96" ]; then
 		/usr/lib/systemd/system/postgresql-9.6.service
 	fi
 	if [ "${container:-}" = docker ]; then
-		su - postgres -c "/usr/pgsql-9.6/bin/pg_ctl start -D /var/lib/pgsql/9.5/data -w"
+		su - postgres -c "/usr/pgsql-9.6/bin/pg_ctl start -D /var/lib/pgsql/9.6/data -w"
 	else
 		systemctl start postgresql-9.6.service
 	fi
