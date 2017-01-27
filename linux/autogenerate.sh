@@ -77,6 +77,7 @@ if [ $OS = "centos7" ] ; then
 	echo "$line" >> $file
 	ne=$(($ne+3))
 	line=$(sed -n ''$ne',$p' $dir/step01_"$OS"_deps.sh)
+	line="$(echo -e "${line}" | sed -e 's/`dirname \$0`\///')"
 else
 	line=$(sed -n '2,$p' $dir/step01_"$OS"_deps.sh)
 fi
