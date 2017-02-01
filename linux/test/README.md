@@ -85,7 +85,10 @@ For example:
     PGVER=pg95 ./docker-build.sh centos6_py27_ius_nginx
     
     PGVER=pg95 ./docker-build.sh ubuntu1404_nginx
-    
+
+The supported values are: 
+pg94 (default), pg95, pg96
+
 To run the image for centOS 6 image, you need to pass the version used e.g. pg95 if the version 
 is not the default one. It is not necessary to specify the version when running Ubuntu/Debian image.
 
@@ -97,7 +100,7 @@ For example:
 
 
 The supported values are: 
-94 (default), 95
+94 (default), 95, 96
 
 If you do not want to install Postgres set PGVER to nopg.
 

@@ -29,7 +29,7 @@ bash -eux step01_centos6_pg_deps.sh
 
 ICEVER=$ICEVER bash -eux step02_centos6_py27_setup.sh
 
-if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
+if [[ "$PGVER" =~ ^(pg94|pg95|pg96)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 

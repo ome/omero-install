@@ -29,7 +29,7 @@ bash -eux step01_centos7_pg_deps.sh
 
 bash -eux step02_all_setup.sh
 
-if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
+if [[ "$PGVER" =~ ^(pg94|pg95|pg96)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 
