@@ -11,4 +11,4 @@ export ICE_CONFIG=$(brew --prefix omero52)/etc/ice.config
 export PYTHONPATH=$(brew --prefix omero52)/lib/python
 
 # Setup nginx
-omero web config nginx-development --http $HTTPPORT > $(brew --prefix omero52)/etc/nginx.conf
+omero web config nginx-development --http $HTTPPORT 2>&1 > $(brew --prefix omero52)/etc/nginx.conf
