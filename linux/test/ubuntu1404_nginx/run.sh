@@ -23,7 +23,7 @@ if [ "$WEBSESSION" = "true" ]; then
 fi
 #service crond start # Doesn't work in Docker
 cron
-service omero start
-service nginx start
-service omero-web start
+#service omero start
+#service nginx start
+#service omero-web start
 exec bash

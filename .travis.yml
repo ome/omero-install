@@ -3,17 +3,17 @@ services:
   - docker
 env:
   - ENV=centos7_nginx
-  - ENV=centos7_apache24
-  - ENV=centos6
-  - ENV=centos6_py27_nginx
-  - ENV=centos6_py27_apache24
+  #- ENV=centos7_apache24
+  #- ENV=centos6
+  #- ENV=centos6_py27_nginx
+  #- ENV=centos6_py27_apache24
   - ENV=ubuntu1404_nginx
-  - ENV=ubuntu1404_apache24
-  - ENV=debian8_nginx
-  - ENV=debian8_apache24
-  - ENV=centos6_py27_ius_apache22
-  - ENV=centos6_py27_ius_apache24
-  - ENV=centos6_py27_ius_nginx
+  #- ENV=ubuntu1404_apache24
+  #- ENV=debian8_nginx
+  #- ENV=debian8_apache24
+  #- ENV=centos6_py27_ius_apache22
+  #- ENV=centos6_py27_ius_apache24
+  #- ENV=centos6_py27_ius_nginx
 
 before_install:  
   - sudo apt-get update
@@ -21,8 +21,9 @@ before_install:
   - sudo apt-get -y install shunit2
 script:
     - cd linux/test
-    - ./docker-build.sh $ENV
-    - if [[ "$ENV" =~ "centos7" ]]; then ./test_services.sh; fi
+    - JAVAVER=oracle19 ./docker-build.sh $ENV
+    # do not start since the version of omero installed will not support Java 1.9
+    #- if [[ "$ENV" =~ "centos7" ]]; then ./test_services.sh; fi
     # run the unit tests
     - ./test_utils.sh
     # Sadly, no test for OS X here.
