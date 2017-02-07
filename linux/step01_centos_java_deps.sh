@@ -31,7 +31,7 @@ elif [ "$JAVAVER" = "oracle19" ]; then
 	wget --no-cookies \
 	--no-check-certificate \
 	--header "Cookie: oraclelicense=accept-securebackup-cookie" \
-	"http://www.java.net/download/java/jdk9/archive/116/binaries/jdk-9-ea+116_linux-x64_bin.tar.gz" \
+	"http://www.java.net/download/java/jdk9/archive/155/binaries/jdk-9-ea+155_linux-x64_bin.tar.gz" \
 	-O jdk-9-linux-x64.tar.gz
 	tar -zxvf jdk-9-linux-x64.tar.gz
 	cd jdk-9
