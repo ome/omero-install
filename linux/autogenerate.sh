@@ -13,7 +13,7 @@ echo "${l}"
 
 #generate the walkthrough for all supported os
 function generate_all() {
-	values=(centos7 centos6_py27 centos6_py27_ius ubuntu1404 debian8)
+	values=(centos7 centos6_py27 centos6_py27_ius ubuntu1404 debian8 ubuntu1604)
 	for os in "${values[@]}"; do
   		echo "${os}"
   		 generate ${os}
@@ -34,7 +34,7 @@ source settings.env
 EOF
 
 N=$OS
-if [ $OS = "debian8" ] ; then
+if [ $OS = "debian8" ] || [ $OS = "ubuntu1604" ] ; then
 	N="ubuntu1404"
 fi
 echo -en '\n' >> $file
@@ -46,6 +46,8 @@ echo "$line" >> $file
 N=$OS
 if [[ $OS =~ "centos" ]] ; then
 	N="centos"
+elif [ $OS = "ubuntu1604" ] ; then
+	N="ubuntu1404"
 fi 
 echo -en '\n' >> $file
 echo "# install Java" >> $file
@@ -79,7 +81,11 @@ if [ $OS = "centos7" ] ; then
 	line=$(sed -n ''$ne',$p' $dir/step01_"$OS"_deps.sh)
 	line="$(echo -e "${line}" | sed -e 's/`dirname \$0`\///')"
 else
-	line=$(sed -n '2,$p' $dir/step01_"$OS"_deps.sh)
+	N=$OS
+	if [ $OS = "ubuntu1604" ] ; then
+		N="ubuntu1404"
+	fi
+	line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
 fi
 echo "$line" >> $file
 
@@ -88,7 +94,7 @@ echo "$line" >> $file
 # install ice
 echo "# install Ice" >> $file
 N=$OS
-if [ $OS = "debian8" ] ; then
+if [ $OS = "debian8" ] || [ $OS = "ubuntu1604" ] ; then
 	N="ubuntu1404"
 fi
 echo "#start-recommended-ice" >> $file
@@ -297,19 +303,23 @@ echo "#end-step04" >> $file
 
 echo -en '\n' >> $file
 if [ ! $OS = "centos6" ] ; then
+	N=$OS
+	if [ $OS = "ubuntu1604" ] ; then
+		N="ubuntu1404"
+	fi
 	echo "#start-step05: As root, install a Web server: Nginx or Apache" >> $file
 	echo "#start-nginx" >> $file
-	number=$(sed -n '/#start-install/=' $dir/step05_"$OS"_nginx.sh)
+	number=$(sed -n '/#start-install/=' $dir/step05_"$N"_nginx.sh)
 	ns=$((number+1))
-	number=$(sed -n '/#start-latest/=' $dir/step05_"$OS"_nginx.sh)
+	number=$(sed -n '/#start-latest/=' $dir/step05_"$N"_nginx.sh)
 	ne=$((number-3))
-	line=$(sed -n ''$ns','$ne'p' $dir/step05_"$OS"_nginx.sh)
+	line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 	echo "$line" >> $file
 	ns=$((number+1))
-	number=$(sed -n '/#end-latest/=' $dir/step05_"$OS"_nginx.sh)
+	number=$(sed -n '/#end-latest/=' $dir/step05_"$N"_nginx.sh)
 	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step05_"$OS"_nginx.sh)
+	line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 	echo "$line" >> $file
 	echo "#start-configure-nginx: As the omero system user, configure OMERO.web" >> $file
@@ -320,9 +330,9 @@ if [ ! $OS = "centos6" ] ; then
 	echo "$line" >> $file
 	echo "#end-configure-nginx" >> $file
 
-	number=$(sed -n '/#end-install/=' $dir/step05_"$OS"_nginx.sh)
+	number=$(sed -n '/#end-install/=' $dir/step05_"$N"_nginx.sh)
 	ns=$((number+1))
-	line=$(sed -n ''$ns',$p' $dir/step05_"$OS"_nginx.sh)
+	line=$(sed -n ''$ns',$p' $dir/step05_"$N"_nginx.sh)
 	# remove docker conditional
 	line=`remove_docker_workaround "${line}"`
 	echo "$line" >> $file
@@ -332,7 +342,7 @@ if [ ! $OS = "centos6" ] ; then
 	echo "#start-apache" >> $file
 
 	v=$OS
-	if [ $OS = "debian8" ] ; then
+	if [ $OS = "debian8" ] || [ $OS = "ubuntu1604" ] ; then
 		v="ubuntu1404"
 	fi
 
