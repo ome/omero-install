@@ -22,12 +22,12 @@ elif [ "$JAVAVER" = "openjdk18" ]; then
 	#start-recommended
 	echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
 	apt-get update
-	apt-get -y install openjdk-8-jre-headless
+	apt-get -y install -t jessie-backports openjdk-8-jre-headless ca-certificates-java
 	#end-recommended
 elif [ "$JAVAVER" = "openjdk18-devel" ]; then
 	echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
 	apt-get update
-	apt-get -y install openjdk-8-jdk
+	apt-get -y install -t jessie-backports openjdk-8-jdk ca-certificates-java
 elif [ "$JAVAVER" = "openjdk17-devel" ]; then
 	apt-get -y install openjdk-7-jdk
 fi
