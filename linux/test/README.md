@@ -108,7 +108,7 @@ To add a new Postgres version, update the following files:
 Configuring Ice
 ---------------
 
-By default, Ice 3.5 is installed.
+By default, Ice 3.6 is installed.
 It is possible to install other versions using the ICEVER parameter.
 
 For example:

@@ -7,7 +7,7 @@ ARG WEBSESSION=false
 ARG WEBAPPS=false
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk18
-ARG ICEVER=ice35
+ARG ICEVER=ice36
 ARG PGVER=pg94
 
 RUN apt-get update && apt-get -y install locales
