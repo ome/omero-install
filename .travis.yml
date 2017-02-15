@@ -3,16 +3,10 @@ services:
   - docker
 env:
   - ENV=centos7_nginx
-  - ENV=centos7_apache24
   - ENV=centos6
   - ENV=centos6_py27_nginx
-  - ENV=centos6_py27_apache24
   - ENV=ubuntu1404_nginx
-  - ENV=ubuntu1404_apache24
   - ENV=debian8_nginx
-  - ENV=debian8_apache24
-  - ENV=centos6_py27_ius_apache22
-  - ENV=centos6_py27_ius_apache24
   - ENV=centos6_py27_ius_nginx
   - ENV=ubuntu1604_nginx
 
