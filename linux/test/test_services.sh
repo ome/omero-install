@@ -49,12 +49,7 @@ docker exec -it $CNAME /bin/bash -c "su - omero -c \"/home/omero/OMERO.server/bi
 
 
 # check OMERO.web status
-if [[ $ENV =~ "nginx" ]]; then
-    docker exec -it $CNAME /bin/bash -c "service omero-web status -l"
-fi
-if [[ $ENV =~ "apache" ]]; then
-    docker exec -it $CNAME /bin/bash -c "service httpd status -l"
-fi
+docker exec -it $CNAME /bin/bash -c "service omero-web status -l"
 
 if [[ "$WEBSESSION" = true ]]; then
     docker exec -it $CNAME /bin/bash -c "service redis status -l"
