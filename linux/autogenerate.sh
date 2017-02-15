@@ -307,7 +307,7 @@ if [ ! $OS = "centos6" ] ; then
 	if [ $OS = "ubuntu1604" ] ; then
 		N="ubuntu1404"
 	fi
-	echo "#start-step05: As root, install a Web server: Nginx or Apache" >> $file
+	echo "#start-step05: As root, install Nginx" >> $file
 	echo "#start-nginx" >> $file
 	number=$(sed -n '/#start-install/=' $dir/step05_"$N"_nginx.sh)
 	ns=$((number+1))
@@ -339,41 +339,6 @@ if [ ! $OS = "centos6" ] ; then
 	echo "#end-nginx" >> $file
 
 	echo -en '\n' >> $file
-	echo "#start-apache" >> $file
-
-	v=$OS
-	if [ $OS = "debian8" ] || [ $OS = "ubuntu1604" ] ; then
-		v="ubuntu1404"
-	fi
-
-	apachever="apache24" #webserver might become a parameter
-	if [ $OS = "centos6_py27_ius" ] ; then
-		apachever="apache22"
-	fi
-	line=$(sed -n ''/#start-copy/','/#end-copy/'p' $dir/step05_"$v"_"$apachever".sh)
-	echo "$line" >> $file
-	echo "#start-configure-apache: As the omero system user, configure OMERO.web" >> $file
-	start=$(sed -n '/#start-config/=' $dir/setup_omero_"$apachever".sh)
-	start=$((start+1))
-	line=$(sed -n ''$start',$p' $dir/setup_omero_"$apachever".sh)
-	echo "$line" >> $file
-	echo "#end-configure-apache" >> $file
-	#start install
-	echo "#start-apache-install" >> $file
-	start=$(sed -n '/#start-install/=' $dir/step05_"$v"_"$apachever".sh)
-	start=$((start+1))
-	end=$(sed -n '/#start-setup-as-omero/=' $dir/step05_"$v"_"$apachever".sh)
-	end=$((end-1))
-	line=$(sed -n ''$start','$end'p' $dir/step05_"$v"_"$apachever".sh)
-	echo "$line" >> $file
-	start=$(sed -n '/#end-setup-as-omero/=' $dir/step05_"$v"_"$apachever".sh)
-	start=$((start+1))
-	line=$(sed -n ''$start',$p' $dir/step05_"$v"_"$apachever".sh)
-	# remove docker conditional
-	line=`remove_docker_workaround "${line}"`
-	echo "$line" >> $file
-	echo "#end-apache-install" >> $file
-	echo "#end-apache" >> $file
 	echo "#end-step05" >> $file
 fi
 
