@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Collection of utility methods
-VERSION=5.2
+VERSION=5.3
 
 # Check if the specified value is a number
 is_number() {
