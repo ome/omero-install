@@ -97,7 +97,7 @@ For example:
 
 
 The supported values are: 
-94 (default), 95
+94 (default), 95, 96
 
 If you do not want to install Postgres set PGVER to nopg.
 
