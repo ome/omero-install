@@ -46,14 +46,14 @@ in the corresponding steps files.
 The default value for given parameter should be the recommended version
 e.g. openjdk18 for Java.
 
-Both nginx and apache installation steps are added to the walkthrough file
+Nginx installation steps are added to the walkthrough file
 
 To generate all the walkthroughs, run the following command
     
     ALL=true bash autogenerate.sh
 
 The possible values are:
-centos7 (default), centos6, centos6_py27, centos6_py27_ius, debian8, ubuntu1404
+centos7 (default), centos6, centos6_py27, centos6_py27_ius, debian8, ubuntu1404, ubuntu1604
 
 Configuring Java
 ----------------
@@ -103,7 +103,7 @@ If you do not want to install Postgres set PGVER to nopg.
 
 To add a new Postgres version, update the following files: 
 `step01_centos6_pg_deps.sh`, `step01_centos7_pg_deps.sh`, `step01_debian8_pg_deps.sh`,
-`step01_ubuntu1404_pg_deps.sh` and update this README.md.
+`step01_ubuntu1404_pg_deps.sh`, `step01_ubuntu1604_pg_deps.sh` and update this README.md.
 
 Configuring Ice
 ---------------
@@ -202,7 +202,6 @@ Testing CentOS 7
 
         $ cd linux/test
         NGINX $ export ENV=centos7_nginx
-        APACHE $ export ENV=centos7_apache24
         $ ./docker-build.sh $ENV
 
      Notet that it is possible to use the various parameters when running the installation script e.g.
