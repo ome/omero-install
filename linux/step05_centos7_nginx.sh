@@ -11,16 +11,6 @@ cp setup_omero_nginx.sh ~omero
 p=nginx
 
 #start-install
-# The following is only required to install
-# latest stable version of nginx
-# Default will be 1.6.3 if not set
-cat << EOF > /etc/yum.repos.d/nginx.repo
-[nginx]
-name=nginx repo
-baseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/
-gpgcheck=0
-enabled=1
-EOF
 
 #install nginx
 yum -y install nginx
