@@ -4,7 +4,6 @@ PGVER=${PGVER:-pg94}
 
 # Postgres installation
 if [ "$PGVER" = "pg94" ]; then
-	#start-recommended
 	# Postgres, reconfigure to allow TCP connections
 	yum -y install http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-2.noarch.rpm
 	yum -y install postgresql94-server postgresql94
@@ -26,7 +25,6 @@ if [ "$PGVER" = "pg94" ]; then
 		systemctl start postgresql-9.4.service
 	fi
 	systemctl enable postgresql-9.4.service
-	#end-recommended
 elif [ "$PGVER" = "pg95" ]; then
 	# Postgres, reconfigure to allow TCP connections
 	yum -y install http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm
@@ -50,6 +48,7 @@ elif [ "$PGVER" = "pg95" ]; then
 	fi
 	systemctl enable postgresql-9.5.service
 elif [ "$PGVER" = "pg96" ]; then
+	#start-recommended
 	# Postgres, reconfigure to allow TCP connections
 	yum -y install http://yum.postgresql.org/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
 	yum -y install postgresql96-server postgresql96
@@ -71,4 +70,5 @@ elif [ "$PGVER" = "pg96" ]; then
 		systemctl start postgresql-9.6.service
 	fi
 	systemctl enable postgresql-9.6.service
+	#end-recommended
 fi
