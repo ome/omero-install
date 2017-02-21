@@ -18,7 +18,7 @@ omero admin start
 
 # Start OMERO.web
 omero web start
-nginx -c $(brew --prefix omero52)/etc/nginx.conf
+nginx -c $(brew --prefix omero53)/etc/nginx.conf
 
 # Check OMERO version
 omero version | grep -v UNKNOWN
