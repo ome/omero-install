@@ -9,7 +9,7 @@ ICEVER=${ICEVER:-ice36}
 
 source settings.env
 
-bash -eux step01_ubuntu1404_init.sh
+bash -eux step01_ubuntu_init.sh
 
 # install java
 bash -eux step01_debian8_java_deps.sh
@@ -52,7 +52,7 @@ fi
 #su - omero -c "OMERO.server/bin/omero admin start"
 #su - omero -c "OMERO.server/bin/omero web start"
 
-bash -eux step06_ubuntu1404_daemon.sh
+bash -eux step06_ubuntu_daemon.sh
 
 bash -eux step07_all_perms.sh
 
