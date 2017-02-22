@@ -21,5 +21,5 @@ elif [ "$PGVER" = "pg96" ]; then
 	apt-get update
 	apt-get -y install postgresql-9.6
 	service postgresql start
-	#start-recommended
+	#end-recommended
 fi
