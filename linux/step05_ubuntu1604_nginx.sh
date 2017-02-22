@@ -11,9 +11,8 @@ cp setup_omero_nginx.sh ~omero
 p=nginx
 
 #start-install
-
-#install nginx
-yum -y install nginx
+apt-get update
+apt-get -y install nginx
 
 file=~omero/OMERO.server/share/web/requirements-py27-nginx.txt
 
@@ -37,11 +36,8 @@ else
 fi
 
 #end-install
-sed -i.bak -re 's/( default_server.*)/; #\1/' /etc/nginx/nginx.conf
+cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/sites-available/omero-web
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/omero-web /etc/nginx/sites-enabled/
 
-cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
-
-systemctl enable nginx
-if [ ! "${container:-}" = docker ]; then
-    systemctl start nginx
-fi
+service nginx start
