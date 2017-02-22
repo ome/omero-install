@@ -4,4 +4,4 @@
 yum -y install https://centos6.iuscommunity.org/ius-release.rpm
 
 # installed for convenience
-yum -y install unzip wget tar bc
+yum -y install unzip wget tar bc git
