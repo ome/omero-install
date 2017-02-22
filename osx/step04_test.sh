@@ -33,7 +33,7 @@ omero logout
 WEB_HOST="localhost:${HTTPPORT}" OMERO_ROOT_PASS=$ROOT_PASSWORD bash ../linux/test/test_login_to_web.sh
 
 # Stop OMERO.web
-nginx -c $(brew --prefix omero52)/etc/nginx.conf -s stop
+nginx -c $(brew --prefix omero53)/etc/nginx.conf -s stop
 omero web stop
 
 # Stop the server
