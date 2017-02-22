@@ -22,5 +22,4 @@ script:
     - ./test_utils.sh
     - cd ..
     - ./autogenerate.sh
-    - rm walktrough*
     # Sadly, no test for OS X here.
