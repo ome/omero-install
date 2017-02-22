@@ -21,6 +21,8 @@ if [ "$PGVER" = "94" ]; then
 	service postgresql-9.4 start
 elif [ "$PGVER" = "95" ]; then
 	service postgresql-9.5 start
+elif [ "$PGVER" = "96" ]; then
+    service postgresql-9.6 start
 fi
 service crond start
 service omero start
