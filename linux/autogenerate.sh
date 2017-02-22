@@ -1,6 +1,8 @@
 #!/bin/bash
 # installation of the recommended dependencies
 # i.e. Java 1.8, nginx
+set +x
+
 dir=`dirname $0`
 
 remove_docker_workaround () {
