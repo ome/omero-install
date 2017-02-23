@@ -23,14 +23,14 @@ brew install omero53 --with-nginx --with-cpp
 
 # Install zeroc-ice if Ice 3.6
 if [ "$ICE" = "3.6" ]; then
-    sudo pip install "zeroc-ice>3.5,<3.7"
+    pip install "zeroc-ice>3.5,<3.7"
 fi
 
 export PYTHONPATH=$OMERO_PYTHONPATH
 VERBOSE=1 brew test omero53
 
 # Install OMERO Python dependencies
-sudo pip install -r $(brew --prefix omero53)/share/web/requirements-py27-nginx.txt
+pip install -r $(brew --prefix omero53)/share/web/requirements-py27-nginx.txt
 cd /usr/local
 bash bin/omero_python_deps
 
