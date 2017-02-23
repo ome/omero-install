@@ -19,7 +19,7 @@ omero admin start
 
 if [ -f $(brew --prefix omero53)/var/log/Blitz-0.log ]; then
     d=10;
-    while ! grep "OMERO.blitz now accepting connections" $(brew --prefix omero52)/var/log/Blitz-0.log ;
+    while ! grep "OMERO.blitz now accepting connections" $(brew --prefix omero53)/var/log/Blitz-0.log ;
         do
             sleep 10;
             d=$[$d -1];
