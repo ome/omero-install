@@ -1,6 +1,8 @@
 #!/bin/bash
 # installation of the recommended dependencies
 # i.e. Java 1.8, nginx
+set +x
+
 dir=`dirname $0`
 
 remove_docker_workaround () {
@@ -34,8 +36,8 @@ source settings.env
 EOF
 
 N=$OS
-if [ $OS = "debian8" ] || [ $OS = "ubuntu1604" ] ; then
-	N="ubuntu1404"
+if [ $OS = "debian8" ] || [[ $OS =~ "ubuntu" ]] ; then
+	N="ubuntu"
 fi
 echo -en '\n' >> $file
 echo "#start-step01: As root, install dependencies" >> $file
@@ -46,8 +48,8 @@ echo "$line" >> $file
 N=$OS
 if [[ $OS =~ "centos" ]] ; then
 	N="centos"
-elif [ $OS = "ubuntu1604" ] ; then
-	N="ubuntu1404"
+elif [[ $OS =~ "ubuntu" ]]  ; then
+	N="ubuntu"
 fi 
 echo -en '\n' >> $file
 echo "# install Java" >> $file
@@ -82,8 +84,8 @@ if [ $OS = "centos7" ] ; then
 	line="$(echo -e "${line}" | sed -e 's/`dirname \$0`\///')"
 else
 	N=$OS
-	if [ $OS = "ubuntu1604" ] ; then
-		N="ubuntu1404"
+	if [[ $OS =~ "ubuntu" ]] ; then
+		N="ubuntu"
 	fi
 	line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
 fi
@@ -94,8 +96,8 @@ echo "$line" >> $file
 # install ice
 echo "# install Ice" >> $file
 N=$OS
-if [ $OS = "debian8" ] || [ $OS = "ubuntu1604" ] ; then
-	N="ubuntu1404"
+if [ $OS = "debian8" ] || [[ $OS =~ "ubuntu" ]] ; then
+	N="ubuntu"
 fi
 echo "#start-recommended-ice" >> $file
 number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_ice_deps.sh)
@@ -304,9 +306,6 @@ echo "#end-step04" >> $file
 echo -en '\n' >> $file
 if [ ! $OS = "centos6" ] ; then
 	N=$OS
-	if [ $OS = "ubuntu1604" ] ; then
-		N="ubuntu1404"
-	fi
 	echo "#start-step05: As root, install Nginx" >> $file
 	echo "#start-nginx" >> $file
 	number=$(sed -n '/#start-install/=' $dir/step05_"$N"_nginx.sh)
