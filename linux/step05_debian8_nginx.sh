@@ -18,13 +18,16 @@ rm nginx_signing.key
 apt-get update
 apt-get -y install nginx
 
-file=~omero/OMERO.server/share/web/requirements-py27-nginx.txt
+file=~omero/OMERO.server/share/web/requirements-py27-all.txt
 
-# introduced in 5.2.0
+# introduced in 5.3.0
 if [ -f $file ]; then
 	#start-latest
 	pip install -r $file
 	#end-latest
+elif $(is_less_than $OMEROVER 5.3); then
+	filenginx=~omero/OMERO.server/share/web/requirements-py27-nginx.txt
+	pip install -r $filenginx
 else
 	#for version 5.1.x
 	pip install "gunicorn>=19.3"
