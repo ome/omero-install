@@ -354,12 +354,12 @@ else
 	echo "#start-step06: As root, run the scripts to start OMERO and OMERO.web automatically" >> $file
 fi
 
-if [[ $v =~ "centos7" ]] ; then
-	number=$(sed -n '/#start-recommended/=' $dir/step06_"$v"_daemon.sh)
+if [ $OS = "centos7" ] ; then
+	number=$(sed -n '/#start-recommended/=' $dir/step06_"$OS"_daemon.sh)
 	nrs=$((number+1))
-	number=$(sed -n '/#end-recommended/=' $dir/step06_"$v"_daemon.sh)
+	number=$(sed -n '/#end-recommended/=' $dir/step06_"$OS"_daemon.sh)
 	nre=$((number-1))
-	line=$(sed -n ''$nrs','$nre'p' $dir/step06_"$v"_daemon.sh)
+	line=$(sed -n ''$nrs','$nre'p' $dir/step06_"$OS"_daemon.sh)
 	# remove docker conditional
 	line=`remove_docker_workaround "${line}"`
 	echo "$line" >> $file
