@@ -22,7 +22,7 @@ before_install:
   - sudo apt-get -y install shunit2
 script:
     - cd linux/test
-    - ./docker-build.sh $ENV
+    - OMEROVER=OMERO-DEV-latest ./docker-build.sh $ENV
     - if [[ "$ENV" =~ "centos7" ]]; then ./test_services.sh; fi
     # run the unit tests
     - ./test_utils.sh
