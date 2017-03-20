@@ -25,15 +25,12 @@ if [[ ! $PY_ENV = "py27_ius" ]]; then
 	#end-venv
 fi
 
-if [ $OMEROVER == "latest" ]; then
-	OMEROVER=$(get_latest_version)
-fi
 
 icevalue=3.5
 #start-install
 if [ "$ICEVER" = "ice36" ]; then
 	icevalue=3.6
-	if $(is_number $OMEROVER) && $(is_latest_version $OMEROVER); then
+	if [ $OMEROVER == "latest" ]; then
 		#start-release-ice36
 		cd ~omero
 		SERVER=http://downloads.openmicroscopy.org/latest/omero$OMEROVER/server-ice36.zip
@@ -44,7 +41,7 @@ if [ "$ICEVER" = "ice36" ]; then
 else
 	# do not use omego for the release version
 	# Handle release version via download page.
-	if $(is_number $OMEROVER) ; then
+	if [ $OMEROVER == "latest" ]; then
   		# one release version
   		#start-release-ice35
   		cd ~omero
