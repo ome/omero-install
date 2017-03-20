@@ -2,14 +2,9 @@
 
 OMEROVER=${OMEROVER:-latest}
 
-source utils.sh
-
-
 #start-copy
 cp setup_omero_nginx.sh ~omero
 #end-copy
-
-p=nginx
 
 #start-install
 set +u

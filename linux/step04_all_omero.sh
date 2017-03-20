@@ -2,8 +2,6 @@
 
 set -e -u -x
 
-source utils.sh
-
 OMEROVER=${OMEROVER:-latest}
 PY_ENV=${PY_ENV:-py27}
 ICEVER=${ICEVER:-ice35}
