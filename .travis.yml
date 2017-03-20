@@ -18,8 +18,6 @@ script:
     - cd linux/test
     - ./docker-build.sh $ENV
     - if [[ "$ENV" =~ "centos7" ]]; then ./test_services.sh; fi
-    # run the unit tests
-    - ./test_utils.sh
     - cd ..
     - ./autogenerate.sh
     # Sadly, no test for OS X here.
