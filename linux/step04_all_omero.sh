@@ -68,10 +68,6 @@ OMERO.server/bin/omero config set omero.db.user "$OMERO_DB_USER"
 OMERO.server/bin/omero config set omero.db.pass "$OMERO_DB_PASS"
 #start-db
 
-if $(is_less_than $OMEROVER 5.1); then
-	OMERO.server/bin/omero db script -f OMERO.server/db.sql "" "" "$OMERO_ROOT_PASS"
-else
-	#start-deb-latest
-	OMERO.server/bin/omero db script -f OMERO.server/db.sql --password "$OMERO_ROOT_PASS"
-	#end-deb-latest
-fi
+#start-deb-latest
+OMERO.server/bin/omero db script -f OMERO.server/db.sql --password "$OMERO_ROOT_PASS"
+#end-deb-latest
