@@ -9,7 +9,7 @@ yum -y install \
 	hdf5-devel \
 	expat-devel
 
-yum -y install libjpeg-turbo zlib-devel
+yum -y install libjpeg-devel zlib-devel
 
 # TODO: this installs a lot of unecessary packages:
 yum -y groupinstall "Development Tools"

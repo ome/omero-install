@@ -7,7 +7,7 @@ yum -y install \
 	python27-jinja2 \
 	hdf5-devel
 
-yum -y install libjpeg-turbo zlib-devel
+yum -y install libjpeg-devel zlib-devel
 
 # install pip and virtualenv using Python 2.6 
 yum -y install python-pip
