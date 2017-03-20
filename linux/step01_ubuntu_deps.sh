@@ -8,5 +8,3 @@ apt-get -y install \
 
 pip install --upgrade pip
 
-# upgrade required since pillow is already installed
-pip install --upgrade -r requirements.txt
