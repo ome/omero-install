@@ -14,7 +14,7 @@ add-apt-repository -y ppa:nginx/stable
 apt-get update
 apt-get -y install nginx
 
-file=~omero/OMERO.server/share/web/requirements-py27-all.txt
+file=~omero/OMERO.server/share/web/requirements-py27.txt
 
 #start-latest
 pip install -r $file
