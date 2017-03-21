@@ -26,7 +26,7 @@ export PYTHONPATH=$OMERO_PYTHONPATH
 VERBOSE=1 brew test omero53
 
 # Install OMERO Python dependencies
-pip install -r $(brew --prefix omero53)/share/web/requirements-py27.txt
+pip install -r $(brew --prefix omero53)/share/web/requirements-py27-all.txt
 cd /usr/local
 bash bin/omero_python_deps
 
