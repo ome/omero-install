@@ -19,7 +19,7 @@ export LANGUAGE=${LANGUAGE:-en_US:en}
 
 # Install OMERO
 OMERO_PYTHONPATH=$(brew --prefix omero52)/lib/python
-brew install omero52 --with-nginx --with-cpp
+brew install omero52 --with-nginx --with-cpp --with-ice36
 export PYTHONPATH=$OMERO_PYTHONPATH
 VERBOSE=1 brew test omero52
 
