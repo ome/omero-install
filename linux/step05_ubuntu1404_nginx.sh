@@ -7,8 +7,8 @@ cp setup_omero_nginx.sh ~omero
 #end-copy
 
 #start-install
-# require to install more recent version of nginx
-# w/o the version installed is 1.4.6
+# required to install more recent version of nginx
+# without this, the version installed is 1.4.6
 add-apt-repository -y ppa:nginx/stable
 
 apt-get update
