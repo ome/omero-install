@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ICEVER=${ICEVER:-ice35}
+ICEVER=${ICEVER:-ice36}
 
 # Ice installation
 if [[ "$ICEVER" =~ "ice35" ]]; then
