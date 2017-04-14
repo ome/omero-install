@@ -16,6 +16,9 @@ bash -eux step01_ubuntu_java_deps.sh
 
 bash -eux step01_ubuntu_deps.sh
 
+# install script dependencies
+WEBAPPS=$WEBAPPS bash -eux step01_ubuntu1404_scripts_deps.sh
+
 # install ice
 bash -eux step01_ubuntu_ice_deps.sh
 
