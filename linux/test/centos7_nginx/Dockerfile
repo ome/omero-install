@@ -5,6 +5,8 @@
 FROM openmicroscopy/omero-ssh-c7:0.1.0-1
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
+ENV LANG en_US.UTF-8
+
 # Remove the existing omero user
 RUN userdel -r omero && \
 	rm -f /etc/sudoers.d/omero && \
