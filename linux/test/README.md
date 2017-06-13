@@ -72,7 +72,7 @@ If you do not want to install Java set JAVAVER to nojava.
 
 To add a new Java version, update the following files: 
 `step01_centos_java_deps.sh`, `step01_debian8_java_deps.sh`,
-`step01_ubuntu1404_java_deps.sh` and update this README.md.
+`step01_ubuntu_java_deps.sh` and update this README.md.
 
 Configuring Postgres
 --------------------
@@ -120,7 +120,7 @@ ice35, ice35-devel, ice36
 
 To add a new Ice version, update the following files:
 `step01_centos6_ice_deps.sh`, `step01_centos6_py27_ice_deps.sh`, `step01_centos6_py27_ius_ice_deps.sh`
-`step01_centos7_ice_deps.sh`, `step01_ubuntu1404_ice_deps.sh` and update this README.md.
+`step01_centos7_ice_deps.sh`, `step01_ubuntu_ice_deps.sh` and update this README.md.
 
 Configuring Redis
 -----------------
@@ -175,21 +175,13 @@ For example:
     OMEROVER=OMERO-DEV-latest ./docker-build.sh ubuntu1404_nginx
 
 The supported values are: 
-OMERO-DEV-latest, OMERO-DEV-merge-build, 5.0 (latest i.e. 5.0.8), 5.1 (latest), 5.2 (latest), latest (default)
-
-If you select 5.0, you will have to apply a Java security patch
-see http://blog.openmicroscopy.org/tech-issues/2015/07/21/java-issue/
-for information and instructions.
-
-5.1 and 5.0 only work with nginx.
+OMERO-DEV-latest, OMERO-DEV-merge-build,s 5.2 (latest), latest (default)
 
 
 | OMERO version         | Ice version |
 |-----------------------|------------ |
 | OMERO-DEV-latest      | 3.5, 3.6    |
 | OMERO-DEV-merge-build | 3.5, 3.6    |
-| 5.0                   | 3.5         |
-| 5.1                   | 3.5         |
 | 5.2                   | 3.5, 3.6    |
 | latest                | 3.5, 3.6    |
 ---------------------------------------
