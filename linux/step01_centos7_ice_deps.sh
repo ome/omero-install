@@ -7,7 +7,7 @@ if [ "$ICEVER" = "ice35" ]; then
 	#start-supported
 	curl -o /etc/yum.repos.d/zeroc-ice-el7.repo \
 	http://download.zeroc.com/Ice/3.5/el7/zeroc-ice-el7.repo
-
+	yum -y install gcc-c++
 	yum -y install ice ice-python ice-servers
 	#end-supported
 elif [ "$ICEVER" = "ice35-devel" ]; then
@@ -28,4 +28,6 @@ elif [ "$ICEVER" = "ice36" ]; then
 
 	pip install "zeroc-ice>3.5,<3.7"
 	#end-recommended
+	# reset the locale
+	localedef -i en_US -f UTF-8 en_US.UTF-8
 fi
