@@ -175,14 +175,13 @@ For example:
     OMEROVER=OMERO-DEV-latest ./docker-build.sh ubuntu1404_nginx
 
 The supported values are: 
-OMERO-DEV-latest, OMERO-DEV-merge-build,s 5.2 (latest), latest (default)
+OMERO-DEV-latest, OMERO-DEV-merge-build, latest (default)
 
 
 | OMERO version         | Ice version |
 |-----------------------|------------ |
 | OMERO-DEV-latest      | 3.5, 3.6    |
 | OMERO-DEV-merge-build | 3.5, 3.6    |
-| 5.2                   | 3.5, 3.6    |
 | latest                | 3.5, 3.6    |
 ---------------------------------------
 
