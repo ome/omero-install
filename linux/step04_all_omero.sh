@@ -19,7 +19,7 @@ fi
 if [[ ! $PY_ENV = "py27_ius" ]]; then
 	#start-venv
 	virtualenv /home/omero/omeroenv
-	/home/omero/omeroenv/bin/pip install omego==0.4.0
+	/home/omero/omeroenv/bin/pip install omego==0.6.0
 	#end-venv
 fi
 
@@ -36,23 +36,13 @@ if [ "$ICEVER" = "ice36" ]; then
 		unzip -q OMERO.server*
 		#end-release-ice36
 	fi
-else
-	# do not use omego for the release version
-	# Handle release version via download page.
-	if [ $OMEROVER == "latest" ]; then
-  		# one release version
-  		#start-release-ice35
-  		cd ~omero
-  		SERVER=http://downloads.openmicroscopy.org/latest/omero5.3/server-ice35.zip
-		wget $SERVER -O OMERO.server-ice35.zip
-		unzip -q OMERO.server*
-		#end-release-ice35
-	fi
 fi
 # no server downloaded
 if [ ! -d OMERO.server* ]; then
 	# dev branches installed via omego
+	#start-release-ice35
 	/home/omero/omeroenv/bin/omego download --ice $icevalue --branch $OMEROVER server
+	#end-release-ice35
 fi
 
 #start-link
