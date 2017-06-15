@@ -4,7 +4,7 @@ set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
 PY_ENV=${PY_ENV:-py27}
-ICEVER=${ICEVER:-ice35}
+ICEVER=${ICEVER:-ice36}
 
 source `dirname $0`/settings.env
 #start-install
