@@ -20,7 +20,7 @@ pip install -r $file
 su - omero -c "bash -eux setup_omero_nginx.sh nginx"
 
 #end-install
-#mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
+mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.disabled
 cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 service nginx start
