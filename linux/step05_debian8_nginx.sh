@@ -1,6 +1,7 @@
 #!/bin/bash
 
 OMEROVER=${OMEROVER:-latest}
+ICEVER=${ICEVER:-ice36}
 
 #start-copy
 cp setup_omero_nginx.sh ~omero
@@ -15,7 +16,11 @@ rm nginx_signing.key
 apt-get update
 apt-get -y install nginx
 
-file=~omero/OMERO.server/share/web/requirements-py27.txt
+if [ "$ICEVER" = "ice36" ]; then
+	file=~omero/OMERO.server/share/web/requirements-py27.txt
+else
+	file=~omero/OMERO.server/share/web/requirements-py27-ice35.txt
+fi
 
 #start-latest
 pip install -r $file

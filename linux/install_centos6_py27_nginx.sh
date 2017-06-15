@@ -40,7 +40,7 @@ su - omero -c "OMEROVER=$OMEROVER PY_ENV=py27_scl ICEVER=$ICEVER bash -eux step0
 
 su - omero -c "bash setup_omero_db.sh"
 
-OMEROVER=$OMEROVER bash -eux step05_centos6_py27_nginx.sh
+OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step05_centos6_py27_nginx.sh
 
 if [ $WEBAPPS = true ]; then
 	OMEROVER=$OMEROVER PY_ENV=py27_scl bash -eux step05_1_all_webapps.sh

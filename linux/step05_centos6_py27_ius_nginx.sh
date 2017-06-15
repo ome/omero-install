@@ -1,5 +1,6 @@
 #!/bin/bash
 OMEROVER=${OMEROVER:-latest}
+ICEVER=${ICEVER:-ice36}
 
 
 set -e -u -x
@@ -27,7 +28,12 @@ source /home/omero/omeroenv/bin/activate
 set -u
 
 # Install OMERO.web requirements
-file=~omero/OMERO.server/share/web/requirements-py27-all.txt
+if [ "$ICEVER" = "ice36" ]; then
+	file=~omero/OMERO.server/share/web/requirements-py27-all.txt
+else
+	file=~omero/OMERO.server/share/web/requirements-py27-all-ice35.txt
+fi
+
 
 #start-latest
 /home/omero/omeroenv/bin/pip2.7 install -r $file
