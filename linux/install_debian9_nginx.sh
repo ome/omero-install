@@ -14,7 +14,7 @@ bash -eux step01_ubuntu_init.sh
 # install java
 bash -eux step01_debian9_java_deps.sh
 
-bash -eux step01_debian8_deps.sh
+bash -eux step01_debian_deps.sh
 
 # install ice
 bash -eux step01_debian9_ice_deps.sh
