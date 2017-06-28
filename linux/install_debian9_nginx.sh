@@ -4,7 +4,7 @@ set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
 WEBAPPS=${WEBAPPS:-false}
-PGVER=${PGVER:-pg94}
+PGVER=${PGVER:-pg96}
 ICEVER=${ICEVER:-ice36}
 
 source settings.env
@@ -28,7 +28,7 @@ bash -eux step01_debian9_pg_deps.sh
 
 bash -eux step02_all_setup.sh
 
-if [[ "$PGVER" =~ ^(pg94|pg95|pg96)$ ]]; then
+if [[ "$PGVER" =~ ^(pg96)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 
@@ -40,9 +40,6 @@ su - omero -c "bash setup_omero_db.sh"
 
 OMEROVER=$OMEROVER bash -eux step05_debian9_nginx.sh
 
-if [ $WEBAPPS = true ]; then
-	OMEROVER=$OMEROVER bash -eux step05_1_all_webapps.sh
-fi
 
 if [ "$WEBSESSION" = true ]; then
 	bash -eux step05_2_websessionconfig.sh
