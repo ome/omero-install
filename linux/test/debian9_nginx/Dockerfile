@@ -1,6 +1,6 @@
 # Dockerfile for testing the OMERO Linux installation instructions
 # Not intended for production use
-FROM debian:experimental
+FROM debian:stretch
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ARG WEBSESSION=false
