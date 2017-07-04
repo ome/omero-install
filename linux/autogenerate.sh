@@ -307,6 +307,19 @@ line=$(sed -n ''$ns',$p' $dir/setup_omero_db.sh)
 echo "$line" >> $file
 echo "#end-step04" >> $file
 
+if [ $OS = "debian9" ] ; then
+	echo "#start-patch-openssl" >> $file
+	number=$(sed -n '/#start-seclevel/=' $dir/step04_omero_patch_openssl.sh)
+	ns=$((number))
+	number=$(sed -n '/#end-seclevel/=' $dir/step04_omero_patch_openssl.sh)
+	ne=$((number))
+	line=$(sed -n ''$ns','$ne'p' $dir/step04_omero_patch_openssl.sh)
+	line=$(echo -e "${line}" | sed -e "s/\-i.bak/-i/g")
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "$line" >> $file
+	echo "#end-patch-openssl" >> $file
+fi
+
 echo -en '\n' >> $file
 if [ ! $OS = "centos6" ] ; then
 	N=$OS
