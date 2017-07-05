@@ -1,4 +1,5 @@
 language: python
+group: deprecated-2017Q2
 services:
   - docker
 env:
@@ -9,6 +10,7 @@ env:
   - ENV=debian8_nginx
   - ENV=centos6_py27_ius_nginx
   - ENV=ubuntu1604_nginx
+  - ENV=debian9_nginx
 
 before_install:  
   - sudo apt-get update
@@ -16,7 +18,7 @@ before_install:
   - sudo apt-get -y install shunit2
 script:
     - cd linux/test
-    - OMEROVER=OMERO-DEV-latest ./docker-build.sh $ENV
+    - ./docker-build.sh $ENV
     - if [[ "$ENV" =~ "centos7" ]]; then ./test_services.sh; fi
     - cd ..
     - ./autogenerate.sh

@@ -1,6 +1,6 @@
 # Dockerfile for testing the OMERO Linux installation instructions
 # Not intended for production use
-FROM ubuntu:14.04
+FROM debian:stretch
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ARG WEBSESSION=false
@@ -8,15 +8,16 @@ ARG WEBAPPS=false
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk18
 ARG ICEVER=ice36
-ARG PGVER=pg94
+ARG PGVER=pg96
 
+RUN apt-get update && apt-get -y install locales
 RUN update-locale LANG=C.UTF-8
 
 ADD omero-install-test.zip /
-RUN apt-get update && apt-get -y install unzip && unzip omero-install-test.zip
+RUN apt-get -y install unzip && unzip omero-install-test.zip
 
 RUN cd omero-install-test && \
-	bash install_ubuntu1404_nginx.sh && \
+	bash install_debian9_nginx.sh && \
 	bash docker_shutdown_ubuntu.sh
 ADD run.sh /home/omero/run.sh
 

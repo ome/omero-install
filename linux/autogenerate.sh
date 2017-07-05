@@ -15,7 +15,7 @@ echo "${l}"
 
 #generate the walkthrough for all supported os
 function generate_all() {
-	values=(centos7 centos6_py27 centos6_py27_ius ubuntu1404 debian8 ubuntu1604)
+	values=(centos7 centos6_py27 centos6_py27_ius ubuntu1404 debian8 ubuntu1604 debian9)
 	for os in "${values[@]}"; do
   		echo "${os}"
   		 generate ${os}
@@ -36,7 +36,7 @@ source settings.env
 EOF
 
 N=$OS
-if [ $OS = "debian8" ] || [[ $OS =~ "ubuntu" ]] ; then
+if [[ $OS =~ "debian" ]] || [[ $OS =~ "ubuntu" ]] ; then
 	N="ubuntu"
 fi
 echo -en '\n' >> $file
@@ -86,6 +86,8 @@ else
 	N=$OS
 	if [[ $OS =~ "ubuntu" ]] ; then
 		N="ubuntu"
+	elif [[ $OS =~ "debian" ]]; then
+		N="debian"
 	fi
 	line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
 fi
@@ -96,7 +98,7 @@ echo "$line" >> $file
 # install ice
 echo "# install Ice" >> $file
 N=$OS
-if [ $OS = "debian8" ] || [[ $OS =~ "ubuntu" ]] ; then
+if [[ $OS =~ "ubuntu" ]] ; then
 	N="ubuntu"
 fi
 echo "#start-recommended-ice" >> $file
@@ -110,18 +112,19 @@ line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 echo "$line"  >> $file
 echo "#end-recommended-ice" >> $file
 
-echo "#start-supported-ice" >> $file
-number=$(sed -n '/#start-supported/=' $dir/step01_"$N"_ice_deps.sh)
-ns=$((number+1))
-number=$(sed -n '/#end-supported/=' $dir/step01_"$N"_ice_deps.sh)
-ne=$((number-1))
-line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_ice_deps.sh)
-# remove leading whitespace
-line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-echo "$line"  >> $file
-echo "#end-supported-ice" >> $file
+if [ ! $OS = "debian9" ] ; then
+	echo "#start-supported-ice" >> $file
+	number=$(sed -n '/#start-supported/=' $dir/step01_"$N"_ice_deps.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#end-supported/=' $dir/step01_"$N"_ice_deps.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_ice_deps.sh)
+	# remove leading whitespace
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "$line"  >> $file
+	echo "#end-supported-ice" >> $file
+fi
 echo -en '\n' >> $file
-
 
 # install postgres
 N=$OS
@@ -252,6 +255,7 @@ else
 	# To be removed when we use omego
 	#echo "$line" >> $file
 fi
+
 echo "#start-release-ice35" >> $file
 number=$(sed -n '/#start-release-ice35/=' $dir/step04_all_omero.sh)
 ns=$((number+1))
@@ -302,6 +306,19 @@ ns=$((number+1))
 line=$(sed -n ''$ns',$p' $dir/setup_omero_db.sh)
 echo "$line" >> $file
 echo "#end-step04" >> $file
+
+if [ $OS = "debian9" ] ; then
+	echo "#start-patch-openssl" >> $file
+	number=$(sed -n '/#start-seclevel/=' $dir/step04_omero_patch_openssl.sh)
+	ns=$((number))
+	number=$(sed -n '/#end-seclevel/=' $dir/step04_omero_patch_openssl.sh)
+	ne=$((number))
+	line=$(sed -n ''$ns','$ne'p' $dir/step04_omero_patch_openssl.sh)
+	line=$(echo -e "${line}" | sed -e "s/\-i.bak/-i/g")
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "$line" >> $file
+	echo "#end-patch-openssl" >> $file
+fi
 
 echo -en '\n' >> $file
 if [ ! $OS = "centos6" ] ; then
