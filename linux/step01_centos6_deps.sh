@@ -3,7 +3,7 @@
 yum -y install \
 	python-pip python-devel python-virtualenv \
 	python-yaml python-jinja2 \
-	numpy scipy Cython \
+	numpy Cython \
 	gcc \
 	hdf5-devel
 
