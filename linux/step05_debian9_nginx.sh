@@ -10,7 +10,7 @@ cp setup_omero_nginx.sh ~omero
 #start-install
 apt-get -y install nginx
 
-file=~omero/OMERO.server/share/web/requirements-py27.txt
+file=~omero/OMERO.server/share/web/requirements-py27-all.txt
 
 #start-latest
 pip install -r $file

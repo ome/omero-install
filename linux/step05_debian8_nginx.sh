@@ -17,9 +17,9 @@ apt-get update
 apt-get -y install nginx
 
 if [ "$ICEVER" = "ice36" ]; then
-	file=~omero/OMERO.server/share/web/requirements-py27.txt
+	file=~omero/OMERO.server/share/web/requirements-py27-all.txt
 else
-	file=~omero/OMERO.server/share/web/requirements-py27-ice35.txt
+	file=~omero/OMERO.server/share/web/requirements-py27-all-ice35.txt
 fi
 
 #start-latest
