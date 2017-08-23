@@ -6,11 +6,12 @@ OMEROVER=${OMEROVER:-latest}
 cp setup_omero_nginx.sh ~omero
 #end-copy
 
+#web-requirements-recommended-start
+	file=~omero/OMERO.server/share/web/requirements-py27-all.txt
+#web-requirements-recommended-end
 
 #start-install
 apt-get -y install nginx
-
-file=~omero/OMERO.server/share/web/requirements-py27-all.txt
 
 #start-latest
 pip install -r $file

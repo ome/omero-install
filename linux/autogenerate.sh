@@ -325,6 +325,13 @@ if [ ! $OS = "centos6" ] ; then
 	N=$OS
 	echo "#start-step05: As root, install Nginx" >> $file
 	echo "#start-nginx" >> $file
+	number=$(sed -n '/#web-requirements-recommended-start/=' $dir/step05_"$N"_nginx.sh)
+	ns=$((number+1))
+	number=$(sed -n '/#web-requirements-recommended-end/=' $dir/step05_"$N"_nginx.sh)
+	ne=$((number-1))
+	line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "$line" >> $file
 	number=$(sed -n '/#start-install/=' $dir/step05_"$N"_nginx.sh)
 	ns=$((number+1))
 	number=$(sed -n '/#start-latest/=' $dir/step05_"$N"_nginx.sh)

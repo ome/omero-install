@@ -7,6 +7,17 @@ ICEVER=${ICEVER:-ice36}
 cp setup_omero_nginx.sh ~omero
 #end-copy
 
+#start-requirements
+if [ "$ICEVER" = "ice36" ]; then
+#web-requirements-recommended-start
+	file=~omero/OMERO.server/share/web/requirements-py27-all.txt
+#web-requirements-recommended-end
+else
+#web-requirements-ice35-start
+	file=~omero/OMERO.server/share/web/requirements-py27-all-ice35.txt
+#web-requirements-ice35-end
+fi
+
 #start-install
 # required to install more recent version of nginx
 # without this, the version installed is 1.4.6
@@ -15,12 +26,7 @@ add-apt-repository -y ppa:nginx/stable
 apt-get update
 apt-get -y install nginx
 
-#start-requirements
-if [ "$ICEVER" = "ice36" ]; then
-	file=~omero/OMERO.server/share/web/requirements-py27-all.txt
-else
-	file=~omero/OMERO.server/share/web/requirements-py27-all-ice35.txt
-fi
+
 #start-latest
 pip install -r $file
 #end-latest

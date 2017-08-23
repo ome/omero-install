@@ -7,6 +7,15 @@ ICEVER=${ICEVER:-ice36}
 cp setup_omero_nginx.sh ~omero
 #end-copy
 
+if [ "$ICEVER" = "ice36" ]; then
+#web-requirements-recommended-start
+	file=~omero/OMERO.server/share/web/requirements-py27-all.txt
+#web-requirements-recommended-end
+else
+#web-requirements-ice35-start
+	file=~omero/OMERO.server/share/web/requirements-py27-all-ice35.txt
+#web-requirements-ice35-end
+fi
 
 #start-install
 echo "deb http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list
@@ -16,11 +25,7 @@ rm nginx_signing.key
 apt-get update
 apt-get -y install nginx
 
-if [ "$ICEVER" = "ice36" ]; then
-	file=~omero/OMERO.server/share/web/requirements-py27-all.txt
-else
-	file=~omero/OMERO.server/share/web/requirements-py27-all-ice35.txt
-fi
+
 
 #start-latest
 pip install -r $file
