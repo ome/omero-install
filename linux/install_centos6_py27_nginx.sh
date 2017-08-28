@@ -9,6 +9,7 @@ PGVER=${PGVER:-pg94}
 ICEVER=${ICEVER:-ice36}
 
 source settings.env
+source settings-web.env
 
 bash -eux step01_centos6_py27_init.sh
 
@@ -34,7 +35,7 @@ if [[ "$PGVER" =~ ^(pg94|pg95|pg96)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 
-cp settings.env omero-centos6py27.env step04_all_omero.sh setup_omero_db.sh ~omero
+cp settings.env settings-web.env omero-centos6py27.env step04_all_omero.sh setup_omero_db.sh ~omero
 
 su - omero -c "OMEROVER=$OMEROVER PY_ENV=py27_scl ICEVER=$ICEVER bash -eux step04_all_omero.sh"
 

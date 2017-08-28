@@ -7,6 +7,7 @@ DMNAME=${DMNAME:-dev}
 WEBSESSION=${WEBSESSION:-false}
 
 source `pwd`/../settings.env
+source `pwd`/../settings-web.env
 
 CNAME=omeroinstall_$ENV
 
