@@ -1,6 +1,10 @@
 #!/bin/bash
 
 apt-get -y install \
-	python-{pip,pillow,numpy,tables,virtualenv,yaml,jinja2}
+	python-{pip,tables,virtualenv,yaml,jinja2}
 
 pip install --upgrade pip
+
+#start-web-dependencies
+apt-get -y install python-{pillow,numpy}
+#end-web-dependencies
