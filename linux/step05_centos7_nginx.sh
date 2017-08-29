@@ -11,7 +11,7 @@ cp setup_omero_nginx.sh ~omero
 yum -y install nginx
 #end-nginx-install
 
-cd ~/omero
+cd ~omero
 if [ "$ICEVER" = "ice36" ]; then
 #web-requirements-recommended-start
 	pip install -r OMERO.server/share/web/requirements-py27.txt
