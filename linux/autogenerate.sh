@@ -324,25 +324,11 @@ fi
 echo -en '\n' >> $file
 if [ ! $OS = "centos6" ] ; then
 	N=$OS
-	echo "#start-step05: As root, install Nginx" >> $file
-	echo "#start-nginx" >> $file
+	echo "#start-step05: As omero, install OMERO.web dependencies" >> $file
 	number=$(sed -n '/#web-requirements-recommended-start/=' $dir/step05_"$N"_nginx.sh)
-	ns=$((number+1))
+	ns=$((number))
 	number=$(sed -n '/#web-requirements-recommended-end/=' $dir/step05_"$N"_nginx.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "$line" >> $file
-	number=$(sed -n '/#start-install/=' $dir/step05_"$N"_nginx.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#start-latest/=' $dir/step05_"$N"_nginx.sh)
-	ne=$((number-3))
-	line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "$line" >> $file
-	ns=$((number+1))
-	number=$(sed -n '/#end-latest/=' $dir/step05_"$N"_nginx.sh)
-	ne=$((number-1))
+	ne=$((number))
 	line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
 	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 	echo "$line" >> $file
@@ -353,14 +339,23 @@ if [ ! $OS = "centos6" ] ; then
 	line=$(echo -e "${line}" | sed -e "s/\$NGINXCMD/nginx/g")
 	echo "$line" >> $file
 	echo "#end-configure-nginx" >> $file
-
-	number=$(sed -n '/#end-install/=' $dir/step05_"$N"_nginx.sh)
-	ns=$((number+1))
-	line=$(sed -n ''$ns',$p' $dir/step05_"$N"_nginx.sh)
+	echo "# As root, install nginx" >> $file
+	number=$(sed -n '/#start-nginx-install/=' $dir/step05_"$N"_nginx.sh)
+	ns=$((number))
+	number=$(sed -n '/#end-nginx-install/=' $dir/step05_"$N"_nginx.sh)
+	ne=$((number))
+	line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "$line" >> $file
+	number=$(sed -n '/#start-nginx-admin/=' $dir/step05_"$N"_nginx.sh)
+	ns=$((number))
+	number=$(sed -n '/#end-nginx-admin/=' $dir/step05_"$N"_nginx.sh)
+	ne=$((number))
+	line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 	# remove docker conditional
 	line=`remove_docker_workaround "${line}"`
 	echo "$line" >> $file
-	echo "#end-nginx" >> $file
 
 	echo -en '\n' >> $file
 	echo "#end-step05" >> $file
