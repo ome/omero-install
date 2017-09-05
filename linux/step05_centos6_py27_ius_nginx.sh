@@ -9,8 +9,7 @@ set -e -u -x
 cp setup_omero_nginx.sh ~omero
 #end-copy
 
-p=nginx
-#start-install
+#start-nginx-install
 cat << EOF > /etc/yum.repos.d/nginx.repo
 [nginx]
 name=nginx repo
@@ -18,33 +17,36 @@ baseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/
 gpgcheck=0
 enabled=1
 EOF
-
-#install nginx
 yum -y install nginx
+#end-nginx-install
 
+cd ~omero
+
+
+#start-web-dependencies
 virtualenv -p /usr/bin/python2.7 /home/omero/omeroenv
 set +u
 source /home/omero/omeroenv/bin/activate
 set -u
 
-# Install OMERO.web requirements
 if [ "$ICEVER" = "ice36" ]; then
-	file=~omero/OMERO.server/share/web/requirements-py27-all.txt
+#web-requirements-recommended-start
+	/home/omero/omeroenv/bin/pip2.7 install -r OMERO.server/share/web/requirements-py27.txt
+#web-requirements-recommended-end
 else
-	file=~omero/OMERO.server/share/web/requirements-py27-all-ice35.txt
+#web-requirements-ice35-start
+	/home/omero/omeroenv/bin/pip2.7 install -r OMERO.server/share/web/requirements-py27-ice35.txt
+#web-requirements-ice35-end
 fi
-
-
-#start-latest
-/home/omero/omeroenv/bin/pip2.7 install -r $file
-#end-latest
 deactivate
+#end-web-dependencies
 
 # set up as the omero user.
 su - omero -c "bash -eux setup_omero_nginx.sh nginx"
 
-#end-install
+#start-nginx-admin
 mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
-cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
+cp OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 service nginx start
+#end-nginx-admin
