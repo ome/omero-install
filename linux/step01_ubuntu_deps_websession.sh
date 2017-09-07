@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yum -y install redis-server
+apt-get -y install redis-server
 
 #start-web-dependencies
 pip install django-redis>=4.4
