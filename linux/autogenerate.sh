@@ -167,6 +167,35 @@ if [ $OS = "centos6_py27_ius" ] ; then
 	echo "$line" >> $file
 	echo "#end-step01.1" >> $file
 fi
+echo -en '\n' >> $file
+echo "# install Redis" >> $file
+V=$OS
+if [ $OS = "centos7" ] || [ $OS = "debian9" ] || [ $OS = "ubuntu1604" ]; then
+	echo "#start-redis-install" >> $file
+	if [ $OS = "debian9" ] || [ $OS = "ubuntu1604" ]; then
+		V="ubuntu"
+	fi
+    ns=2
+    number=$(sed -n '/#start-web-dependencies/=' $dir/step01_"$V"_deps_websession.sh)
+    ne=$((number-1))
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$V"_deps_websession.sh)
+    echo "$line" >> $file
+    number=$(sed -n '/#end-web-dependencies/=' $dir/step01_"$V"_deps_websession.sh)
+    ns=$((number+1))
+    number=$(sed -n '/#start-check/=' $dir/step01_"$V"_deps_websession.sh)
+    ne=$((number-1))
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$V"_deps_websession.sh)
+    echo "$line" >> $file
+    number=$(sed -n '/#start-check/=' $dir/step01_"$V"_deps_websession.sh)
+    ns=$((number+1))
+    number=$(sed -n '/#end-check/=' $dir/step01_"$V"_deps_websession.sh)
+    ne=$((number-1))
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$V"_deps_websession.sh)
+    # remove docker conditional
+	line=`remove_docker_workaround "${line}"`
+	echo "$line" >> $file
+	echo "#end-redis-install" >> $file
+fi
 
 echo -en '\n' >> $file
 echo "#start-step02: As root, create an omero system user and directory for the OMERO repository" >> $file

@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-WEBSESSION=${WEBSESSION:-false}
+WEBSESSION=${WEBSESSION:-true}
 OMEROVER=${OMEROVER:-latest}
 WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg94}

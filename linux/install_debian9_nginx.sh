@@ -2,6 +2,7 @@
 
 set -e -u -x
 
+WEBSESSION=${WEBSESSION:-true}
 OMEROVER=${OMEROVER:-latest}
 WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg96}
@@ -26,6 +27,10 @@ fi
 
 # install Postgres
 bash -eux step01_debian9_pg_deps.sh
+
+if $WEBSESSION ; then
+    bash -eux step01_ubuntu_deps_websession.sh
+fi
 
 bash -eux step02_all_setup.sh
 
