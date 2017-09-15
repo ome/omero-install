@@ -15,10 +15,10 @@ install_gallery=true
 install_error=true
 install_test=true
 # Figure URL
-URL_FIGURE=http://downloads.openmicroscopy.org/latest/figure.zip
+URL_FIGURE=https://downloads.openmicroscopy.org/latest/figure.zip
 
 # Web tagging URL
-URL_WEBTAGGING=http://downloads.openmicroscopy.org/latest/webtagging.zip
+URL_WEBTAGGING=https://downloads.openmicroscopy.org/latest/webtagging.zip
 
 # Gallery URL
 URL_GALLERY=https://github.com/ome/gallery/archive/v1.0.0.zip
