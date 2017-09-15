@@ -29,6 +29,8 @@ elif [ "$ICEVER" = "ice36" ]; then
 	#start-recommended
 	cd /etc/yum.repos.d
 	wget https://zeroc.com/download/rpm/zeroc-ice-el6.repo
+	curl -sL https://zeroc.com/download/Ice/3.6/el6/zeroc-ice3.6.repo > \
+    /etc/yum.repos.d/zeroc-ice3.6.repo
 
 	yum -y install gcc-c++
 	yum -y install db53 db53-utils
