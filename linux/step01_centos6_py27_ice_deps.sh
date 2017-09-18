@@ -13,7 +13,7 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 	mkdir /tmp/ice-download
 	cd /tmp/ice-download
 
-	wget http://downloads.openmicroscopy.org/ice/experimental/Ice-3.5.1-b1-centos6-sclpy27-x86_64.tar.gz
+	wget https://downloads.openmicroscopy.org/ice/experimental/Ice-3.5.1-b1-centos6-sclpy27-x86_64.tar.gz
 
 	tar -zxvf /tmp/ice-download/Ice-3.5.1-b1-centos6-sclpy27-x86_64.tar.gz
 
