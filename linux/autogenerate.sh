@@ -87,8 +87,6 @@ else
 	N=$OS
 	if [[ $OS =~ "ubuntu" ]] ; then
 		N="ubuntu"
-	elif [[ $OS =~ "debian" ]]; then
-		N="debian"
 	fi
 	line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
 fi
