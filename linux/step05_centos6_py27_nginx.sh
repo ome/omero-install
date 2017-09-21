@@ -9,6 +9,11 @@ cp setup_omero_nginx.sh ~omero
 
 cd ~omero
 
+#start-install
+set +u
+source /opt/rh/python27/enable
+set -u
+
 if [ "$ICEVER" = "ice36" ]; then
 #web-requirements-recommended-start
 	pip install -r  OMERO.server/share/web/requirements-py27.txt
@@ -18,11 +23,6 @@ else
 	pip install -r OMERO.server/share/web/requirements-py27-ice35.txt
 #web-requirements-ice35-end
 fi
-
-#start-install
-set +u
-source /opt/rh/python27/enable
-set -u
 
 cat << EOF > /etc/yum.repos.d/nginx.repo
 [nginx]
