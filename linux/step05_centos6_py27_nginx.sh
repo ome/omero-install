@@ -7,13 +7,15 @@ ICEVER=${ICEVER:-ice36}
 cp setup_omero_nginx.sh ~omero
 #end-copy
 
+cd ~omero
+
 if [ "$ICEVER" = "ice36" ]; then
 #web-requirements-recommended-start
-	file=~omero/OMERO.server/share/web/requirements-py27-all.txt
+	pip install -r  OMERO.server/share/web/requirements-py27.txt
 #web-requirements-recommended-end
 else
 #web-requirements-ice35-start
-	file=~omero/OMERO.server/share/web/requirements-py27-all-ice35.txt
+	pip install -r OMERO.server/share/web/requirements-py27-ice35.txt
 #web-requirements-ice35-end
 fi
 
@@ -32,11 +34,6 @@ EOF
 
 yum -y install nginx
 
-
-
-#start-latest
-pip install -r $file
-#end-latest
 
 # set up as the omero user.
 su - omero -c "bash -eux setup_omero_nginx.sh nginx"
