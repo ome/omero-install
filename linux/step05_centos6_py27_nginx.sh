@@ -39,8 +39,9 @@ fi
 # set up as the omero user.
 su - omero -c "bash -eux setup_omero_nginx.sh nginx"
 
-#end-install
+#start-nginx-admin
 mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.disabled
 cp ~omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 service nginx start
+#end-nginx-admin
