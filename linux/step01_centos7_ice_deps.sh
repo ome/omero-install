@@ -17,9 +17,8 @@ elif [ "$ICEVER" = "ice35-devel" ]; then
 	yum -y install ice ice-python-devel ice-java-devel ice-servers
 elif [ "$ICEVER" = "ice36" ]; then
 	#start-recommended
-	cd /etc/yum.repos.d
-	wget https://zeroc.com/download/rpm/zeroc-ice-el7.repo
-
+    curl -sL https://zeroc.com/download/Ice/3.6/el7/zeroc-ice3.6.repo > \
+    /etc/yum.repos.d/zeroc-ice3.6.repo
 	yum -y install gcc-c++
 	yum -y install libdb-utils
 	yum -y install openssl-devel bzip2-devel expat-devel
