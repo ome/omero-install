@@ -3,7 +3,7 @@
 OMEROVER=${OMEROVER:-latest}
 
 #start-nginx-install
-apt-get -y install nginx
+apt-get -y install nginx gunicorn
 #end-nginx-install
 
 #start-copy
