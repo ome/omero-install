@@ -9,6 +9,7 @@ After=network.service
 
 [Service]
 User=omero
+UMask=0002
 Type=forking
 PIDFile=/home/omero/OMERO.server/var/master/master.pid
 Restart=no
