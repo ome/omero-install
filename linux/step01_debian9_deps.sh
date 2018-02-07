@@ -1,7 +1,9 @@
 #!/bin/bash
 
 apt-get -y install \
-	python-{pip,virtualenv,yaml,jinja2}
+	python-{pip,virtualenv,yaml,jinja2,setuptools,wheel}
+
+apt-get -y install virtualenv
 
 pip install --upgrade pip
 
