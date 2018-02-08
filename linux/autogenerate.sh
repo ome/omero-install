@@ -85,7 +85,7 @@ if [ $OS = "centos7" ] ; then
 	line="$(echo -e "${line}" | sed -e 's/`dirname \$0`\///')"
 else
 	N=$OS
-	if [[ $OS =~ "ubuntu" ]] ; then
+	if [[ $OS = "ubuntu1404" ]] ; then
 		N="ubuntu"
 	fi
 	line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
