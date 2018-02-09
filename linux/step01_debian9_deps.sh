@@ -3,7 +3,8 @@
 apt-get -y install \
 	python-{pip,virtualenv,yaml,jinja2,setuptools,wheel}
 
-apt-get -y install virtualenv
+# to be installed if recommended/suggested is false
+apt-get -y install python-setuptools python-wheel virtualenv
 
 pip install --upgrade pip
 

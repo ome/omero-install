@@ -4,9 +4,10 @@ apt-get update
 apt-get -y install \
 	unzip \
 	wget \
-	python-{pip,tables,virtualenv,yaml,jinja2,setuptools,wheel}
+	python-{pip,tables,virtualenv,yaml,jinja2}
 
-apt-get -y install virtualenv
+# to be installed if recommended/suggested is false
+apt-get -y install python-setuptools python-wheel virtualenv
 
 pip install --upgrade pip
 
