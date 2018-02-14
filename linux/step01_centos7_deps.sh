@@ -1,9 +1,6 @@
 #!/bin/bash
 
-yum -y install \
-	python-pip python-devel python-virtualenv \
-	python-yaml python-jinja2 \
-	python-tables
+yum -y install python-{pip,devel,virtualenv,yaml,jinja2,tables}
 
 if [[ ! "${container:-}" = docker ]]; then
 	#start-docker-pip
