@@ -17,7 +17,7 @@ elif [ "$ICEVER" = "ice36" ]; then
 	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 5E6DA83306132997
 	apt-add-repository "deb http://zeroc.com/download/apt/ubuntu`lsb_release -rs` stable main"
 	apt-get update
-	apt-get -y install zeroc-ice-all-runtime zeroc-ice-all-dev
+	apt-get -y install zeroc-ice-all-runtime
 
 	pip install "zeroc-ice>3.5,<3.7"
 	#end-recommended
