@@ -11,7 +11,7 @@ ARG ICEVER=ice36
 ARG PGVER=pg94
 
 RUN echo 'APT::Install-Recommends 0;' > /etc/apt/apt.conf.d/01norecommends \
- && echo 'APT::Install-Suggests 0;' > /etc/apt/apt.conf.d/01norecommends
+ && echo 'APT::Install-Suggests 0;' >> /etc/apt/apt.conf.d/01norecommends
  
 ADD omero-install-test.zip /
 RUN apt-get update && apt-get -y install unzip && unzip omero-install-test.zip
