@@ -10,6 +10,9 @@ ARG JAVAVER=openjdk18
 ARG ICEVER=ice36
 ARG PGVER=pg96
 
+RUN echo 'APT::Install-Recommends 0;' > /etc/apt/apt.conf.d/01norecommends \
+ && echo 'APT::Install-Suggests 0;' >> /etc/apt/apt.conf.d/01norecommends
+ 
 RUN apt-get update && apt-get -y install locales
 RUN update-locale LANG=C.UTF-8
 

@@ -9,8 +9,11 @@ if [[ "$ICEVER" =~ "ice35" ]]; then
 	apt-get -y install ice-services python-zeroc-ice
 	#end-supported
 elif [ "$ICEVER" = "ice36" ]; then
-	apt-get -y install python-dev
+
 	#start-recommended
+	# to be installed if recommended/suggested is false
+	apt-get -y install python-dev build-essential
+	
 	apt-get -y install db5.3-util
 	apt-get -y install libssl-dev libbz2-dev libmcpp-dev libdb++-dev libdb-dev
 

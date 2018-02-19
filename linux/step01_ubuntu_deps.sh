@@ -1,10 +1,7 @@
 #!/bin/bash
 
 apt-get update
-apt-get -y install \
-	unzip \
-	wget \
-	python-{pip,tables,virtualenv,yaml,jinja2}
+apt-get -y install python-{pip,tables,virtualenv,yaml,jinja2}
 
 pip install --upgrade pip
 
