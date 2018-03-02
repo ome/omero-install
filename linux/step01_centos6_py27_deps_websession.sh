@@ -10,4 +10,4 @@ set +u
 source /opt/rh/python27/enable
 set -u
 
-pip install django-redis>=4.4
+pip install "django-redis>=4.4,<4.9"

@@ -10,6 +10,6 @@ set +u
 source /home/omero/omeroenv/bin/activate
 set -u
 
-pip install django-redis>=4.4
+pip install "django-redis>=4.4,<4.9"
 
 deactivate
