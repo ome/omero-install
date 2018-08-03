@@ -66,30 +66,11 @@ echo -en '\n' >> $file
 
 echo "# install dependencies" >> $file
 # install dependencies
-if [ $OS = "centos7" ] ; then
-	number=$(sed -n '/#start-docker-pip/=' $dir/step01_"$OS"_deps.sh)
-	ne=$((number-2))
-	line=$(sed -n '2,'$ne'p' $dir/step01_"$OS"_deps.sh)
-	echo "$line" >> $file
-	# remove leading whitespace
-	number=$(sed -n '/#start-docker-pip/=' $dir/step01_"$OS"_deps.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#end-docker-pip/=' $dir/step01_"$OS"_deps.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_deps.sh)
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-
-	echo "$line" >> $file
-	ne=$(($ne+3))
-	line=$(sed -n ''$ne',$p' $dir/step01_"$OS"_deps.sh)
-	line="$(echo -e "${line}" | sed -e 's/`dirname \$0`\///')"
-else
-	N=$OS
-	if [[ $OS = "ubuntu1404" ]] ; then
-		N="ubuntu"
-	fi
-	line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
+N=$OS
+if [[ $OS = "ubuntu1404" ]] ; then
+	N="ubuntu"
 fi
+line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
 echo "$line" >> $file
 
 
