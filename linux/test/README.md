@@ -5,11 +5,11 @@ This directory contains Dockerfiles for testing the installation walkthroughs.
 
 For example:
 
-    ./docker-build.sh ubuntu1404_nginx
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
+    ./docker-build.sh ubuntu1604_nginx
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604_nginx
 
-    ./docker-build.sh centos6
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6
+    ./docker-build.sh debian9_nginx
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_debian9_nginx
 
     ./docker-build.sh centos6_py27_ius_nginx
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx
