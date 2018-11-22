@@ -66,7 +66,7 @@ For example, to install oracle-java 1.8:
 JAVAVER=oracle18 ./docker-build.sh ubuntu1404_nginx
 
 The supported values are: 
-openjdk17, openjdk18 (default), openjdk17-devel, openjdk18-devel, oracle17, oracle18
+openjdk18 (default), openjdk18-devel, oracle18
 
 If you do not want to install Java set JAVAVER to nojava.
 
