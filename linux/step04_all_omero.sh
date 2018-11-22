@@ -24,10 +24,9 @@ if [[ ! $PY_ENV = "py27_ius" ]]; then
 fi
 
 
-icevalue=3.5
+icevalue=3.6
 #start-install
 if [ "$ICEVER" = "ice36" ]; then
-	icevalue=3.6
 	if [ $OMEROVER == "latest" ]; then
 		#start-release-ice36
 		cd ~omero
@@ -40,9 +39,7 @@ fi
 # no server downloaded
 if [ ! -d OMERO.server* ]; then
 	# dev branches installed via omego
-	#start-release-ice35
 	/home/omero/omeroenv/bin/omego download --ice $icevalue --branch $OMEROVER server
-	#end-release-ice35
 fi
 
 #start-link

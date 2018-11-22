@@ -113,14 +113,15 @@ It is possible to install other versions using the ICEVER parameter.
 
 For example:
 
-    ICEVER=ice35-devel ./docker-build.sh ubuntu1404_nginx
+    ICEVER=ice36-devel ./docker-build.sh centos7_nginx
 
 The supported values are: 
-ice35, ice35-devel, ice36
+ice36-devel (CentOS 7 only), ice36
 
 To add a new Ice version, update the following files:
 `step01_centos6_ice_deps.sh`, `step01_centos6_py27_ice_deps.sh`, `step01_centos6_py27_ius_ice_deps.sh`
-`step01_centos7_ice_deps.sh`, `step01_ubuntu_ice_deps.sh` and update this README.md.
+`step01_centos7_ice_deps.sh`, `step01_ubuntu_ice_deps.sh`, `step01_debian8_ice_deps.sh`,
+`step01_debian9_ice_deps.sh` and update this README.md.
 
 Configuring Redis
 -----------------

@@ -4,11 +4,7 @@ ICEVER=${ICEVER:-ice36}
 
 
 # Ice installation
-if [[ "$ICEVER" =~ "ice35" ]]; then
-	#start-supported
-	apt-get -y install ice-services python-zeroc-ice
-	#end-supported
-elif [ "$ICEVER" = "ice36" ]; then
+if [ "$ICEVER" = "ice36" ]; then
 
 	#start-recommended
 	# to be installed if recommended/suggested is false
