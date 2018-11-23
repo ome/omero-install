@@ -22,10 +22,6 @@ if [ "$ICEVER" = "ice36" ]; then
 #web-requirements-recommended-start
 	pip install -r OMERO.server/share/web/requirements-py27.txt
 #web-requirements-recommended-end
-else
-#web-requirements-ice35-start
-	pip install -r OMERO.server/share/web/requirements-py27-ice35.txt
-#web-requirements-ice35-end
 fi
 
 # set up as the omero user.
