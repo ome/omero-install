@@ -47,7 +47,11 @@ Nginx installation steps are added to the walkthrough file
 
 To generate all the walkthroughs, run the following command
     
-    ALL=true bash autogenerate.sh
+    bash autogenerate.sh
+
+To generate a specific walkthrough, run the following command
+
+    OS=debian9 ALL=false bash autogenerate.sh
 
 The possible values are:
 centos7 (default), debian8, debian9, ubuntu1404, ubuntu1604
