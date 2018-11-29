@@ -15,7 +15,7 @@ echo "${l}"
 
 #generate the walkthrough for all supported os
 function generate_all() {
-	values=(centos7 centos6_py27 centos6_py27_ius ubuntu1404 debian8 ubuntu1604 debian9)
+	values=(centos7 ubuntu1404 ubuntu1604 debian9)
 	for os in "${values[@]}"; do
   		echo "${os}"
   		 generate ${os}
@@ -92,25 +92,10 @@ line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 echo "$line"  >> $file
 echo "#end-recommended-ice" >> $file
 
-if [ ! $OS = "debian9" ] ; then
-	echo "#start-supported-ice" >> $file
-	number=$(sed -n '/#start-supported/=' $dir/step01_"$N"_ice_deps.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#end-supported/=' $dir/step01_"$N"_ice_deps.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_ice_deps.sh)
-	# remove leading whitespace
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "$line"  >> $file
-	echo "#end-supported-ice" >> $file
-fi
 echo -en '\n' >> $file
 
 # install postgres
 N=$OS
-if [[ $OS =~ "centos6" ]]; then
-	N="centos6"
-fi
 echo -en '\n' >> $file
 echo "# install Postgres" >> $file
 if [ $OS = "centos7" ] ; then
@@ -136,62 +121,18 @@ echo -en '\n' >> $file
 
 echo "#end-step01" >> $file
 
-if [ $OS = "centos6_py27_ius" ] ; then
-	echo -en '\n' >> $file
-	echo "#start-step01.1: virtual env" >> $file
-	#find from where to start copying
-	start=$(sed -n '/#start-install/=' $dir/step01_"$OS"_virtualenv_deps.sh)
-	start=$((start+1))
-	line=$(sed -n ''$start',$p' $dir/step01_"$OS"_virtualenv_deps.sh)
-	echo "$line" >> $file
-	echo "#end-step01.1" >> $file
-fi
-
 echo -en '\n' >> $file
 echo "#start-step02: As root, create an omero system user and directory for the OMERO repository" >> $file
-if [[ $OS =~ "centos6_py27" ]] ; then
-	number=$(sed -n '/#start-create-user/=' $dir/step02_"$OS"_setup.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#end-create-user/=' $dir/step02_"$OS"_setup.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step02_"$OS"_setup.sh)
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "$line" >> $file
-	ns=$((number+2))
-	number=$(sed -n '/#start-ice/=' $dir/step02_"$OS"_setup.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step02_"$OS"_setup.sh)
-	echo "$line" >> $file
-	number=$(sed -n '/#start-recommended/=' $dir/step02_"$OS"_setup.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#end-recommended/=' $dir/step02_"$OS"_setup.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step02_"$OS"_setup.sh)
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "#start-configuration-env-ice35" >> $file
-	echo "$line" >> $file
-	echo "#end-configuration-env-ice35" >> $file
-	number=$(sed -n '/#start-supported/=' $dir/step02_"$OS"_setup.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#end-supported/=' $dir/step02_"$OS"_setup.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step02_"$OS"_setup.sh)
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "#start-configuration-env-ice36" >> $file
-	echo "$line" >> $file
-	echo "#end-configuration-env-ice36" >> $file
-else
-	number=$(sed -n '/#start-create-user/=' $dir/step02_all_setup.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#end-create-user/=' $dir/step02_all_setup.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step02_all_setup.sh)
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "$line" >> $file
-	ne=$((number+3))
-	line=$(sed -n ''$ne',$p' $dir/step02_all_setup.sh)
-	echo "$line" >> $file
-fi
+number=$(sed -n '/#start-create-user/=' $dir/step02_all_setup.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-create-user/=' $dir/step02_all_setup.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step02_all_setup.sh)
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line" >> $file
+ne=$((number+3))
+line=$(sed -n ''$ne',$p' $dir/step02_all_setup.sh)
+echo "$line" >> $file
 echo "#end-step02" >> $file
 
 # postgres remove section
@@ -206,47 +147,17 @@ echo "#end-step03" >> $file
 
 echo -en '\n' >> $file
 echo "#start-step04: As the omero system user, install the OMERO.server" >> $file
-if [ $OS = "centos6_py27" ] ; then
-	echo "#start-copy-omeroscript" >> $file
-	echo "cp settings.env settings-web.env omero-centos6_py27.env $dir/step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
-	echo "#end-copy-omeroscript" >> $file
-	number=$(sed -n '/#start-py27-scl/=' $dir/step04_all_omero.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#end-py27-scl/=' $dir/step04_all_omero.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	# To be removed when we use omego
-	#echo "$line" >> $file
-elif [ $OS = "centos6_py27_ius" ] ; then
-	echo "#start-copy-omeroscript" >> $file
-	echo "cp settings.env settings-web.env omero-centos6_py27ius.env step04_all_omero.sh setup_omero_db.sh ~omero" >> $file
-	echo "#end-copy-omeroscript" >> $file
-else
-	echo "#start-copy-omeroscript" >> $file
-	echo "cp settings.env settings-web.env step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
-	echo "#end-copy-omeroscript" >> $file
-	number=$(sed -n '/#start-venv/=' $dir/step04_all_omero.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#end-venv/=' $dir/step04_all_omero.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	# To be removed when we use omego
-	#echo "$line" >> $file
-fi
-
-echo "#start-release-ice35" >> $file
-number=$(sed -n '/#start-release-ice35/=' $dir/step04_all_omero.sh)
+echo "#start-copy-omeroscript" >> $file
+echo "cp settings.env settings-web.env step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
+echo "#end-copy-omeroscript" >> $file
+number=$(sed -n '/#start-venv/=' $dir/step04_all_omero.sh)
 ns=$((number+1))
-number=$(sed -n '/#end-release-ice35/=' $dir/step04_all_omero.sh)
+number=$(sed -n '/#end-venv/=' $dir/step04_all_omero.sh)
 ne=$((number-1))
 line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-line=$(echo -e "${line}" | sed -e "s/\$OMEROVER/5.2/g")
-line=$(echo -e "${line}" | sed -e "s/\$icevalue/3.5/g")
-echo "$line" >> $file
-echo "#end-release-ice35" >> $file
+# To be removed when we use omego
+#echo "$line" >> $file
 
 echo "#start-release-ice36" >> $file
 number=$(sed -n '/#start-release-ice36/=' $dir/step04_all_omero.sh)
@@ -338,18 +249,8 @@ echo "$line" >> $file
 echo -en '\n' >> $file
 echo "#end-step05" >> $file
 
-if [[ $OS =~ "centos6" ]] ; then
-	v="centos6"
-fi
-
 echo -en '\n' >> $file
-if [ $OS = "centos6" ] ; then
-	echo "#start-step06: As root, run the scripts to start OMERO automatically" >> $file
-	line=$(sed -n '2,$p' $dir/step06_"$v"_daemon_no_web.sh)
-	echo "$line" >> $file
-else
-	echo "#start-step06: As root, run the scripts to start OMERO and OMERO.web automatically" >> $file
-fi
+echo "#start-step06: As root, run the scripts to start OMERO and OMERO.web automatically" >> $file
 
 if [ $OS = "centos7" ] ; then
 	number=$(sed -n '/#start-recommended/=' $dir/step06_"$OS"_daemon.sh)
@@ -359,9 +260,6 @@ if [ $OS = "centos7" ] ; then
 	line=$(sed -n ''$nrs','$nre'p' $dir/step06_"$OS"_daemon.sh)
 	# remove docker conditional
 	line=`remove_docker_workaround "${line}"`
-	echo "$line" >> $file
-elif [[ $OS =~ "centos6_py27" ]] ; then
-	line=$(sed -n '2,$p' $dir/step06_"$v"_daemon.sh)
 	echo "$line" >> $file
 fi
 echo "#end-step06" >> $file
@@ -375,19 +273,17 @@ echo "$line" >> $file
 echo "#end-step07" >> $file
 
 echo -en '\n' >> $file
-if [ ! $OS = "centos6" ] ; then
-	echo "#start-step08: As root, perform regular tasks" >> $file
-	echo "#start-omeroweb-cron" >> $file
-	line=$(sed -n '2,$p' $dir/omero-web-cron)
-	echo "$line" >> $file
-	echo "#end-omeroweb-cron" >> $file
-	echo "#Copy omero-web-cron into the appropriate location" >> $file
-	echo "#start-copy-omeroweb-cron" >> $file
-	line=$(sed -n '2,$p' $dir/step08_all_cron.sh)
-	echo "$line" >> $file
-	echo "#end-copy-omeroweb-cron" >> $file
-	echo "#end-step08" >> $file
-fi
+echo "#start-step08: As root, perform regular tasks" >> $file
+echo "#start-omeroweb-cron" >> $file
+line=$(sed -n '2,$p' $dir/omero-web-cron)
+echo "$line" >> $file
+echo "#end-omeroweb-cron" >> $file
+echo "#Copy omero-web-cron into the appropriate location" >> $file
+echo "#start-copy-omeroweb-cron" >> $file
+line=$(sed -n '2,$p' $dir/step08_all_cron.sh)
+echo "$line" >> $file
+echo "#end-copy-omeroweb-cron" >> $file
+echo "#end-step08" >> $file
 
 if [[ $OS =~ "centos" ]]; then
 echo "#start-selinux" >> $file

@@ -11,9 +11,6 @@ For example:
     ./docker-build.sh debian9_nginx
     docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_debian9_nginx
 
-    ./docker-build.sh centos6_py27_ius_nginx
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx
-
 See `docker run --help` for more information on these and other options
 for running docker images.
 
@@ -37,7 +34,7 @@ The walkthrough files should be used for documentation purpose.
 To generate the walkthrough file corresponding to a given OS i.e. `walkthough_OS.sh`,
 run for example:
 
-    OS=centos6 ALL=false bash autogenerate.sh
+    OS=centos7 ALL=false bash autogenerate.sh
 
 Only the "recommended" requirements will be copied to the walkthrough file.
 When a requirement is modified e.g. Postgres 9.5 instead of Postgres 9.4
@@ -50,10 +47,14 @@ Nginx installation steps are added to the walkthrough file
 
 To generate all the walkthroughs, run the following command
     
-    ALL=true bash autogenerate.sh
+    bash autogenerate.sh
+
+To generate a specific walkthrough, run the following command
+
+    OS=debian9 ALL=false bash autogenerate.sh
 
 The possible values are:
-centos7 (default), centos6, centos6_py27, centos6_py27_ius, debian8, ubuntu1404, ubuntu1604
+centos7 (default), debian9, ubuntu1404, ubuntu1604
 
 Configuring Java
 ----------------
@@ -63,7 +64,7 @@ It is possible to install other versions using the JAVAVER parameter.
 
 For example, to install oracle-java 1.8:
 
-JAVAVER=oracle18 ./docker-build.sh ubuntu1404_nginx
+JAVAVER=oracle18 ./docker-build.sh ubuntu1604_nginx
 
 The supported values are: 
 openjdk18 (default), openjdk18-devel, oracle18
@@ -71,8 +72,8 @@ openjdk18 (default), openjdk18-devel, oracle18
 If you do not want to install Java set JAVAVER to nojava.
 
 To add a new Java version, update the following files: 
-`step01_centos_java_deps.sh`, `step01_debian8_java_deps.sh`,
-`step01_ubuntu_java_deps.sh` and update this README.md.
+`step01_centos_java_deps.sh`, `step01_ubuntu_java_deps.sh`,
+`step01_debian9_java_deps.sh` and update this README.md.
 
 Configuring Postgres
 --------------------
@@ -81,19 +82,14 @@ By default, Postgres 9.4 is installed.
 It is possible to install other versions using the PGVER parameter.
 
 For example:
-
-    PGVER=pg95 ./docker-build.sh centos6_py27_ius_nginx
     
-    PGVER=pg95 ./docker-build.sh ubuntu1404_nginx
+    PGVER=pg95 ./docker-build.sh ubuntu1604_nginx
     
-To run the image for centOS 6 image, you need to pass the version used e.g. pg95 if the version 
-is not the default one. It is not necessary to specify the version when running Ubuntu/Debian image.
+It is not necessary to specify the version when running Ubuntu/Debian image.
 
 For example:
 
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx --pg 95
-
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604_nginx
 
 
 The supported values are: 
@@ -102,8 +98,8 @@ The supported values are:
 If you do not want to install Postgres set PGVER to nopg.
 
 To add a new Postgres version, update the following files: 
-`step01_centos6_pg_deps.sh`, `step01_centos7_pg_deps.sh`, `step01_debian8_pg_deps.sh`,
-`step01_ubuntu1404_pg_deps.sh`, `step01_ubuntu1604_pg_deps.sh` and update this README.md.
+`step01_centos7_pg_deps.sh`, `step01_debian9_pg_deps.sh`, `step01_ubuntu1404_pg_deps.sh`,
+`step01_ubuntu1604_pg_deps.sh` and update this README.md.
 
 Configuring Ice
 ---------------
@@ -119,8 +115,7 @@ The supported values are:
 ice36-devel (CentOS 7 only), ice36
 
 To add a new Ice version, update the following files:
-`step01_centos6_ice_deps.sh`, `step01_centos6_py27_ice_deps.sh`, `step01_centos6_py27_ius_ice_deps.sh`
-`step01_centos7_ice_deps.sh`, `step01_ubuntu_ice_deps.sh`, `step01_debian8_ice_deps.sh`,
+`step01_centos7_ice_deps.sh`, `step01_ubuntu_ice_deps.sh`,
 `step01_debian9_ice_deps.sh` and update this README.md.
 
 Configuring Redis
@@ -132,18 +127,13 @@ backend using the WEBSESSION parameter
 
 For example:
 
-    WEBSESSION=true ./docker-build.sh centos6_py27_ius_nginx
+    WEBSESSION=true ./docker-build.sh ubuntu1604_nginx
 
-    WEBSESSION=true ./docker-build.sh ubuntu1404_nginx
-
-To run the image for centOS 6 with Python 2.7 or Ubuntu/Debian, you need to pass the -w/--websession true.
-The parameter is not taken into account for CentOS 6 with Python 2.6
+To run the image for Ubuntu/Debian, you need to pass the -w/--websession true.
 
 For example:
 
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_centos6_py27_ius_nginx --websession true
-
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx --websession true
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604_nginx --websession true
 
 It is not necessary to specify the version when running CentOS 7 image.
 
@@ -159,10 +149,8 @@ step05_1_all_webapps.sh.
 
 For example:
 
-    WEBAPPS=true ./docker-build.sh ubuntu1404_nginx
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1404_nginx
-
-The parameter will not be taken into account when creating a CentOS 6 with Python 2.6 test image. 
+    WEBAPPS=true ./docker-build.sh ubuntu1604_nginx
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604_nginx
 
 Installing development branches
 -------------------------------
@@ -173,7 +161,7 @@ when building the image.
 
 For example:
 
-    OMEROVER=OMERO-DEV-latest ./docker-build.sh ubuntu1404_nginx
+    OMEROVER=OMERO-DEV-latest ./docker-build.sh ubuntu1604_nginx
 
 The supported values are: 
 OMERO-DEV-latest, OMERO-DEV-merge-build, latest (default)
@@ -181,9 +169,9 @@ OMERO-DEV-latest, OMERO-DEV-merge-build, latest (default)
 
 | OMERO version         | Ice version |
 |-----------------------|------------ |
-| OMERO-DEV-latest      | 3.5, 3.6    |
-| OMERO-DEV-merge-build | 3.5, 3.6    |
-| latest                | 3.5, 3.6    |
+| OMERO-DEV-latest      | 3.6         |
+| OMERO-DEV-merge-build | 3.6         |
+| latest                | 3.6         |
 ---------------------------------------
 
 
