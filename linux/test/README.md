@@ -64,7 +64,7 @@ It is possible to install other versions using the JAVAVER parameter.
 
 For example, to install oracle-java 1.8:
 
-JAVAVER=oracle18 ./docker-build.sh ubuntu1404_nginx
+JAVAVER=oracle18 ./docker-build.sh ubuntu1604_nginx
 
 The supported values are: 
 openjdk18 (default), openjdk18-devel, oracle18
@@ -72,8 +72,7 @@ openjdk18 (default), openjdk18-devel, oracle18
 If you do not want to install Java set JAVAVER to nojava.
 
 To add a new Java version, update the following files: 
-`step01_centos_java_deps.sh`, `step01_debian8_java_deps.sh`,
-`step01_ubuntu_java_deps.sh` and update this README.md.
+`step01_centos_java_deps.sh`, `step01_ubuntu_java_deps.sh` and update this README.md.
 
 Configuring Postgres
 --------------------
@@ -129,7 +128,7 @@ For example:
 
     WEBSESSION=true ./docker-build.sh ubuntu1604_nginx
 
-To run the image for centOS 6 with Python 2.7 or Ubuntu/Debian, you need to pass the -w/--websession true.
+To run the image for Ubuntu/Debian, you need to pass the -w/--websession true.
 
 For example:
 
