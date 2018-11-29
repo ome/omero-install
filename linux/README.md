@@ -18,7 +18,7 @@ Usernames and passwords can be customized in `settings.env`.
 Documentation generation
 ========================
 To generate a walkthrough file corresponding to a given OS, run the
-`autogenerate.sh` script, the OS is specified as a paramater e.g.
+`autogenerate.sh` script, the OS is specified as a parameter e.g.
 	
 	OS=ubuntu1604 bash autogenerate.sh
 
