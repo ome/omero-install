@@ -78,9 +78,6 @@ echo "$line" >> $file
 # install ice
 echo "# install Ice" >> $file
 N=$OS
-if [[ $OS =~ "ubuntu" ]] ; then
-	N="ubuntu"
-fi
 echo "#start-recommended-ice" >> $file
 number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_ice_deps.sh)
 ns=$((number+1))
