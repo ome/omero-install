@@ -26,4 +26,11 @@ elif [ "$PGVER" = "pg96" ]; then
 	apt-get -y install postgresql-9.6
 	service postgresql start
 	#end-recommended
+elif [ "$PGVER" = "pg10" ]; then
+    apt-get -y install apt-transport-https
+	add-apt-repository -y "deb https://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main 10"
+	wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+	apt-get update
+	apt-get -y install postgresql-10
+	service postgresql start
 fi
