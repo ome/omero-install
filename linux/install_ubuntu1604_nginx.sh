@@ -18,7 +18,7 @@ bash -eux step01_ubuntu_java_deps.sh
 bash -eux step01_ubuntu1604_deps.sh
 
 # install ice
-bash -eux step01_ubuntu_ice_deps.sh
+bash -eux step01_ubuntu1604_ice_deps.sh
 
 # install Postgres
 bash -eux step01_ubuntu1604_pg_deps.sh
