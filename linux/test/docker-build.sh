@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]; then
+if [ $# -lt 1 ]; then
 	echo "USAGE: `basename $0` distribution"
 	exit 2
 fi
