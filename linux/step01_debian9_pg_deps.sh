@@ -2,7 +2,7 @@
 
 PGVER=${PGVER:-pg96}
 
-if [ "$PGVER" = "pg94" ]; then
+if [ "$PGVER" = "pg96" ]; then
     # Postgres installation: version installed will be 9.6
     #start-recommended
     apt-get -y install postgresql
