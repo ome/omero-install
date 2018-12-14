@@ -2,16 +2,19 @@ language: python
 services:
   - docker
 env:
-  - ENV=centos7_nginx
-  - ENV=ubuntu1604_nginx
-  - ENV=debian9_nginx
+  - ENV=centos7_nginx PGVER=pg10
+  - ENV=ubuntu1604_nginx PGVER=pg10
+  - ENV=debian9_nginx PGVER=pg10
+  - ENV=centos7_nginx PGVER=pg96
+  - ENV=ubuntu1604_nginx PGVER=pg96
+  - ENV=debian9_nginx PGVER=pg96
 
 before_install:  
   - sudo apt-get update
   - sudo apt-get -y install shunit2
 script:
     - cd linux/test
-    - ./docker-build.sh $ENV
+    - PGVER=$PGVER ./docker-build.sh $ENV
     - if [[ "$ENV" =~ "centos7" ]]; then ./test_services.sh; fi
     - cd ..
     - ./autogenerate.sh

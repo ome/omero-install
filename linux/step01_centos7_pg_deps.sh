@@ -71,4 +71,25 @@ elif [ "$PGVER" = "pg96" ]; then
 	fi
 	systemctl enable postgresql-9.6.service
 	#end-recommended
+elif [ "$PGVER" = "pg10" ]; then
+    yum -y install https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+    yum -y install postgresql10-server postgresql10
+
+    if [ "${container:-}" = docker ]; then
+		su - postgres -c "/usr/pgsql-10/bin/initdb -D /var/lib/pgsql/10/data --encoding=UTF8"
+		echo "listen_addresses='*'" >> /var/lib/pgsql/10/data/postgresql.conf
+	else
+		PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-10/bin/postgresql10-setup initdb
+	fi
+	sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/10/data/pg_hba.conf
+	if [ "${container:-}" = docker ]; then
+		sed -i 's/OOMScoreAdjust/#OOMScoreAdjust/' \
+		/usr/lib/systemd/system/postgresql-10.service
+	fi
+	if [ "${container:-}" = docker ]; then
+		su - postgres -c "/usr/pgsql-10/bin/pg_ctl start -D /var/lib/pgsql/10/data -w"
+	else
+		systemctl start postgresql-10.service
+	fi
+	systemctl enable postgresql-10.service
 fi

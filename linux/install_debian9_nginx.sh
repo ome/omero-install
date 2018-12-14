@@ -29,7 +29,7 @@ bash -eux step01_debian9_pg_deps.sh
 
 bash -eux step02_all_setup.sh
 
-if [[ "$PGVER" =~ ^(pg94|pg95|pg96)$ ]]; then
+if [[ "$PGVER" =~ ^(pg94|pg95|pg96|pg10)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 cp settings.env settings-web.env step04_omero_patch_openssl.sh step04_all_omero.sh setup_omero_db.sh ~omero
