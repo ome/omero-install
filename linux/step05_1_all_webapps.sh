@@ -43,7 +43,7 @@ if [ $install_figure = true ]; then
 	# Install required packages
 	if [ "$PY_ENV" = "py27" ]; then
 		pip install reportlab markdown
-	else
+	fi
 
 	# Register the app
 	su - omero -c "OMERO.server/bin/omero config append omero.web.apps '\"figure\"'"
