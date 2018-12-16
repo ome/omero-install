@@ -8,15 +8,8 @@ ICEVER=${ICEVER:-ice36}
 
 source `dirname $0`/settings.env
 #start-install
-if [ "$PY_ENV" = "py27_scl" ]; then
-	#start-py27-scl
-	set +u
-	source /opt/rh/python27/enable
-	set -u
-	#end-py27-scl
-fi
 
-if [[ ! $PY_ENV = "py27_ius" ]]; then
+if [ "$PY_ENV" = "py27" ]]; then
 	#start-venv
 	virtualenv /home/omero/omeroenv
 	/home/omero/omeroenv/bin/pip install omego==0.6.0

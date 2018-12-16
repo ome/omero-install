@@ -40,24 +40,8 @@ if [ $install_figure = true ]; then
 	rm $NAME_FIGURE_ZIP
 	mv figure* OMERO.server/lib/python/omeroweb/figure
 
-	echo "value=$PY_ENV"
 	# Install required packages
-	if [ "$PY_ENV" = "py26" ]; then
-		pip install reportlab==2.7
-		pip install reportlab markdown
-	elif [ "$PY_ENV" = "py27_scl" ]; then
-		set +u
-		source /opt/rh/python27/enable
-		set -u
-		pip install reportlab markdown
-	elif [ "$PY_ENV" = "py27_ius" ]; then
-		virtualenv -p /usr/bin/python2.7 /home/omero/omeroenv
-		set +u
-		source /home/omero/omeroenv/bin/activate
-		set -u
-		/home/omero/omeroenv/bin/pip2.7 install reportlab markdown
-		deactivate
-	else
+	if [ "$PY_ENV" = "py27" ]; then
 		pip install reportlab markdown
 	fi
 
