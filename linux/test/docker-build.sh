@@ -7,7 +7,7 @@ fi
 
 WEBAPPS=${WEBAPPS:-false}
 OMEROVER=${OMEROVER:-latest}
-JAVAVER=${JAVAVER:-openjdk18}
+JAVAVER=${JAVAVER:-openjdk1.8}
 ICEVER=${ICEVER:-ice36}
 PGVER=${PGVER:-pg94}
 
