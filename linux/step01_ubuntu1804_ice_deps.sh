@@ -8,3 +8,5 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv B6391CB2CFBA643D
 apt-add-repository "deb http://zeroc.com/download/Ice/3.7/ubuntu18.04 stable main"
 apt-get update
 apt-get -y install zeroc-ice-all-runtime
+# Zeroc IcePy
+apt-get -y install python-zeroc-ice
