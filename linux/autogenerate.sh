@@ -15,7 +15,7 @@ echo "${l}"
 
 #generate the walkthrough for all supported os
 function generate_all() {
-	values=(centos7 ubuntu1404 ubuntu1604 debian9)
+	values=(centos7 ubuntu1404 ubuntu1604 debian9 ubuntu1804)
 	for os in "${values[@]}"; do
   		echo "${os}"
   		 generate ${os}
@@ -69,6 +69,8 @@ echo "# install dependencies" >> $file
 N=$OS
 if [[ $OS = "ubuntu1404" ]] ; then
 	N="ubuntu"
+elif [[ $OS = "ubuntu1804" ]] ; then
+	N="ubuntu1604"
 fi
 line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
 echo "$line" >> $file
