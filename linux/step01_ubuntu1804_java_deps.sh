@@ -10,7 +10,7 @@ if [ "$JAVAVER" = "oracle11" ]; then
     apt-get install -y oracle-java11-installer
 elif [ "$JAVAVER" = "openjdk11-devel" ]; then
     apt-get update -q
-    apt-get install -y openjdk-11-devel
+    apt-get install -y openjdk-11-jdk
 else
     #start-recommended
     apt-get update -q
