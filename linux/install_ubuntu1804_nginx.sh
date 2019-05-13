@@ -35,7 +35,7 @@ su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero.sh"
 
 su - omero -c "bash setup_omero_db.sh"
 
-OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step05_ubuntu16804_nginx.sh
+OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step05_ubuntu1804_nginx.sh
 
 if [ $WEBAPPS = true ]; then
     OMEROVER=$OMEROVER bash -eux step05_1_all_webapps.sh

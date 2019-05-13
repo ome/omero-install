@@ -1,7 +1,7 @@
 #!/bin/bash
 
 OMEROVER=${OMEROVER:-latest}
-ICEVER=${ICEVER:-ice37}
+ICEVER=${ICEVER:-ice36}
 
 #start-nginx-install
 apt-get update
