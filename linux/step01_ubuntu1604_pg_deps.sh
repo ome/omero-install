@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PGVER=${PGVER:-pg94}
+PGVER=${PGVER:-pg10}
 
 
 # Postgres installation

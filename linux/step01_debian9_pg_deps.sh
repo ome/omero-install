@@ -1,8 +1,8 @@
 #!/bin/bash
 
-PGVER=${PGVER:-pg96}
+PGVER=${PGVER:-pg10}
 if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
-    PGVER="pg96"
+    PGVER="pg10"
 fi
 
 if [ "$PGVER" = "pg96" ]; then
