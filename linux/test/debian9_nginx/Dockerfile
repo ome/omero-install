@@ -4,7 +4,6 @@ FROM debian:stretch
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ARG WEBSESSION=false
-ARG WEBAPPS=false
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk1.8
 ARG ICEVER=ice36

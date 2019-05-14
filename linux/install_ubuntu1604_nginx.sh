@@ -3,7 +3,6 @@
 set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
-WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg10}
 ICEVER=${ICEVER:-ice36}
 
@@ -36,10 +35,6 @@ su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero.sh"
 su - omero -c "bash setup_omero_db.sh"
 
 OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step05_ubuntu1604_nginx.sh
-
-if [ $WEBAPPS = true ]; then
-	OMEROVER=$OMEROVER bash -eux step05_1_all_webapps.sh
-fi
 
 if [ "$WEBSESSION" = true ]; then
 	bash -eux step05_2_websessionconfig.sh
