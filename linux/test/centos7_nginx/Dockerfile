@@ -24,7 +24,7 @@ ARG WEBAPPS=false
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk1.8
 ARG ICEVER=ice36
-ARG PGVER=pg94
+ARG PGVER=pg10
 
 RUN cd omero-install-test && \
 	bash install_centos7_nginx.sh
