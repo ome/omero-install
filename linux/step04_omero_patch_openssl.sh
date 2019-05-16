@@ -1,8 +1,7 @@
 #!/bin/bash
 
 #start-seclevel
-sed -i.bak 's/\("IceSSL.Ciphers".*ADH\)/\1:@SECLEVEL=0/' OMERO.server/lib/python/omero/clients.py OMERO.server/etc/templates/grid/templates.xml
+OMERO.server/bin/omero config set omero.glacier2.IceSSL.Ciphers HIGH:ADH:@SECLEVEL=0
+sed -i 's/\("IceSSL.Ciphers".*ADH\)/\1:@SECLEVEL=0/' OMERO.server/lib/python/omero/clients.py
 #end-seclevel
 #clean files
-rm OMERO.server/lib/python/omero/clients.py.bak
-rm OMERO.server/etc/templates/grid/templates.xml.bak
