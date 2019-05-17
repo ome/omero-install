@@ -78,7 +78,7 @@ To add a new Java version, update the following files:
 Configuring Postgres
 --------------------
 
-By default, Postgres 9.4 is installed.
+By default, Postgres 10.0 is installed.
 It is possible to install other versions using the PGVER parameter.
 
 For example:

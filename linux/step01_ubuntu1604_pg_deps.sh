@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PGVER=${PGVER:-pg94}
+PGVER=${PGVER:-pg10}
 
 
 # Postgres installation
@@ -18,7 +18,6 @@ elif [ "$PGVER" = "pg94" ]; then
 	sed -i.bak -re 's/^(host.*)ident/\1md5/' /etc/postgresql/9.4/main/pg_hba.conf
 	service postgresql start
 elif [ "$PGVER" = "pg96" ]; then
-	#start-recommended
 	apt-get -y install apt-transport-https
 	add-apt-repository -y "deb https://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main 9.6"
 	wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
@@ -26,8 +25,8 @@ elif [ "$PGVER" = "pg96" ]; then
 	apt-get -y install postgresql-9.6
 	sed -i.bak -re 's/^(host.*)ident/\1md5/' /etc/postgresql/9.6/main/pg_hba.conf
 	service postgresql start
-	#end-recommended
 elif [ "$PGVER" = "pg10" ]; then
+	#start-recommended
 	apt-get -y install apt-transport-https
 	add-apt-repository -y "deb https://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main 10"
 	wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
@@ -35,4 +34,5 @@ elif [ "$PGVER" = "pg10" ]; then
 	apt-get -y install postgresql-10
 	sed -i.bak -re 's/^(host.*)ident/\1md5/' /etc/postgresql/10/main/pg_hba.conf
 	service postgresql start
+	#end-recommended
 fi

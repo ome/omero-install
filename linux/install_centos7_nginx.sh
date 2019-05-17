@@ -5,7 +5,7 @@ set -e -u -x
 WEBSESSION=${WEBSESSION:-false}
 OMEROVER=${OMEROVER:-latest}
 WEBAPPS=${WEBAPPS:-false}
-PGVER=${PGVER:-pg94}
+PGVER=${PGVER:-pg10}
 ICEVER=${ICEVER:-ice36}
 
 source `dirname $0`/settings.env
