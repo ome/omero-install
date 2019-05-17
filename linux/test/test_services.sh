@@ -12,11 +12,7 @@ source `pwd`/../settings-web.env
 CNAME=omeroinstall_$ENV
 
 # start docker container
-if [[ "darwin" == "${OSTYPE//[0-9.]/}" ]]; then
-    docker run -d --privileged -p 8888:80 --name $CNAME omero_install_test_$ENV
-else
-    docker run -d --name $CNAME -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run omero_install_test_$ENV
-fi
+docker run -d --name $CNAME -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run -p 8080:80 omero_install_test_$ENV
 
 # check if container is running
 docker inspect -f {{.State.Running}} $CNAME
@@ -60,15 +56,7 @@ fi
 docker exec -it $CNAME /bin/bash -c "su - omero -c \"/home/omero/OMERO.server/bin/omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
 
 # Log in to OMERO.web
-if [[ "darwin" == "${OSTYPE//[0-9.]/}" ]]; then
-  DOCKER_IP=$(docker-machine ip "${DMNAME}")
-  curl -I http://${DOCKER_IP}:8888/webclient
-  WEB_HOST="${DOCKER_IP}:8888" ./test_login_to_web.sh
-else
-  DOCKER_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $CNAME)
-  curl -I http://${DOCKER_IP}/webclient
-  WEB_HOST=$DOCKER_IP ./test_login_to_web.sh
-fi
+WEB_HOST=localhost:8080 ./test_login_to_web.sh
 
 # stop and cleanup
 docker stop $CNAME
