@@ -24,7 +24,7 @@ if [ "$ICEVER" = "ice36" ]; then
 		#start-release-ice36
 		cd ~omero
 		SERVER=https://downloads.openmicroscopy.org/latest/omero5/server-ice36.zip
-		wget $SERVER -O OMERO.server-ice36.zip
+		wget -q $SERVER -O OMERO.server-ice36.zip
 		unzip -q OMERO.server*
 		#end-release-ice36
 	fi
@@ -32,7 +32,7 @@ fi
 # no server downloaded
 if [ ! -d OMERO.server* ]; then
 	# dev branches installed via omego
-	/home/omero/omeroenv/bin/omego download --ice $icevalue --branch $OMEROVER server
+	/home/omero/omeroenv/bin/omego download -q --ice $icevalue --branch $OMEROVER server
 fi
 
 #start-link
