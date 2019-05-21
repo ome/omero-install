@@ -54,7 +54,7 @@ To generate a specific walkthrough, run the following command
     OS=debian9 ALL=false bash autogenerate.sh
 
 The possible values are:
-centos7 (default), debian9, ubuntu1404, ubuntu1604
+centos7 (default), debian9, ubuntu1404, ubuntu1604, ubuntu1804
 
 Configuring Java
 ----------------
@@ -62,18 +62,19 @@ Configuring Java
 By default, openjdk1.8 is installed.
 It is possible to install other versions using the JAVAVER parameter.
 
-For example, to install oracle-java 1.8:
+For example, to install openjdk11:
 
-JAVAVER=oracle18 ./docker-build.sh ubuntu1604_nginx
+JAVAVER=openjdk11 ./docker-build.sh ubuntu1604_nginx
 
 The supported values are: 
-openjdk18 (default), openjdk18-devel, oracle18
+openjdk18 (default), openjdk18-devel, openjdk11
 
 If you do not want to install Java set JAVAVER to nojava.
 
 To add a new Java version, update the following files: 
 `step01_centos_java_deps.sh`, `step01_ubuntu_java_deps.sh`,
-`step01_debian9_java_deps.sh` and update this README.md.
+`step01_debian9_java_deps.sh`, `step01_ubuntu1804_java_deps.sh`
+and update this README.md.
 
 Configuring Postgres
 --------------------
@@ -93,13 +94,13 @@ For example:
 
 
 The supported values are: 
-pg94 (default), pg95, pg96, pg10
+pg94, pg95, pg96, pg10 (default)
 
 If you do not want to install Postgres set PGVER to nopg.
 
 To add a new Postgres version, update the following files: 
 `step01_centos7_pg_deps.sh`, `step01_debian9_pg_deps.sh`, `step01_ubuntu1404_pg_deps.sh`,
-`step01_ubuntu1604_pg_deps.sh` and update this README.md.
+`step01_ubuntu1604_pg_deps.sh`, `step01_ubuntu1804_pg_deps.sh` and update this README.md.
 
 Configuring Ice
 ---------------
@@ -116,7 +117,7 @@ ice36-devel (CentOS 7 only), ice36
 
 To add a new Ice version, update the following files:
 `step01_centos7_ice_deps.sh`, `step01_ubuntu_ice_deps.sh`,
-`step01_debian9_ice_deps.sh` and update this README.md.
+`step01_debian9_ice_deps.sh`, `step01_ubuntu1804_ice_deps.sh` and update this README.md.
 
 Configuring Redis
 -----------------
