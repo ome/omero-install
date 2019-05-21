@@ -26,4 +26,8 @@ cron
 service omero start
 service nginx start
 service omero-web start
-exec bash
+if [ -t 1 ] ; then
+    exec bash
+else
+    exec tail -F /home/omero/OMERO.server/var/log/*
+fi

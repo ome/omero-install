@@ -19,6 +19,6 @@ before_install:
 script:
     - cd linux/test
     - PGVER=$PGVER ./docker-build.sh $ENV
-    - if [[ "$ENV" =~ "centos7" ]]; then ./test_services.sh; fi
+    - ./test_services.sh
     - cd ..
     - ./autogenerate.sh
