@@ -12,6 +12,7 @@ env:
   #- ENV=debian9_nginx JAVAVER=openjdk11
   #- ENV=debian9_nginx JAVAVER=oracle11
   #- ENV=ubuntu1604_nginx JAVAVER=oracle11
+  - ENV=ubuntu1804_nginx
 
 before_install:  
   - sudo apt-get update
