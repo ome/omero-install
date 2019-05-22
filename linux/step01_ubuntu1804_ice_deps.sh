@@ -24,11 +24,11 @@ if [ "$ICEVER" = "ice36" ]; then
         software-properties-common \
         zlib1g-dev
 
-    wget https://github.com/zeroc-ice/ice/archive/v3.6.4.tar.gz
-    tar xzvf v3.6.4.tar.gz
+    wget -q https://github.com/zeroc-ice/ice/archive/v3.6.4.tar.gz
+    tar xzf v3.6.4.tar.gz
     cd ice-3.6.4/cpp
     
-    make && make install
+    make --silent && make install --silent
 
     pip install "zeroc-ice>3.5,<3.7"
     echo /opt/Ice-3.6.4/lib/x86_64-linux-gnu > /etc/ld.so.conf.d/ice-x86_64.conf
