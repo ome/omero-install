@@ -3,8 +3,7 @@
 set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
-WEBAPPS=${WEBAPPS:-false}
-PGVER=${PGVER:-pg94}
+PGVER=${PGVER:-pg10}
 ICEVER=${ICEVER:-ice36}
 
 source settings.env
@@ -19,6 +18,8 @@ bash -eux step01_ubuntu1604_deps.sh
 
 # install ice
 bash -eux step01_ubuntu1804_ice_deps.sh
+
+cat omero-ice36.env >> /etc/profile
 
 # install Postgres
 bash -eux step01_ubuntu1804_pg_deps.sh
@@ -37,9 +38,6 @@ su - omero -c "bash setup_omero_db.sh"
 
 OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step05_ubuntu1804_nginx.sh
 
-if [ $WEBAPPS = true ]; then
-    OMEROVER=$OMEROVER bash -eux step05_1_all_webapps.sh
-fi
 
 if [ "$WEBSESSION" = true ]; then
     bash -eux step05_2_websessionconfig.sh

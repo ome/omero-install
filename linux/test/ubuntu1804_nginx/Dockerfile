@@ -4,11 +4,10 @@ FROM ubuntu:18.04
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ARG WEBSESSION=false
-ARG WEBAPPS=false
 ARG OMEROVER=latest
-ARG JAVAVER=openjdk18
+ARG JAVAVER=openjdk11
 ARG ICEVER=ice36
-ARG PGVER=pg94
+ARG PGVER=pg10
 
 ENV TZ=Europe/London
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
