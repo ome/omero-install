@@ -4,7 +4,6 @@ apt-get update
 apt-get -y install \
 	unzip \
 	wget \
-	curl \
 	python-{pip,tables,virtualenv,yaml,jinja2}
 
 # to be installed if recommended/suggested is false
