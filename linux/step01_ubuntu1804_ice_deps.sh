@@ -10,8 +10,6 @@ if [ "$ICEVER" = "ice36" ]; then
     apt-get install -y -q\
         build-essential \
         db5.3-util \
-        git \
-        gpg-agent \
         libbz2-dev \
         libdb++-dev \
         libdb-dev \
