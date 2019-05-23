@@ -5,7 +5,7 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ARG WEBSESSION=false
 ARG OMEROVER=latest
-ARG JAVAVER=openjdk11
+ARG JAVAVER=openjdk1.8
 ARG ICEVER=ice36
 ARG PGVER=pg10
 
