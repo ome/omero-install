@@ -49,6 +49,8 @@ echo "$line" >> $file
 N=$OS
 if [[ $OS =~ "centos" ]] ; then
 	N="centos"
+elif [[ $OS =~ "ubuntu1804" ]]  ; then
+	N="ubuntu1804"
 elif [[ $OS =~ "ubuntu" ]]  ; then
 	N="ubuntu"
 fi 
