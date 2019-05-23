@@ -14,6 +14,6 @@ elif [ "$JAVAVER" = "openjdk11-devel" ]; then
 else
     #start-recommended
     apt-get update -q
-    apt-get install -y openjdk-8-jdk
+    apt-get install -y openjdk-11-jre
     #end-recommended
 fi
