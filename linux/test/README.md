@@ -137,21 +137,6 @@ For example:
 
 It is not necessary to specify the version when running CentOS 7 image.
 
-Installing web applications
----------------------------
-
-By default the installation walkthroughs do not install any of the web applications.
-To create a test image with: figure (https://github.com/ome/figure), 
-gallery (https://github.com/ome/gallery), webtest (https://github.com/openmicroscopy/webtest) and
-webtagging (https://github.com/MicronOxford/webtagging), you can pass `WEBAPPS=true` to the build
-script. If you wish not to install one of the apps above, edit one of the "install_*" flag in
-step05_1_all_webapps.sh.
-
-For example:
-
-    WEBAPPS=true ./docker-build.sh ubuntu1604_nginx
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604_nginx
-
 Installing development branches
 -------------------------------
 

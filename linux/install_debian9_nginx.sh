@@ -3,7 +3,6 @@
 set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
-WEBAPPS=${WEBAPPS:-false}
 PGVER=${PGVER:-pg10}
 ICEVER=${ICEVER:-ice36}
 
