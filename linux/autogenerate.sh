@@ -197,7 +197,7 @@ line=$(sed -n ''$ns',$p' $dir/setup_omero_db.sh)
 echo "$line" >> $file
 echo "#end-step04" >> $file
 
-if [ $OS = "debian9" ] ; then
+if [ $OS = "debian9" ] || [ $OS = "ubuntu1804" ] ; then
 	echo "#start-patch-openssl" >> $file
 	number=$(sed -n '/#start-seclevel/=' $dir/step04_omero_patch_openssl.sh)
 	ns=$((number))
