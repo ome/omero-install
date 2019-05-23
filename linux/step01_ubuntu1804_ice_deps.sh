@@ -17,9 +17,6 @@ if [ "$ICEVER" = "ice36" ]; then
         libmcpp-dev \
         libssl-dev \
         mcpp \
-        python-dev \
-        python-pip \
-        software-properties-common \
         zlib1g-dev
 
     cd /tmp
