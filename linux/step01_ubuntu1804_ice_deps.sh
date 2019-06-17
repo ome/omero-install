@@ -7,7 +7,7 @@ echo $ICEVER
 if [ "$ICEVER" = "ice36" ]; then
     #start-recommended
     apt-get update && \
-    apt-get install -y -q\
+    apt-get install -y -q \
         build-essential \
         db5.3-util \
         libbz2-dev \
