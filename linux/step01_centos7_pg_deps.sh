@@ -78,7 +78,7 @@ elif [ "$PGVER" = "pg10" ]; then
         su - postgres -c "/usr/pgsql-10/bin/initdb -D /var/lib/pgsql/10/data --encoding=UTF8"
         echo "listen_addresses='*'" >> /var/lib/pgsql/10/data/postgresql.conf
     else
-        PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-10/bin/postgresql10-setup initdb
+        PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-10/bin/postgresql-10-setup initdb
     fi
     sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/10/data/pg_hba.conf
     if [ "${container:-}" = docker ]; then
