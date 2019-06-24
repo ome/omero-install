@@ -27,6 +27,7 @@ if [ "$ICEVER" = "ice36" ]; then
 		wget -q $SERVER -O OMERO.server-ice36.zip
 		unzip -q OMERO.server*
 		#end-release-ice36
+		rm OMERO.server-ice36.zip
 	fi
 fi
 # no server downloaded
