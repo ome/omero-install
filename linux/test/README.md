@@ -54,7 +54,7 @@ To generate a specific walkthrough, run the following command
     OS=debian9 ALL=false bash autogenerate.sh
 
 The possible values are:
-centos7 (default), debian9, ubuntu1404, ubuntu1604, ubuntu1804
+centos7 (default), debian9, ubuntu1404, ubuntu1604, ubuntu1804, fedora30
 
 Configuring Java
 ----------------
