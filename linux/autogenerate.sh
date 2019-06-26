@@ -15,7 +15,7 @@ echo "${l}"
 
 #generate the walkthrough for all supported os
 function generate_all() {
-	values=(centos7 ubuntu1404 ubuntu1604 debian9 ubuntu1804)
+	values=(centos7 ubuntu1404 ubuntu1604 debian9 ubuntu1804 fedora30)
 	for os in "${values[@]}"; do
   		echo "${os}"
   		 generate ${os}
@@ -99,7 +99,7 @@ echo -en '\n' >> $file
 N=$OS
 echo -en '\n' >> $file
 echo "# install Postgres" >> $file
-if [ $OS = "centos7" ] ; then
+if [ $OS = "centos7" ] || [ $OS = "fedora30" ] ; then
 	number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_pg_deps.sh)
 	nrs=$((number+1))
 	number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_pg_deps.sh)
