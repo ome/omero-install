@@ -27,7 +27,7 @@ sed -i.bak -re 's/( default_server.*)/; #\1/' /etc/nginx/nginx.conf
 cp OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 systemctl enable nginx
-#if [ ! "${container:-}" = docker ]; then
-    #systemctl start nginx
-#fi
+if [ ! "${container:-}" = docker ]; then
+    systemctl start nginx
+fi
 #end-nginx-admin

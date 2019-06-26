@@ -21,8 +21,5 @@ if [ "$PGVER" = "pg10" ]; then
         systemctl start postgresql-10.service
     fi
     systemctl enable postgresql-10.service
-
-    #systemctl start postgresql-10.service
-    #systemctl enable postgresql-10.service
     #end-recommended
 fi
