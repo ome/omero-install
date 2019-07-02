@@ -1,7 +1,5 @@
 #!/bin/bash
 
-PY_ENV=${PY_ENV:-py27}
-
 cd ~omero
 
 

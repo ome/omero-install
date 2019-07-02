@@ -3,19 +3,10 @@
 set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
-PY_ENV=${PY_ENV:-py27}
 ICEVER=${ICEVER:-ice36}
 
 source `dirname $0`/settings.env
 #start-install
-
-if [ "$PY_ENV" = "py27" ]; then
-	#start-venv
-	virtualenv /home/omero/omeroenv
-	/home/omero/omeroenv/bin/pip install omego==0.6.0
-	#end-venv
-fi
-
 
 icevalue=3.6
 #start-install
@@ -27,11 +18,16 @@ if [ "$ICEVER" = "ice36" ]; then
 		wget -q $SERVER -O OMERO.server-ice36.zip
 		unzip -q OMERO.server*
 		#end-release-ice36
+		rm OMERO.server-ice36.zip
 	fi
 fi
 # no server downloaded
 if [ ! -d OMERO.server* ]; then
 	# dev branches installed via omego
+	#start-venv
+	virtualenv /home/omero/omeroenv
+	/home/omero/omeroenv/bin/pip install omego==0.6.0
+	#end-venv
 	/home/omero/omeroenv/bin/omego download -q --ice $icevalue --branch $OMEROVER server
 fi
 
