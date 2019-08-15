@@ -6,7 +6,7 @@ PGVER=${PGVER:-pg94}
 if [ "$PGVER" = "pg94" ]; then
 	# Postgres, reconfigure to allow TCP connections
 	yum -y install http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-redhat94-9.4-3.noarch.rpm
-	yum -y install postgresql94-server-9.4.22 postgresql94-9.4.22
+	yum -y install postgresql94-server postgresql94
 
 	if [ "${container:-}" = docker ]; then
 		su - postgres -c "/usr/pgsql-9.4/bin/initdb -D /var/lib/pgsql/9.4/data --encoding=UTF8"
@@ -28,7 +28,7 @@ if [ "$PGVER" = "pg94" ]; then
 elif [ "$PGVER" = "pg95" ]; then
 	# Postgres, reconfigure to allow TCP connections
 	yum -y install http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-redhat95-9.5-3.noarch.rpm
-	yum -y install postgresql95-server-9.5.17 postgresql95-9.5.17
+	yum -y install postgresql95-server postgresql95
 
 	if [ "${container:-}" = docker ]; then
 		su - postgres -c "/usr/pgsql-9.5/bin/initdb -D /var/lib/pgsql/9.5/data --encoding=UTF8"
@@ -50,7 +50,7 @@ elif [ "$PGVER" = "pg95" ]; then
 elif [ "$PGVER" = "pg96" ]; then
 	# Postgres, reconfigure to allow TCP connections
 	yum -y install http://yum.postgresql.org/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
-	yum -y install postgresql96-server-9.6.13 postgresql96-9.6.13
+	yum -y install postgresql96-server postgresql96
 
 	if [ "${container:-}" = docker ]; then
 		su - postgres -c "/usr/pgsql-9.6/bin/initdb -D /var/lib/pgsql/9.6/data --encoding=UTF8"
