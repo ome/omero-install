@@ -54,7 +54,7 @@ To generate a specific walkthrough, run the following command
     OS=debian9 ALL=false bash autogenerate.sh
 
 The possible values are:
-centos7 (default), debian9, ubuntu1404, ubuntu1604, ubuntu1804
+centos7 (default), debian9, ubuntu1604, ubuntu1804
 
 Configuring Java
 ----------------
@@ -99,7 +99,7 @@ pg94, pg95, pg96, pg10 (default)
 If you do not want to install Postgres set PGVER to nopg.
 
 To add a new Postgres version, update the following files: 
-`step01_centos7_pg_deps.sh`, `step01_debian9_pg_deps.sh`, `step01_ubuntu1404_pg_deps.sh`,
+`step01_centos7_pg_deps.sh`, `step01_debian9_pg_deps.sh`,
 `step01_ubuntu1604_pg_deps.sh`, `step01_ubuntu1804_pg_deps.sh` and update this README.md.
 
 Configuring Ice
