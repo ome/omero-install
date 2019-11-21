@@ -1,8 +1,13 @@
 #!/bin/bash
+VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
 cd ~omero
 
+export OMERODIR=OMERO.server
+
+source $VIRTUALENV/bin/activate
+pip3 install "django-redis>=4.10.0"
 
 # Register the app
-su - omero -c "OMERO.server/bin/omero config set omero.web.session_engine 'django.contrib.sessions.backends.cache'"
-su - omero -c "OMERO.server/bin/omero config set omero.web.caches '{\"default\": {\"BACKEND\": \"django_redis.cache.RedisCache\",\"LOCATION\": \"redis://127.0.0.1:6379/0\"}}'"
+omero config set omero.web.session_engine 'django.contrib.sessions.backends.cache'
+omero config set omero.web.caches '{\"default\": {\"BACKEND\": \"django_redis.cache.RedisCache\",\"LOCATION\": \"redis://127.0.0.1:6379/0\"}}'
