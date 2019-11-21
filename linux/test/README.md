@@ -181,7 +181,7 @@ Testing CentOS 7
 
     or can be tested manually
 
-        OSX: $ docker run -d --privileged -p 8888:80 --name omeroinstall omero_install_$ENV
+        OSX: $ docker run -d --privileged -p 8888:80 --name omeroinstall omero_install_test_$ENV
         UNIX: $ docker run -d --name omeroinstall -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run omero_install_test_$ENV
         wait 10 sec
         $ docker exec -it omeroinstall /bin/bash -c "service omero status"
