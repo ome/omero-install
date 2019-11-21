@@ -2,6 +2,7 @@
 
 OMEROVER=${OMEROVER:-latest}
 ICEVER=${ICEVER:-ice36}
+VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
 #start-nginx-install
 apt-get update
@@ -14,11 +15,11 @@ cp setup_omero_nginx.sh ~omero
 
 cd ~omero
 #web-requirements-recommended-start
-pip install -r OMERO.server/share/web/requirements-py27.txt
+su - omero -c "source $VIRTUALENV/bin/activate; pip3 install omero-web"
 #web-requirements-recommended-end
 
 # set up as the omero user.
-su - omero -c "bash -eux setup_omero_nginx.sh nginx"
+su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux setup_omero_nginx.sh nginx"
 
 #start-nginx-admin
 cp OMERO.server/nginx.conf.tmp /etc/nginx/sites-available/omero-web
