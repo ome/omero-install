@@ -12,8 +12,7 @@ if [ "$ICEVER" = "ice36" ]; then
     yum -y install openssl-devel bzip2-devel
 
     yum -y install ice-all-runtime
-
-    pip3 install https://github.com/ome/zeroc-ice-py-centos7/releases/download/0.2.1/zeroc_ice-3.6.5-cp36-cp36m-linux_x86_64.whl
+    #end-recommended
     # reset the locale
     localedef -i en_US -f UTF-8 en_US.UTF-8
 elif [ "$ICEVER" = "ice36-devel" ]; then
@@ -25,6 +24,5 @@ elif [ "$ICEVER" = "ice36-devel" ]; then
 
     yum -y install ice-all-runtime ice-all-devel
 
-    pip3 install https://github.com/ome/zeroc-ice-py-centos7/releases/download/0.2.1/zeroc_ice-3.6.5-cp36-cp36m-linux_x86_64.whl 
     localedef -i en_US -f UTF-8 en_US.UTF-8
 fi

@@ -1,4 +1,6 @@
 #!/bin/bash
+
 OMERO_USER=omero
 OMERO_SERVER=/home/omero/OMERO.server
-su - ${OMERO_USER} -c "${OMERO_SERVER}/bin/omero web clearsessions"
+VIRTUALENV=/home/omero/omeroenv
+su - ${OMERO_USER} -c "source ${VIRTUALENV}/bin/activate;OMERODIR=${OMERO_SERVER} omero web clearsessions"

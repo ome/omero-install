@@ -27,11 +27,11 @@ prog=omero-web
 
 OMERO_SERVER=${OMERO_SERVER:-/home/omero/OMERO.server}
 OMERO_USER=${OMERO_USER:-omero}
-OMERO=${OMERO_SERVER}/bin/omero
+VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
 start() {	
 	echo -n $"Starting $prog:"
-	su - ${OMERO_USER} -c "${OMERO} web start" &> /dev/null && echo -n ' OMERO.web'
+	su - ${OMERO_USER} -c "source ${VIRTUALENV}/bin/activate;OMERODIR=${OMERO_SERVER} omero web start" &> /dev/null && echo -n ' OMERO.web'
 	RETVAL=$?
 	[ "$RETVAL" = 0 ]
         echo
@@ -39,7 +39,7 @@ start() {
 
 stop() {
 	echo -n $"Stopping $prog:"
-	su - ${OMERO_USER} -c "${OMERO} web stop" &> /dev/null && echo -n ' OMERO.web'
+	su - ${OMERO_USER} -c "source ${VIRTUALENV}/bin/activate;OMERODIR=${OMERO_SERVER} omero web stop" &> /dev/null && echo -n ' OMERO.web'
 	RETVAL=$?
 	[ "$RETVAL" = 0 ]
         echo
@@ -47,7 +47,7 @@ stop() {
 
 status() {
 	echo -n $"Status $prog:"
-	su - ${OMERO_USER} -c "${OMERO} web status"
+	su - ${OMERO_USER} -c "source ${VIRTUALENV}/bin/activate;OMERODIR=${OMERO_SERVER} omero status"
 	RETVAL=$?
 }
 
