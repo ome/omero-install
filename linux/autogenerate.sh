@@ -144,8 +144,17 @@ line=$(sed -n ''$start',$p' $dir/step03_all_postgres.sh)
 echo "$line" >> $file
 echo "#end-step03" >> $file
 
+# create virtual env and install dependencies
 echo -en '\n' >> $file
-echo "#start-step04: As the omero system user, install the OMERO.server" >> $file
+echo "#start-step03bis: As the omero system user, create a virtual env and install dependenciees" >> $file
+start=$(sed -n '/#start-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
+start=$((start+1))
+line=$(sed -n ''$start',$p' $dir/step01_"$OS"_ice_venv.sh)
+echo "$line" >> $file
+echo "#end-step03bis" >> $file
+
+echo -en '\n' >> $file
+echo "#start-step04: As the omero system user, install the omero-py OMERO.server" >> $file
 echo "#start-copy-omeroscript" >> $file
 echo "cp settings.env settings-web.env step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
 echo "#end-copy-omeroscript" >> $file
@@ -157,6 +166,15 @@ line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 # To be removed when we use omego
 #echo "$line" >> $file
+echo "#start-omero-venv" >> $file
+number=$(sed -n '/#start-omero-venv/=' $dir/step04_all_omero.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-omero-venv/=' $dir/step04_all_omero.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line" >> $file
+echo "#end-omero-venv" >> $file
 
 echo "#start-release-ice36" >> $file
 number=$(sed -n '/#start-release-ice36/=' $dir/step04_all_omero.sh)

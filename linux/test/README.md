@@ -181,7 +181,7 @@ Testing CentOS 7
 
     or can be tested manually
 
-        OSX: $ docker run -d --privileged -p 8888:80 --name omeroinstall omero_install_test_$ENV
+        OSX: $ docker run -d --privileged -p 8888:80 --name omeroinstall omero_install_$ENV
         UNIX: $ docker run -d --name omeroinstall -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run omero_install_test_$ENV
         wait 10 sec
         $ docker exec -it omeroinstall /bin/bash -c "service omero status"
@@ -196,6 +196,6 @@ Testing CentOS 7
         ● omero-web.service - OMERO.web
            Loaded: loaded (/etc/systemd/system/omero-web.service; enabled; vendor preset: disabled)
            Active: active (running) since Mon 2016-04-11 13:43:27 UTC; 26s ago
-          Process: 69 ExecStart=/home/omero/OMERO.server/bin/omero web start (code=exited, status=0/SUCCESS)
+          Process: 69 ExecStart=/home/omeroenv/bin/omero web start (code=exited, status=0/SUCCESS)
          Main PID: 493 (gunicorn)
         ...
