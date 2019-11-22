@@ -37,14 +37,14 @@ cp step01_debian9_ice_venv.sh settings.env settings-web.env step04_omero_patch_o
 su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux step01_debian9_ice_venv.sh"
 
 su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER VIRTUALENV=$VIRTUALENV bash -eux step04_all_omero.sh"
-su - omero -c "bash -eux step04_omero_patch_openssl.sh"
+su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux step04_omero_patch_openssl.sh"
 su - omero -c "bash setup_omero_db.sh"
 
 OMEROVER=$OMEROVER bash -eux step05_debian9_nginx.sh
 
 
 if [ "$WEBSESSION" = true ]; then
-	bash -eux step05_2_websessionconfig.sh
+	su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux step05_2_websessionconfig.sh"
 fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:
