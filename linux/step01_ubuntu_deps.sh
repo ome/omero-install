@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get update
-apt-get -y install python3-{pip,tables,virtualenv,yaml,jinja2}
+apt-get -y install python3-{pip,tables,venv,yaml,jinja2}
 
 
 #start-web-dependencies

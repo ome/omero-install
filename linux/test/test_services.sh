@@ -7,8 +7,8 @@ DMNAME=${DMNAME:-dev}
 WEBSESSION=${WEBSESSION:-false}
 VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
-source `pwd`/../settings.env
-source `pwd`/../settings-web.env
+. `pwd`/../settings.env
+. `pwd`/../settings-web.env
 
 CNAME=omeroinstall_$ENV
 
@@ -19,12 +19,31 @@ docker run -d --name $CNAME -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run -p 8080:
 docker inspect -f {{.State.Running}} $CNAME
 
 # wait for omero to start up and accept connections
+docker exec -it $CNAME /bin/bash -c 'd=10; \
+    until [ -f /home/omero/OMERO.server/var/log/Blitz-0.log ]; \
+        do \
+            sleep 10; \
+            d=$[$d -1]; \
+            if [ $d -lt 0 ]; then \
+                exit 1; \
+            fi; \
+        done; \
+    echo "File found"; exit'
 
+docker exec -it $CNAME /bin/bash -c 'd=10; \
+    while ! grep "OMERO.blitz now accepting connections" /home/omero/OMERO.server/var/log/Blitz-0.log ; \
+        do \
+            sleep 10; \
+            d=$[$d -1]; \
+            if [ $d -lt 0 ]; then \
+                exit 1; \
+            fi; \
+        done'
 
 #check OMERO.server service status
 docker exec -it $CNAME /bin/bash -c "service omero status -l"
 
-docker exec -it $CNAME /bin/bash -c "su - omero -c \"source $VIRTUALENV/bin/activate;OMERODIR=OMERO.server omero admin diagnostics\""
+docker exec -it $CNAME /bin/bash -c "su - omero -c \". $VIRTUALENV/bin/activate;OMERODIR=OMERO.server omero admin diagnostics\""
 
 
 # check OMERO.web status
@@ -35,7 +54,7 @@ if [[ "$WEBSESSION" = true ]]; then
 fi
 
 # Log in to OMERO.server
-docker exec -it $CNAME /bin/bash -c "su - omero -c \"source $VIRTUALENV/bin/activate; omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
+docker exec -it $CNAME /bin/bash -c "su - omero -c \". $VIRTUALENV/bin/activate; omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
 
 # Log in to OMERO.web
 WEB_HOST=localhost:8080 ./test_login_to_web.sh

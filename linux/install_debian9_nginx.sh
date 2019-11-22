@@ -6,8 +6,8 @@ OMEROVER=${OMEROVER:-latest}
 PGVER=${PGVER:-pg10}
 ICEVER=${ICEVER:-ice36}
 
-source settings.env
-source settings-web.env
+. settings.env
+. settings-web.env
 
 bash -eux step01_ubuntu_init.sh
 
@@ -48,8 +48,8 @@ if [ "$WEBSESSION" = true ]; then
 fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:
-#su - omero -c "source $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero admin start"
-#su - omero -c "source $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero web start"
+#su - omero -c ". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero admin start"
+#su - omero -c ". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero web start"
 
 bash -eux step06_ubuntu_daemon.sh
 

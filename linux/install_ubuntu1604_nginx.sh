@@ -7,8 +7,8 @@ PGVER=${PGVER:-pg10}
 ICEVER=${ICEVER:-ice36}
 VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
-source settings.env
-source settings-web.env
+. settings.env
+. settings-web.env
 
 bash -eux step01_ubuntu_init.sh
 
@@ -38,15 +38,15 @@ su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER VIRTUALENV=$VIRTUALENV bash -eu
 
 su - omero -c "bash setup_omero_db.sh"
 
-OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step05_ubuntu1604_nginx.sh
+OMEROVER=$OMEROVER bash -eux step05_ubuntu1604_nginx.sh
 
 if [ "$WEBSESSION" = true ]; then
 	su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux step05_2_websessionconfig.sh"
 fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:
-#su - omero -c "source $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero admin start"
-#su - omero -c "source $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero web start"
+#su - omero -c ". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero admin start"
+#su - omero -c ". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero web start"
 
 bash -eux step06_ubuntu_daemon.sh
 

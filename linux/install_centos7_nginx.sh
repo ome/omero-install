@@ -8,8 +8,8 @@ PGVER=${PGVER:-pg10}
 ICEVER=${ICEVER:-ice36}
 VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
-source `dirname $0`/settings.env
-source `dirname $0`/settings-web.env
+. `dirname $0`/settings.env
+. `dirname $0`/settings-web.env
 
 bash -eux step01_centos7_init.sh
 
@@ -43,15 +43,15 @@ su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER VIRTUALENV=$VIRTUALENV bash -eu
 
 su - omero -c "bash setup_omero_db.sh"
 
-OMEROVER=$OMEROVER ICEVER=$ICEVER VIRTUALENV=$VIRTUALENV bash -eux step05_centos7_nginx.sh
+OMEROVER=$OMEROVER VIRTUALENV=$VIRTUALENV bash -eux step05_centos7_nginx.sh
 
 if [ "$WEBSESSION" = true ]; then
 	su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux step05_2_websessionconfig.sh"
 fi
 
 #If you don't want to use the systemd scripts you can start OMERO manually:
-#su - omero -c "source $VIRTUALENV/bin/activate;OMERODIR=OMERO.server omero admin start"
-#su - omero -c "source $VIRTUALENV/bin/activate;OMERODIR=${OMERO_SERVER} omero web start"
+#su - omero -c ". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero admin start"
+#su - omero -c ". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero web start"
 
 bash -eux setup_centos_selinux.sh
 
