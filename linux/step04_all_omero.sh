@@ -10,12 +10,8 @@ source `dirname $0`/settings.env
 #start-install
 
 icevalue=3.6
-
-#start-install
-#start-omero-venv
 source $VIRTUALENV/bin/activate
-pip3 install "omero-py>=5.6.dev4"
-#end-omero-venv
+#start-install
 
 if [ "$ICEVER" = "ice36" ]; then
 	if [ $OMEROVER == "latest" ]; then
@@ -32,7 +28,7 @@ fi
 if [ ! -d OMERO.server* ]; then
 	# dev branches installed via omego
 	#start-venv
-	pip3 install omego==0.6.0
+	$VIRTUALENV/bin/pip3 install omego==0.6.0
 	#end-venv
 	$VIRTUALENV/bin/omego download -q --ice $icevalue --branch $OMEROVER server
 fi
@@ -44,6 +40,13 @@ export OMERODIR=OMERO.server
 #end-link
 
 #configure
+
+
+# Install omero-py
+pip3 install "omero-py>=5.6.dev4"
+# Install omero-web
+pip3 install "omero-web>=5.6.dev5"
+
 omero config set omero.data.dir "$OMERO_DATA_DIR"
 omero config set omero.db.name "$OMERO_DB_NAME"
 omero config set omero.db.user "$OMERO_DB_USER"
