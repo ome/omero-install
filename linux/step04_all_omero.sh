@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e -u -x
+set -x
 
 OMEROVER=${OMEROVER:-latest}
 ICEVER=${ICEVER:-ice36}
