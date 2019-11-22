@@ -166,15 +166,6 @@ line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 # To be removed when we use omego
 #echo "$line" >> $file
-echo "#start-omero-venv" >> $file
-number=$(sed -n '/#start-omero-venv/=' $dir/step04_all_omero.sh)
-ns=$((number+1))
-number=$(sed -n '/#end-omero-venv/=' $dir/step04_all_omero.sh)
-ne=$((number-1))
-line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
-line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-echo "$line" >> $file
-echo "#end-omero-venv" >> $file
 
 echo "#start-release-ice36" >> $file
 number=$(sed -n '/#start-release-ice36/=' $dir/step04_all_omero.sh)
