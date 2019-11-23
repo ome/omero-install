@@ -15,7 +15,7 @@ cp setup_omero_nginx.sh ~omero
 cd ~omero
 
 # set up as the omero user.
-su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux setup_omero_nginx.sh nginx"
+su - omero -c "VIRTUALENV=$VIRTUALENV bash -x setup_omero_nginx.sh nginx"
 
 #start-nginx-admin
 cp OMERO.server/nginx.conf.tmp /etc/nginx/sites-available/omero-web

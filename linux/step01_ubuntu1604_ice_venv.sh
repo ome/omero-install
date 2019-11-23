@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e -u -x
+set -x
 
 VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
