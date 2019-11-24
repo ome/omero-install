@@ -10,8 +10,6 @@ env:
   - ENV=debian9_nginx PGVER=pg96
   - ENV=ubuntu1604_nginx JAVAVER=openjdk11
   - ENV=debian9_nginx JAVAVER=openjdk11
-  - ENV=debian9_nginx JAVAVER=oracle11
-  - ENV=ubuntu1604_nginx JAVAVER=oracle11
   - ENV=ubuntu1804_nginx JAVAVER=openjdk11
   - ENV=ubuntu1804_nginx
 
