@@ -47,7 +47,7 @@ stop() {
 
 status() {
 	echo -n $"Status $prog:"
-	su - ${OMERO_USER} -c ". ${VIRTUALENV}/bin/activate;OMERODIR=${OMERO_SERVER} omero status"
+	su - ${OMERO_USER} -c ". ${VIRTUALENV}/bin/activate;OMERODIR=${OMERO_SERVER} omero web status"
 	RETVAL=$?
 }
 
