@@ -11,6 +11,7 @@ cp setup_omero_nginx.sh ~omero
 yum -y install nginx
 #end-nginx-install
 
+cd ~omero
 
 # set up as the omero user.
 su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux setup_omero_nginx.sh nginx"
