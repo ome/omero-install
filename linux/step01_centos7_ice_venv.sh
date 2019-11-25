@@ -2,10 +2,10 @@
 
 set -e -u -x
 
-VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
 #start-ice-py
 # Create a virtual env and activate it
+VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 python3 -mvenv $VIRTUALENV
 . $VIRTUALENV/bin/activate
 
