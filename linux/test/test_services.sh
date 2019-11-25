@@ -33,17 +33,18 @@ docker exec -it $CNAME /bin/bash -c 'd=10; \
 docker exec -it $CNAME /bin/bash -c 'd=10; \
     while ! grep "OMERO.blitz now accepting connections" /home/omero/OMERO.server/var/log/Blitz-0.log ; \
         do \
-            sleep 10; \
+            sleep 20; \
             d=$[$d -1]; \
             if [ $d -lt 0 ]; then \
                 exit 1; \
             fi; \
-        done'
+        done;  \
+    echo "Entry found"; exit'
 
 #check OMERO.server service status
 docker exec -it $CNAME /bin/bash -c "service omero status -l"
 
-docker exec -it $CNAME /bin/bash -c "su - omero -c \". $VIRTUALENV/bin/activate;OMERODIR=OMERO.server omero admin diagnostics\""
+docker exec -it $CNAME /bin/bash -c "su - omero -c \". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero admin diagnostics\""
 
 
 # check OMERO.web status
@@ -54,7 +55,7 @@ if [[ "$WEBSESSION" = true ]]; then
 fi
 
 # Log in to OMERO.server
-docker exec -it $CNAME /bin/bash -c "su - omero -c \". $VIRTUALENV/bin/activate; omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
+docker exec -it $CNAME /bin/bash -c "su - omero -c \". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
 
 # Log in to OMERO.web
 WEB_HOST=localhost:8080 ./test_login_to_web.sh
