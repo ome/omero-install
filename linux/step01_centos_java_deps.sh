@@ -8,4 +8,8 @@ if [ "$JAVAVER" = "openjdk1.8" ]; then
     #end-recommended
 elif [ "$JAVAVER" = "openjdk1.8-devel" ]; then
     yum -y install java-1.8.0-openjdk-devel
+elif [ "$JAVAVER" = "openjdk11" ]; then
+    yum -y install java-11-openjdk
+elif [ "$JAVAVER" = "openjdk11-devel" ]; then
+    yum -y install java-11-openjdk-devel
 fi
