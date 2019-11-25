@@ -45,8 +45,6 @@ export OMERODIR=OMERO.server
 
 # Install omero-py
 pip3 install "omero-py>=5.6.dev4"
-# Install omero-web
-pip3 install "omero-web>=5.6.dev5"
 
 omero config set omero.data.dir "$OMERO_DATA_DIR"
 omero config set omero.db.name "$OMERO_DB_NAME"

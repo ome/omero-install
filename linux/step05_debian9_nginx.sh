@@ -13,6 +13,9 @@ cp setup_omero_nginx.sh ~omero
 
 cd ~omero
 
+# Install omero-web
+$VIRTUALENV/bin/pip3 install "omero-web>=5.6.dev5"
+
 # set up as the omero user.
 su - omero -c "VIRTUALENV=$VIRTUALENV bash -x setup_omero_nginx.sh nginx"
 
