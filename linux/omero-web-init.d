@@ -45,6 +45,14 @@ stop() {
         echo
 }
 
+restart() {
+	echo -n $"Restarting $prog:"
+	su - ${OMERO_USER} -c ". ${VIRTUALENV}/bin/activate;OMERODIR=${OMERO_SERVER} omero web restart" &> /dev/null && echo -n ' OMERO.web'
+	RETVAL=$?
+	[ "$RETVAL" = 0 ]
+        echo
+}
+
 status() {
 	echo -n $"Status $prog:"
 	su - ${OMERO_USER} -c ". ${VIRTUALENV}/bin/activate;OMERODIR=${OMERO_SERVER} omero web status"
@@ -59,8 +67,7 @@ case "$1" in
 		stop
 		;;
 	restart)
-		stop
-		start
+		restart
 		;;
 	status)
 		status
