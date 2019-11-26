@@ -12,7 +12,7 @@ After=network.service
 User=omero
 Group=omero
 WorkingDirectorpy=/home/omero
-Type=notify
+Type=forking
 Restart=no
 RestartSec=10
 # Allow up to 5 min for start/stop
