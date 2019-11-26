@@ -10,7 +10,6 @@ VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 #start-install
 
 icevalue=3.6
-. $VIRTUALENV/bin/activate
 #start-install
 
 if [ "$ICEVER" = "ice36" ]; then
@@ -36,8 +35,7 @@ fi
 
 #start-link
 ln -s OMERO.server-*/ OMERO.server
-# set OMERODIR
-export OMERODIR=OMERO.server
+
 #end-link
 
 #configure

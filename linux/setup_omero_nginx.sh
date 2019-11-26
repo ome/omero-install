@@ -4,9 +4,7 @@ VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 set -x
 
 . `dirname $0`/settings-web.env
-
-export OMERODIR=/home/omero/OMERO.server
-. $VIRTUALENV/bin/activate
+. `dirname $0`/settings.env
 
 #start-config
 omero config set omero.web.application_server wsgi-tcp

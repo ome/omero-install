@@ -1,11 +1,10 @@
 #!/bin/bash
 VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
+. `dirname $0`/settings.env
+
 cd ~omero
 
-export OMERODIR=OMERO.server
-
-. $VIRTUALENV/bin/activate
 pip3 install "django-redis>=4.10.0"
 
 # Register the app

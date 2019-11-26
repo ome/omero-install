@@ -11,6 +11,7 @@ VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 . `pwd`/../settings-web.env
 
 CNAME=omeroinstall_$ENV
+VALUE=${VALUE:-/home/omero/settings.env}
 
 # start docker container
 docker run -d --name $CNAME -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run -p 8080:80 omero_install_test_$ENV
@@ -44,7 +45,7 @@ docker exec -it $CNAME /bin/bash -c 'd=10; \
 #check OMERO.server service status
 docker exec -it $CNAME /bin/bash -c "service omero status -l"
 
-docker exec -it $CNAME /bin/bash -c "su - omero -c \". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero admin diagnostics\""
+docker exec -it $CNAME /bin/bash -c "su - omero -c \". $VALUE omero admin diagnostics\""
 
 
 # check OMERO.web status
@@ -55,7 +56,7 @@ if [[ "$WEBSESSION" = true ]]; then
 fi
 
 # Log in to OMERO.server
-docker exec -it $CNAME /bin/bash -c "su - omero -c \". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
+docker exec -it $CNAME /bin/bash -c "su - omero -c \". $VALUE omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
 
 # Log in to OMERO.web
 WEB_HOST=localhost:8080 ./test_login_to_web.sh
