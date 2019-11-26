@@ -12,6 +12,7 @@ env:
   - ENV=debian9_nginx JAVAVER=openjdk11
   - ENV=ubuntu1804_nginx JAVAVER=openjdk11
   - ENV=ubuntu1804_nginx
+  - ENV=centos7_nginx JAVAVER=openjdk11
 
 before_install:  
   - sudo apt-get update
