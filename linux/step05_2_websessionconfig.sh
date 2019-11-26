@@ -1,5 +1,4 @@
 #!/bin/bash
-VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
 . `dirname $0`/settings.env
 

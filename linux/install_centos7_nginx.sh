@@ -46,12 +46,12 @@ su - omero -c "bash setup_omero_db.sh"
 OMEROVER=$OMEROVER VIRTUALENV=$VIRTUALENV bash -eux step05_centos7_nginx.sh
 
 if [ "$WEBSESSION" = true ]; then
-	su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux step05_2_websessionconfig.sh"
+	su - omero -c "bash -eux step05_2_websessionconfig.sh"
 fi
 
 #If you don't want to use the systemd scripts you can start OMERO manually:
-#su - omero -c ". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero admin start"
-#su - omero -c ". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero web start"
+#su - omero -c ". /home/omero/settings.env omero admin start"
+#su - omero -c ". /home/omero/settings.env omero web start"
 
 bash -eux setup_centos_selinux.sh
 

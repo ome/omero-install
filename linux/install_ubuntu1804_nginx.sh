@@ -44,12 +44,12 @@ OMEROVER=$OMEROVER bash -eux step05_ubuntu1804_nginx.sh
 
 
 if [ "$WEBSESSION" = true ]; then
-    su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux step05_2_websessionconfig.sh"
+    su - omero -c "bash -eux step05_2_websessionconfig.sh"
 fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:
-#su - omero -c ". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero admin start"
-#su - omero -c ". $VIRTUALENV/bin/activate;OMERODIR=/home/omero/OMERO.server omero web start"
+#su - omero -c ". /home/omero/settings.env omero admin start"
+#su - omero -c ". /home/omero/settings.env omero web start"
 
 bash -eux step06_ubuntu_daemon.sh
 

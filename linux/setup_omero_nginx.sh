@@ -1,7 +1,6 @@
 #!/bin/bash
 NGINXCMD=${1:-nginx}
-VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
-set -x
+set -eux
 
 . `dirname $0`/settings-web.env
 . `dirname $0`/settings.env
