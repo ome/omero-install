@@ -11,5 +11,5 @@ apt-get -y install python3-setuptools python3-wheel
 
 #start-web-dependencies
 apt-get -y install zlib1g-dev
-apt-get -y install python3-{pillow,numpy}
+apt-get -y install python3-numpy
 #end-web-dependencies

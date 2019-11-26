@@ -12,5 +12,5 @@ pip3 install tables==3.4.4
 
 #start-web-dependencies
 apt-get -y install zlib1g-dev libjpeg-dev
-apt-get -y install python3-{pillow,numpy}
+apt-get -y install python3-numpy
 #end-web-dependencies
