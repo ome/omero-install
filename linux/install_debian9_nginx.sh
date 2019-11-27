@@ -31,7 +31,7 @@ bash -eux step02_all_setup.sh
 if [[ "$PGVER" =~ ^(pg94|pg95|pg96|pg10)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
-cp step01_debian9_ice_venv.sh settings.env settings-web.env step04_omero_patch_openssl.sh step04_all_omero.sh setup_omero_db.sh ~omero
+cp step01_debian9_ice_venv.sh settings.env settings-web.env step05_2_websessionconfig.sh step04_omero_patch_openssl.sh step04_all_omero.sh setup_omero_db.sh ~omero
 
 # Create a virtual env to install Ice Python binding as the omero user
 su - omero -c "bash -x step01_debian9_ice_venv.sh"
