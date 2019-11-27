@@ -5,7 +5,6 @@ set -e -u -x
 OMEROVER=${OMEROVER:-latest}
 PGVER=${PGVER:-pg10}
 ICEVER=${ICEVER:-ice36}
-VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
 . settings.env
 . settings-web.env
@@ -34,9 +33,9 @@ fi
 cp step01_ubuntu1804_ice_venv.sh settings.env settings-web.env step04_omero_patch_openssl.sh step04_all_omero.sh setup_omero_db.sh ~omero
 
 # Create a virtual env to install Ice Python binding as the omero user
-su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux step01_ubuntu1804_ice_venv.sh"
+su - omero -c "bash -eux step01_ubuntu1804_ice_venv.sh"
 
-su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER VIRTUALENV=$VIRTUALENV bash -eux step04_all_omero.sh"
+su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero.sh"
 su - omero -c "bash -eux step04_omero_patch_openssl.sh"
 su - omero -c "bash setup_omero_db.sh"
 

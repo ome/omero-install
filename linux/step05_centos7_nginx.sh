@@ -1,7 +1,8 @@
 #!/bin/bash
 
 OMEROVER=${OMEROVER:-latest}
-VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
+
+. `dirname $0`/settings.env
 
 #start-copy
 cp setup_omero_nginx.sh ~omero
@@ -17,7 +18,7 @@ cd ~omero
 $VIRTUALENV/bin/pip3 install "omero-web>=5.6.dev5"
 
 # set up as the omero user.
-su - omero -c "VIRTUALENV=$VIRTUALENV bash -eux setup_omero_nginx.sh nginx"
+su - omero -c "bash -eux setup_omero_nginx.sh nginx"
 
 #start-nginx-admin
 sed -i.bak -re 's/( default_server.*)/; #\1/' /etc/nginx/nginx.conf

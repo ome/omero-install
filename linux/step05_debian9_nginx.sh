@@ -1,7 +1,8 @@
 #!/bin/bash
 
 OMEROVER=${OMEROVER:-latest}
-VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
+
+. `dirname $0`/settings.env
 
 #start-nginx-install
 apt-get -y install nginx gunicorn
@@ -17,7 +18,7 @@ cd ~omero
 $VIRTUALENV/bin/pip3 install "omero-web>=5.6.dev5"
 
 # set up as the omero user.
-su - omero -c "VIRTUALENV=$VIRTUALENV bash -x setup_omero_nginx.sh nginx"
+su - omero -c "bash -x setup_omero_nginx.sh nginx"
 
 #start-nginx-admin
 mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.disabled

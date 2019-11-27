@@ -4,7 +4,6 @@ set -x
 
 OMEROVER=${OMEROVER:-latest}
 ICEVER=${ICEVER:-ice36}
-VIRTUALENV=${VIRTUALENV:-/home/omero/omeroenv}
 
 . `dirname $0`/settings.env
 #start-install
