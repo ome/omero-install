@@ -8,8 +8,8 @@ Type=forking
 Restart=on-failure
 RestartSec=10
 Environment="OMERODIR=/home/omero/OMERO.server"
-ExecStart=/home/omero/omeroenv/bin/omero web start
-ExecStop=/home/omero/omeroenv/bin/omero web stop
+ExecStart=/opt/omero/web/venv/bin/omero web start
+ExecStop=/opt/omero/web/venv/bin/omero web stop
 
 [Install]
 WantedBy=multi-user.target

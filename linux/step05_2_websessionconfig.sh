@@ -1,10 +1,6 @@
 #!/bin/bash
 
-. `dirname $0`/settings.env
-
-cd ~omero
-
-pip3 install "django-redis>=4.10.0"
+. `dirname $0`/settings-web.env
 
 # Register the app
 omero config set omero.web.session_engine 'django.contrib.sessions.backends.cache'

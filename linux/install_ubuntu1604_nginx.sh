@@ -30,8 +30,8 @@ fi
 
 cp step01_ubuntu1604_ice_venv.sh settings.env settings-web.env step05_2_websessionconfig.sh step04_all_omero.sh setup_omero_db.sh ~omero
 
-# Create a virtual env to install Ice Python binding as the omero user
-su - omero -c "bash -x step01_ubuntu1604_ice_venv.sh"
+bash -x step01_ubuntu1604_ice_venv.sh
+bash -eux step04_all_omero_install.sh
 
 su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -x step04_all_omero.sh"
 
@@ -40,7 +40,8 @@ su - omero -c "bash setup_omero_db.sh"
 OMEROVER=$OMEROVER bash -eux step05_ubuntu1604_nginx.sh
 
 if [ "$WEBSESSION" = true ]; then
-	su - omero -c "bash -eux step05_2_websessionconfig.sh"
+    bash -eux step05_2_websession_install.sh
+    su - omero -c "bash -eux step05_2_websessionconfig.sh"
 fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:

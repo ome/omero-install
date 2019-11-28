@@ -3,7 +3,6 @@ NGINXCMD=${1:-nginx}
 set -eux
 
 . `dirname $0`/settings-web.env
-. `dirname $0`/settings.env
 
 #start-config
 omero config set omero.web.application_server wsgi-tcp

@@ -30,22 +30,25 @@ bash -eux step01_centos7_pg_deps.sh
 bash -eux step02_all_setup.sh
 
 if [[ "$PGVER" =~ ^(pg94|pg95|pg96|pg10)$ ]]; then
-	bash -eux step03_all_postgres.sh
+    bash -eux step03_all_postgres.sh
 fi
 
-cp step01_centos7_ice_venv.sh settings.env settings-web.env step05_2_websessionconfig.sh step04_all_omero.sh setup_omero_db.sh ~omero
+cp settings.env settings-web.env step05_2_websessionconfig.sh step04_all_omero.sh setup_omero_db.sh ~omero
 
-# Create a virtual env to install Ice Python binding as the omero user
-su - omero -c "bash -eux step01_centos7_ice_venv.sh"
+bash -eux step01_centos7_ice_venv.sh
+
+bash -eux step04_all_omero_install.sh
 
 su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero.sh"
+
 
 su - omero -c "bash setup_omero_db.sh"
 
 OMEROVER=$OMEROVER bash -eux step05_centos7_nginx.sh
 
 if [ "$WEBSESSION" = true ]; then
-	su - omero -c "bash -eux step05_2_websessionconfig.sh"
+    bash -eux step05_2_websession_install.sh
+    su - omero -c "bash -eux step05_2_websessionconfig.sh"
 fi
 
 #If you don't want to use the systemd scripts you can start OMERO manually:

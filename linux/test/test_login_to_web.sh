@@ -11,7 +11,6 @@ LOGIN_URL=http://$WEB_HOST/webclient/login/
 LOGOUT_URL=http://$WEB_HOST/webclient/logout/
 
 . `dirname $0`/../settings.env
-. `dirname $0`/../settings-web.env
 
 OMERO_ROOT='root'
 SERVER='1'
