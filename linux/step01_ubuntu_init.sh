@@ -1,5 +1,4 @@
 #!/bin/bash
-
 apt-get update
 
 # installed for convenience

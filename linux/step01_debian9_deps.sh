@@ -6,7 +6,6 @@ apt-get -y install\
 
 # to be installed if recommended/suggested is false
 apt-get -y install python3-setuptools python3-wheel
-
 #start-web-dependencies
 apt-get -y install zlib1g-dev libjpeg-dev
 #end-web-dependencies

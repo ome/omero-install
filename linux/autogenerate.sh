@@ -74,7 +74,7 @@ if [[ $OS = "ubuntu1804" ]] ; then
 fi
 line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
 echo "$line" >> $file
-
+echo "#end-step01" >> $file
 
 
 # install ice
@@ -116,8 +116,6 @@ fi
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 
 echo "$line"  >> $file
-echo -en '\n' >> $file
-
 echo "#end-step01" >> $file
 
 echo -en '\n' >> $file
@@ -135,7 +133,6 @@ echo "$line" >> $file
 echo "#end-step02" >> $file
 
 # postgres remove section
-echo -en '\n' >> $file
 echo "#start-step03: As root, create a database user and a database" >> $file
 #find from where to start copying
 start=$(sed -n '/#start-setup/=' $dir/step03_all_postgres.sh)
