@@ -146,26 +146,30 @@ echo "#end-step03" >> $file
 
 # create virtual env and install dependencies
 echo -en '\n' >> $file
-echo "#start-step03bis: As the omero system user, create a virtual env and install dependenciees" >> $file
-start=$(sed -n '/#start-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
-start=$((start+1))
-line=$(sed -n ''$start',$p' $dir/step01_"$OS"_ice_venv.sh)
+echo "#start-step03bis: As root, create a virtual env and install dependencies" >> $file
+number=$(sed -n '/#start-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_ice_venv.sh)
 echo "$line" >> $file
 echo "#end-step03bis" >> $file
 
 echo -en '\n' >> $file
-echo "#start-step04: As the omero system user, install the omero-py OMERO.server" >> $file
+echo "#start-step04-pre: As root, install omero-py" >> $file
+start=$(sed -n '/#start-install-omero-py/=' $dir/step04_all_omero_install.sh)
+start=$((start+1))
+line=$(sed -n ''$start',$p' $dir/step04_all_omero_install.sh)
+echo "$line" >> $file
+echo "#end-step04-pre" >> $file
+
+
+
+echo -en '\n' >> $file
+echo "#start-step04: As the omero user, download the OMERO.server and configure it" >> $file
 echo "#start-copy-omeroscript" >> $file
 echo "cp settings.env settings-web.env step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
 echo "#end-copy-omeroscript" >> $file
-number=$(sed -n '/#start-venv/=' $dir/step04_all_omero.sh)
-ns=$((number+1))
-number=$(sed -n '/#end-venv/=' $dir/step04_all_omero.sh)
-ne=$((number-1))
-line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
-line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-# To be removed when we use omego
-#echo "$line" >> $file
 
 echo "#start-release-ice36" >> $file
 number=$(sed -n '/#start-release-ice36/=' $dir/step04_all_omero.sh)
