@@ -1,6 +1,8 @@
 #!/bin/bash
 
-apt-get -y install python3-venv
+apt-get -y install\
+    python3 \
+    python3-venv
 
 # to be installed if recommended/suggested is false
 apt-get -y install python3-setuptools python3-wheel

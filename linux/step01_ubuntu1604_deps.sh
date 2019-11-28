@@ -4,6 +4,7 @@ apt-get update
 apt-get -y install \
 	unzip \
 	wget \
+	python3 \
 	python3-venv
 
 # to be installed if recommended/suggested is false
