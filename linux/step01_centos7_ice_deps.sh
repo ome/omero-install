@@ -7,9 +7,6 @@ if [ "$ICEVER" = "ice36" ]; then
    #start-recommended
     curl -sL https://zeroc.com/download/Ice/3.6/el7/zeroc-ice3.6.repo > \
     /etc/yum.repos.d/zeroc-ice3.6.repo
-    yum -y install gcc-c++
-    yum -y install libdb-utils
-    yum -y install openssl-devel bzip2-devel
 
     yum -y install ice-all-runtime
     #end-recommended
@@ -18,9 +15,6 @@ if [ "$ICEVER" = "ice36" ]; then
 elif [ "$ICEVER" = "ice36-devel" ]; then
     curl -sL https://zeroc.com/download/Ice/3.6/el7/zeroc-ice3.6.repo > \
     /etc/yum.repos.d/zeroc-ice3.6.repo
-    yum -y install gcc-c++
-    yum -y install libdb-utils
-    yum -y install openssl-devel bzip2-devel
 
     yum -y install ice-all-runtime ice-all-devel
 
