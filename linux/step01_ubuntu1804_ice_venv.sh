@@ -2,9 +2,9 @@
 
 set -e -u -x
 
+VENV_SERVER=${VENV_SERVER:-/opt/omero/server/venv}
 #start-ice-py
 # Create a virtual env and activate it
-VENV_SERVER=${VENV_SERVER:-/opt/omero/server/venv}
 python3 -mvenv $VENV_SERVER
 
 # Install the Ice Python binding
