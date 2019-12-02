@@ -3,7 +3,7 @@
 set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
-PGVER=${PGVER:-pg10}
+PGVER=${PGVER:-pg11}
 ICEVER=${ICEVER:-ice36}
 
 . settings.env
@@ -28,7 +28,7 @@ bash -eux step01_debian9_pg_deps.sh
 
 bash -eux step02_all_setup.sh
 
-if [[ "$PGVER" =~ ^(pg94|pg95|pg96|pg10)$ ]]; then
+if [[ "$PGVER" =~ ^(pg94|pg95|pg96|pg10|pg11)$ ]]; then
     bash -eux step03_all_postgres.sh
 fi
 cp settings.env settings-web.env step05_2_websessionconfig.sh step04_omero_patch_openssl.sh step04_all_omero.sh setup_omero_db.sh ~omero

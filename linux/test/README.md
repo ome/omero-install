@@ -59,7 +59,7 @@ centos7 (default), debian9, ubuntu1604, ubuntu1804
 Configuring Java
 ----------------
 
-By default, openjdk1.8 is installed.
+By default, openjdk11 is installed.
 It is possible to install other versions using the JAVAVER parameter.
 
 For example, to install openjdk11:
@@ -79,7 +79,7 @@ and update this README.md.
 Configuring Postgres
 --------------------
 
-By default, Postgres 10.0 is installed.
+By default, Postgres 11.0 is installed.
 It is possible to install other versions using the PGVER parameter.
 
 For example:
@@ -94,7 +94,7 @@ For example:
 
 
 The supported values are: 
-pg94, pg95, pg96, pg10 (default)
+pg94, pg95, pg96, pg10, pg11 (default)
 
 If you do not want to install Postgres set PGVER to nopg.
 

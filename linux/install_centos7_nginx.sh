@@ -4,7 +4,7 @@ set -e -u -x
 
 WEBSESSION=${WEBSESSION:-false}
 OMEROVER=${OMEROVER:-latest}
-PGVER=${PGVER:-pg10}
+PGVER=${PGVER:-pg11}
 ICEVER=${ICEVER:-ice36}
 
 . `dirname $0`/settings.env
@@ -29,7 +29,7 @@ bash -eux step01_centos7_pg_deps.sh
 
 bash -eux step02_all_setup.sh
 
-if [[ "$PGVER" =~ ^(pg94|pg95|pg96|pg10)$ ]]; then
+if [[ "$PGVER" =~ ^(pg94|pg95|pg96|pg10|pg11)$ ]]; then
     bash -eux step03_all_postgres.sh
 fi
 
