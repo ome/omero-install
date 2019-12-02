@@ -123,7 +123,7 @@ Configuring Redis
 -----------------
 
 By default, OMERO.web is set to use filestore session backend.
-For Python 2.7 based environment it is possible to use Redis as a session
+It is possible to use Redis as a session
 backend using the WEBSESSION parameter
 
 For example:
@@ -172,7 +172,7 @@ Testing CentOS 7
 
      Notet that it is possible to use the various parameters when running the installation script e.g.
 
-        $PGVER=pg95 ./docker-build.sh $ENV
+        $PGVER=pg96 ./docker-build.sh $ENV
 
 2. Run the tests
 
