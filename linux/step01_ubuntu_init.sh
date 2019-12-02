@@ -1,8 +1,7 @@
 #!/bin/bash
 apt-get update
 
-# installed for convenience
 apt-get -y install unzip wget bc
 
-# to be installed if recommended/suggested is false
+# to be installed if daily cron tasks are configured
 apt-get -y install cron
