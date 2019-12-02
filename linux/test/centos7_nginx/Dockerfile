@@ -21,7 +21,7 @@ RUN echo 'export container=docker' > /etc/profile.d/docker.sh
 
 ARG WEBSESSION=false
 ARG OMEROVER=latest
-ARG JAVAVER=openjdk1.8
+ARG JAVAVER=openjdk11
 ARG ICEVER=ice36
 ARG PGVER=pg10
 

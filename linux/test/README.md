@@ -64,10 +64,10 @@ It is possible to install other versions using the JAVAVER parameter.
 
 For example, to install openjdk11:
 
-JAVAVER=openjdk11 ./docker-build.sh ubuntu1604_nginx
+JAVAVER=openjdk1.8 ./docker-build.sh ubuntu1604_nginx
 
 The supported values are: 
-openjdk18 (default), openjdk18-devel, openjdk11
+openjdk1.8, openjdk1.8-devel, openjdk11 (default), openjdk11-devel
 
 If you do not want to install Java set JAVAVER to nojava.
 
