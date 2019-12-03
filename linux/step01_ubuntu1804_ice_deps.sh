@@ -20,11 +20,10 @@ if [ "$ICEVER" = "ice36" ]; then
         zlib1g-dev
 
     cd /tmp
-    wget -q https://github.com/ome/zeroc-ice-ubuntu1804/releases/download/0.1.0/Ice-3.6.4-ubuntu1804-amd64.tar.xz
-    tar xf Ice-3.6.4-ubuntu1804-amd64.tar.xz
-    mv opt/Ice-3.6.4 /opt
-    pip install https://github.com/ome/zeroc-ice-ubuntu1804/releases/download/0.1.0/zeroc_ice-3.6.4-cp27-cp27mu-linux_x86_64.whl
-    echo /opt/Ice-3.6.4/lib/x86_64-linux-gnu > /etc/ld.so.conf.d/ice-x86_64.conf
+    wget -q https://github.com/ome/zeroc-ice-ubuntu1804/releases/download/0.3.0/ice-3.6.5-0.3.0-ubuntu1804-amd64.tar.gz
+    tar xf ice-3.6.5-0.3.0-ubuntu1804-amd64.tar.gz
+    mv ice-3.6.5-0.3.0 /opt
+    echo /opt/ice-3.6.5-0.3.0/lib/x86_64-linux-gnu > /etc/ld.so.conf.d/ice-x86_64.conf
     ldconfig
     #end-recommended
 fi

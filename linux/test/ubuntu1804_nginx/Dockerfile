@@ -5,9 +5,9 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ARG WEBSESSION=false
 ARG OMEROVER=latest
-ARG JAVAVER=openjdk1.8
+ARG JAVAVER=openjdk11
 ARG ICEVER=ice36
-ARG PGVER=pg10
+ARG PGVER=pg11
 
 ENV TZ=Europe/London
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-PGVER=${PGVER:-pg10}
+PGVER=${PGVER:-pg11}
 if [[ "$PGVER" =~ ^(pg94|pg95)$ ]]; then
-    PGVER="pg10"
+    PGVER="pg11"
 fi
 
 if [ "$PGVER" = "pg96" ]; then
@@ -10,12 +10,19 @@ if [ "$PGVER" = "pg96" ]; then
     apt-get -y install postgresql
     service postgresql start
 elif [ "$PGVER" = "pg10" ]; then
-    #start-recommended
     apt-get install -y gnupg
     echo "deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
     apt-get update
     apt-get install -y postgresql-10
-	service postgresql start
+    service postgresql start
+elif [ "$PGVER" = "pg11" ]; then
+    #start-recommended
+    apt-get install -y gnupg
+    echo "deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+    apt-get update
+    apt-get install -y postgresql-11
+    service postgresql start
     #end-recommended
 fi

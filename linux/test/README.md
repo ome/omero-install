@@ -59,15 +59,15 @@ centos7 (default), debian9, ubuntu1604, ubuntu1804
 Configuring Java
 ----------------
 
-By default, openjdk1.8 is installed.
+By default, openjdk11 is installed.
 It is possible to install other versions using the JAVAVER parameter.
 
 For example, to install openjdk11:
 
-JAVAVER=openjdk11 ./docker-build.sh ubuntu1604_nginx
+JAVAVER=openjdk1.8 ./docker-build.sh ubuntu1604_nginx
 
 The supported values are: 
-openjdk18 (default), openjdk18-devel, openjdk11
+openjdk1.8, openjdk1.8-devel, openjdk11 (default), openjdk11-devel
 
 If you do not want to install Java set JAVAVER to nojava.
 
@@ -79,7 +79,7 @@ and update this README.md.
 Configuring Postgres
 --------------------
 
-By default, Postgres 10.0 is installed.
+By default, Postgres 11.0 is installed.
 It is possible to install other versions using the PGVER parameter.
 
 For example:
@@ -94,7 +94,7 @@ For example:
 
 
 The supported values are: 
-pg94, pg95, pg96, pg10 (default)
+pg94, pg95, pg96, pg10, pg11 (default)
 
 If you do not want to install Postgres set PGVER to nopg.
 
@@ -123,7 +123,7 @@ Configuring Redis
 -----------------
 
 By default, OMERO.web is set to use filestore session backend.
-For Python 2.7 based environment it is possible to use Redis as a session
+It is possible to use Redis as a session
 backend using the WEBSESSION parameter
 
 For example:
@@ -172,7 +172,7 @@ Testing CentOS 7
 
      Notet that it is possible to use the various parameters when running the installation script e.g.
 
-        $PGVER=pg95 ./docker-build.sh $ENV
+        $PGVER=pg96 ./docker-build.sh $ENV
 
 2. Run the tests
 
@@ -196,6 +196,6 @@ Testing CentOS 7
         ● omero-web.service - OMERO.web
            Loaded: loaded (/etc/systemd/system/omero-web.service; enabled; vendor preset: disabled)
            Active: active (running) since Mon 2016-04-11 13:43:27 UTC; 26s ago
-          Process: 69 ExecStart=/home/omero/OMERO.server/bin/omero web start (code=exited, status=0/SUCCESS)
+          Process: 69 ExecStart=/home/omeroenv/bin/omero web start (code=exited, status=0/SUCCESS)
          Main PID: 493 (gunicorn)
         ...

@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-source `dirname $0`/settings.env
+. `dirname $0`/settings.env
 
 cd ~omero
 #start

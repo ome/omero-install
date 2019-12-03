@@ -6,9 +6,9 @@ if [ $# -lt 1 ]; then
 fi
 
 OMEROVER=${OMEROVER:-latest}
-JAVAVER=${JAVAVER:-openjdk1.8}
+JAVAVER=${JAVAVER:-openjdk11}
 ICEVER=${ICEVER:-ice36}
-PGVER=${PGVER:-pg10}
+PGVER=${PGVER:-pg11}
 
 WEBSESSION=${WEBSESSION:-false}
 

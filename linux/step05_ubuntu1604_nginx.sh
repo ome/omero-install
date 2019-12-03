@@ -1,7 +1,8 @@
 #!/bin/bash
 
 OMEROVER=${OMEROVER:-latest}
-ICEVER=${ICEVER:-ice36}
+
+. `dirname $0`/settings-web.env
 
 #start-nginx-install
 apt-get update
@@ -12,18 +13,14 @@ apt-get -y install nginx
 cp setup_omero_nginx.sh ~omero
 #end-copy
 
-cd ~omero
-if [ "$ICEVER" = "ice36" ]; then
-#web-requirements-recommended-start
-	pip install -r OMERO.server/share/web/requirements-py27.txt
-#web-requirements-recommended-end
-fi
+# Install omero-web
+$VENV_WEB/bin/pip install "omero-web>=5.6.dev5"
 
 # set up as the omero user.
-su - omero -c "bash -eux setup_omero_nginx.sh nginx"
+su - omero -c "bash -x setup_omero_nginx.sh nginx"
 
 #start-nginx-admin
-cp OMERO.server/nginx.conf.tmp /etc/nginx/sites-available/omero-web
+cp /home/omero/OMERO.server/nginx.conf.tmp /etc/nginx/sites-available/omero-web
 rm /etc/nginx/sites-enabled/default
 ln -s /etc/nginx/sites-available/omero-web /etc/nginx/sites-enabled/
 

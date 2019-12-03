@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PGVER=${PGVER:-pg94}
+PGVER=${PGVER:-pg11}
 
 # Postgres installation
 if [ "$PGVER" = "pg94" ]; then
@@ -70,7 +70,6 @@ elif [ "$PGVER" = "pg96" ]; then
 	fi
 	systemctl enable postgresql-9.6.service
 elif [ "$PGVER" = "pg10" ]; then
-    #start-recommended
     yum -y install https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm
     yum -y install postgresql10-server postgresql10
 
@@ -91,5 +90,27 @@ elif [ "$PGVER" = "pg10" ]; then
         systemctl start postgresql-10.service
     fi
     systemctl enable postgresql-10.service
+elif [ "$PGVER" = "pg11" ]; then
+    #start-recommended
+    yum -y install https://yum.postgresql.org/11/redhat/rhel-7-x86_64/pgdg-redhat11-11-2.noarch.rpm
+    yum -y install postgresql11-server postgresql11
+
+    if [ "${container:-}" = docker ]; then
+        su - postgres -c "/usr/pgsql-11/bin/initdb -D /var/lib/pgsql/11/data --encoding=UTF8"
+        echo "listen_addresses='*'" >> /var/lib/pgsql/11/data/postgresql.conf
+    else
+        PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-11/bin/postgresql-11-setup initdb
+    fi
+    sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/11/data/pg_hba.conf
+    if [ "${container:-}" = docker ]; then
+        sed -i 's/OOMScoreAdjust/#OOMScoreAdjust/' \
+        /usr/lib/systemd/system/postgresql-11.service
+    fi
+    if [ "${container:-}" = docker ]; then
+        su - postgres -c "/usr/pgsql-11/bin/pg_ctl start -D /var/lib/pgsql/11/data -w"
+    else
+        systemctl start postgresql-11.service
+    fi
+    systemctl enable postgresql-11.service
     #end-recommended
 fi

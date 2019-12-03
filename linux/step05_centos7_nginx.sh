@@ -1,7 +1,8 @@
 #!/bin/bash
 
 OMEROVER=${OMEROVER:-latest}
-ICEVER=${ICEVER:-ice36}
+
+. `dirname $0`/settings-web.env
 
 #start-copy
 cp setup_omero_nginx.sh ~omero
@@ -11,12 +12,9 @@ cp setup_omero_nginx.sh ~omero
 yum -y install nginx
 #end-nginx-install
 
-cd ~omero
-if [ "$ICEVER" = "ice36" ]; then
-#web-requirements-recommended-start
-	pip install -r OMERO.server/share/web/requirements-py27.txt
-#web-requirements-recommended-end
-fi
+
+# Install omero-web
+$VENV_WEB/bin/pip install "omero-web>=5.6.dev5"
 
 # set up as the omero user.
 su - omero -c "bash -eux setup_omero_nginx.sh nginx"
@@ -24,7 +22,7 @@ su - omero -c "bash -eux setup_omero_nginx.sh nginx"
 #start-nginx-admin
 sed -i.bak -re 's/( default_server.*)/; #\1/' /etc/nginx/nginx.conf
 
-cp OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
+cp /home/omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 systemctl enable nginx
 if [ ! "${container:-}" = docker ]; then
