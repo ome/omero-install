@@ -20,7 +20,7 @@ su - omero -c "bash -x setup_omero_nginx.sh nginx"
 
 #start-nginx-admin
 mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.disabled
-cp /home/omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
+cp $OMERODIR/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 service nginx start
 #end-nginx-admin

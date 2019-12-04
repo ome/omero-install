@@ -7,7 +7,7 @@ User=omero
 Type=forking
 Restart=on-failure
 RestartSec=10
-Environment="OMERODIR=/home/omero/OMERO.server"
+Environment="OMERODIR=/opt/omero/server/OMERO.server"
 ExecStart=/opt/omero/web/venv3/bin/omero web start
 ExecStop=/opt/omero/web/venv3/bin/omero web stop
 
