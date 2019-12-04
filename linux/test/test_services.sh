@@ -19,7 +19,7 @@ docker inspect -f {{.State.Running}} $CNAME
 
 # wait for omero to start up and accept connections
 docker exec -it $CNAME /bin/bash -c 'd=10; \
-    until [ -f /home/omero/OMERO.server/var/log/Blitz-0.log ]; \
+    until [ -f /opt/omero/server/OMERO.server/var/log/Blitz-0.log ]; \
         do \
             sleep 10; \
             d=$[$d -1]; \
@@ -30,7 +30,7 @@ docker exec -it $CNAME /bin/bash -c 'd=10; \
     echo "File found"; exit'
 
 docker exec -it $CNAME /bin/bash -c 'd=10; \
-    while ! grep "OMERO.blitz now accepting connections" /home/omero/OMERO.server/var/log/Blitz-0.log ; \
+    while ! grep "OMERO.blitz now accepting connections" /opt/omero/server/OMERO.server/var/log/Blitz-0.log ; \
         do \
             sleep 20; \
             d=$[$d -1]; \

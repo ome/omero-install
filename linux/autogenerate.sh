@@ -153,38 +153,38 @@ echo "$line" >> $file
 echo "#end-step03bis" >> $file
 
 echo -en '\n' >> $file
-echo "#start-step04-pre: As root, install omero-py" >> $file
+echo "#start-step04-pre: As root, install omero-py, download the OMERO.server" >> $file
 start=$(sed -n '/#start-install-omero-py/=' $dir/step04_all_omero_install.sh)
 start=$((start+1))
-line=$(sed -n ''$start',$p' $dir/step04_all_omero_install.sh)
+number=$(sed -n '/#end-install-omero-py/=' $dir/step04_all_omero_install.sh)
+ne=$((number-1))
+line=$(sed -n ''$start','$ne'p' $dir/step04_all_omero_install.sh)
 echo "$line" >> $file
+echo "#start-release-ice36" >> $file
+number=$(sed -n '/#start-release-ice36/=' $dir/step04_all_omero_install.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-release-ice36/=' $dir/step04_all_omero_install.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero_install.sh)
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line" >> $file
+echo "#end-release-ice36" >> $file
+number=$(sed -n '/#start-link/=' $dir/step04_all_omero_install.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-link/=' $dir/step04_all_omero_install.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero_install.sh)
+line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+echo "$line" >> $file
+
 echo "#end-step04-pre" >> $file
 
-
-
 echo -en '\n' >> $file
-echo "#start-step04: As the omero user, download the OMERO.server and configure it" >> $file
+echo "#start-step04: As the omero user, configure it" >> $file
 echo "#start-copy-omeroscript" >> $file
 echo "cp settings.env settings-web.env step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
 echo "#end-copy-omeroscript" >> $file
 
-echo "#start-release-ice36" >> $file
-number=$(sed -n '/#start-release-ice36/=' $dir/step04_all_omero.sh)
-ns=$((number+1))
-number=$(sed -n '/#end-release-ice36/=' $dir/step04_all_omero.sh)
-ne=$((number-1))
-line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
-line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-echo "$line" >> $file
-echo "#end-release-ice36" >> $file
-
-number=$(sed -n '/#start-link/=' $dir/step04_all_omero.sh)
-ns=$((number+1))
-number=$(sed -n '/#end-link/=' $dir/step04_all_omero.sh)
-ne=$((number-1))
-line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
-line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-echo "$line" >> $file
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 number=$(sed -n '/#configure/=' $dir/step04_all_omero.sh)
 ns=$((number+1))

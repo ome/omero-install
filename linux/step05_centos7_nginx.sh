@@ -22,7 +22,7 @@ su - omero -c "bash -eux setup_omero_nginx.sh nginx"
 #start-nginx-admin
 sed -i.bak -re 's/( default_server.*)/; #\1/' /etc/nginx/nginx.conf
 
-cp /home/omero/OMERO.server/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
+cp $OMERODIR/nginx.conf.tmp /etc/nginx/conf.d/omero-web.conf
 
 systemctl enable nginx
 if [ ! "${container:-}" = docker ]; then

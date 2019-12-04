@@ -37,9 +37,9 @@ cp settings.env settings-web.env step05_2_websessionconfig.sh step04_all_omero.s
 
 bash -eux step01_centos7_ice_venv.sh
 
-bash -eux step04_all_omero_install.sh
+OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero_install.sh
 
-su - omero -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero.sh"
+su - omero -c " bash -eux step04_all_omero.sh"
 
 
 su - omero -c "bash setup_omero_db.sh"
