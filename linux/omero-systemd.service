@@ -19,8 +19,8 @@ RestartSec=10
 # Allow up to 5 min for start/stop
 TimeoutSec=300
 Environment="OMERODIR=/home/omero/OMERO.server"
-ExecStart=/opt/omero/server/venv/bin/omero admin start
-ExecStop=/opt/omero/server/venv/bin/omero admin stop
+ExecStart=/opt/omero/server/venv3/bin/omero admin start
+ExecStop=/opt/omero/server/venv3/bin/omero admin stop
 # If you want to enable in-place imports uncomment this:
 #UMask=0002
 
