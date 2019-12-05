@@ -19,8 +19,7 @@ if [ "$ICEVER" = "ice36" ]; then
 	if [ $OMEROVER == "latest" ]; then
 		#start-release-ice36
 		cd /opt/omero/server
-		#SERVER=https://downloads.openmicroscopy.org/latest/omero5.6/server-ice36.zip
-		SERVER=https://downloads.openmicroscopy.org/omero/5.6.0-m2/artifacts/OMERO.server-5.6.0-m2-ice36-b126.zip
+		SERVER=https://downloads.openmicroscopy.org/latest/omero/5.6/server-ice36.zip
 		wget -q $SERVER -O OMERO.server-ice36.zip
 		unzip -q OMERO.server*
 		#end-release-ice36
