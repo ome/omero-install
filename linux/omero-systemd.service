@@ -10,7 +10,7 @@ After=postgresql-11.service
 After=network.service
 
 [Service]
-User=omero
+User=omero-server
 Group=omero
 WorkingDirectorpy=/opt/omero
 Type=forking

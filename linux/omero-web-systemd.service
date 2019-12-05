@@ -3,7 +3,7 @@ Description=OMERO.web
 Requires=nginx.service
 
 [Service]
-User=omero
+User=omero-server
 Type=forking
 Restart=on-failure
 RestartSec=10

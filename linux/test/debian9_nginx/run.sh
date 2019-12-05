@@ -29,5 +29,5 @@ service omero-web start
 if [ -t 1 ] ; then
     exec bash
 else
-    exec tail -F /home/omero/OMERO.server/var/log/*
+    exec tail -F /opt/omero/server/OMERO.server/var/log/*
 fi
