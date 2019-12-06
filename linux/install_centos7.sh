@@ -18,10 +18,6 @@ bash -eux step01_centos7_deps.sh
 # install ice
 bash -eux step01_centos7_ice_deps.sh
 
-if $WEBSESSION ; then
-    bash -eux step01_centos7_deps_websession.sh
-fi
-
 # install Postgres
 bash -eux step01_centos7_pg_deps.sh
 
