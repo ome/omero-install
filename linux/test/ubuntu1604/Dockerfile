@@ -3,7 +3,6 @@
 FROM ubuntu:16.04
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
-ARG WEBSESSION=false
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk11
 ARG ICEVER=ice36
@@ -16,7 +15,7 @@ ADD omero-install-test.zip /
 RUN apt-get update && apt-get -y install unzip && unzip omero-install-test.zip
 
 RUN cd omero-install-test && \
-	bash install_ubuntu1604_nginx.sh && \
+	bash install_ubuntu1604.sh && \
 	bash docker_shutdown_ubuntu.sh
 ADD run.sh /home/omero-server/run.sh
 

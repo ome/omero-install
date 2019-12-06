@@ -19,13 +19,12 @@ RUN yum -y install initscripts unzip && unzip omero-install-test.zip
 # This is so that scripts can detect whether they're in docker
 RUN echo 'export container=docker' > /etc/profile.d/docker.sh
 
-ARG WEBSESSION=false
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk11
 ARG ICEVER=ice36
 ARG PGVER=pg11
 
 RUN cd omero-install-test && \
-	bash install_centos7_nginx.sh
+	bash install_centos7.sh
 
 EXPOSE 22 80 4063 4064
