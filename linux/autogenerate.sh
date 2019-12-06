@@ -182,7 +182,7 @@ echo "#end-step04-pre" >> $file
 echo -en '\n' >> $file
 echo "#start-step04: As the omero-server system user, configure it" >> $file
 echo "#start-copy-omeroscript" >> $file
-echo "cp settings.env settings-web.env step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
+echo "cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
 echo "#end-copy-omeroscript" >> $file
 
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
@@ -221,45 +221,9 @@ if [ $OS = "debian9" ] || [ $OS = "ubuntu1804" ] ; then
 fi
 
 echo -en '\n' >> $file
-N=$OS
-echo "#start-step05: As root, install OMERO.web dependencies" >> $file
-number=$(sed -n '/#web-requirements-recommended-start/=' $dir/step05_"$N"_nginx.sh)
-ns=$((number))
-number=$(sed -n '/#web-requirements-recommended-end/=' $dir/step05_"$N"_nginx.sh)
-ne=$((number))
-line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
-line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-echo "$line" >> $file
-echo "#start-configure-nginx: As the omero-server system user, configure OMERO.web" >> $file
-number=$(sed -n '/#start-config/=' $dir/setup_omero_nginx.sh)
-ns=$((number+1))
-line=$(sed -n ''$ns',$p' $dir/setup_omero_nginx.sh)
-line=$(echo -e "${line}" | sed -e "s/\$NGINXCMD/nginx/g")
-echo "$line" >> $file
-echo "#end-configure-nginx" >> $file
-echo "# As root, install nginx" >> $file
-number=$(sed -n '/#start-nginx-install/=' $dir/step05_"$N"_nginx.sh)
-ns=$((number))
-number=$(sed -n '/#end-nginx-install/=' $dir/step05_"$N"_nginx.sh)
-ne=$((number))
-line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
-line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-echo "$line" >> $file
-number=$(sed -n '/#start-nginx-admin/=' $dir/step05_"$N"_nginx.sh)
-ns=$((number))
-number=$(sed -n '/#end-nginx-admin/=' $dir/step05_"$N"_nginx.sh)
-ne=$((number))
-line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
-line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-# remove docker conditional
-line=`remove_docker_workaround "${line}"`
-echo "$line" >> $file
 
 echo -en '\n' >> $file
-echo "#end-step05" >> $file
-
-echo -en '\n' >> $file
-echo "#start-step06: As root, run the scripts to start OMERO and OMERO.web automatically" >> $file
+echo "#start-step06: As root, run the scripts to start OMERO automatically" >> $file
 
 if [ $OS = "centos7" ] ; then
 	number=$(sed -n '/#start-recommended/=' $dir/step06_"$OS"_daemon.sh)
@@ -280,19 +244,6 @@ start=$((start+1))
 line=$(sed -n ''$start',$p' $dir/step07_all_perms.sh)
 echo "$line" >> $file
 echo "#end-step07" >> $file
-
-echo -en '\n' >> $file
-echo "#start-step08: As root, perform regular tasks" >> $file
-echo "#start-omeroweb-cron" >> $file
-line=$(sed -n '2,$p' $dir/omero-web-cron)
-echo "$line" >> $file
-echo "#end-omeroweb-cron" >> $file
-echo "#Copy omero-web-cron into the appropriate location" >> $file
-echo "#start-copy-omeroweb-cron" >> $file
-line=$(sed -n '2,$p' $dir/step08_all_cron.sh)
-echo "$line" >> $file
-echo "#end-copy-omeroweb-cron" >> $file
-echo "#end-step08" >> $file
 
 if [[ $OS =~ "centos" ]]; then
 echo "#start-selinux" >> $file
