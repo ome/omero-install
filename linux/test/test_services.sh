@@ -2,7 +2,7 @@
 
 set -e -u -x
 
-ENV=${ENV:-centos7_nginx}
+ENV=${ENV:-centos7}
 DMNAME=${DMNAME:-dev}
 
 . `pwd`/../settings.env

@@ -5,11 +5,11 @@ This directory contains Dockerfiles for testing the installation walkthroughs.
 
 For example:
 
-    ./docker-build.sh ubuntu1604_nginx
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604_nginx
+    ./docker-build.sh ubuntu1604
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604
 
-    ./docker-build.sh debian9_nginx
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_debian9_nginx
+    ./docker-build.sh debian9
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_debian9
 
 See `docker run --help` for more information on these and other options
 for running docker images.
@@ -64,7 +64,7 @@ It is possible to install other versions using the JAVAVER parameter.
 
 For example, to install openjdk11:
 
-JAVAVER=openjdk1.8 ./docker-build.sh ubuntu1604_nginx
+JAVAVER=openjdk1.8 ./docker-build.sh ubuntu1604
 
 The supported values are: 
 openjdk1.8, openjdk1.8-devel, openjdk11 (default), openjdk11-devel
@@ -84,13 +84,13 @@ It is possible to install other versions using the PGVER parameter.
 
 For example:
     
-    PGVER=pg95 ./docker-build.sh ubuntu1604_nginx
+    PGVER=pg95 ./docker-build.sh ubuntu1604
     
 It is not necessary to specify the version when running Ubuntu/Debian image.
 
 For example:
 
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604_nginx
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604
 
 
 The supported values are: 
@@ -110,7 +110,7 @@ It is possible to install other versions using the ICEVER parameter.
 
 For example:
 
-    ICEVER=ice36-devel ./docker-build.sh centos7_nginx
+    ICEVER=ice36-devel ./docker-build.sh centos7
 
 The supported values are: 
 ice36-devel (CentOS 7 only), ice36
@@ -126,7 +126,7 @@ Testing CentOS 7
 1. Create a test image containing the installation scripts
 
         $ cd linux/test
-        NGINX $ export ENV=centos7_nginx
+        $ export ENV=centos7
         $ ./docker-build.sh $ENV
 
      Notet that it is possible to use the various parameters when running the installation script e.g.
