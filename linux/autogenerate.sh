@@ -119,7 +119,7 @@ echo "$line"  >> $file
 echo "#end-step01" >> $file
 
 echo -en '\n' >> $file
-echo "#start-step02: As root, create an omero system user and directory for the OMERO repository" >> $file
+echo "#start-step02: As root, create a local omero-server system user and directory for the OMERO repository" >> $file
 number=$(sed -n '/#start-create-user/=' $dir/step02_all_setup.sh)
 ns=$((number+1))
 number=$(sed -n '/#end-create-user/=' $dir/step02_all_setup.sh)
@@ -153,7 +153,7 @@ echo "$line" >> $file
 echo "#end-step03bis" >> $file
 
 echo -en '\n' >> $file
-echo "#start-step04-pre: As root, install omero-py, download the OMERO.server" >> $file
+echo "#start-step04-pre: As root, install omero-py and download the OMERO.server" >> $file
 start=$(sed -n '/#start-install-omero-py/=' $dir/step04_all_omero_install.sh)
 start=$((start+1))
 number=$(sed -n '/#end-install-omero-py/=' $dir/step04_all_omero_install.sh)
@@ -180,7 +180,7 @@ echo "$line" >> $file
 echo "#end-step04-pre" >> $file
 
 echo -en '\n' >> $file
-echo "#start-step04: As the omero user, configure it" >> $file
+echo "#start-step04: As the omero-server system user, configure it" >> $file
 echo "#start-copy-omeroscript" >> $file
 echo "cp settings.env settings-web.env step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
 echo "#end-copy-omeroscript" >> $file
@@ -222,7 +222,7 @@ fi
 
 echo -en '\n' >> $file
 N=$OS
-echo "#start-step05: As omero, install OMERO.web dependencies" >> $file
+echo "#start-step05: As root, install OMERO.web dependencies" >> $file
 number=$(sed -n '/#web-requirements-recommended-start/=' $dir/step05_"$N"_nginx.sh)
 ns=$((number))
 number=$(sed -n '/#web-requirements-recommended-end/=' $dir/step05_"$N"_nginx.sh)
@@ -230,7 +230,7 @@ ne=$((number))
 line=$(sed -n ''$ns','$ne'p' $dir/step05_"$N"_nginx.sh)
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 echo "$line" >> $file
-echo "#start-configure-nginx: As the omero system user, configure OMERO.web" >> $file
+echo "#start-configure-nginx: As the omero-server system user, configure OMERO.web" >> $file
 number=$(sed -n '/#start-config/=' $dir/setup_omero_nginx.sh)
 ns=$((number+1))
 line=$(sed -n ''$ns',$p' $dir/setup_omero_nginx.sh)
@@ -311,5 +311,3 @@ if [ $ALL = true ]; then
 else
 	generate $OS
 fi
-
-

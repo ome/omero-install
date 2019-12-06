@@ -21,7 +21,7 @@ RUN apt-get update && apt-get -y install unzip && unzip omero-install-test.zip
 RUN cd omero-install-test && \
     bash install_ubuntu1804_nginx.sh && \
     bash docker_shutdown_ubuntu.sh
-ADD run.sh /home/omero/run.sh
+ADD run.sh /home/omero-server/run.sh
 
 EXPOSE 80 4063 4064
-CMD ["/bin/bash", "-e", "/home/omero/run.sh"]
+CMD ["/bin/bash", "-e", "/home/omero-server/run.sh"]

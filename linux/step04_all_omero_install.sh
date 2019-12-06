@@ -29,6 +29,6 @@ fi
 
 #start-link
 # change ownership of the folder
-chown -R omero OMERO.server-*
+chown -R omero-server OMERO.server-*
 ln -s OMERO.server-*/ OMERO.server
 #end-link

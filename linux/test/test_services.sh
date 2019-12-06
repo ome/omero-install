@@ -9,7 +9,7 @@ WEBSESSION=${WEBSESSION:-false}
 . `pwd`/../settings.env
 
 CNAME=omeroinstall_$ENV
-SETTINGS=${SETTINGS:-/home/omero/settings.env}
+SETTINGS=${SETTINGS:-/home/omero-server/settings.env}
 
 # start docker container
 docker run -d --name $CNAME -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run -p 8080:80 omero_install_test_$ENV
@@ -43,7 +43,7 @@ docker exec -it $CNAME /bin/bash -c 'd=10; \
 #check OMERO.server service status
 docker exec -it $CNAME /bin/bash -c "service omero status -l"
 
-docker exec -it $CNAME /bin/bash -c "su - omero -c \". ${SETTINGS} omero admin diagnostics\""
+docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} omero admin diagnostics\""
 
 
 # check OMERO.web status
@@ -54,7 +54,7 @@ docker exec -it $CNAME /bin/bash -c "su - omero -c \". ${SETTINGS} omero admin d
 #fi
 
 # Log in to OMERO.server
-docker exec -it $CNAME /bin/bash -c "su - omero -c \". ${SETTINGS} omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
+docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
 
 # Log in to OMERO.web
 # WEB_HOST=localhost:8080 ./test_login_to_web.sh

@@ -26,8 +26,8 @@ prog=omero-web
 [ -r /etc/default/omero ] && . /etc/default/omero
 
 OMERO_SERVER=${OMERO_SERVER:-/opt/omero/server/OMERO.server}
-OMERO_USER=${OMERO_USER:-omero}
-SETTINGS=/home/omero/settings.env
+OMERO_USER=${OMERO_USER:-omero-server}
+SETTINGS=/home/omero-server/settings.env
 
 start() {	
 	echo -n $"Starting $prog:"

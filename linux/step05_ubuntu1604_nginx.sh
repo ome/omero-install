@@ -10,14 +10,14 @@ apt-get -y install nginx
 #end-nginx-install
 
 #start-copy
-cp setup_omero_nginx.sh ~omero
+cp setup_omero_nginx.sh ~omero-server
 #end-copy
 
 # Install omero-web
 $VENV_WEB/bin/pip install "omero-web>=5.6.dev5"
 
-# set up as the omero user.
-su - omero -c "bash -x setup_omero_nginx.sh nginx"
+# set up as the omero-server user.
+su - omero-server -c "bash -x setup_omero_nginx.sh nginx"
 
 #start-nginx-admin
 cp $OMERODIR/nginx.conf.tmp /etc/nginx/sites-available/omero-web
