@@ -119,47 +119,6 @@ To add a new Ice version, update the following files:
 `step01_centos7_ice_deps.sh`, `step01_ubuntu_ice_deps.sh`,
 `step01_debian9_ice_deps.sh`, `step01_ubuntu1804_ice_deps.sh` and update this README.md.
 
-Configuring Redis
------------------
-
-By default, OMERO.web is set to use filestore session backend.
-It is possible to use Redis as a session
-backend using the WEBSESSION parameter
-
-For example:
-
-    WEBSESSION=true ./docker-build.sh ubuntu1604_nginx
-
-To run the image for Ubuntu/Debian, you need to pass the -w/--websession true.
-
-For example:
-
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604_nginx --websession true
-
-It is not necessary to specify the version when running CentOS 7 image.
-
-Installing development branches
--------------------------------
-
-By default the installation uses the latest OMERO server release. To use
-a specific development, you can specify as a parameter one of the development versions
-when building the image.
-
-For example:
-
-    OMEROVER=OMERO-DEV-latest ./docker-build.sh ubuntu1604_nginx
-
-The supported values are: 
-OMERO-DEV-latest, OMERO-DEV-merge-build, latest (default)
-
-
-| OMERO version         | Ice version |
-|-----------------------|------------ |
-| OMERO-DEV-latest      | 3.6         |
-| OMERO-DEV-merge-build | 3.6         |
-| latest                | 3.6         |
----------------------------------------
-
 
 Testing CentOS 7
 ================
@@ -190,12 +149,4 @@ Testing CentOS 7
            Loaded: loaded (/etc/systemd/system/omero.service; enabled; vendor preset: disabled)
            Active: active (running) since Mon 2016-04-11 13:43:23 UTC; 30s ago
          Main PID: 91 (python)
-        ...
-        $ docker exec -it omeroinstall /bin/bash -c "service omero-web status"
-        Redirecting to /bin/systemctl status  -l omero-web.service
-        ● omero-web.service - OMERO.web
-           Loaded: loaded (/etc/systemd/system/omero-web.service; enabled; vendor preset: disabled)
-           Active: active (running) since Mon 2016-04-11 13:43:27 UTC; 26s ago
-          Process: 69 ExecStart=/home/omeroenv/bin/omero web start (code=exited, status=0/SUCCESS)
-         Main PID: 493 (gunicorn)
         ...

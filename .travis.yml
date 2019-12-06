@@ -2,12 +2,12 @@ language: python
 services:
   - docker
 env:
-  - ENV=centos7_nginx PGVER=pg10 JAVAVER=openjdk1.8
-  - ENV=ubuntu1804_nginx PGVER=pg10 JAVAVER=openjdk1.8
-  - ENV=ubuntu1604_nginx
-  - ENV=debian9_nginx
-  - ENV=ubuntu1804_nginx
-  - ENV=centos7_nginx
+  - ENV=centos7 PGVER=pg10 JAVAVER=openjdk1.8
+  - ENV=ubuntu1804 PGVER=pg10 JAVAVER=openjdk1.8
+  - ENV=ubuntu1604
+  - ENV=debian9
+  - ENV=ubuntu1804
+  - ENV=centos7
 
 before_install:  
   - sudo apt-get update

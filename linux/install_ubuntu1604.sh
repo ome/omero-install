@@ -2,7 +2,6 @@
 
 set -e -u -x
 
-WEBSESSION=${WEBSESSION:-false}
 OMEROVER=${OMEROVER:-latest}
 PGVER=${PGVER:-pg11}
 ICEVER=${ICEVER:-ice36}
@@ -29,7 +28,7 @@ if [[ "$PGVER" =~ ^(pg94|pg95|pg96|pg10|pg11)$ ]]; then
 	bash -eux step03_all_postgres.sh
 fi
 
-cp step01_ubuntu1604_ice_venv.sh settings.env settings-web.env step05_2_websessionconfig.sh step04_all_omero.sh setup_omero_db.sh ~omero-server
+cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
 
 bash -x step01_ubuntu1604_ice_venv.sh
 bash -eux step04_all_omero_install.sh
@@ -38,22 +37,12 @@ su - omero-server -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -x step04_all_omero
 
 su - omero-server -c "bash setup_omero_db.sh"
 
-OMEROVER=$OMEROVER bash -eux step05_ubuntu1604_nginx.sh
-
-if [ "$WEBSESSION" = true ]; then
-    bash -eux step05_2_websession_install.sh
-    su - omero -c "bash -eux step05_2_websessionconfig.sh"
-fi
 
 #If you don't want to use the init.d scripts you can start OMERO manually:
 #su - omero-server -c ". /home/omero-server/settings.env omero admin start"
-#su - omero-server -c ". /home/omero-server/settings.env omero web start"
 
 bash -eux step06_ubuntu_daemon.sh
 
 bash -eux step07_all_perms.sh
 
-bash -eux step08_all_cron.sh
-
 #service omero start
-#service omero-web start
