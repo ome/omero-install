@@ -2,6 +2,7 @@
 
 set -e -u -x
 
+WEBSESSION=${WEBSESSION:-false}
 OMEROVER=${OMEROVER:-latest}
 PGVER=${PGVER:-pg11}
 ICEVER=${ICEVER:-ice36}
