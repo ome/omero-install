@@ -7,7 +7,6 @@ PGVER=${PGVER:-pg11}
 ICEVER=${ICEVER:-ice36}
 
 . settings.env
-. settings-web.env
 
 bash -eux step01_ubuntu_init.sh
 
