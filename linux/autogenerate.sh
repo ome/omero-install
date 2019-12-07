@@ -31,8 +31,6 @@ fi
 cat <<EOF > $file
 #!/bin/bash
 set -e -u -x
-source settings.env
-source settings-web.env
 EOF
 
 N=$OS
