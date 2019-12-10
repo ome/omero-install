@@ -2,9 +2,8 @@
 
 set -e -u -x
 
-ENV=${ENV:-centos7_nginx}
+ENV=${ENV:-centos7}
 DMNAME=${DMNAME:-dev}
-WEBSESSION=${WEBSESSION:-false}
 
 . `pwd`/../settings.env
 
@@ -45,19 +44,8 @@ docker exec -it $CNAME /bin/bash -c "service omero status -l"
 
 docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} omero admin diagnostics\""
 
-
-# check OMERO.web status
-#docker exec -it $CNAME /bin/bash -c "service omero-web status -l"
-
-#if [[ "$WEBSESSION" = true ]]; then
-#    docker exec -it $CNAME /bin/bash -c "service redis status -l"
-#fi
-
 # Log in to OMERO.server
 docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
-
-# Log in to OMERO.web
-# WEB_HOST=localhost:8080 ./test_login_to_web.sh
 
 # stop and cleanup
 docker stop $CNAME

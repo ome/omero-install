@@ -2,13 +2,11 @@
 
 set -e -u -x
 
-WEBSESSION=${WEBSESSION:-false}
 OMEROVER=${OMEROVER:-latest}
 PGVER=${PGVER:-pg11}
 ICEVER=${ICEVER:-ice36}
 
 . `dirname $0`/settings.env
-. `dirname $0`/settings-web.env
 
 bash -eux step01_centos7_init.sh
 
@@ -20,10 +18,6 @@ bash -eux step01_centos7_deps.sh
 # install ice
 bash -eux step01_centos7_ice_deps.sh
 
-if $WEBSESSION ; then
-    bash -eux step01_centos7_deps_websession.sh
-fi
-
 # install Postgres
 bash -eux step01_centos7_pg_deps.sh
 
@@ -33,7 +27,7 @@ if [[ "$PGVER" =~ ^(pg94|pg95|pg96|pg10|pg11)$ ]]; then
     bash -eux step03_all_postgres.sh
 fi
 
-cp settings.env settings-web.env step05_2_websessionconfig.sh step04_all_omero.sh setup_omero_db.sh ~omero-server
+cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
 
 bash -eux step01_centos7_ice_venv.sh
 
@@ -44,20 +38,12 @@ su - omero-server -c " bash -eux step04_all_omero.sh"
 
 su - omero-server -c "bash setup_omero_db.sh"
 
-OMEROVER=$OMEROVER bash -eux step05_centos7_nginx.sh
-
-if [ "$WEBSESSION" = true ]; then
-    bash -eux step05_2_websession_install.sh
-    su - omero-server -c "bash -eux step05_2_websessionconfig.sh"
-fi
 
 #If you don't want to use the systemd scripts you can start OMERO manually:
 #su - omero-server -c ". /home/omero-server/settings.env omero admin start"
-#su - omero-server -c ". /home/omero-server/settings.env omero web start"
 
 bash -eux setup_centos_selinux.sh
 
 PGVER=$PGVER bash -eux step06_centos7_daemon.sh
 
 #systemctl start omero.service
-#systemctl start omero-web.service
