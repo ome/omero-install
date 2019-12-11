@@ -89,6 +89,18 @@ echo "$line"  >> $file
 echo "#end-recommended-ice" >> $file
 
 echo -en '\n' >> $file
+if [ $OS = "debian9" ] ; then
+    echo "#start-disable-daemons" >> $file
+    number=$(sed -n '/#start-disable/=' $dir/step01_"$N"_ice_deps.sh)
+    ns=$((number+1))
+    number=$(sed -n '/#end-disable/=' $dir/step01_"$N"_ice_deps.sh)
+    ne=$((number-1))
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_ice_deps.sh)
+    # remove leading whitespace
+    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+    echo "$line"  >> $file
+    echo "#end-disable-daemons" >> $file
+fi
 
 # install postgres
 N=$OS
