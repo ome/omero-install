@@ -8,6 +8,7 @@ set -eux
 
 #start-install-omero-py
 # Install omero-py
+$VENV_SERVER/bin/pip install wheel
 $VENV_SERVER/bin/pip install "omero-py>=5.6.dev4"
 #end-install-omero-py
 
