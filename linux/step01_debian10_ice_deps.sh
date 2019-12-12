@@ -20,10 +20,10 @@ if [ "$ICEVER" = "ice36" ]; then
         zlib1g-dev
 
     cd /tmp
-    wget -q https://github.com/jburel/zeroc-ice-py-debian10/releases/download/v0.1.1-rc1/ice-3.6.5-0.1.1-rc1-debian10-amd64.tar.gz
-    tar xf ice-3.6.5-0.1.1-rc1-debian10-amd64.tar.gz
-    mv ice-3.6.5-0.1.1-rc1 /opt
-    echo /opt/ice-3.6.5-0.1.1-rc1/lib/x86_64-linux-gnu > /etc/ld.so.conf.d/ice-x86_64.conf
+    wget -q https://github.com/ome/zeroc-ice-debian10/releases/download/v0.1.0/ice-3.6.5-v0.1.0-debian10-amd64.tar.gz
+    tar xf ice-3.6.5-v0.1.0-debian10-amd64.tar.gz
+    mv ice-3.6.5-v0.1.0 /opt
+    echo /opt/ice-3.6.5-v0.1.0/lib/x86_64-linux-gnu > /etc/ld.so.conf.d/ice-x86_64.conf
     ldconfig
     #end-recommended
 fi
