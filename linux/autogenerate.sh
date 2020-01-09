@@ -243,6 +243,13 @@ if [ $OS = "centos7" ] ; then
 	# remove docker conditional
 	line=`remove_docker_workaround "${line}"`
 	echo "$line" >> $file
+else
+	number=$(sed -n '/#start-recommended/=' $dir/step06_ubuntu_daemon.sh)
+	nrs=$((number+1))
+	number=$(sed -n '/#end-recommended/=' $dir/step06_ubuntu_daemon.sh)
+	nre=$((number-1))
+	line=$(sed -n ''$nrs','$nre'p' $dir/step06_ubuntu_daemon.sh)
+	echo "$line" >> $file
 fi
 echo "#end-step06" >> $file
 

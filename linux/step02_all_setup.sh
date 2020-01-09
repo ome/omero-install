@@ -4,7 +4,7 @@ if [ -z "$(getent passwd omero)" ]; then
 	#start-create-user
     useradd -mr omero-server
     # Give a password to the omero user
-    # e.g. passwd omero
+    # e.g. passwd omero-server
     #end-create-user
 fi
 

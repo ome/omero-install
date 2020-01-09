@@ -1,8 +1,9 @@
 #!/bin/bash
 
-cp omero-init.d /etc/init.d/omero
-chmod a+x /etc/init.d/omero
+#start-recommended
+cp omero-server-init.d /etc/init.d/omero-server
+chmod a+x /etc/init.d/omero-server
 
-update-rc.d -f omero remove
-update-rc.d -f omero defaults 98 02
-
+update-rc.d -f omero-server remove
+update-rc.d -f omero-server defaults 98 02
+#end-recommended

@@ -143,10 +143,10 @@ Testing CentOS 7
         OSX: $ docker run -d --privileged -p 8888:80 --name omeroinstall omero_install_test_$ENV
         UNIX: $ docker run -d --name omeroinstall -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run omero_install_test_$ENV
         wait 10 sec
-        $ docker exec -it omeroinstall /bin/bash -c "service omero status"
-        Redirecting to /bin/systemctl status  -l omero.service
-        ● omero.service - OMERO.server
-           Loaded: loaded (/etc/systemd/system/omero.service; enabled; vendor preset: disabled)
+        $ docker exec -it omeroinstall /bin/bash -c "service omero-server status"
+        Redirecting to /bin/systemctl status  -l omero-server.service
+        ● omero-server.service - OMERO.server
+           Loaded: loaded (/etc/systemd/system/omero-server.service; enabled; vendor preset: disabled)
            Active: active (running) since Mon 2016-04-11 13:43:23 UTC; 30s ago
          Main PID: 91 (python)
         ...
