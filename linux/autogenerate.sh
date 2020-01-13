@@ -14,7 +14,7 @@ echo "${l}"
 
 #generate the walkthrough for all supported os
 function generate_all() {
-	values=(centos7 ubuntu1604 debian9 ubuntu1804)
+	values=(centos7 ubuntu1604 debian9 debian10 ubuntu1804)
 	for os in "${values[@]}"; do
   		echo "${os}"
   		 generate ${os}
@@ -216,7 +216,7 @@ line=$(sed -n ''$ns',$p' $dir/setup_omero_db.sh)
 echo "$line" >> $file
 echo "#end-step04" >> $file
 
-if [ $OS = "debian9" ] || [ $OS = "ubuntu1804" ] ; then
+if [[ $OS =~ "debian" ]] || [ $OS = "ubuntu1804" ] ; then
 	echo "#start-patch-openssl" >> $file
 	number=$(sed -n '/#start-seclevel/=' $dir/step04_omero_patch_openssl.sh)
 	ns=$((number))
