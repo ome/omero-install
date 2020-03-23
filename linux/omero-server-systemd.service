@@ -17,6 +17,7 @@ Restart=no
 RestartSec=10
 # Allow up to 5 min for start/stop
 TimeoutSec=300
+Environment="PATH=/opt/omero/server/venv3/bin:/bin:/usr/bin"
 Environment="OMERODIR=/opt/omero/server/OMERO.server"
 ExecStart=/opt/omero/server/venv3/bin/omero admin start
 ExecStop=/opt/omero/server/venv3/bin/omero admin stop
