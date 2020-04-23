@@ -70,7 +70,7 @@ elif [ "$PGVER" = "pg96" ]; then
 	fi
 	systemctl enable postgresql-9.6.service
 elif [ "$PGVER" = "pg10" ]; then
-    yum -y install https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm
+    yum -y install https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
     yum -y install postgresql10-server postgresql10
 
     if [ "${container:-}" = docker ]; then
@@ -92,7 +92,7 @@ elif [ "$PGVER" = "pg10" ]; then
     systemctl enable postgresql-10.service
 elif [ "$PGVER" = "pg11" ]; then
     #start-recommended
-    yum -y install https://yum.postgresql.org/11/redhat/rhel-7-x86_64/pgdg-redhat11-11-2.noarch.rpm
+    yum -y install https://yum.postgresql.org/11/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
     yum -y install postgresql11-server postgresql11
 
     if [ "${container:-}" = docker ]; then
