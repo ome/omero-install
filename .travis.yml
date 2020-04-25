@@ -9,6 +9,7 @@ env:
   - ENV=ubuntu1804
   - ENV=centos7
   - ENV=debian10
+  - ENV=ubuntu2004
 
 
 before_install:  
