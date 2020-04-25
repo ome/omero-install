@@ -19,7 +19,7 @@ bash -eux step01_debian10_deps.sh
 bash -eux step01_debian10_ice_deps.sh
 
 if [ "$ICEVER" = "ice36" ]; then		
-	cat omero-ice36-debian10.env >> /etc/profile		
+	cat omero-ice36.env >> /etc/profile		
 fi
 
 # install Postgres
