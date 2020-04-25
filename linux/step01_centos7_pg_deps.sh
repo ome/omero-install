@@ -5,7 +5,7 @@ PGVER=${PGVER:-pg11}
 # Postgres installation
 if [ "$PGVER" = "pg94" ]; then
 	# Postgres, reconfigure to allow TCP connections
-	yum -y install http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-redhat94-9.4-3.noarch.rpm
+	yum -y install https://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 	yum -y install postgresql94-server postgresql94
 
 	if [ "${container:-}" = docker ]; then
@@ -27,7 +27,7 @@ if [ "$PGVER" = "pg94" ]; then
 	systemctl enable postgresql-9.4.service
 elif [ "$PGVER" = "pg95" ]; then
 	# Postgres, reconfigure to allow TCP connections
-	yum -y install http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-redhat95-9.5-3.noarch.rpm
+	yum -y install https://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 	yum -y install postgresql95-server postgresql95
 
 	if [ "${container:-}" = docker ]; then
@@ -49,7 +49,7 @@ elif [ "$PGVER" = "pg95" ]; then
 	systemctl enable postgresql-9.5.service
 elif [ "$PGVER" = "pg96" ]; then
 	# Postgres, reconfigure to allow TCP connections
-	yum -y install http://yum.postgresql.org/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
+	yum -y install https://yum.postgresql.org/9.6/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 	yum -y install postgresql96-server postgresql96
 
 	if [ "${container:-}" = docker ]; then
@@ -70,7 +70,7 @@ elif [ "$PGVER" = "pg96" ]; then
 	fi
 	systemctl enable postgresql-9.6.service
 elif [ "$PGVER" = "pg10" ]; then
-    yum -y install https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm
+    yum -y install https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
     yum -y install postgresql10-server postgresql10
 
     if [ "${container:-}" = docker ]; then
@@ -92,7 +92,7 @@ elif [ "$PGVER" = "pg10" ]; then
     systemctl enable postgresql-10.service
 elif [ "$PGVER" = "pg11" ]; then
     #start-recommended
-    yum -y install https://yum.postgresql.org/11/redhat/rhel-7-x86_64/pgdg-redhat11-11-2.noarch.rpm
+    yum -y install https://yum.postgresql.org/11/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
     yum -y install postgresql11-server postgresql11
 
     if [ "${container:-}" = docker ]; then
