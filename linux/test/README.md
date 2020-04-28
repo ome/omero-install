@@ -5,11 +5,11 @@ This directory contains Dockerfiles for testing the installation walkthroughs.
 
 For example:
 
-    ./docker-build.sh ubuntu1604
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604
+    ./docker-build.sh ubuntu1804
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1804
 
-    ./docker-build.sh debian9
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_debian9
+    ./docker-build.sh debian10
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_debian10
 
 See `docker run --help` for more information on these and other options
 for running docker images.
@@ -95,14 +95,14 @@ For example:
 
 
 The supported values are: 
-pg94, pg95, pg96, pg10, pg11 (default)
+pg94, pg95, pg96, pg10, pg11 (default), pg12 (ubuntu 20.04 only)
 
 If you do not want to install Postgres set PGVER to nopg.
 
 To add a new Postgres version, update the following files: 
 `step01_centos7_pg_deps.sh`, `step01_debian9_pg_deps.sh`,
 `step01_ubuntu1604_pg_deps.sh`, `step01_ubuntu1804_pg_deps.sh`,
-`step01_debian9_pg_deps.sh` and update this README.md.
+`step01_debian9_pg_deps.sh`, `step01_ubuntu2004_pg_deps.sh` and update this README.md.
 
 Configuring Ice
 ---------------
@@ -120,7 +120,8 @@ ice36-devel (CentOS 7 only), ice36
 To add a new Ice version, update the following files:
 `step01_centos7_ice_venv_deps.sh`, `step01_ubuntu_ice_venv_deps.sh`,
 `step01_debian9_ice_venv_deps.sh`, `step01_ubuntu1804_ice_venv_deps.sh`,
-`step01_debian10_ice_venv_deps.sh` and update this README.md.
+`step01_debian10_ice_venv_deps.sh`, `step01_ubuntu2004_ice_venv_deps.sh`
+and update this README.md.
 
 
 Testing CentOS 7
