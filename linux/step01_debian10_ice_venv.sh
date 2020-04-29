@@ -12,4 +12,7 @@ $VENV_SERVER/bin/pip install https://github.com/ome/zeroc-ice-debian10/releases/
 
 # Install pytables
 $VENV_SERVER/bin/pip install tables
+
+# Install omero-certificates
+$VENV_SERVER/bin/pip install omero-certificates
 #end-ice-py
