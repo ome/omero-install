@@ -107,6 +107,15 @@ N=$OS
 echo -en '\n' >> $file
 echo "# install Postgres" >> $file
 if [ $OS = "centos7" ] ; then
+    number=$(sed -n '/#start-postgresql-installation-general/=' $dir/step01_"$N"_pg_deps.sh)
+    nrs=$((number+1))
+    number=$(sed -n '/#end-postgresql-installation-general/=' $dir/step01_"$N"_pg_deps.sh)
+    nre=$((number-1))
+    line=$(sed -n ''$nrs','$nre'p' $dir/step01_"$N"_pg_deps.sh)
+    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+
+    echo "$line"  >> $file
+
 	number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_pg_deps.sh)
 	nrs=$((number+1))
 	number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_pg_deps.sh)
