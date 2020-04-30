@@ -25,7 +25,7 @@ docker build -t $IMAGE --no-cache --build-arg OMEROVER=${OMEROVER} \
 	--build-arg JAVAVER=${JAVAVER} --build-arg ICEVER=${ICEVER} \
 	--build-arg PGVER=${PGVER} $1
 
-if [[ "$1" =~ "centos7" ]]; then
+if [[ "$1" =~ "centos" ]]; then
 	echo "Test this image by running ./test_services.sh"
 else
 	echo "Test this image by running docker run -it [...] $IMAGE"
