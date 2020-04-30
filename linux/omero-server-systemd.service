@@ -11,7 +11,7 @@ After=network.service
 
 [Service]
 User=omero-server
-WorkingDirectorpy=/opt/omero
+WorkingDirectory=/opt/omero
 Type=forking
 Restart=no
 RestartSec=10
