@@ -40,7 +40,7 @@ docker exec -it $CNAME /bin/bash -c 'd=10; \
     echo "Entry found"; exit'
 
 #check OMERO.server service status
-docker exec -it $CNAME /bin/bash -c "service omero-server status -l; echo \"sarted\"; exit"
+docker exec -it $CNAME /bin/bash -c "service omero-server status -l --no-pager"
 
 docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} omero admin diagnostics\""
 
