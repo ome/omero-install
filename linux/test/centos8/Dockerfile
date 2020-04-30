@@ -27,7 +27,7 @@ RUN useradd omero && \
 
 # Workaround as there is no need for udev or getty in containers.
 # see https://bugzilla.redhat.com/show_bug.cgi?id=1046469#c11
-RUN rm -f /lib/systemd/system/systemd*udev* ; \
+RUN rm -rf /lib/systemd/system/systemd*udev* ; \
     rm -f /lib/systemd/system/getty.target;
 
 # Shutdown systemd in container correctly
@@ -49,7 +49,7 @@ RUN echo 'export container=docker' > /etc/profile.d/docker.sh
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk11
 ARG ICEVER=ice36
-ARG PGVER=pg12
+ARG PGVER=pg11
 
 RUN cd omero-install-test && \
     bash install_centos8.sh
