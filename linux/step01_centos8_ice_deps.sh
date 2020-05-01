@@ -10,9 +10,7 @@ if [ "$ICEVER" = "ice36" ]; then
         expat-devel \
         gcc \
         gcc-c++ \
-        libmcpp \
-        openssl-devel \
-        patch
+        libmcpp
 
     cd /tmp
     wget -q https://github.com/ome/zeroc-ice-centos8/releases/download/0.0.1/ice-3.6.5-0.0.1-centos8-amd64.tar.gz
