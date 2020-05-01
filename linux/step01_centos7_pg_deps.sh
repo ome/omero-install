@@ -4,7 +4,7 @@ PGVER=${PGVER:-pg11}
 
 
 #start-postgresql-installation-general
-yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-42.0-9.noarch.rpm
+yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 #end-postgresql-installation-general
 if [ "$PGVER" = "pg94" ]; then
 	# Postgres, reconfigure to allow TCP connections
