@@ -4,6 +4,10 @@ services:
 env:
   - ENV=centos7 PGVER=pg10 JAVAVER=openjdk1.8
   - ENV=ubuntu1804 PGVER=pg10 JAVAVER=openjdk1.8
+  - ENV=ubuntu1804 PGVER=pg12
+  - ENV=debian9 PGVER=pg12
+  - ENV=debian10 PGVER=pg12
+  - ENV=centos7 PGVER=pg12
   - ENV=ubuntu1604
   - ENV=debian9
   - ENV=ubuntu1804
