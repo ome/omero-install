@@ -116,7 +116,7 @@ elif [ "$PGVER" = "pg12" ]; then
 
     if [ "${container:-}" = docker ]; then
         su - postgres -c "/usr/pgsql-12/bin/initdb -D /var/lib/pgsql/12/data --encoding=UTF8"
-        echo "listen_addresses='*'" >> /var/lib/pgsql/11/data/postgresql.conf
+        echo "listen_addresses='*'" >> /var/lib/pgsql/12/data/postgresql.conf
     else
         PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-12/bin/postgresql-12-setup initdb
     fi
@@ -126,7 +126,7 @@ elif [ "$PGVER" = "pg12" ]; then
         /usr/lib/systemd/system/postgresql-12.service
     fi
     if [ "${container:-}" = docker ]; then
-        su - postgres -c "/usr/pgsql-11/bin/pg_ctl start -D /var/lib/pgsql/12/data -w"
+        su - postgres -c "/usr/pgsql-12/bin/pg_ctl start -D /var/lib/pgsql/12/data -w"
     else
         systemctl start postgresql-12.service
     fi
