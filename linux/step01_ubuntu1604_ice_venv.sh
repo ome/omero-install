@@ -11,5 +11,5 @@ python3 -mvenv $VENV_SERVER
 $VENV_SERVER/bin/pip install https://github.com/ome/zeroc-ice-py-ubuntu1604/releases/download/0.2.0/zeroc_ice-3.6.5-cp35-cp35m-linux_x86_64.whl
 
 # Install server dependencies
-$VENV_SERVER/bin/pip install git+https://github.com/jburel/omero-cli-server.git@table
+$VENV_SERVER/bin/pip install -e git+https://github.com/jburel/omero-cli-server.git#egg=table[debian9]
 #end-ice-py
