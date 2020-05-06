@@ -111,4 +111,24 @@ elif [ "$PGVER" = "pg11" ]; then
     fi
     systemctl enable postgresql-11.service
     #end-recommended
+elif [ "$PGVER" = "pg12" ]; then
+    yum -y install postgresql12-server postgresql12
+
+    if [ "${container:-}" = docker ]; then
+        su - postgres -c "/usr/pgsql-12/bin/initdb -D /var/lib/pgsql/12/data --encoding=UTF8"
+        echo "listen_addresses='*'" >> /var/lib/pgsql/12/data/postgresql.conf
+    else
+        PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-12/bin/postgresql-12-setup initdb
+    fi
+    sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/12/data/pg_hba.conf
+    if [ "${container:-}" = docker ]; then
+        sed -i 's/OOMScoreAdjust/#OOMScoreAdjust/' \
+        /usr/lib/systemd/system/postgresql-12.service
+    fi
+    if [ "${container:-}" = docker ]; then
+        su - postgres -c "/usr/pgsql-12/bin/pg_ctl start -D /var/lib/pgsql/12/data -w"
+    else
+        systemctl start postgresql-12.service
+    fi
+    systemctl enable postgresql-12.service
 fi
