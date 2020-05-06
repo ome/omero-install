@@ -7,7 +7,7 @@ PGVER=${PGVER:-pg11}
 rm -f /var/lib/rpm/__db*
 
 #start-postgresql-installation-general
-dnf module disable -y postgresql
+yum module disable -y postgresql
 yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 #end-postgresql-installation-general
 if [ "$PGVER" = "pg96" ]; then
