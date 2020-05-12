@@ -195,7 +195,7 @@ echo "#end-step03" >> $file
 
 # create virtual env and install dependencies
 echo -en '\n' >> $file
-echo "#start-step03bis: As omero-server, create a virtual env and install dependencies" >> $file
+echo "#start-step03bis: As root, create a virtual env and install dependencies" >> $file
 
 
 if [ $OS = "ubuntu1604" ] ; then
@@ -207,14 +207,8 @@ if [ $OS = "ubuntu1604" ] ; then
     # remove leading whitespace
     line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
     echo "$line"  >> $file
-    number=$(sed -n '/# Install server dependencies/=' $dir/step01_"$OS"_ice_venv.sh)
-    ns=$((number))
-    number=$(sed -n '/#end-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
-    ne=$((number-1))
-    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_ice_venv.sh)
-    # remove leading whitespace
-    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-    echo "$line" >> $file
+    
+    echo "#end-step03bis" >> $file
     number=$(sed -n '/#start-py36-venv/=' $dir/step01_"$OS"_ice_venv.sh)
     ns=$((number))
     number=$(sed -n '/#end-py36-venv/=' $dir/step01_"$OS"_ice_venv.sh)
@@ -223,8 +217,16 @@ if [ $OS = "ubuntu1604" ] ; then
     # remove leading whitespace
     line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
     echo "$line" >> $file
-
-
+    echo "#start-deps-venv" >> $file
+    number=$(sed -n '/# Install server dependencies/=' $dir/step01_"$OS"_ice_venv.sh)
+    ns=$((number))
+    number=$(sed -n '/#end-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
+    ne=$((number-1))
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_ice_venv.sh)
+    # remove leading whitespace
+    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+    echo "$line" >> $file
+    echo "#end-deps-venv" >> $file
 else
     number=$(sed -n '/#start-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
     ns=$((number+1))
@@ -232,12 +234,11 @@ else
     ne=$((number-1))
     line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_ice_venv.sh)
     echo "$line" >> $file
+    echo "#end-step03bis" >> $file
 fi
 
-echo "#end-step03bis" >> $file
-
 echo -en '\n' >> $file
-echo "#start-step04-pre: As omero-server, install omero-py and download the OMERO.server" >> $file
+echo "#start-step04-pre: As root, install omero-py and download the OMERO.server" >> $file
 start=$(sed -n '/#start-install-omero-py/=' $dir/step04_all_omero_install.sh)
 start=$((start+1))
 number=$(sed -n '/#end-install-omero-py/=' $dir/step04_all_omero_install.sh)
