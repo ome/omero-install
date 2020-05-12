@@ -13,7 +13,7 @@ bash -eux step01_ubuntu_init.sh
 # install java
 bash -eux step01_ubuntu1804_java_deps.sh
 
-bash -eux step01_ubuntu1604_deps.sh
+bash -eux step01_ubuntu1804_deps.sh
 
 # install ice
 bash -eux step01_ubuntu1804_ice_deps.sh
