@@ -13,7 +13,7 @@ bash -eux step01_centos7_init.sh
 # install java
 bash -eux step01_centos_java_deps.sh
 
-bash -eux step01_centos7_deps.sh
+bash -eux step01_centos8_deps.sh
 
 # install ice
 bash -eux step01_centos8_ice_deps.sh

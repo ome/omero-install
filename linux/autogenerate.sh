@@ -70,8 +70,6 @@ echo "# install dependencies" >> $file
 N=$OS
 if [[ $OS =~ "ubuntu" ]] ; then
 	N="ubuntu1604"
-elif [[ $OS =~ "centos" ]] ; then
-    N="centos7"
 fi
 line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
 echo "$line" >> $file
