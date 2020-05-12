@@ -2,7 +2,7 @@
 
 set -x
 
-PYTHONVER==${PYTHONVER:-default}
+PYTHONVER=${PYTHONVER:-default}
 VENV_SERVER=${VENV_SERVER:-/opt/omero/server/venv3}
 #start-ice-py
 
