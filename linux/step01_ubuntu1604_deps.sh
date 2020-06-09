@@ -9,12 +9,18 @@ apt-get -y install \
 #end-add-dependencies
 if [ "$PYTHONVER" = "py36" ]; then
     #start-install-Python36
-    add-apt-repository ppa:deadsnakes/ppa
-    apt-get update
-    apt-get install -y python3.6 python3.6-venv python3.6-dev
+    apt-get install -y build-essential
+    apt-get install -y zlib1g-dev libncurses5-dev libgdbm-dev \
+                       libnss3-dev libssl-dev libreadline-dev libffi-dev
     # dependencies required to install Ice Python binding
-    apt-get install -y build-essential libssl-dev libffi-dev \
-                       libbz2-dev libxml2-dev libxslt1-dev zlib1g-dev
+    apt-get install -y libbz2-dev libxml2-dev libxslt1-dev
+    cd /tmp
+    wget https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tar.xz
+    tar -xf Python-3.6.9.tar.xz
+    cd Python-3.6.9
+    ./configure --enable-optimizations
+    make -j 1
+    make altinstall
     #end-install-Python36                
 else
     #start-default
