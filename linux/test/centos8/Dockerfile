@@ -7,6 +7,7 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ENV container docker
 ENV LANG en_US.UTF-8
+RUN yum install -y langpacks-en glibc-all-langpacks
 
 RUN yum install -y sudo openssh-server openssh-clients && \
     yum clean all
