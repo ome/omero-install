@@ -7,6 +7,7 @@ ARG OMEROVER=latest
 ARG JAVAVER=openjdk11
 ARG ICEVER=ice36
 ARG PGVER=pg11
+ARG PYTHONVER=default
 
 RUN echo 'APT::Install-Recommends 0;' > /etc/apt/apt.conf.d/01norecommends \
  && echo 'APT::Install-Suggests 0;' >> /etc/apt/apt.conf.d/01norecommends

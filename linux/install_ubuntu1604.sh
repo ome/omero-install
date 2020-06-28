@@ -5,6 +5,7 @@ set -e -u -x
 OMEROVER=${OMEROVER:-latest}
 PGVER=${PGVER:-pg11}
 ICEVER=${ICEVER:-ice36}
+PYTHONVER=${PYTHONVER:-default}
 
 . settings.env
 
@@ -13,7 +14,7 @@ bash -eux step01_ubuntu_init.sh
 # install java
 bash -eux step01_ubuntu_java_deps.sh
 
-bash -eux step01_ubuntu1604_deps.sh
+PYTHONVER=$PYTHONVER bash -eux step01_ubuntu1604_deps.sh
 
 # install ice
 bash -eux step01_ubuntu1604_ice_deps.sh
@@ -29,7 +30,7 @@ fi
 
 cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
 
-bash -x step01_ubuntu1604_ice_venv.sh
+PYTHONVER=$PYTHONVER bash -x step01_ubuntu1604_ice_venv.sh
 bash -eux step04_all_omero_install.sh
 
 su - omero-server -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -x step04_all_omero.sh"

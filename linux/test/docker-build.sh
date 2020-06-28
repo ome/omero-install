@@ -9,6 +9,7 @@ OMEROVER=${OMEROVER:-latest}
 JAVAVER=${JAVAVER:-openjdk11}
 ICEVER=${ICEVER:-ice36}
 PGVER=${PGVER:-pg11}
+PYTHONVER=${PYTHONVER:-pg11}
 
 set -e
 
@@ -23,7 +24,7 @@ echo "Building image $IMAGE"
 
 docker build -t $IMAGE --no-cache --build-arg OMEROVER=${OMEROVER} \
 	--build-arg JAVAVER=${JAVAVER} --build-arg ICEVER=${ICEVER} \
-	--build-arg PGVER=${PGVER} $1
+	--build-arg PGVER=${PGVER} --build-arg PYTHONVER=${PYTHONVER} $1
 
 if [[ "$1" =~ "centos" ]]; then
 	echo "Test this image by running ./test_services.sh"
