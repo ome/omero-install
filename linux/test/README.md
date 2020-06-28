@@ -54,7 +54,7 @@ To generate a specific walkthrough, run the following command
     OS=debian9 ALL=false bash autogenerate.sh
 
 The possible values are:
-centos7 (default), debian9, ubuntu1604, ubuntu1804, debian10
+centos7 (default), centos8, debian9, ubuntu1804, ubuntu2004, debian10
 
 Configuring Java
 ----------------
@@ -64,7 +64,7 @@ It is possible to install other versions using the JAVAVER parameter.
 
 For example, to install openjdk11:
 
-JAVAVER=openjdk1.8 ./docker-build.sh ubuntu1604
+JAVAVER=openjdk1.8 ./docker-build.sh ubuntu1804
 
 The supported values are: 
 openjdk1.8, openjdk1.8-devel, openjdk11 (default), openjdk11-devel
@@ -85,13 +85,13 @@ It is possible to install other versions using the PGVER parameter.
 
 For example:
     
-    PGVER=pg95 ./docker-build.sh ubuntu1604
+    PGVER=pg95 ./docker-build.sh ubuntu1804
     
 It is not necessary to specify the version when running Ubuntu/Debian image.
 
 For example:
 
-    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1604
+    docker run --rm -it -p 8080:80 -p 4063:4063 -p 4064:4064 omero_install_test_ubuntu1804
 
 
 The supported values are: 
@@ -101,7 +101,7 @@ If you do not want to install Postgres set PGVER to nopg.
 
 To add a new Postgres version, update the following files: 
 `step01_centos7_pg_deps.sh`, `step01_debian9_pg_deps.sh`,
-`step01_ubuntu1604_pg_deps.sh`, `step01_ubuntu1804_pg_deps.sh`,
+`step01_centos8_pg_deps.sh`, `step01_ubuntu1804_pg_deps.sh`,
 `step01_debian9_pg_deps.sh`, `step01_ubuntu2004_pg_deps.sh` and update this README.md.
 
 Configuring Ice
