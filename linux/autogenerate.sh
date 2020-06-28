@@ -14,7 +14,7 @@ echo "${l}"
 
 #generate the walkthrough for all supported os
 function generate_all() {
-	values=(centos7 centos8 ubuntu1604 debian9 debian10 ubuntu1804 ubuntu2004)
+	values=(centos7 centos8 debian9 debian10 ubuntu1804 ubuntu2004)
 	for os in "${values[@]}"; do
   		echo "${os}"
   		 generate ${os}
@@ -68,44 +68,13 @@ echo -en '\n' >> $file
 echo "# install dependencies" >> $file
 # install dependencies
 N=$OS
-if [[ $OS = "ubuntu1604" ]] ; then
-	N="ubuntu1604"
-elif [[ $OS =~ "ubuntu" ]]  ; then
+if [[ $OS =~ "ubuntu" ]]  ; then
     N="ubuntu1804"
 fi
 
-if [ $OS = "ubuntu1604" ] ; then
-    number=$(sed -n '/#start-add-dependencies/=' $dir/step01_"$N"_deps.sh)
-    ns=$((number+1))
-    number=$(sed -n '/#end-add-dependencies/=' $dir/step01_"$N"_deps.sh)
-    ne=$((number-1))
-    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_deps.sh)
-    echo "$line" >> $file
-    number=$(sed -n '/#start-default/=' $dir/step01_"$N"_deps.sh)
-    ns=$((number+1))
-    number=$(sed -n '/#end-default/=' $dir/step01_"$N"_deps.sh)
-    ne=$((number-1))
-    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_deps.sh)
-    # remove leading whitespace
-    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-    echo "$line" >> $file
-    echo "#end-step01" >> $file
-    echo "#start-step01-py36" >> $file
-    number=$(sed -n '/#start-install-Python36/=' $dir/step01_"$N"_deps.sh)
-    ns=$((number+1))
-    number=$(sed -n '/#end-install-Python36/=' $dir/step01_"$N"_deps.sh)
-    ne=$((number-1))
-    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_deps.sh)
-    # remove leading whitespace
-    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-    echo "$line" >> $file
-    echo "#end-step01-py36" >> $file
-
-else
-    line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
-    echo "$line" >> $file
-    echo "#end-step01" >> $file
-fi
+line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
+echo "$line" >> $file
+echo "#end-step01" >> $file
 
 
 # install ice
@@ -198,44 +167,13 @@ echo -en '\n' >> $file
 echo "#start-step03bis: As root, create a virtual env and install dependencies" >> $file
 
 
-if [ $OS = "ubuntu1604" ] ; then
-    number=$(sed -n '/#start-default/=' $dir/step01_"$OS"_ice_venv.sh)
-    ns=$((number+1))
-    number=$(sed -n '/#end-default/=' $dir/step01_"$OS"_ice_venv.sh)
-    ne=$((number-1))
-    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_ice_venv.sh)
-    # remove leading whitespace
-    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-    echo "$line"  >> $file
-    
-    echo "#end-step03bis" >> $file
-    number=$(sed -n '/#start-py36-venv/=' $dir/step01_"$OS"_ice_venv.sh)
-    ns=$((number))
-    number=$(sed -n '/#end-py36-venv/=' $dir/step01_"$OS"_ice_venv.sh)
-    ne=$((number))
-    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_ice_venv.sh)
-    # remove leading whitespace
-    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-    echo "$line" >> $file
-    echo "#start-deps-venv" >> $file
-    number=$(sed -n '/# Install server dependencies/=' $dir/step01_"$OS"_ice_venv.sh)
-    ns=$((number))
-    number=$(sed -n '/#end-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
-    ne=$((number-1))
-    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_ice_venv.sh)
-    # remove leading whitespace
-    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-    echo "$line" >> $file
-    echo "#end-deps-venv" >> $file
-else
-    number=$(sed -n '/#start-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
-    ns=$((number+1))
-    number=$(sed -n '/#end-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
-    ne=$((number-1))
-    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_ice_venv.sh)
-    echo "$line" >> $file
-    echo "#end-step03bis" >> $file
-fi
+number=$(sed -n '/#start-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
+ns=$((number+1))
+number=$(sed -n '/#end-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
+ne=$((number-1))
+line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_ice_venv.sh)
+echo "$line" >> $file
+echo "#end-step03bis" >> $file
 
 echo -en '\n' >> $file
 echo "#start-step04-pre: As root, install omero-py and download the OMERO.server" >> $file
@@ -292,7 +230,7 @@ line=$(sed -n ''$ns',$p' $dir/setup_omero_db.sh)
 echo "$line" >> $file
 echo "#end-step04" >> $file
 
-if [[ $OS != "centos7" ]] && [[ $OS != "ubuntu1604" ]]; then
+if [[ $OS != "centos7" ]]; then
 	echo "#start-patch-openssl" >> $file
 	number=$(sed -n '/#start-seclevel/=' $dir/step04_omero_patch_openssl.sh)
 	ns=$((number))
