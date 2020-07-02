@@ -8,8 +8,6 @@ env:
   - ENV=debian9 PGVER=pg12
   - ENV=debian10 PGVER=pg12
   - ENV=centos7 PGVER=pg12
-  - ENV=ubuntu1604
-  - ENV=ubuntu1604 PYTHONVER=py36
   - ENV=debian9
   - ENV=ubuntu1804
   - ENV=centos7
