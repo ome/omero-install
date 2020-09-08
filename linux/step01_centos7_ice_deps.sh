@@ -8,7 +8,14 @@ if [ "$ICEVER" = "ice36" ]; then
     curl -sL https://zeroc.com/download/Ice/3.6/el7/zeroc-ice3.6.repo > \
     /etc/yum.repos.d/zeroc-ice3.6.repo
 
-    yum -y install ice-all-runtime
+    yum -y install glacier2 \
+                   icebox \
+                   icegrid \
+                   icepatch2 \
+                   libfreeze3.6-c++ \
+                   libice3.6-c++ \
+                   libicestorm3.6
+
     #end-recommended
     # reset the locale
     localedef -i en_US -f UTF-8 en_US.UTF-8
