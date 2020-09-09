@@ -42,10 +42,10 @@ docker exec -it $CNAME /bin/bash -c 'd=10; \
 #check OMERO.server service status
 docker exec -it $CNAME /bin/bash -c "service omero-server status -l --no-pager"
 
-docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} omero admin diagnostics\""
+docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && omero admin diagnostics\""
 
 # Log in to OMERO.server
-docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
+docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
 
 # stop and cleanup
 docker stop $CNAME
