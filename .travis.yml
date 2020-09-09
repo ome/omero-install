@@ -12,8 +12,11 @@ env:
   - ENV=ubuntu1804
   - ENV=centos7
   - ENV=debian10
-  - ENV=ubuntu2004
-  - ENV=centos8
+
+jobs:
+  allow_failures:
+    - ENV=ubuntu2004
+    - ENV=centos8
 
 
 before_install:  
