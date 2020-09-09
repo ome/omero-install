@@ -11,7 +11,7 @@ CNAME=omeroinstall_$ENV
 SETTINGS=${SETTINGS:-/home/omero-server/settings.env}
 
 # start docker container
-docker run -d --name $CNAME -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run -p 8080:80 omero_install_test_$ENV
+docker run -dit --name $CNAME -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run -p 8080:80 omero_install_test_$ENV
 
 # check if container is running
 docker inspect -f {{.State.Running}} $CNAME
@@ -42,10 +42,10 @@ docker exec -it $CNAME /bin/bash -c 'd=10; \
 #check OMERO.server service status
 docker exec -it $CNAME /bin/bash -c "service omero-server status -l --no-pager"
 
-docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} omero admin diagnostics\""
+docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && omero admin diagnostics\""
 
 # Log in to OMERO.server
-docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
+docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
 
 # stop and cleanup
 docker stop $CNAME
