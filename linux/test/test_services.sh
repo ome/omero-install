@@ -9,6 +9,7 @@ DMNAME=${DMNAME:-dev}
 
 CNAME=omeroinstall_$ENV
 SETTINGS=${SETTINGS:-/home/omero-server/settings.env}
+DATA=https://downloads.openmicroscopy.org/images/PNG/will/WesternBlots/Blot-purif-Ab-west-11.11.png
 
 # start docker container
 docker run -dit --name $CNAME -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run -p 8080:80 omero_install_test_$ENV
@@ -46,6 +47,8 @@ docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && ome
 
 # Log in to OMERO.server
 docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
+
+docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && wget ${DATA} -O image.png && omero import image.png\""
 
 # stop and cleanup
 docker stop $CNAME
