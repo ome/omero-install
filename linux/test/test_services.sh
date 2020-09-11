@@ -49,6 +49,9 @@ docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && ome
 
 docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && touch test_image.fake && omero import test_image.fake\""
 
+# Log out
+docker exec -it $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && omero logout\""
+
 # stop and cleanup
 docker stop $CNAME
 docker rm $CNAME
