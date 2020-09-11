@@ -8,7 +8,9 @@ set -eux
 
 #start-install-omero-py
 # Install omero-py
-$VENV_SERVER/bin/pip install "omero-py>=5.6.0"
+#$VENV_SERVER/bin/pip install "omero-py>=5.6.0"
+wget https://merge-ci.openmicroscopy.org/jenkins/job/OMERO-python-superbuild-build/lastSuccessfulBuild/artifact/omero-py/dist/omero-py-5.7.2.dev0.tar.gz
+$VENV_SERVER/bin/pip install omero-py-5.7.2.dev0.tar.gz
 #end-install-omero-py
 
 #start-download-omero
