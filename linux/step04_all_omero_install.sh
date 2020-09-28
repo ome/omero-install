@@ -8,7 +8,7 @@ set -eux
 
 #start-install-omero-py
 # Install omero-py
-$VENV_SERVER/bin/pip install "omero-py>=5.6.0"
+$VENV_SERVER/bin/pip install "omero-py>=5.8.0"
 #end-install-omero-py
 
 #start-download-omero
