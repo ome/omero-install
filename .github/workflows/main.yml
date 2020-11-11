@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [centos7, debian9, debian10, ubuntu1804]
+        os: [centos7, centos8, debian9, debian10, ubuntu1804, ubuntu2004]
         pg: [pg11, pg12]
     steps:
       - name: Checkout
