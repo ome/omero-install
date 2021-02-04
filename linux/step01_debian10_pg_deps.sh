@@ -2,7 +2,7 @@
 
 PGVER=${PGVER:-pg11}
 
-if [[ "$PGVER" =~ ^(pg94|pg95|pg10)$ ]]; then
+if [[ "$PGVER" =~ ^(pg96|pg10)$ ]]; then
     PGVER="pg11"
 fi
 

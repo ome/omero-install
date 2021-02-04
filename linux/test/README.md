@@ -37,7 +37,7 @@ run for example:
     OS=centos7 ALL=false bash autogenerate.sh
 
 Only the "recommended" requirements will be copied to the walkthrough file.
-When a requirement is modified e.g. Postgres 9.5 instead of Postgres 9.4
+When a requirement is modified e.g. Postgres 12 instead of Postgres 11
 the following markers `#start-recommended`, `#end-recommended` should be updated
 in the corresponding steps files.
 The default value for given parameter should be the recommended version
@@ -85,7 +85,7 @@ It is possible to install other versions using the PGVER parameter.
 
 For example:
     
-    PGVER=pg95 ./docker-build.sh ubuntu1804
+    PGVER=pg10 ./docker-build.sh ubuntu1804
     
 It is not necessary to specify the version when running Ubuntu/Debian image.
 
@@ -95,7 +95,7 @@ For example:
 
 
 The supported values are: 
-pg94, pg95, pg96, pg10, pg11 (default), pg12 (ubuntu 20.04 only)
+pg96, pg10, pg11 (default), pg12 (ubuntu 20.04 only)
 
 If you do not want to install Postgres set PGVER to nopg.
 
