@@ -25,7 +25,7 @@ cat omero-ice36.env >> /etc/profile
 
 bash -eux step02_all_setup.sh
 
-if [[ "$PGVER" =~ ^(pg94|pg95|pg96|pg10|pg11|pg12)$ ]]; then
+if [[ "$PGVER" =~ ^(pg96|pg10|pg11|pg12)$ ]]; then
     bash -eux step03_all_postgres.sh
 fi
 
