@@ -9,3 +9,4 @@ These scripts are provided to help new users with installing OMERO.server for th
 Read the [OMERO System Administrator Documentation](https://docs.openmicroscopy.org/latest/omero/sysadmins/), especially the sections on requirements and installation, before using these scripts.
 
 The scripts should automatically download all required files.
+
