@@ -14,11 +14,11 @@ echo "${l}"
 
 #generate the walkthrough for all supported os
 function generate_all() {
-	values=(centos7 centos8 debian9 debian10 ubuntu1804 ubuntu2004)
-	for os in "${values[@]}"; do
-  		echo "${os}"
-  		 generate ${os}
-	done
+    values=(centos7 centos8 debian9 debian10 ubuntu1804 ubuntu2004)
+    for os in "${values[@]}"; do
+        echo "${os}"
+        generate ${os}
+    done
 }
 
 # generate the specified walkthrough
@@ -26,7 +26,7 @@ function generate() {
 OS=$1
 file=walkthrough_$OS.sh
 if [ -e $file ]; then
-	rm $file
+    rm $file
 fi
 cat <<EOF > $file
 #!/bin/bash
@@ -35,7 +35,7 @@ EOF
 
 N=$OS
 if [[ $OS =~ "debian" ]] || [[ $OS =~ "ubuntu" ]] ; then
-	N="ubuntu"
+    N="ubuntu"
 elif [[ $OS =~ "centos" ]]  ; then
     N="centos7"
 fi
@@ -47,11 +47,11 @@ echo "$line" >> $file
 # install java
 N=$OS
 if [[ $OS =~ "centos" ]] ; then
-	N="centos"
+    N="centos"
 elif [[ $OS =~ "ubuntu1804" ]]  ; then
-	N="ubuntu1804"
+    N="ubuntu1804"
 elif [[ $OS =~ "ubuntu" ]]  ; then
-	N="ubuntu"
+    N="ubuntu"
 fi 
 echo -en '\n' >> $file
 echo "# install Java" >> $file
@@ -119,19 +119,19 @@ if [[ $OS =~ "centos" ]] ; then
 
     echo "$line"  >> $file
 
-	number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_pg_deps.sh)
-	nrs=$((number+1))
-	number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_pg_deps.sh)
-	nre=$((number-1))
-	line=$(sed -n ''$nrs','$nre'p' $dir/step01_"$N"_pg_deps.sh)
-	# remove docker conditional
-	line=`remove_docker_workaround "${line}"`
+    number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_pg_deps.sh)
+    nrs=$((number+1))
+    number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_pg_deps.sh)
+    nre=$((number-1))
+    line=$(sed -n ''$nrs','$nre'p' $dir/step01_"$N"_pg_deps.sh)
+    # remove docker conditional
+    line=`remove_docker_workaround "${line}"`
 else
-	number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_pg_deps.sh)
-	ns=$((number+1))
-	number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_pg_deps.sh)
-	ne=$((number-1))
-	line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_pg_deps.sh)
+    number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_pg_deps.sh)
+    ns=$((number+1))
+    number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_pg_deps.sh)
+    ne=$((number-1))
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_pg_deps.sh)
 fi
 # remove leading whitespace
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
@@ -231,16 +231,16 @@ echo "$line" >> $file
 echo "#end-step04" >> $file
 
 if [[ $OS != "centos7" ]]; then
-	echo "#start-patch-openssl" >> $file
-	number=$(sed -n '/#start-seclevel/=' $dir/step04_omero_patch_openssl.sh)
-	ns=$((number))
-	number=$(sed -n '/#end-seclevel/=' $dir/step04_omero_patch_openssl.sh)
-	ne=$((number))
-	line=$(sed -n ''$ns','$ne'p' $dir/step04_omero_patch_openssl.sh)
-	line=$(echo -e "${line}" | sed -e "s/\-i.bak/-i/g")
-	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
-	echo "$line" >> $file
-	echo "#end-patch-openssl" >> $file
+    echo "#start-patch-openssl" >> $file
+    number=$(sed -n '/#start-seclevel/=' $dir/step04_omero_patch_openssl.sh)
+    ns=$((number))
+    number=$(sed -n '/#end-seclevel/=' $dir/step04_omero_patch_openssl.sh)
+    ne=$((number))
+    line=$(sed -n ''$ns','$ne'p' $dir/step04_omero_patch_openssl.sh)
+    line=$(echo -e "${line}" | sed -e "s/\-i.bak/-i/g")
+    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+    echo "$line" >> $file
+    echo "#end-patch-openssl" >> $file
 fi
 
 echo -en '\n' >> $file
@@ -249,21 +249,21 @@ echo -en '\n' >> $file
 echo "#start-step06: As root, run the scripts to start OMERO automatically" >> $file
 
 if [ $OS = "centos7" ] ; then
-	number=$(sed -n '/#start-recommended/=' $dir/step06_"$OS"_daemon.sh)
-	nrs=$((number+1))
-	number=$(sed -n '/#end-recommended/=' $dir/step06_"$OS"_daemon.sh)
-	nre=$((number-1))
-	line=$(sed -n ''$nrs','$nre'p' $dir/step06_"$OS"_daemon.sh)
-	# remove docker conditional
-	line=`remove_docker_workaround "${line}"`
-	echo "$line" >> $file
+    number=$(sed -n '/#start-recommended/=' $dir/step06_"$OS"_daemon.sh)
+    nrs=$((number+1))
+    number=$(sed -n '/#end-recommended/=' $dir/step06_"$OS"_daemon.sh)
+    nre=$((number-1))
+    line=$(sed -n ''$nrs','$nre'p' $dir/step06_"$OS"_daemon.sh)
+    # remove docker conditional
+    line=`remove_docker_workaround "${line}"`
+    echo "$line" >> $file
 else
-	number=$(sed -n '/#start-recommended/=' $dir/step06_ubuntu_daemon.sh)
-	nrs=$((number+1))
-	number=$(sed -n '/#end-recommended/=' $dir/step06_ubuntu_daemon.sh)
-	nre=$((number-1))
-	line=$(sed -n ''$nrs','$nre'p' $dir/step06_ubuntu_daemon.sh)
-	echo "$line" >> $file
+    number=$(sed -n '/#start-recommended/=' $dir/step06_ubuntu_daemon.sh)    
+    nrs=$((number+1))
+    number=$(sed -n '/#end-recommended/=' $dir/step06_ubuntu_daemon.sh)
+    nre=$((number-1))
+    line=$(sed -n ''$nrs','$nre'p' $dir/step06_ubuntu_daemon.sh)
+    echo "$line" >> $file
 fi
 echo "#end-step06" >> $file
 
@@ -288,7 +288,7 @@ ALL=${ALL:-true}
 OS=${OS:-centos7}
 
 if [ $ALL = true ]; then
-	generate_all
+    generate_all
 else
-	generate $OS
+    generate $OS
 fi
