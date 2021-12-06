@@ -182,6 +182,7 @@ start=$((start+1))
 number=$(sed -n '/#end-install-omero-py/=' $dir/step04_all_omero_install.sh)
 ne=$((number-1))
 line=$(sed -n ''$start','$ne'p' $dir/step04_all_omero_install.sh)
+line="$(echo -e "${line}" | sed -e 's/>=.*/>=\\ |version_py|\"/')"
 echo "$line" >> $file
 echo "#start-release-ice36" >> $file
 number=$(sed -n '/#start-release-ice36/=' $dir/step04_all_omero_install.sh)
