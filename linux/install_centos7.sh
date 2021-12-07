@@ -35,7 +35,6 @@ OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero_install.sh
 
 su - omero-server -c " bash -eux step04_all_omero.sh"
 
-
 su - omero-server -c "bash setup_omero_db.sh"
 
 

@@ -14,3 +14,7 @@ omero config set omero.db.pass "$OMERO_DB_PASS"
 #start-deb-latest
 omero db script -f $OMERODIR/db.sql --password "$OMERO_ROOT_PASS"
 #end-deb-latest
+
+#start-seclevel
+omero certificates
+#end-seclevel

@@ -30,13 +30,12 @@ bash -eux step02_all_setup.sh
 if [[ "$PGVER" =~ ^(pg96|pg10|pg11|pg12)$ ]]; then
     bash -eux step03_all_postgres.sh
 fi
-cp settings.env step04_omero_patch_openssl.sh step04_all_omero.sh setup_omero_db.sh ~omero-server
+cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
 
 bash -x step01_debian9_ice_venv.sh
 bash -eux step04_all_omero_install.sh
 
 su - omero-server -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -x step04_all_omero.sh"
-su - omero-server -c "bash -x step04_omero_patch_openssl.sh"
 su - omero-server -c "bash setup_omero_db.sh"
 
 

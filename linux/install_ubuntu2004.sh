@@ -29,13 +29,12 @@ if [[ "$PGVER" =~ ^(pg96|pg10|pg11|pg12)$ ]]; then
     bash -eux step03_all_postgres.sh
 fi
 
-cp settings.env step04_omero_patch_openssl.sh step04_all_omero.sh setup_omero_db.sh ~omero-server
+cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
 
 bash -eux step01_ubuntu2004_ice_venv.sh
 bash -eux step04_all_omero_install.sh
 
 su - omero-server -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero.sh"
-su - omero-server -c "bash -eux step04_omero_patch_openssl.sh"
 su - omero-server -c "bash setup_omero_db.sh"
 
 
