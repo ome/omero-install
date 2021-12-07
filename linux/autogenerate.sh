@@ -176,13 +176,7 @@ echo "$line" >> $file
 echo "#end-step03bis" >> $file
 
 echo -en '\n' >> $file
-echo "#start-step04-pre: As root, install omero-py and download the OMERO.server" >> $file
-start=$(sed -n '/#start-install-omero-py/=' $dir/step04_all_omero_install.sh)
-start=$((start+1))
-number=$(sed -n '/#end-install-omero-py/=' $dir/step04_all_omero_install.sh)
-ne=$((number-1))
-line=$(sed -n ''$start','$ne'p' $dir/step04_all_omero_install.sh)
-echo "$line" >> $file
+echo "#start-step04-pre: As root, download the OMERO.server" >> $file
 echo "#start-release-ice36" >> $file
 number=$(sed -n '/#start-release-ice36/=' $dir/step04_all_omero_install.sh)
 ns=$((number+1))
