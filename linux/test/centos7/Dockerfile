@@ -13,6 +13,8 @@ RUN userdel -r omero && \
 	echo 'root:omero' | chpasswd
 
 ADD omero-install-test.zip /
+RUN yum update -y
+RUN yum -y install ca-certificates
 RUN yum -y install initscripts unzip && unzip omero-install-test.zip
 
 
