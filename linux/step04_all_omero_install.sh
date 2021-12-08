@@ -6,13 +6,6 @@ set -eux
 
 . `dirname $0`/settings.env
 
-#start-install-omero-py
-# Install omero-py
-$VENV_SERVER/bin/pip install "omero-py>=5.8.0"
-#end-install-omero-py
-
-#start-download-omero
-
 
 #start-install
 if [ "$ICEVER" = "ice36" ]; then
