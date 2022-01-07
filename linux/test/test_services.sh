@@ -42,15 +42,15 @@ docker exec $CNAME /bin/bash -c 'd=10; \
 #check OMERO.server service status
 docker exec $CNAME /bin/bash -c "service omero-server status -l --no-pager"
 
-docker exec $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && omero admin diagnostics\""
+docker exec $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && $CONDA_ENV/envs/venv3/bin/omero admin diagnostics\""
 
 # Log in to OMERO.server
-docker exec $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
+docker exec $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && $CONDA_ENV/envs/venv3/bin/omero login -s localhost -p 4064 -u root -w ${OMERO_ROOT_PASS}\""
 
-docker exec $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && touch test_image.fake && omero import test_image.fake\""
+docker exec $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && touch test_image.fake && $CONDA_ENV/envs/venv3/bin/omero import test_image.fake\""
 
 # Log out
-docker exec $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && omero logout\""
+docker exec $CNAME /bin/bash -c "su - omero-server -c \". ${SETTINGS} && $CONDA_ENV/envs/venv3/bin/omero logout\""
 
 # stop and cleanup
 docker stop $CNAME
