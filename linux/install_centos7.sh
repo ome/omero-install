@@ -16,7 +16,7 @@ bash -eux step01_centos_java_deps.sh
 bash -eux step01_centos7_deps.sh
 
 # install ice
-bash -eux step01_centos7_ice_deps.sh
+# bash -eux step01_centos7_ice_deps.sh
 
 # install Postgres
 bash -eux step01_centos7_pg_deps.sh
@@ -29,11 +29,10 @@ fi
 
 cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
 
-bash -eux step01_centos7_ice_venv.sh
 
 OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero_install.sh
 
-su - omero-server -c " bash -eux step04_all_omero.sh"
+su - omero-server -c "bash -eux step04_all_omero.sh"
 
 su - omero-server -c "bash setup_omero_db.sh"
 
