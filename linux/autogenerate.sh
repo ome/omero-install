@@ -150,19 +150,6 @@ line=$(sed -n ''$start',$p' $dir/step03_all_postgres.sh)
 echo "$line" >> $file
 echo "#end-step03" >> $file
 
-# create virtual env and install dependencies
-echo -en '\n' >> $file
-echo "#start-step03bis: As root, create a virtual env and install dependencies" >> $file
-
-
-number=$(sed -n '/#start-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
-ns=$((number+1))
-number=$(sed -n '/#end-ice-py/=' $dir/step01_"$OS"_ice_venv.sh)
-ne=$((number-1))
-line=$(sed -n ''$ns','$ne'p' $dir/step01_"$OS"_ice_venv.sh)
-echo "$line" >> $file
-echo "#end-step03bis" >> $file
-
 echo -en '\n' >> $file
 echo "#start-step04-pre: As root, download the OMERO.server" >> $file
 echo "#start-release-ice36" >> $file
@@ -185,7 +172,7 @@ echo "$line" >> $file
 echo "#end-step04-pre" >> $file
 
 echo -en '\n' >> $file
-echo "#start-step04: As the omero-server system user, configure it" >> $file
+echo "#start-step04: As the omero-server system user, create a virtual env, install dependencies and configure the OMERO server" >> $file
 echo "#start-copy-omeroscript" >> $file
 echo "cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero " >> $file
 echo "#end-copy-omeroscript" >> $file
