@@ -3,6 +3,9 @@
 FROM ubuntu:20.04
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
+ENV PATH /opt/conda/bin:$PATH
+ARG PATH /opt/conda/bin:$PATH
+
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk11
 ARG ICEVER=ice36
@@ -15,7 +18,15 @@ RUN echo 'APT::Install-Recommends 0;' > /etc/apt/apt.conf.d/01norecommends \
  && echo 'APT::Install-Suggests 0;' >> /etc/apt/apt.conf.d/01norecommends
  
 ADD omero-install-test.zip /
-RUN apt-get update && apt-get -y install unzip && unzip omero-install-test.zip
+RUN apt-get update && apt-get -y install unzip wget && unzip omero-install-test.zip
+
+RUN wget --no-check-certificate \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir -p /opt \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh \
+    && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
+    && echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
 
 RUN cd omero-install-test && \
     bash install_ubuntu2004.sh && \

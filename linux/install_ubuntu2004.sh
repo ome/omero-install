@@ -31,7 +31,6 @@ fi
 
 cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
 
-bash -eux step01_ubuntu2004_ice_venv.sh
 bash -eux step04_all_omero_install.sh
 
 su - omero-server -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero.sh"
