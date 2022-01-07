@@ -7,6 +7,8 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ENV container docker
 ENV LANG en_US.UTF-8
+ENV PATH /opt/conda/bin:$PATH
+ARG PATH /opt/conda/bin:$PATH
 RUN yum install -y langpacks-en glibc-all-langpacks
 
 RUN yum install -y sudo openssh-server openssh-clients && \
@@ -41,8 +43,16 @@ RUN userdel -r omero && \
     echo 'root:omero' | chpasswd
 
 ADD omero-install-test.zip /
-RUN yum -y install initscripts unzip && unzip omero-install-test.zip
+RUN yum -y install initscripts unzip wget && unzip omero-install-test.zip
 
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir -p /opt \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh \
+    && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
+    && echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
+RUN conda --version
 
 # This is so that scripts can detect whether they're in docker
 RUN echo 'export container=docker' > /etc/profile.d/docker.sh
