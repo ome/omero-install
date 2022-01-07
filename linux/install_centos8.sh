@@ -31,7 +31,7 @@ fi
 
 cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
 
-bash -eux step01_centos8_ice_venv.sh
+#bash -eux step01_centos8_ice_venv.sh
 
 OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero_install.sh
 
