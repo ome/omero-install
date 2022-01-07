@@ -18,8 +18,8 @@ bash -eux step01_debian10_deps.sh
 # install ice
 bash -eux step01_debian10_ice_deps.sh
 
-if [ "$ICEVER" = "ice36" ]; then		
-	cat omero-ice36.env >> /etc/profile		
+if [ "$ICEVER" = "ice36" ]; then
+    cat omero-ice36.env >> /etc/profile
 fi
 
 # install Postgres
@@ -32,7 +32,6 @@ if [[ "$PGVER" =~ ^(pg96|pg10|pg11|pg12)$ ]]; then
 fi
 cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
 
-bash -x step01_debian10_ice_venv.sh
 bash -eux step04_all_omero_install.sh
 
 su - omero-server -c "OMEROVER=$OMEROVER ICEVER=$ICEVER bash -x step04_all_omero.sh"
