@@ -52,6 +52,7 @@ elif [ "$PGVER" = "pg11" ]; then
     yum -y install postgresql11-server postgresql11
 
     if [ "${container:-}" = docker ]; then
+        localedef -i en_US -f UTF-8 en_US.UTF-8
         su - postgres -c "/usr/pgsql-11/bin/initdb -D /var/lib/pgsql/11/data --encoding=UTF8"
         echo "listen_addresses='*'" >> /var/lib/pgsql/11/data/postgresql.conf
     else
@@ -73,6 +74,7 @@ elif [ "$PGVER" = "pg12" ]; then
     yum -y install postgresql12-server postgresql12
 
     if [ "${container:-}" = docker ]; then
+        localedef -i en_US -f UTF-8 en_US.UTF-8
         su - postgres -c "/usr/pgsql-12/bin/initdb -D /var/lib/pgsql/12/data --encoding=UTF8"
         echo "listen_addresses='*'" >> /var/lib/pgsql/12/data/postgresql.conf
     else
