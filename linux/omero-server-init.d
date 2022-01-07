@@ -29,7 +29,7 @@ SETTINGS=${SETTINGS:-/home/omero-server/settings.env}
 
 start() {	
 	echo -n $"Starting $prog:"
-	su - ${OMERO_USER} -c ". ${SETTINGS}; $CONDA_ENV/envs/venv3/bin/omero admin start" &> /dev/null && echo -n ' OMERO.server'
+	su - ${OMERO_USER} -c ". ${SETTINGS}; omero admin start" &> /dev/null && echo -n ' OMERO.server'
 	RETVAL=$?
 	[ "$RETVAL" = 0 ]
 	echo
@@ -37,7 +37,7 @@ start() {
 
 stop() {
 	echo -n $"Stopping $prog:"
-	su - ${OMERO_USER} -c ". ${SETTINGS}; $CONDA_ENV/envs/venv3/bin/omero admin stop" &> /dev/null && echo -n ' OMERO.server'
+	su - ${OMERO_USER} -c ". ${SETTINGS}; omero admin stop" &> /dev/null && echo -n ' OMERO.server'
 	RETVAL=$?
 	[ "$RETVAL" = 0 ]
 	echo
@@ -45,7 +45,7 @@ stop() {
 
 restart() {
 	echo -n $"Restarting $prog:"
-	su - ${OMERO_USER} -c ". ${SETTINGS} $CONDA_ENV/envs/venv3/bin/omero admin restart" &> /dev/null && echo -n ' OMERO.server'
+	su - ${OMERO_USER} -c ". ${SETTINGS} omero admin restart" &> /dev/null && echo -n ' OMERO.server'
 	RETVAL=$?
 	[ "$RETVAL" = 0 ]
 	echo
@@ -53,14 +53,14 @@ restart() {
 
 status() {
 	echo -n $"Status $prog:"
-	su - ${OMERO_USER} -c ". ${SETTINGS} $CONDA_ENV/envs/venv3/bin/omero admin status" && echo -n ' OMERO.server running'
+	su - ${OMERO_USER} -c ". ${SETTINGS} omero admin status" && echo -n ' OMERO.server running'
 	RETVAL=$?
 	echo
 }
 
 diagnostics() {
 	echo -n $"Diagnostics $prog:"
-	su - ${OMERO_USER} -c ". ${SETTINGS} $CONDA_ENV/envs/venv3/bin/omero admin diagnostics"
+	su - ${OMERO_USER} -c ". ${SETTINGS} omero admin diagnostics"
 	RETVAL=$?
 	echo
 }
