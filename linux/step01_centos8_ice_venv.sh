@@ -11,7 +11,7 @@ python3 -mvenv $VENV_SERVER
 $VENV_SERVER/bin/pip install --upgrade pip
 
 # Install the Ice Python binding
-$VENV_SERVER/bin/pip install https://github.com/ome/zeroc-ice-centos8/releases/download/0.2.0/zeroc_ice-3.6.5-cp38-cp38-linux_x86_64.whl
+$VENV_SERVER/bin/pip install https://github.com/ome/zeroc-ice-centos8/releases/download/0.1.0/zeroc_ice-3.6.5-cp38-cp38-linux_x86_64.whl
 
 # Install server dependencies
 $VENV_SERVER/bin/pip install omero-server[default]
