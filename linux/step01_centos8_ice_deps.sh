@@ -13,9 +13,9 @@ if [ "$ICEVER" = "ice36" ]; then
         libmcpp
 
     cd /tmp
-    wget -q https://github.com/ome/zeroc-ice-centos8/releases/download/0.0.1/ice-3.6.5-0.0.1-centos8-amd64.tar.gz
-    tar xf ice-3.6.5-0.0.1-centos8-amd64.tar.gz
-    mv ice-3.6.5-0.0.1 ice-3.6.5
+    wget -q https://github.com/ome/zeroc-ice-centos8/releases/download/0.1.0/ice-3.6.5-0.1.0-centos8-amd64.tar.gz
+    tar xf ice-3.6.5-0.1.0-centos8-amd64.tar.gz
+    mv ice-3.6.5-0.1.0 ice-3.6.5
     mv ice-3.6.5 /opt
     echo /opt/ice-3.6.5/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
     ldconfig
