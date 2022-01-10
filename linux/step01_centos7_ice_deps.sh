@@ -35,7 +35,8 @@ elif [ "$ICEVER" = "ice36-devel" ]; then
                    libicestorm3.6 \
                    ice-all-devel \
                    gcc-c++ \
-                   bzip2-devel
+                   bzip2-devel \
+                   openssl-devel
 
     localedef -i en_US -f UTF-8 en_US.UTF-8
 fi
