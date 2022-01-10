@@ -29,4 +29,5 @@ ARG PGVER=pg11
 RUN cd omero-install-test && \
 	bash install_centos7.sh
 
+
 EXPOSE 22 80 4063 4064
