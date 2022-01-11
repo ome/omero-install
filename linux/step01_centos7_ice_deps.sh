@@ -14,10 +14,7 @@ if [ "$ICEVER" = "ice36" ]; then
                    icepatch2 \
                    libfreeze3.6-c++ \
                    libice3.6-c++ \
-                   libicestorm3.6 \
-                   gcc-c++ \
-                   bzip2-devel \
-                   openssl-devel
+                   libicestorm3.6
 
     #end-recommended
     # reset the locale
@@ -33,10 +30,7 @@ elif [ "$ICEVER" = "ice36-devel" ]; then
                    libfreeze3.6-c++ \
                    libice3.6-c++ \
                    libicestorm3.6 \
-                   ice-all-devel \
-                   gcc-c++ \
-                   bzip2-devel \
-                   openssl-devel
+                   ice-all-devel
 
     localedef -i en_US -f UTF-8 en_US.UTF-8
 fi
