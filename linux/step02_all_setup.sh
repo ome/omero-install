@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$(getent passwd omero)" ]; then
+if [ -z "$(getent passwd omero-server)" ]; then
 	#start-create-user
     useradd -mr omero-server
     # Give a password to the omero user
