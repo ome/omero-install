@@ -23,7 +23,7 @@ elif [ "$ICEVER" = "ice36-devel" ]; then
     curl -sL https://zeroc.com/download/Ice/3.6/el7/zeroc-ice3.6.repo > \
     /etc/yum.repos.d/zeroc-ice3.6.repo
 
-    yum -y install yum -y install glacier2 \
+    yum -y install glacier2 \
                    icebox \
                    icegrid \
                    icepatch2 \
