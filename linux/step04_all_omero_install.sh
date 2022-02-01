@@ -8,7 +8,7 @@ set -eux
 
 
 #start-install
-if [ "$ICEVER" = "ice36" ]; then
+if [ "$ICEVER" = "ice36" ] || [ "$ICEVER" = "ice36-devel" ]; then
 	if [ $OMEROVER == "latest" ]; then
 		#start-release-ice36
 		cd /opt/omero/server
