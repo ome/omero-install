@@ -27,15 +27,20 @@ if [[ "$PGVER" =~ ^(pg96|pg10|pg11|pg12)$ ]]; then
     bash -eux step03_all_postgres.sh
 fi
 
-cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
-
 bash -eux step01_centos7_ice_venv.sh
 
-OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero_install.sh
 
-su - omero-server -c " bash -eux step04_all_omero.sh"
+# Those steps are valid if an omero-server user exists
+# This might not be the case when used in the context of devspace
+if [ "$(getent passwd omero-server)" ]; then
+    cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
 
-su - omero-server -c "bash setup_omero_db.sh"
+    OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero_install.sh
+
+    su - omero-server -c " bash -eux step04_all_omero.sh"
+
+    su - omero-server -c "bash setup_omero_db.sh"
+fi
 
 
 #If you don't want to use the systemd scripts you can start OMERO manually:
