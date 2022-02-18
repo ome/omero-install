@@ -54,7 +54,7 @@ To generate a specific walkthrough, run the following command
     OS=debian10 ALL=false bash autogenerate.sh
 
 The possible values are:
-centos7 (default), centos8, ubuntu1804, ubuntu2004, debian10
+centos7 (default), ubuntu1804, ubuntu2004, debian10
 
 Configuring Java
 ----------------
@@ -99,7 +99,7 @@ pg96, pg10, pg11 (default), pg12 (ubuntu 20.04 only)
 If you do not want to install Postgres set PGVER to nopg.
 
 To add a new Postgres version, update the following files: 
-`step01_centos7_pg_deps.sh`, `step01_centos8_pg_deps.sh`,
+`step01_centos7_pg_deps.sh`,
 `step01_ubuntu1804_pg_deps.sh`, `step01_ubuntu2004_pg_deps.sh`,
 `step01_debian10_pg_deps.sh` and update this README.md.
 
