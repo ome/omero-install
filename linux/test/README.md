@@ -94,7 +94,7 @@ For example:
 
 
 The supported values are: 
-pg96, pg10, pg11 (default), pg12 (ubuntu 20.04 only)
+pg10, pg11 (default), pg12 (ubuntu 20.04 only)
 
 If you do not want to install Postgres set PGVER to nopg.
 
@@ -134,7 +134,7 @@ Testing CentOS 7
 
      Notet that it is possible to use the various parameters when running the installation script e.g.
 
-        $PGVER=pg96 ./docker-build.sh $ENV
+        $PGVER=pg12 ./docker-build.sh $ENV
 
 2. Run the tests
 
