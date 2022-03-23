@@ -25,9 +25,7 @@ bash -eux step01_ubuntu2004_pg_deps.sh
 
 bash -eux step02_all_setup.sh
 
-if [[ "$PGVER" =~ ^(pg12)$ ]]; then
-    bash -eux step03_all_postgres.sh
-fi
+bash -eux step03_all_postgres.sh
 
 cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
 
