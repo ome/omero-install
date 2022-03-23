@@ -3,7 +3,7 @@
 set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
-PGVER=${PGVER:-pg11}
+PGVER=${PGVER:-pg12}
 ICEVER=${ICEVER:-ice36}
 
 . settings.env
@@ -25,7 +25,7 @@ bash -eux step01_ubuntu2004_pg_deps.sh
 
 bash -eux step02_all_setup.sh
 
-if [[ "$PGVER" =~ ^(pg10|pg11|pg12)$ ]]; then
+if [[ "$PGVER" =~ ^(pg12)$ ]]; then
     bash -eux step03_all_postgres.sh
 fi
 
