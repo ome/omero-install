@@ -24,6 +24,7 @@ jobs:
           cd linux
           ./autogenerate.sh
       - name: Build docker image
+        if: contains(matrix.pg, 'pg12') || (!contains(matrix.os, 'ubuntu2004') && contains(matrix.pg, 'pg11'))
         run: |
           cd linux/test
           PGVER=$PGVER ./docker-build.sh $ENV
