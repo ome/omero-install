@@ -2,10 +2,6 @@
 
 PGVER=${PGVER:-pg11}
 
-if [[ "$PGVER" =~ ^(pg96|pg10)$ ]]; then
-    PGVER="pg11"
-fi
-
 if [ "$PGVER" = "pg11" ]; then
     #start-recommended
     apt-get install -y postgresql-11
