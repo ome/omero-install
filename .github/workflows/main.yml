@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [centos7, debian10, ubuntu1804, ubuntu2004]
-        pg: [pg11, pg12]
+        os: [ubuntu1804]
+        pg: [pg11, pg14]
         exclude:
           - os: ubuntu2004
             pg: pg11
