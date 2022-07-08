@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu2004, ubuntu1804, debian10, centos7]
-        pg: [pg11, pg12, pg14]
+        pg: [pg11, pg12, pg14, pg13]
         exclude:
           - os: ubuntu2004
             pg: pg11
