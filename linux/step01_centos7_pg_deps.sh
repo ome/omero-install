@@ -6,27 +6,7 @@ PGVER=${PGVER:-pg11}
 #start-postgresql-installation-general
 yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 #end-postgresql-installation-general
-if [ "$PGVER" = "pg10" ]; then
-    yum -y install postgresql10-server postgresql10
-
-    if [ "${container:-}" = docker ]; then
-        su - postgres -c "/usr/pgsql-10/bin/initdb -D /var/lib/pgsql/10/data --encoding=UTF8"
-        echo "listen_addresses='*'" >> /var/lib/pgsql/10/data/postgresql.conf
-    else
-        PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-10/bin/postgresql-10-setup initdb
-    fi
-    sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/10/data/pg_hba.conf
-    if [ "${container:-}" = docker ]; then
-        sed -i 's/OOMScoreAdjust/#OOMScoreAdjust/' \
-        /usr/lib/systemd/system/postgresql-10.service
-    fi
-    if [ "${container:-}" = docker ]; then
-        su - postgres -c "/usr/pgsql-10/bin/pg_ctl start -D /var/lib/pgsql/10/data -w"
-    else
-        systemctl start postgresql-10.service
-    fi
-    systemctl enable postgresql-10.service
-elif [ "$PGVER" = "pg11" ]; then
+if [ "$PGVER" = "pg11" ]; then
     #start-recommended
     yum -y install postgresql11-server postgresql11
 

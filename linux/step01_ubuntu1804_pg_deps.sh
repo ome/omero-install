@@ -2,11 +2,7 @@
 
 PGVER=${PGVER:-pg11}
 #Postgres 10
-if [ "$PGVER" = "pg10" ]; then
-    apt-get update
-    apt-get -y install postgresql
-    service postgresql start
-elif [ "$PGVER" = "pg11" ]; then
+if [ "$PGVER" = "pg11" ]; then
     #start-recommended
     apt-get install -y gnupg
     echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/pgdg.list
