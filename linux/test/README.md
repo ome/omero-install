@@ -94,7 +94,7 @@ For example:
 
 
 The supported values are: 
-pg10, pg11 (default), pg12 (ubuntu 20.04 only)
+pg11 (default), pg12 (ubuntu 20.04 only), pg13, pg14
 
 If you do not want to install Postgres set PGVER to nopg.
 

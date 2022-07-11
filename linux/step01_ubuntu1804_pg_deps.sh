@@ -1,13 +1,8 @@
 #!/bin/bash
 
 PGVER=${PGVER:-pg11}
-PGVER=pg12
 #Postgres 10
-if [ "$PGVER" = "pg10" ]; then
-    apt-get update
-    apt-get -y install postgresql
-    service postgresql start
-elif [ "$PGVER" = "pg11" ]; then
+if [ "$PGVER" = "pg11" ]; then
     #start-recommended
     apt-get install -y gnupg
     echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/pgdg.list
@@ -22,5 +17,19 @@ elif [ "$PGVER" = "pg12" ]; then
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
     apt-get update
     apt-get -y install postgresql-12
+    service postgresql start
+elif [ "$PGVER" = "pg13" ]; then
+    apt-get install -y gnupg
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+    apt-get update
+    apt-get -y install postgresql-13
+    service postgresql start
+elif [ "$PGVER" = "pg14" ]; then
+    apt-get install -y gnupg
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+    apt-get update
+    apt-get -y install postgresql-14
     service postgresql start
 fi
