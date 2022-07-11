@@ -49,7 +49,7 @@ elif [ "$PGVER" = "pg12" ]; then
     fi
     systemctl enable postgresql-12.service
 elif [ "$PGVER" = "pg13" ]; then
-    yum -y install postgresql13-server postgresql14
+    yum -y install postgresql13-server postgresql13
 
     if [ "${container:-}" = docker ]; then
         su - postgres -c "/usr/pgsql-13/bin/initdb -D /var/lib/pgsql/13/data --encoding=UTF8"
