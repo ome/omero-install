@@ -5,7 +5,7 @@ set -e -u -x
 VENV_SERVER=${VENV_SERVER:-/opt/omero/server/venv3}
 #start-ice-py
 # Create a virtual env
-python3 -mvenv --upgrade $VENV_SERVER
+/opt/rh/rh-python38/root/usr/bin/python -mvenv --upgrade $VENV_SERVER
 
 # Upgrade pip
 $VENV_SERVER/bin/pip install --upgrade pip
