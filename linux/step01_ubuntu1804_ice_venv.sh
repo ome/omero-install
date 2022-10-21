@@ -15,4 +15,5 @@ $VENV_SERVER/bin/pip install https://github.com/ome/zeroc-ice-ubuntu1804/release
 
 # Install server dependencies
 $VENV_SERVER/bin/pip install omero-server[default]
+$VENV_SERVER/bin/pip install -U git+https://github.com/chris-allan/omero-certificates.git@py-cryptography
 #end-ice-py
