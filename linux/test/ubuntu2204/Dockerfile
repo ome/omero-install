@@ -1,12 +1,12 @@
 # Dockerfile for testing the OMERO Linux installation instructions
 # Not intended for production use
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk11
 ARG ICEVER=ice36
-ARG PGVER=pg12
+ARG PGVER=pg14
 
 ENV TZ=Europe/London
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
