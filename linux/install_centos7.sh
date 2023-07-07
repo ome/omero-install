@@ -39,6 +39,8 @@ if [ "$(getent passwd omero-server)" ]; then
 
     su - omero-server -c " bash -eux step04_all_omero.sh"
 
+    su - omero-server -c " bash -eux step04_centos7_ciphers.sh"
+
     su - omero-server -c "bash setup_omero_db.sh"
 fi
 
