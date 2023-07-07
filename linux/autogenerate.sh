@@ -219,6 +219,17 @@ line=$(sed -n ''$ns','$ne'p' $dir/step04_all_omero.sh)
 line=$(echo -e "${line}" | sed -e "s/\-i.bak/-i/g")
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 echo "$line" >> $file
+if [[ $OS =~ "centos7" ]] ; then
+	echo -en '\n' >> $file
+	number=$(sed -n '/#start-diffie-hellman/=' $dir/step04_centos7_ciphers.sh)
+    ns=$((number))
+    number=$(sed -n '/#end-diffie-hellman/=' $dir/step04_centos7_ciphers.sh)
+    ne=$((number))
+    line=$(sed -n ''$ns','$ne'p' $dir/step04_centos7_ciphers.sh)
+    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+    echo "$line" >> $file
+fi
+
 
 echo -en '\n' >> $file
 
