@@ -1,6 +1,5 @@
 #!/bin/bash
 OMEROVER=${OMEROVER:-latest}
-ICEVER=${ICEVER:-ice36}
 
 set -eux
 
@@ -8,16 +7,14 @@ set -eux
 
 
 #start-install
-if [ "$ICEVER" = "ice36" ] || [ "$ICEVER" = "ice36-devel" ]; then
-	if [ $OMEROVER == "latest" ]; then
-		#start-release-ice36
-		cd /opt/omero/server
-		SERVER=https://downloads.openmicroscopy.org/omero/5.6/server-ice36.zip
-		wget -q $SERVER -O OMERO.server-ice36.zip
-		unzip -q OMERO.server*
-		#end-release-ice36
-		rm OMERO.server-ice36.zip
-	fi
+if [ $OMEROVER == "latest" ]; then
+	#start-release-ice36
+	cd /opt/omero/server
+	SERVER=https://downloads.openmicroscopy.org/omero/5.6/server-ice36.zip
+	wget -q $SERVER -O OMERO.server-ice36.zip
+	unzip -q OMERO.server*
+	#end-release-ice36
+	rm OMERO.server-ice36.zip
 fi
 
 #start-link
