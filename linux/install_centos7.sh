@@ -33,11 +33,13 @@ bash -eux step01_centos7_ice_venv.sh
 # Those steps are valid if an omero-server user exists
 # This might not be the case when used in the context of devspace
 if [ "$(getent passwd omero-server)" ]; then
-    cp settings.env step04_all_omero.sh setup_omero_db.sh ~omero-server
+    cp settings.env step04_all_omero.sh setup_omero_db.sh step04_centos7_ciphers.sh ~omero-server 
 
     OMEROVER=$OMEROVER ICEVER=$ICEVER bash -eux step04_all_omero_install.sh
 
     su - omero-server -c " bash -eux step04_all_omero.sh"
+
+    su - omero-server -c " bash -eux step04_centos7_ciphers.sh"
 
     su - omero-server -c "bash setup_omero_db.sh"
 fi
