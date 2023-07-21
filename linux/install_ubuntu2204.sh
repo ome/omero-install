@@ -10,6 +10,10 @@ ICEVER=${ICEVER:-ice36}
 
 bash -eux step01_ubuntu_init.sh
 
+# disable daemon restart pop-up:
+# see https://stackoverflow.com/questions/73397110/how-to-stop-ubuntu-pop-up-daemons-using-outdated-libraries-when-using-apt-to-i
+echo "\$nrconf{restart} = 'a';" >> /etc/needrestart/needrestart.conf
+
 # install java
 bash -eux step01_ubuntu1804_java_deps.sh
 
