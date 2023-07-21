@@ -8,16 +8,14 @@ if [ "$ICEVER" = "ice36" ]; then
     #start-recommended
     apt-get update && \
     apt-get install -y -q \
-        build-essential \
         db5.3-util \
-        libbz2-dev \
-        libdb++-dev \
-        libdb-dev \
-        libexpat-dev \
-        libmcpp-dev \
-        libssl-dev \
+        bzip2 \
+        libdb++ \
+        libexpat1 \
+        libmcpp0 \
+        openssl \
         mcpp \
-        zlib1g-dev
+        zlib1g
 
     cd /tmp
     wget -q https://github.com/glencoesoftware/zeroc-ice-ubuntu2204-x86_64/releases/download/20221004/Ice-3.6.5-ubuntu2204-x86_64.tar.gz
