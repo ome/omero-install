@@ -2,7 +2,7 @@
 
 #start-recommended
 cp omero-server-systemd.service /etc/systemd/system/omero-server.service
-if [ ! "${container:-}" = docker ]; then
+if [ ! -f /.dockerenv ]; then
     systemctl daemon-reload
 fi
 systemctl enable omero-server.service
