@@ -6,9 +6,9 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 ARG OMEROVER=latest
 ARG JAVAVER=openjdk11
 ARG ICEVER=ice36
-ARG PGVER=pg14
+ARG PGVER=pg13
 
-
+RUN touch /.dockerenv
 ADD omero-install-test.zip /
 RUN dnf -y install unzip && unzip omero-install-test.zip
 
