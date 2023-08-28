@@ -30,6 +30,6 @@ jobs:
         run: |
           cd linux/test
           ./docker-build.sh $ENV
-          ./test_services.sh
+          ./test_services.sh $ENV
         env:
           ENV: ${{ matrix.os }}
