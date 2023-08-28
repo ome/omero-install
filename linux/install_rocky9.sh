@@ -8,6 +8,8 @@ OMEROVER=${OMEROVER:-latest}
 
 bash -eux step01_centos7_init.sh
 
+bash -eux step01_centos7_deps.sh
+
 # install java
 bash -eux step01_centos_java_deps.sh
 
