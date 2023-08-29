@@ -12,15 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu2204]
-        pg: [pg11, pg12, pg13, pg14]
+        os: [debian10, ubuntu1804, ubuntu2004, ubuntu2204]
+        pg: [pg13, pg14]
         exclude:
-          - os: ubuntu2004
-            pg: pg11
-          - os: ubuntu2204
-            pg: pg11
-          - os: ubuntu2204
-            pg: pg12
           - os: ubuntu2204
             pg: pg13
     steps:
