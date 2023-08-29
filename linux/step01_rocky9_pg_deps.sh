@@ -1,9 +1,13 @@
 #!/bin/bash
 
-# pg 13 is installed by default
+PGVER=${PGVER:-pg13} # pg 13 is installed by default
+
+#start-postgresql-installation-general
+
+#end-postgresql-installation-general
+#start-recommended
 yum -y install postgresql-server postgresql
 
-ls -all /
 if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/bin/initdb -D /var/lib/pgsql/data --encoding=UTF8"
     echo "listen_addresses='*'" >> /var/lib/pgsql/data/postgresql.conf
@@ -20,3 +24,5 @@ fi
     systemctl enable postgresql
 
 sed -i 's/ ident/ trust/g' /var/lib/pgsql/data/pg_hba.conf
+
+#end-recommended
