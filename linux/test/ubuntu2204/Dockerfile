@@ -8,6 +8,8 @@ ARG JAVAVER=openjdk11
 ARG ICEVER=ice36
 ARG PGVER=pg14
 
+RUN touch /.dockerenv
+
 ENV TZ=Europe/London
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
