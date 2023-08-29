@@ -20,8 +20,7 @@ if [ "$ICEVER" = "ice36" ]; then
     cd /tmp
     wget -q https://github.com/glencoesoftware/zeroc-ice-ubuntu2204-x86_64/releases/download/20221004/Ice-3.6.5-ubuntu2204-x86_64.tar.gz
     tar xf Ice-3.6.5-ubuntu2204-x86_64.tar.gz
-    mv Ice-3.6.5 ice-3.6.5
-    mv ice-3.6.5 /opt
+    mv Ice-3.6.5 /opt/ice-3.6.5
     echo /opt/ice-3.6.5/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
     ldconfig
     #end-recommended
