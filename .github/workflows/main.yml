@@ -29,7 +29,8 @@ jobs:
       - name: Build docker image
         run: |
           cd linux/test
-          ./docker-build.sh $ENV
-          ./test_services.sh $ENV
+          PGVER=$PGVER ./docker-build.sh $ENV
+          ./test_services.sh 
         env:
           ENV: ${{ matrix.os }}
+          PGVER: ${{ matrix.pg }}
