@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [debian10, ubuntu1804, ubuntu2004, ubuntu2204]
+        os: [rockylinux9, debian10, ubuntu1804, ubuntu2004, ubuntu2204]
         pg: [pg13, pg14]
         exclude:
           - os: ubuntu2204
             pg: pg13
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Install shunit2
         run: sudo apt-get install -y shunit2
       - name: Build walkthroughs
@@ -30,7 +30,7 @@ jobs:
         run: |
           cd linux/test
           PGVER=$PGVER ./docker-build.sh $ENV
-          ./test_services.sh
+          ./test_services.sh 
         env:
           ENV: ${{ matrix.os }}
           PGVER: ${{ matrix.pg }}

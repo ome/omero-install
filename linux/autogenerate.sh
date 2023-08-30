@@ -7,14 +7,14 @@ dir=`dirname $0`
 remove_docker_workaround () {
 l="$(echo -e "${@}" | sed -e 's/^[[:space:]]*//')"
 l="$(echo -e "${l}" | sed -e 's/^if.*!.*then//' )"
-l="$(echo -e "${l}" | sed -e '/^if.*container.*then/,/else/d' )"
+l="$(echo -e "${l}" | sed -e '/^if.*docker.*then/,/else/d' )"
 l="$(echo -e "${l}" | sed -e 's/^fi//')"
 echo "${l}"
 }
 
 #generate the walkthrough for all supported os
 function generate_all() {
-	values=(centos7 debian10 ubuntu1804 ubuntu2004 ubuntu2204)
+	values=(centos7 debian10 ubuntu1804 ubuntu2004 ubuntu2204 rocky9)
 	for os in "${values[@]}"; do
   		echo "${os}"
   		 generate ${os}
@@ -36,6 +36,8 @@ EOF
 N=$OS
 if [[ $OS =~ "debian" ]] || [[ $OS =~ "ubuntu" ]] ; then
 	N="ubuntu"
+elif [[ $OS =~ "rocky" ]]  ; then
+    N="centos7"
 elif [[ $OS =~ "centos" ]]  ; then
     N="centos7"
 fi
@@ -47,6 +49,8 @@ echo "$line" >> $file
 # install java
 N=$OS
 if [[ $OS =~ "centos" ]] ; then
+	N="centos"
+elif [[ $OS =~ "rocky" ]]  ; then
 	N="centos"
 elif [[ $OS =~ "ubuntu1804" ]]  ; then
 	N="ubuntu1804"
@@ -70,6 +74,8 @@ echo "# install dependencies" >> $file
 N=$OS
 if [[ $OS =~ "ubuntu" ]]  ; then
     N="ubuntu1804"
+elif [[ $OS =~ "rocky" ]]  ; then
+	N="centos7"
 fi
 
 line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
@@ -95,23 +101,26 @@ echo -en '\n' >> $file
 
 # install postgres
 N=$OS
+if [[ $OS =~ "rocky" ]]  ; then
+	N="centos"
+fi
 echo -en '\n' >> $file
 echo "# install Postgres" >> $file
-if [[ $OS =~ "centos" ]] ; then
-    number=$(sed -n '/#start-postgresql-installation-general/=' $dir/step01_"$N"_pg_deps.sh)
+if [[ $N =~ "centos" ]] ; then
+    number=$(sed -n '/#start-postgresql-installation-general/=' $dir/step01_"$OS"_pg_deps.sh)
     nrs=$((number+1))
-    number=$(sed -n '/#end-postgresql-installation-general/=' $dir/step01_"$N"_pg_deps.sh)
+    number=$(sed -n '/#end-postgresql-installation-general/=' $dir/step01_"$OS"_pg_deps.sh)
     nre=$((number-1))
-    line=$(sed -n ''$nrs','$nre'p' $dir/step01_"$N"_pg_deps.sh)
+    line=$(sed -n ''$nrs','$nre'p' $dir/step01_"$OS"_pg_deps.sh)
     line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 
     echo "$line"  >> $file
 
-	number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_pg_deps.sh)
+	number=$(sed -n '/#start-recommended/=' $dir/step01_"$OS"_pg_deps.sh)
 	nrs=$((number+1))
-	number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_pg_deps.sh)
+	number=$(sed -n '/#end-recommended/=' $dir/step01_"$OS"_pg_deps.sh)
 	nre=$((number-1))
-	line=$(sed -n ''$nrs','$nre'p' $dir/step01_"$N"_pg_deps.sh)
+	line=$(sed -n ''$nrs','$nre'p' $dir/step01_"$OS"_pg_deps.sh)
 	# remove docker conditional
 	line=`remove_docker_workaround "${line}"`
 else
@@ -121,6 +130,7 @@ else
 	ne=$((number-1))
 	line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_pg_deps.sh)
 fi
+N=$OS
 # remove leading whitespace
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 
