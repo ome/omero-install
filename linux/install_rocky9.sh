@@ -6,18 +6,7 @@ OMEROVER=${OMEROVER:-latest}
 
 . `dirname $0`/settings.env
 
-bash -eux step01_centos7_init.sh
-
-bash -eux step01_centos7_deps.sh
-
-# install java
-bash -eux step01_centos_java_deps.sh
-
-# install ice
-bash -eux step01_rocky9_ice_deps.sh
-
-# install Postgres
-bash -eux step01_rocky9_pg_deps.sh
+bash -eux step01_rocky9_deps.sh
 
 bash -eux step02_all_setup.sh
 
@@ -40,5 +29,10 @@ fi
 
 #If you don't want to use the systemd scripts you can start OMERO manually:
 #su - omero-server -c ". /home/omero-server/settings.env omero admin start"
-
-bash -eux step06_centos7_daemon.sh
+#start-recommended
+cp omero-server-systemd.service /etc/systemd/system/omero-server.service
+if [ ! -f /.dockerenv ]; then
+    systemctl daemon-reload
+fi
+systemctl enable omero-server.service
+#end-recommended
