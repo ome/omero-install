@@ -40,24 +40,61 @@ ldconfig
 
 
 # PostgreSQL installation
-PGVER=${PGVER:-pg13} # pg 13 is installed by default
-#start-recommended
-dnf -y install postgresql-server postgresql
+dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+dnf -qy module disable postgresql
+PGVER=${PGVER:-pg13}
+if [ "$PGVER" = "pg13" ]; then
+  #start-recommended
+  dnf -y install postgresql13-server postgresql
+  /usr/pgsql-13/bin/postgresql-13-setup initdb
+  sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/13/data/pg_hba.conf
+  sed -i 's/ ident/ trust/g' /var/lib/pgsql/13/data/pg_hba.conf
+  #end-recommended
+elif [ "$PGVER" = "pg14" ]; then
+  dnf -y install postgresql14-server postgresql
+  /usr/pgsql-14/bin/postgresql-14-setup initdb
+  sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/14/data/pg_hba.conf
+  sed -i 's/ ident/ trust/g' /var/lib/pgsql/14/data/pg_hba.conf
+elif [ "$PGVER" = "pg15" ]; then
+  dnf -y install postgresql15-server postgresql
+  /usr/pgsql-15/bin/postgresql-15-setup initdb
+  sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/15/data/pg_hba.conf
+  sed -i 's/ ident/ trust/g' /var/lib/pgsql/15/data/pg_hba.conf
+elif [ "$PGVER" = "pg16" ]; then
+  dnf -y install postgresql16-server postgresql
+  /usr/pgsql-16/bin/postgresql-16-setup initdb
+  sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/16/data/pg_hba.conf
+  sed -i 's/ ident/ trust/g' /var/lib/pgsql/16/data/pg_hba.conf
+fi
 
 if [ -f /.dockerenv ]; then
-    su - postgres -c "/usr/bin/initdb -D /var/lib/pgsql/data --encoding=UTF8"
-    echo "listen_addresses='*'" >> /var/lib/pgsql/data/postgresql.conf
+    if [ "$PGVER" = "pg13" ]; then
+        echo "listen_addresses='*'" >> /var/lib/pgsql/13/data/postgresql.conf
+        su - postgres -c "/usr/pgsql-13/binpg_ctl start -D /var/lib/pgsql/13/data -w"
+    elif [ "$PGVER" = "pg14" ]; then
+        echo "listen_addresses='*'" >> /var/lib/pgsql/14/data/postgresql.conf
+        su - postgres -c "/usr/pgsql-14/binpg_ctl start -D /var/lib/pgsql/14/data -w"
+    elif [ "$PGVER" = "pg15" ]; then
+        echo "listen_addresses='*'" >> /var/lib/pgsql/15/data/postgresql.conf
+        su - postgres -c "/usr/pgsql-15/binpg_ctl start -D /var/lib/pgsql/15/data -w"
+    elif [ "$PGVER" = "pg16" ]; then
+        echo "listen_addresses='*'" >> /var/lib/pgsql/16/data/postgresql.conf
+        su - postgres -c "/usr/pgsql-16/binpg_ctl start -D /var/lib/pgsql/16/data -w"
+    fi
 else
-    PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/bin/postgresql-setup --initdb
+    if [ "$PGVER" = "pg13" ]; then
+        #start-recommended
+        systemctl start postgresql-13
+        systemctl enable postgresql-13
+        #end-recommended
+    elif [ "$PGVER" = "pg14" ]; then
+        systemctl start postgresql-14
+        systemctl enable postgresql-14
+    elif [ "$PGVER" = "pg15" ]; then
+        systemctl start postgresql-15
+        systemctl enable postgresql-15
+    elif [ "$PGVER" = "pg16" ]; then
+        systemctl start postgresql-16
+        systemctl enable postgresql-16
+    fi
 fi
-sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/data/pg_hba.conf
-
-if [ -f /.dockerenv ]; then
-    su - postgres -c "/usr/bin/pg_ctl start -D /var/lib/pgsql/data -w"
-else
-    systemctl start postgresql
-fi
-    systemctl enable postgresql
-
-sed -i 's/ ident/ trust/g' /var/lib/pgsql/data/pg_hba.conf
-#end-recommended
