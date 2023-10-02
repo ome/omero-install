@@ -47,7 +47,7 @@ if [ "$PGVER" = "pg13" ]; then
   #start-recommended
   dnf -y install postgresql13-server postgresql
   if [ -f /.dockerenv ]; then
-    su - postgres -c "/usr/postgresql13/bin/initdb -D /var/lib/pgsql/13/data --encoding=UTF8"
+    su - postgres -c "/usr/pgsql-13/bin/initdb -D /var/lib/pgsql/13/data --encoding=UTF8"
     echo "listen_addresses='*'" >> /var/lib/pgsql/13/data/postgresql.conf
   else
     PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-13/bin/postgresql-13-setup initdb
@@ -58,7 +58,7 @@ if [ "$PGVER" = "pg13" ]; then
 elif [ "$PGVER" = "pg14" ]; then
   dnf -y install postgresql14-server postgresql
   if [ -f /.dockerenv ]; then
-    su - postgres -c "/usr/postgresql14/bin/initdb -D /var/lib/pgsql/14/data --encoding=UTF8"
+    su - postgres -c "/usr/pgsql-14/bin/initdb -D /var/lib/pgsql/14/data --encoding=UTF8"
     echo "listen_addresses='*'" >> /var/lib/pgsql/14/data/postgresql.conf
   else
     PGSETUP_INITDB_OPTIONS=--encoding=UTF8  /usr/pgsql-14/bin/postgresql-14-setup initdb
@@ -69,7 +69,7 @@ elif [ "$PGVER" = "pg14" ]; then
 elif [ "$PGVER" = "pg15" ]; then
   dnf -y install postgresql15-server postgresql
   if [ -f /.dockerenv ]; then
-    su - postgres -c "/usr/postgresql15/bin/initdb -D /var/lib/pgsql/15/data --encoding=UTF8"
+    su - postgres -c "/usr/pgsql-15/bin/initdb -D /var/lib/pgsql/15/data --encoding=UTF8"
     echo "listen_addresses='*'" >> /var/lib/pgsql/15/data/postgresql.conf
   else
     PGSETUP_INITDB_OPTIONS=--encoding=UTF8  /usr/pgsql-15/bin/postgresql-15-setup initdb
