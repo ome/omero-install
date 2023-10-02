@@ -1,21 +1,23 @@
 #!/bin/bash
 
+PGVER=${PGVER:-pg13}
+JAVAVER=${JAVAVER:-openjdk11}
 # General additional packages installation
 dnf -y install python unzip bzip2 wget bc openssl
 
 
 # Java installation
-JAVAVER=${JAVAVER:-openjdk11}
+
 if [ "$JAVAVER" = "openjdk1.8" ]; then
-    dnf -y install java-1.8.0-openjdk
+  dnf -y install java-1.8.0-openjdk
 elif [ "$JAVAVER" = "openjdk1.8-devel" ]; then
-    dnf -y install java-1.8.0-openjdk-devel
+  dnf -y install java-1.8.0-openjdk-devel
 elif [ "$JAVAVER" = "openjdk11" ]; then
-	#start-recommended
-    dnf -y install java-11-openjdk
+  #start-recommended
+  dnf -y install java-11-openjdk
   #end-recommended
 elif [ "$JAVAVER" = "openjdk11-devel" ]; then
-    dnf -y install java-11-openjdk-devel
+  dnf -y install java-11-openjdk-devel
 fi
 
 
@@ -40,20 +42,22 @@ ldconfig
 
 
 # PostgreSQL installation
-dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-dnf -qy module disable postgresql
-PGVER=${PGVER:-pg13}
+if [ "$PGVER" != "pg13" ]; then
+  dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+  dnf -qy module disable postgresql
+fi 
+
 if [ "$PGVER" = "pg13" ]; then
   #start-recommended
-  dnf -y install postgresql13-server postgresql13
+  dnf -y install postgresql-server postgresql
   if [ -f /.dockerenv ]; then
-    su - postgres -c "/usr/pgsql-13/bin/initdb -D /var/lib/pgsql/13/data --encoding=UTF8"
-    echo "listen_addresses='*'" >> /var/lib/pgsql/13/data/postgresql.conf
+    su - postgres -c "/usr/bin/initdb -D /var/lib/pgsql/data --encoding=UTF8"
+    echo "listen_addresses='*'" >> /var/lib/pgsql/data/postgresql.conf
   else
-    PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-13/bin/postgresql-13-setup initdb
+    PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/bin/postgresql-setup --initdb
   fi
-  sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/13/data/pg_hba.conf
-  sed -i 's/ ident/ trust/g' /var/lib/pgsql/13/data/pg_hba.conf
+  sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/data/pg_hba.conf
+  sed -i 's/ ident/ trust/g' /var/lib/pgsql/data/pg_hba.conf
   #end-recommended
 elif [ "$PGVER" = "pg14" ]; then
   dnf -y install postgresql14-server postgresql14
@@ -91,16 +95,12 @@ fi
 
 if [ -f /.dockerenv ]; then
     if [ "$PGVER" = "pg13" ]; then
-        echo "listen_addresses='*'" >> /var/lib/pgsql/13/data/postgresql.conf
-        su - postgres -c "/usr/pgsql-13/bin/pg_ctl start -D /var/lib/pgsql/13/data -w"
+        su - postgres -c "/usr/bin/pg_ctl start -D /var/lib/pgsql/data -w"
     elif [ "$PGVER" = "pg14" ]; then
-        echo "listen_addresses='*'" >> /var/lib/pgsql/14/data/postgresql.conf
         su - postgres -c "/usr/pgsql-14/bin/pg_ctl start -D /var/lib/pgsql/14/data -w"
     elif [ "$PGVER" = "pg15" ]; then
-        echo "listen_addresses='*'" >> /var/lib/pgsql/15/data/postgresql.conf
         su - postgres -c "/usr/pgsql-15/bin/pg_ctl start -D /var/lib/pgsql/15/data -w"
     elif [ "$PGVER" = "pg16" ]; then
-        echo "listen_addresses='*'" >> /var/lib/pgsql/16/data/postgresql.conf
         su - postgres -c "/usr/pgsql-16/bin/pg_ctl start -D /var/lib/pgsql/16/data -w"
     fi
 else
