@@ -46,23 +46,45 @@ PGVER=${PGVER:-pg13}
 if [ "$PGVER" = "pg13" ]; then
   #start-recommended
   dnf -y install postgresql13-server postgresql
-  /usr/pgsql-13/bin/postgresql-13-setup initdb
+  if [ -f /.dockerenv ]; then
+    su - postgres -c "/usr/postgresql13/bin/initdb -D /var/lib/pgsql/13/data --encoding=UTF8"
+    echo "listen_addresses='*'" >> /var/lib/pgsql/13/data/postgresql.conf
+  else
+    PGSETUP_INITDB_OPTIONS=--encoding=UTF8 /usr/pgsql-13/bin/postgresql-13-setup initdb
+  fi
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/13/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/13/data/pg_hba.conf
   #end-recommended
 elif [ "$PGVER" = "pg14" ]; then
   dnf -y install postgresql14-server postgresql
-  /usr/pgsql-14/bin/postgresql-14-setup initdb
+  if [ -f /.dockerenv ]; then
+    su - postgres -c "/usr/postgresql14/bin/initdb -D /var/lib/pgsql/14/data --encoding=UTF8"
+    echo "listen_addresses='*'" >> /var/lib/pgsql/14/data/postgresql.conf
+  else
+    PGSETUP_INITDB_OPTIONS=--encoding=UTF8  /usr/pgsql-14/bin/postgresql-14-setup initdb
+  fi
+
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/14/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/14/data/pg_hba.conf
 elif [ "$PGVER" = "pg15" ]; then
   dnf -y install postgresql15-server postgresql
-  /usr/pgsql-15/bin/postgresql-15-setup initdb
+  if [ -f /.dockerenv ]; then
+    su - postgres -c "/usr/postgresql15/bin/initdb -D /var/lib/pgsql/15/data --encoding=UTF8"
+    echo "listen_addresses='*'" >> /var/lib/pgsql/15/data/postgresql.conf
+  else
+    PGSETUP_INITDB_OPTIONS=--encoding=UTF8  /usr/pgsql-15/bin/postgresql-15-setup initdb
+  fi
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/15/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/15/data/pg_hba.conf
 elif [ "$PGVER" = "pg16" ]; then
   dnf -y install postgresql16-server postgresql
-  /usr/pgsql-16/bin/postgresql-16-setup initdb
+    if [ -f /.dockerenv ]; then
+    su - postgres -c "/usr/pgsql-16/bin/initdb -D /var/lib/pgsql/16/data --encoding=UTF8"
+    echo "listen_addresses='*'" >> /var/lib/pgsql/16/data/postgresql.conf
+  else
+    PGSETUP_INITDB_OPTIONS=--encoding=UTF8  /usr/pgsql-16/bin/postgresql-16-setup initdb
+  fi
+
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/16/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/16/data/pg_hba.conf
 fi
@@ -70,16 +92,16 @@ fi
 if [ -f /.dockerenv ]; then
     if [ "$PGVER" = "pg13" ]; then
         echo "listen_addresses='*'" >> /var/lib/pgsql/13/data/postgresql.conf
-        su - postgres -c "/usr/pgsql-13/binpg_ctl start -D /var/lib/pgsql/13/data -w"
+        su - postgres -c "/usr/pgsql-13/bin/pg_ctl start -D /var/lib/pgsql/13/data -w"
     elif [ "$PGVER" = "pg14" ]; then
         echo "listen_addresses='*'" >> /var/lib/pgsql/14/data/postgresql.conf
-        su - postgres -c "/usr/pgsql-14/binpg_ctl start -D /var/lib/pgsql/14/data -w"
+        su - postgres -c "/usr/pgsql-14/bin/pg_ctl start -D /var/lib/pgsql/14/data -w"
     elif [ "$PGVER" = "pg15" ]; then
         echo "listen_addresses='*'" >> /var/lib/pgsql/15/data/postgresql.conf
-        su - postgres -c "/usr/pgsql-15/binpg_ctl start -D /var/lib/pgsql/15/data -w"
+        su - postgres -c "/usr/pgsql-15/bin/pg_ctl start -D /var/lib/pgsql/15/data -w"
     elif [ "$PGVER" = "pg16" ]; then
         echo "listen_addresses='*'" >> /var/lib/pgsql/16/data/postgresql.conf
-        su - postgres -c "/usr/pgsql-16/binpg_ctl start -D /var/lib/pgsql/16/data -w"
+        su - postgres -c "/usr/pgsql-16/bin/pg_ctl start -D /var/lib/pgsql/16/data -w"
     fi
 else
     if [ "$PGVER" = "pg13" ]; then
