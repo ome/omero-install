@@ -1,6 +1,6 @@
 #!/bin/bash
 
-su - postgres -c "/usr/pgsql-13/bin/pg_ctl start -D /var/lib/pgsql/13/data -w"
+su - postgres -c "/usr/bin/pg_ctl start -D /var/lib/pgsql/data -w"
 
 #service crond start # Doesn't work in Docker
 su - omero-server -c ". /home/omero-server/settings.env && omero admin start"
