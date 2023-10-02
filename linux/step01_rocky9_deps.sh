@@ -45,7 +45,7 @@ dnf -qy module disable postgresql
 PGVER=${PGVER:-pg13}
 if [ "$PGVER" = "pg13" ]; then
   #start-recommended
-  dnf -y install postgresql13-server postgresql
+  dnf -y install postgresql13-server postgresql13
   if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/pgsql-13/bin/initdb -D /var/lib/pgsql/13/data --encoding=UTF8"
     echo "listen_addresses='*'" >> /var/lib/pgsql/13/data/postgresql.conf
@@ -56,7 +56,7 @@ if [ "$PGVER" = "pg13" ]; then
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/13/data/pg_hba.conf
   #end-recommended
 elif [ "$PGVER" = "pg14" ]; then
-  dnf -y install postgresql14-server postgresql
+  dnf -y install postgresql14-server postgresql14
   if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/pgsql-14/bin/initdb -D /var/lib/pgsql/14/data --encoding=UTF8"
     echo "listen_addresses='*'" >> /var/lib/pgsql/14/data/postgresql.conf
@@ -67,7 +67,7 @@ elif [ "$PGVER" = "pg14" ]; then
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/14/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/14/data/pg_hba.conf
 elif [ "$PGVER" = "pg15" ]; then
-  dnf -y install postgresql15-server postgresql
+  dnf -y install postgresql15-server postgresql15
   if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/pgsql-15/bin/initdb -D /var/lib/pgsql/15/data --encoding=UTF8"
     echo "listen_addresses='*'" >> /var/lib/pgsql/15/data/postgresql.conf
@@ -77,7 +77,7 @@ elif [ "$PGVER" = "pg15" ]; then
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/15/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/15/data/pg_hba.conf
 elif [ "$PGVER" = "pg16" ]; then
-  dnf -y install postgresql16-server postgresql
+  dnf -y install postgresql16-server postgresql16
     if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/pgsql-16/bin/initdb -D /var/lib/pgsql/16/data --encoding=UTF8"
     echo "listen_addresses='*'" >> /var/lib/pgsql/16/data/postgresql.conf
