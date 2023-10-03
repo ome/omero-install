@@ -3,8 +3,9 @@
 PGVER=${PGVER:-pg13}
 JAVAVER=${JAVAVER:-openjdk11}
 # General additional packages installation
+#start-general
 dnf -y install python unzip bzip2 wget bc openssl
-
+#end-general
 
 # Java installation
 
@@ -13,16 +14,16 @@ if [ "$JAVAVER" = "openjdk1.8" ]; then
 elif [ "$JAVAVER" = "openjdk1.8-devel" ]; then
   dnf -y install java-1.8.0-openjdk-devel
 elif [ "$JAVAVER" = "openjdk11" ]; then
-  #start-recommended
+  #start-recommended-java
   dnf -y install java-11-openjdk
-  #end-recommended
+  #end-recommended-java
 elif [ "$JAVAVER" = "openjdk11-devel" ]; then
   dnf -y install java-11-openjdk-devel
 fi
 
 
 # ICE installation
-#start-recommended
+#start-recommended-ice
 if grep -q "Rocky" /etc/redhat-release; then
   dnf -y install 'dnf-command(config-manager)'
   dnf config-manager --set-enabled crb
@@ -38,17 +39,19 @@ tar xf Ice-3.6.5-rhel9-x86_64.tar.gz
 mv Ice-3.6.5 /opt/ice-3.6.5
 echo /opt/ice-3.6.5/lib64 > /etc/ld.so.conf.d/ice-x86_64.conf
 ldconfig
-#end-recommended
+#end-recommended-ice
 
 
 # PostgreSQL installation
 if [ "$PGVER" != "pg13" ]; then
+  #start-pg-enabling
   dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
   dnf -qy module disable postgresql
+  #end-pg-enabling
 fi 
 
 if [ "$PGVER" = "pg13" ]; then
-  #start-recommended
+  #start-recommended-postgres
   dnf -y install postgresql-server postgresql
   if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/bin/initdb -D /var/lib/pgsql/data --encoding=UTF8"
@@ -58,7 +61,7 @@ if [ "$PGVER" = "pg13" ]; then
   fi
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/data/pg_hba.conf
-  #end-recommended
+  #end-recommended-postgres
 elif [ "$PGVER" = "pg14" ]; then
   dnf -y install postgresql14-server postgresql14
   if [ -f /.dockerenv ]; then
@@ -103,10 +106,10 @@ if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/bin/pg_ctl start -D /var/lib/pgsql/data -w"
 else
     if [ "$PGVER" = "pg13" ]; then
-        #start-recommended
+        #start-recommended-pg-start
         systemctl start postgresql
         systemctl enable postgresql
-        #end-recommended
+        #end-recommended-pg-start
     elif [ "$PGVER" = "pg14" ]; then
         systemctl start postgresql-14
         systemctl enable postgresql-14

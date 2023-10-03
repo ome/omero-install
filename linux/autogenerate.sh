@@ -50,8 +50,6 @@ echo "$line" >> $file
 N=$OS
 if [[ $OS =~ "centos" ]] ; then
 	N="centos"
-elif [[ $OS =~ "rocky" ]]  ; then
-	N="centos"
 elif [[ $OS =~ "ubuntu1804" ]]  ; then
 	N="ubuntu1804"
 elif [[ $OS =~ "ubuntu" ]]  ; then
@@ -59,11 +57,20 @@ elif [[ $OS =~ "ubuntu" ]]  ; then
 fi 
 echo -en '\n' >> $file
 echo "# install Java" >> $file
-number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_java_deps.sh)
-ns=$((number+1))
-number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_java_deps.sh)
-ne=$((number-1))
-line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_java_deps.sh)
+if [[ $OS =~ "rocky" ]]  ; then
+	number=$(sed -n '/#start-recommended-java/=' $dir/step01_rocky9_deps.sh)
+    ns=$((number+1))
+    number=$(sed -n '/#end-recommended-java/=' $dir/step01_rocky9_deps.sh)
+    ne=$((number-1))
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_rocky9_deps.sh)
+else
+	number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_java_deps.sh)
+    ns=$((number+1))
+    number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_java_deps.sh)
+    ne=$((number-1))
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_java_deps.sh)
+fi
+
 # remove leading whitespace
 line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
 echo "$line"  >> $file
@@ -74,11 +81,18 @@ echo "# install dependencies" >> $file
 N=$OS
 if [[ $OS =~ "ubuntu" ]]  ; then
     N="ubuntu1804"
-elif [[ $OS =~ "rocky" ]]  ; then
-	N="centos7"
 fi
 
-line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
+if [[ $OS =~ "rocky" ]]  ; then
+	number=$(sed -n '/#start-general/=' $dir/step01_rocky9_deps.sh)
+    ns=$((number+1))
+    number=$(sed -n '/#end-general/=' $dir/step01_rocky9_deps.sh)
+    ne=$((number-1))
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_rocky9_deps.sh)
+else
+	line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
+fi
+
 echo "$line" >> $file
 echo "#end-step01" >> $file
 
@@ -87,13 +101,22 @@ echo "#end-step01" >> $file
 echo "# install Ice" >> $file
 N=$OS
 echo "#start-recommended-ice" >> $file
-number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_ice_deps.sh)
-ns=$((number+1))
-number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_ice_deps.sh)
-ne=$((number-1))
-line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_ice_deps.sh)
-# remove leading whitespace
-line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+if [[ $OS =~ "rocky" ]]  ; then
+	number=$(sed -n '/#start-recommended-ice/=' $dir/step01_rocky9_deps.sh)
+    ns=$((number+1))
+    number=$(sed -n '/#end-recommended-ice/=' $dir/step01_rocky9_deps.sh)
+    ne=$((number-1))
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_rocky9_deps.sh)
+else
+	number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_ice_deps.sh)
+    ns=$((number+1))
+    number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_ice_deps.sh)
+    ne=$((number-1))
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_ice_deps.sh)
+    # remove leading whitespace
+    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+fi
+
 echo "$line"  >> $file
 echo "#end-recommended-ice" >> $file
 
@@ -101,9 +124,6 @@ echo -en '\n' >> $file
 
 # install postgres
 N=$OS
-if [[ $OS =~ "rocky" ]]  ; then
-	N="centos"
-fi
 echo -en '\n' >> $file
 echo "# install Postgres" >> $file
 if [[ $N =~ "centos" ]] ; then
@@ -121,6 +141,34 @@ if [[ $N =~ "centos" ]] ; then
 	number=$(sed -n '/#end-recommended/=' $dir/step01_"$OS"_pg_deps.sh)
 	nre=$((number-1))
 	line=$(sed -n ''$nrs','$nre'p' $dir/step01_"$OS"_pg_deps.sh)
+	# remove docker conditional
+	line=`remove_docker_workaround "${line}"`
+elif [[ $OS =~ "rocky" ]]  ; then
+    number=$(sed -n '/#start-pg-enabling/=' $dir/step01_rocky9_deps.sh)
+    nrs=$((number+1))
+    number=$(sed -n '/#end-pg-enabling/=' $dir/step01_rocky9_deps.sh)
+    nre=$((number-1))
+    line=$(sed -n ''$nrs','$nre'p' $dir/step01_rocky9_deps.sh)
+    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+    echo "$line"  >> $file
+
+    number=$(sed -n '/#start-recommended-postgres/=' $dir/step01_rocky9_deps.sh)
+	nrs=$((number+1))
+	number=$(sed -n '/#end-recommended-postgres/=' $dir/step01_rocky9_deps.sh)
+	nre=$((number-1))
+	line=$(sed -n ''$nrs','$nre'p' $dir/step01_rocky9_deps.sh)
+
+	
+	# remove docker conditional
+	line=`remove_docker_workaround "${line}"`
+    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+    echo "$line"  >> $file
+
+	number=$(sed -n '/#start-recommended-pg-start/=' $dir/step01_rocky9_deps.sh)
+	nrs=$((number+1))
+	number=$(sed -n '/#end-recommended-pg-start/=' $dir/step01_rocky9_deps.sh)
+	nre=$((number-1))
+	line=$(sed -n ''$nrs','$nre'p' $dir/step01_rocky9_deps.sh)
 	# remove docker conditional
 	line=`remove_docker_workaround "${line}"`
 else
