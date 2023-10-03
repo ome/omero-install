@@ -3,10 +3,12 @@
 set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
+PGVER=${PGVER:-pg15}
+JAVAVER=${JAVAVER:-openjdk11}
 
 . `dirname $0`/settings.env
 
-bash -eux step01_rocky9_deps.sh
+PGVER=$PGVER JAVAVER=$JAVAVER bash -eux step01_rocky9_deps.sh
 
 bash -eux step02_all_setup.sh
 

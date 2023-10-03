@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PGVER=${PGVER:-pg13}
+PGVER=${PGVER:-pg15}
 JAVAVER=${JAVAVER:-openjdk11}
 # General additional packages installation
 #start-general
