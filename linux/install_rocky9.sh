@@ -40,5 +40,7 @@ systemctl enable omero-server.service
 #end-recommended
 
 # open omero-server port
-firewall-cmd --zone=public --add-port=4064/tcp --permanent
-firewall-cmd --reload
+if [ ! -f /.dockerenv ]; then
+  firewall-cmd --zone=public --add-port=4064/tcp --permanent
+  firewall-cmd --reload
+fi
