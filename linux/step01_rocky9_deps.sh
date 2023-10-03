@@ -64,6 +64,8 @@ elif [ "$PGVER" = "pg14" ]; then
   if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/pgsql-14/bin/initdb -D /var/lib/pgsql/14/data --encoding=UTF8"
     echo "listen_addresses='*'" >> /var/lib/pgsql/14/data/postgresql.conf
+    ln -s /usr/pgsql-14/bin/pg_ctl /usr/bin/pg_ctl
+    ln -s /var/lib/pgsql/14/data /var/lib/pgsql/data
   else
     PGSETUP_INITDB_OPTIONS=--encoding=UTF8  /usr/pgsql-14/bin/postgresql-14-setup initdb
   fi
@@ -75,6 +77,8 @@ elif [ "$PGVER" = "pg15" ]; then
   if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/pgsql-15/bin/initdb -D /var/lib/pgsql/15/data --encoding=UTF8"
     echo "listen_addresses='*'" >> /var/lib/pgsql/15/data/postgresql.conf
+    ln -s /usr/pgsql-15/bin/pg_ctl /usr/bin/pg_ctl
+    ln -s /var/lib/pgsql/15/data /var/lib/pgsql/data
   else
     PGSETUP_INITDB_OPTIONS=--encoding=UTF8  /usr/pgsql-15/bin/postgresql-15-setup initdb
   fi
@@ -85,6 +89,8 @@ elif [ "$PGVER" = "pg16" ]; then
     if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/pgsql-16/bin/initdb -D /var/lib/pgsql/16/data --encoding=UTF8"
     echo "listen_addresses='*'" >> /var/lib/pgsql/16/data/postgresql.conf
+    ln -s /usr/pgsql-16/bin/pg_ctl /usr/bin/pg_ctl
+    ln -s /var/lib/pgsql/16/data /var/lib/pgsql/data
   else
     PGSETUP_INITDB_OPTIONS=--encoding=UTF8  /usr/pgsql-16/bin/postgresql-16-setup initdb
   fi
@@ -94,15 +100,7 @@ elif [ "$PGVER" = "pg16" ]; then
 fi
 
 if [ -f /.dockerenv ]; then
-    if [ "$PGVER" = "pg13" ]; then
-        su - postgres -c "/usr/bin/pg_ctl start -D /var/lib/pgsql/data -w"
-    elif [ "$PGVER" = "pg14" ]; then
-        su - postgres -c "/usr/pgsql-14/bin/pg_ctl start -D /var/lib/pgsql/14/data -w"
-    elif [ "$PGVER" = "pg15" ]; then
-        su - postgres -c "/usr/pgsql-15/bin/pg_ctl start -D /var/lib/pgsql/15/data -w"
-    elif [ "$PGVER" = "pg16" ]; then
-        su - postgres -c "/usr/pgsql-16/bin/pg_ctl start -D /var/lib/pgsql/16/data -w"
-    fi
+    su - postgres -c "/usr/bin/pg_ctl start -D /var/lib/pgsql/data -w"
 else
     if [ "$PGVER" = "pg13" ]; then
         #start-recommended
