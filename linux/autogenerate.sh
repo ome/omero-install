@@ -322,11 +322,33 @@ echo "$line" >> $file
 echo "#end-step07" >> $file
 
 if [[ $OS =~ "centos" ]]; then
-echo "#start-selinux" >> $file
-line=$(sed -n '2,$p' $dir/setup_centos_selinux.sh)
-echo "$line" >> $file
-echo "#end-selinux" >> $file
+    echo "#start-selinux" >> $file
+    line=$(sed -n '2,$p' $dir/setup_centos_selinux.sh)
+    echo "$line" >> $file
+    echo "#end-selinux" >> $file
 fi
+
+if [[ $OS =~ "rocky" ]]; then
+	echo "#start-step08: As root, configure" >> $file
+	number=$(sed -n '/#start-recommended/=' $dir/step08_rocky9_config.sh)
+	nrs=$((number+1))
+	number=$(sed -n '/#end-recommended/=' $dir/step08_rocky9_config.sh)
+	nre=$((number-1))
+	line=$(sed -n ''$nrs','$nre'p' $dir/step08_rocky9_config.sh)
+	# remove docker conditional
+	line=`remove_docker_workaround "${line}"`
+	echo "$line" >> $file
+
+	number=$(sed -n '/#start-open-omero-server-port/=' $dir/step08_rocky9_config.sh)
+	nrs=$((number+1))
+	number=$(sed -n '/#end-open-omero-server-port/=' $dir/step08_rocky9_config.sh)
+	nre=$((number-1))
+	line=$(sed -n ''$nrs','$nre'p' $dir/step08_rocky9_config.sh)
+	line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//')"
+	echo "$line" >> $file
+	echo "#end-step08" >> $file
+fi
+
 }
 
 #generate scripts for all os by default.
