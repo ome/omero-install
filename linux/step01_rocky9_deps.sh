@@ -104,8 +104,8 @@ if [ -f /.dockerenv ]; then
 else
     if [ "$PGVER" = "pg13" ]; then
         #start-recommended
-        systemctl start postgresql-13
-        systemctl enable postgresql-13
+        systemctl start postgresql
+        systemctl enable postgresql
         #end-recommended
     elif [ "$PGVER" = "pg14" ]; then
         systemctl start postgresql-14
