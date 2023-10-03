@@ -31,16 +31,5 @@ fi
 
 #If you don't want to use the systemd scripts you can start OMERO manually:
 #su - omero-server -c ". /home/omero-server/settings.env omero admin start"
-#start-recommended
-cp omero-server-systemd.service /etc/systemd/system/omero-server.service
-if [ ! -f /.dockerenv ]; then
-    systemctl daemon-reload
-fi
-systemctl enable omero-server.service
-#end-recommended
 
-# open omero-server port
-if [ ! -f /.dockerenv ]; then
-  firewall-cmd --zone=public --add-port=4064/tcp --permanent
-  firewall-cmd --reload
-fi
+bash -eux step08_rocky9_config.sh
