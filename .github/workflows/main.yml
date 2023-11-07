@@ -12,11 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [rockylinux9, debian10, ubuntu1804, ubuntu2004, ubuntu2204]
-        pg: [pg13, pg14]
+        os: [rockylinux9, debian10, ubuntu2204]
+        pg: [pg13, pg14, pg15, pg16]
         exclude:
           - os: ubuntu2204
             pg: pg13
+          - os: debian10
+            pg: pg15
+          - os: debian10
+            pg: pg16
     steps:
       - name: Checkout
         uses: actions/checkout@v2
