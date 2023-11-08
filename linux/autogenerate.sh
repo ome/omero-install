@@ -37,14 +37,16 @@ N=$OS
 if [[ $OS =~ "debian" ]] || [[ $OS =~ "ubuntu" ]] ; then
 	N="ubuntu"
 elif [[ $OS =~ "rocky" ]]  ; then
-    N="centos7"
+    N="rocky"
 elif [[ $OS =~ "centos" ]]  ; then
     N="centos7"
 fi
 echo -en '\n' >> $file
-echo "#start-step01: As root, install dependencies" >> $file
-line=$(sed -n '2,$p' $dir/step01_"$N"_init.sh)
-echo "$line" >> $file
+if ! [[ $OS =~ "rocky" ]]  ; then
+    echo "#start-step01: As root, install dependencies" >> $file
+    line=$(sed -n '2,$p' $dir/step01_"$N"_init.sh)
+    echo "$line" >> $file
+fi
 
 # install java
 N=$OS
