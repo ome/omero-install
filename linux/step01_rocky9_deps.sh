@@ -63,6 +63,7 @@ if [ "$PGVER" = "pg13" ]; then
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/data/pg_hba.conf
   
 elif [ "$PGVER" = "pg14" ]; then
+  #start-recommended-postgres
   dnf -y install postgresql14-server postgresql14
   if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/pgsql-14/bin/initdb -D /var/lib/pgsql/14/data --encoding=UTF8"
@@ -72,11 +73,10 @@ elif [ "$PGVER" = "pg14" ]; then
   else
     PGSETUP_INITDB_OPTIONS=--encoding=UTF8  /usr/pgsql-14/bin/postgresql-14-setup initdb
   fi
-
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/14/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/14/data/pg_hba.conf
+  #end-recommended-postgres
 elif [ "$PGVER" = "pg15" ]; then
-  #start-recommended-postgres
   dnf -y install postgresql15-server postgresql15
   if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/pgsql-15/bin/initdb -D /var/lib/pgsql/15/data --encoding=UTF8"
@@ -88,7 +88,6 @@ elif [ "$PGVER" = "pg15" ]; then
   fi
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/15/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/15/data/pg_hba.conf
-  #end-recommended-postgres
 elif [ "$PGVER" = "pg16" ]; then
   dnf -y install postgresql16-server postgresql16
     if [ -f /.dockerenv ]; then
