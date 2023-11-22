@@ -6,7 +6,6 @@ echo $ICEVER
 # Ice installation
 if [ "$ICEVER" = "ice36" ]; then
     #start-recommended
-    apt-get update && \
     apt-get install -y -q \
         build-essential \
         db5.3-util \

@@ -5,7 +5,6 @@ PGVER=${PGVER:-pg12}
 #Postgres 12
 if [ "$PGVER" = "pg12" ]; then
     #start-recommended
-    apt-get update
     apt-get -y install postgresql
     service postgresql start
     #end-recommended
