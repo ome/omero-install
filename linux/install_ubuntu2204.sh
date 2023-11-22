@@ -17,9 +17,9 @@ if [ ! -f /.dockerenv ]; then
 fi
 
 # install java
-bash -eux step01_ubuntu1804_java_deps.sh
+bash -eux step01_ubuntu_java_deps.sh
 
-bash -eux step01_ubuntu1804_deps.sh
+bash -eux step01_ubuntu_deps.sh
 
 # install ice
 bash -eux step01_ubuntu2204_ice_deps.sh
