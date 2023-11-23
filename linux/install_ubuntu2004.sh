@@ -11,9 +11,9 @@ ICEVER=${ICEVER:-ice36}
 bash -eux step01_ubuntu_init.sh
 
 # install java
-bash -eux step01_ubuntu1804_java_deps.sh
+bash -eux step01_ubuntu_java_deps.sh
 
-bash -eux step01_ubuntu1804_deps.sh
+bash -eux step01_ubuntu_deps.sh
 
 # install ice
 bash -eux step01_ubuntu2004_ice_deps.sh
