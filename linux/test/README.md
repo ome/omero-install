@@ -11,7 +11,7 @@ For example:
 See `docker run --help` for more information on these and other options
 for running docker images.
 
-CentOS 7 testing workflow is fully automated, for more details see below.
+Rocky 9 testing workflow is fully automated, for more details see below.
 
 
 Adding a new step
@@ -31,10 +31,10 @@ The walkthrough files should be used for documentation purpose.
 To generate the walkthrough file corresponding to a given OS i.e. `walkthough_OS.sh`,
 run for example:
 
-    OS=centos7 ALL=false bash autogenerate.sh
+    OS=ubuntu2204 ALL=false bash autogenerate.sh
 
 Only the "recommended" requirements will be copied to the walkthrough file.
-When a requirement is modified e.g. Postgres 12 instead of Postgres 11
+When a requirement is modified e.g. Postgres 15 instead of Postgres 14
 the following markers `#start-recommended`, `#end-recommended` should be updated
 in the corresponding steps files.
 The default value for given parameter should be the recommended version
@@ -51,7 +51,7 @@ To generate a specific walkthrough, run the following command
     OS=debian10 ALL=false bash autogenerate.sh
 
 The possible values are:
-centos7 (default), ubuntu2004, ubuntu2204, debian10, rocky9
+centos7, ubuntu2004, ubuntu2204, debian10, rocky9 (default)
 
 Configuring Java
 ----------------
@@ -81,7 +81,7 @@ It is possible to install other versions using the PGVER parameter.
 
 For example:
     
-    PGVER=pg15 ./docker-build.sh ubuntu2204
+    PGVER=pg15 ./docker-build.sh rocky9
     
 It is not necessary to specify the version when running Ubuntu/Debian image.
 
@@ -103,35 +103,20 @@ To add a new Postgres version, update the following files:
 Configuring Ice
 ---------------
 
-By default, Ice 3.6 is installed.
-It is possible to install other versions using the ICEVER parameter.
+Ice 3.6 is currently the sole supported version.
 
-For example:
-
-    ICEVER=ice36-devel ./docker-build.sh centos7
-
-The supported values are: 
-ice36-devel (CentOS 7 only), ice36
-
-To add a new Ice version, update the following files:
-`step01_centos7_ice_venv_deps.sh`, `step01_ubuntu_ice_venv_deps.sh`,
-step01_ubuntu2004_ice_venv_deps.sh`, `step01_ubuntu2204_ice_venv_deps.sh`
-`step01_debian10_ice_venv_deps.sh`
-and update this README.md.
-
-
-Testing CentOS 7
-================
+Testing Rocky 9
+===============
 
 1. Create a test image containing the installation scripts
 
         $ cd linux/test
-        $ export ENV=centos7
+        $ export ENV=rockylinux9
         $ ./docker-build.sh $ENV
 
      Notet that it is possible to use the various parameters when running the installation script e.g.
 
-        $PGVER=pg12 ./docker-build.sh $ENV
+        $PGVER=pg15 ./docker-build.sh $ENV
 
 2. Run the tests
 

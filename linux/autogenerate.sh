@@ -355,7 +355,7 @@ fi
 
 #generate scripts for all os by default.
 ALL=${ALL:-true}
-OS=${OS:-centos7}
+OS=${OS:-rocky9}
 
 if [ $ALL = true ]; then
 	generate_all
