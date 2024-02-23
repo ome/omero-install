@@ -3,7 +3,7 @@
 set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
-PGVER=${PGVER:-pg14}
+PGVER=${PGVER:-pg15}
 ICEVER=${ICEVER:-ice36}
 
 . settings.env
