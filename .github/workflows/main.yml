@@ -21,7 +21,7 @@ jobs:
             pg: pg13
           - os: ubuntu2404
             pg: pg14
-          - os: ubuntu2504
+          - os: ubuntu2404
             pg: pg15
     steps:
       - name: Checkout
