@@ -14,7 +14,7 @@ echo "${l}"
 
 #generate the walkthrough for all supported os
 function generate_all() {
-	values=(ubuntu2004 ubuntu2204 rocky9)
+	values=(ubuntu2004 ubuntu2204 ubuntu2404 rocky9)
 	for os in "${values[@]}"; do
   		echo "${os}"
   		 generate ${os}
@@ -47,12 +47,6 @@ if ! [[ $OS =~ "rocky" ]]  ; then
 fi
 
 # install java
-N=$OS
-if [[ $OS =~ "ubuntu1804" ]]  ; then
-	N="ubuntu1804"
-elif [[ $OS =~ "ubuntu" ]]  ; then
-	N="ubuntu"
-fi 
 echo -en '\n' >> $file
 echo "# install Java" >> $file
 if [[ $OS =~ "rocky" ]]  ; then
@@ -62,11 +56,11 @@ if [[ $OS =~ "rocky" ]]  ; then
     ne=$((number-1))
     line=$(sed -n ''$ns','$ne'p' $dir/step01_rocky9_deps.sh)
 else
-	number=$(sed -n '/#start-recommended/=' $dir/step01_"$N"_java_deps.sh)
+	number=$(sed -n '/#start-recommended/=' $dir/step01_ubuntu_java_deps.sh)
     ns=$((number+1))
-    number=$(sed -n '/#end-recommended/=' $dir/step01_"$N"_java_deps.sh)
+    number=$(sed -n '/#end-recommended/=' $dir/step01_ubuntu_java_deps.sh)
     ne=$((number-1))
-    line=$(sed -n ''$ns','$ne'p' $dir/step01_"$N"_java_deps.sh)
+    line=$(sed -n ''$ns','$ne'p' $dir/step01_ubuntu_java_deps.sh)
 fi
 
 # remove leading whitespace
@@ -77,9 +71,6 @@ echo -en '\n' >> $file
 echo "# install dependencies" >> $file
 # install dependencies
 N=$OS
-if [[ $OS =~ "ubuntu" ]]  ; then
-    N="ubuntu1804"
-fi
 
 if [[ $OS =~ "rocky" ]]  ; then
 	number=$(sed -n '/#start-general/=' $dir/step01_rocky9_deps.sh)
@@ -88,7 +79,7 @@ if [[ $OS =~ "rocky" ]]  ; then
     ne=$((number-1))
     line=$(sed -n ''$ns','$ne'p' $dir/step01_rocky9_deps.sh)
 else
-	line=$(sed -n '2,$p' $dir/step01_"$N"_deps.sh)
+	line=$(sed -n '2,$p' $dir/step01_ubuntu_deps.sh)
 fi
 
 echo "$line" >> $file
