@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [rockylinux9, ubuntu2204, ubuntu2404]
-        pg: [pg13, pg14, pg15, pg16]
+        pg: [pg14, pg15, pg16]
         exclude:
           - os: ubuntu2204
             pg: pg13
