@@ -15,10 +15,6 @@ jobs:
         os: [rockylinux9, ubuntu2204, ubuntu2404]
         pg: [pg14, pg15, pg16]
         exclude:
-          - os: ubuntu2204
-            pg: pg13
-          - os: ubuntu2404
-            pg: pg13
           - os: ubuntu2404
             pg: pg14
           - os: ubuntu2404
