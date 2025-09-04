@@ -18,6 +18,8 @@ fi
 if grep -q "Red Hat" /etc/redhat-release; then
   subscription-manager repos --enable codeready-builder-for-rhel-10-$(arch)-rpms
 fi
+dnf install -y epel-release
+
 dnf -y install expat libdb-cxx
 
 cd /tmp
