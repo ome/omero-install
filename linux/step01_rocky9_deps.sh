@@ -4,7 +4,7 @@ PGVER=${PGVER:-pg15}
 JAVAVER=${JAVAVER:-openjdk11}
 # General additional packages installation
 #start-general
-dnf -y install python3 unzip bzip2 wget bc openssl
+dnf -y install python3.12 unzip bzip2 tar wget bc openssl
 #end-general
 
 # Java installation
