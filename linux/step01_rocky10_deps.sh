@@ -1,26 +1,13 @@
 #!/bin/bash
 
 PGVER=${PGVER:-pg15}
-JAVAVER=${JAVAVER:-openjdk11}
 # General additional packages installation
 #start-general
 dnf -y install python3 unzip bzip2 tar wget bc openssl
 #end-general
 
 # Java installation
-
-if [ "$JAVAVER" = "openjdk1.8" ]; then
-  dnf -y install java-1.8.0-openjdk
-elif [ "$JAVAVER" = "openjdk1.8-devel" ]; then
-  dnf -y install java-1.8.0-openjdk-devel
-elif [ "$JAVAVER" = "openjdk11" ]; then
-  #start-recommended-java
-  dnf -y install java-11-openjdk
-  #end-recommended-java
-elif [ "$JAVAVER" = "openjdk11-devel" ]; then
-  dnf -y install java-11-openjdk-devel
-fi
-
+dnf -y install java-21-openjdk  # no other versions available
 
 # ICE installation
 #start-recommended-ice
