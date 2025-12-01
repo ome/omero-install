@@ -1,10 +1,21 @@
 #!/bin/bash
 
-PGVER=${PGVER:-pg15}
+PGVER=${PGVER:-pg16}
 JAVAVER=${JAVAVER:-openjdk11}
+
 # General additional packages installation
 #start-general
-dnf -y install python3 unzip bzip2 wget bc openssl
+# Enable CodeReady Linux Builder repository
+if grep -q "Rocky" /etc/redhat-release; then
+  dnf -y install 'dnf-command(config-manager)'
+  dnf config-manager --set-enabled crb
+fi
+if grep -q "Red Hat" /etc/redhat-release; then
+  subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
+fi
+
+dnf -y upgrade
+dnf -y install python3.12 tar unzip bzip2 wget bc openssl
 #end-general
 
 # Java installation
@@ -24,13 +35,6 @@ fi
 
 # ICE installation
 #start-recommended-ice
-if grep -q "Rocky" /etc/redhat-release; then
-  dnf -y install 'dnf-command(config-manager)'
-  dnf config-manager --set-enabled crb
-fi
-if grep -q "Red Hat" /etc/redhat-release; then
-  subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
-fi
 dnf -y install expat libdb-cxx
 
 cd /tmp
@@ -75,7 +79,6 @@ elif [ "$PGVER" = "pg14" ]; then
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/14/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/14/data/pg_hba.conf 
 elif [ "$PGVER" = "pg15" ]; then
-  #start-recommended-postgres
   dnf -y install postgresql15-server postgresql15
   if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/pgsql-15/bin/initdb -D /var/lib/pgsql/15/data --encoding=UTF8"
@@ -87,8 +90,9 @@ elif [ "$PGVER" = "pg15" ]; then
   fi
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/15/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/15/data/pg_hba.conf
-  #end-recommended-postgres
+  
 elif [ "$PGVER" = "pg16" ]; then
+  #start-recommended-postgres
   dnf -y install postgresql16-server postgresql16
     if [ -f /.dockerenv ]; then
     su - postgres -c "/usr/pgsql-16/bin/initdb -D /var/lib/pgsql/16/data --encoding=UTF8"
@@ -101,6 +105,7 @@ elif [ "$PGVER" = "pg16" ]; then
 
   sed -i.bak -re 's/^(host.*)ident/\1md5/' /var/lib/pgsql/16/data/pg_hba.conf
   sed -i 's/ ident/ trust/g' /var/lib/pgsql/16/data/pg_hba.conf
+  #end-recommended-postgres
 fi
 
 if [ -f /.dockerenv ]; then
@@ -113,12 +118,12 @@ else
         systemctl start postgresql-14
         systemctl enable postgresql-14
     elif [ "$PGVER" = "pg15" ]; then
-        #start-recommended-pg-start
         systemctl start postgresql-15
         systemctl enable postgresql-15
-        #end-recommended-pg-start
     elif [ "$PGVER" = "pg16" ]; then
+        #start-recommended-pg-start
         systemctl start postgresql-16
         systemctl enable postgresql-16
+        #end-recommended-pg-start
     fi
 fi

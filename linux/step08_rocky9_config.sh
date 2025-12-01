@@ -3,7 +3,7 @@
 set -e -u -x
 
 #start-recommended
-cp omero-server-systemd.service /etc/systemd/system/omero-server.service
+wget https://omero.readthedocs.io/en/stable/_downloads/08850daa9012dfe7b7d4a90dc76c1b83/omero-server-systemd.service -O /etc/systemd/system/omero-server.service
 if [ ! -f /.dockerenv ]; then
     systemctl daemon-reload
 fi
