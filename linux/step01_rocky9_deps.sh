@@ -26,7 +26,16 @@ elif [ "$JAVAVER" = "openjdk1.8-devel" ]; then
   dnf -y install java-1.8.0-openjdk-devel
 elif [ "$JAVAVER" = "openjdk11" ]; then
   #start-recommended-java
-  dnf -y install java-11-openjdk
+cat <<EOF > /etc/yum.repos.d/adoptium.repo
+[Adoptium]
+name=Adoptium
+baseurl=https://packages.adoptium.net/artifactory/rpm/rhel/\$releasever/\$basearch
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.adoptium.net/artifactory/api/gpg/key/public
+EOF
+
+dnf -y install temurin-11-jdk
   #end-recommended-java
 elif [ "$JAVAVER" = "openjdk11-devel" ]; then
   dnf -y install java-11-openjdk-devel
