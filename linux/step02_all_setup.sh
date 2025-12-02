@@ -8,5 +8,7 @@ if [ -z "$(getent passwd omero-server)" ]; then
     #end-create-user
 fi
 
+chmod a+X ~omero-server
+
 mkdir -p "$OMERO_DATA_DIR"
 chown omero-server "$OMERO_DATA_DIR"
