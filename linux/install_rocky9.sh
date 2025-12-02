@@ -3,7 +3,7 @@
 set -e -u -x
 
 OMEROVER=${OMEROVER:-latest}
-PGVER=${PGVER:-pg15}
+PGVER=${PGVER:-pg16}
 JAVAVER=${JAVAVER:-openjdk11}
 
 . `dirname $0`/settings.env
